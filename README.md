@@ -8,8 +8,6 @@ A comprehensive **24-week AI/ML curriculum** specifically optimized for the **NV
 
 From neural network fundamentals to fine-tuning 70B parameter models, this curriculum leverages the unique capabilities of the DGX Spark platform.
 
-![Curriculum Overview](assets/curriculum-overview.png)
-
 ## 🎯 What You'll Learn
 
 | Phase | Duration | Topics |
@@ -39,7 +37,7 @@ This curriculum specifically leverages DGX Spark's unique capabilities:
 
 1. **Clone the repository**
 ```bash
-   git clone https://github.com/YOUR_USERNAME/dgx-spark-ai-curriculum.git
+   git clone https://github.com/Trosfy/dgx-spark-ai-curriculum.git
    cd dgx-spark-ai-curriculum
 ```
 
@@ -97,6 +95,71 @@ This curriculum specifically leverages DGX Spark's unique capabilities:
 
 </details>
 
+## 📁 Repository Structure
+
+```
+dgx-spark-ai-curriculum/
+│
+├── README.md                    # Main repo README with badges, overview
+├── CURRICULUM.md                # Full curriculum documentation
+├── CONTRIBUTING.md              # Contribution guidelines
+├── LICENSE                      # MIT License
+├── .gitignore                   # Comprehensive gitignore
+├── requirements.txt             # Python dependencies
+│
+├── .github/
+│   ├── ISSUE_TEMPLATE/
+│   │   ├── bug_report.md
+│   │   ├── feature_request.md
+│   │   └── question.md
+│   ├── PULL_REQUEST_TEMPLATE.md
+│   ├── workflows/
+│   │   └── validate_notebooks.yml
+│   └── mlc_config.json
+│
+├── docs/
+│   ├── SETUP.md                # Environment setup guide
+│   ├── NGC_CONTAINERS.md       # NGC container deep-dive
+│   ├── TROUBLESHOOTING.md      # Common issues & solutions
+│   └── RESOURCES.md            # External learning resources
+│
+├── utils/
+│   ├── __init__.py             # Package init with exports
+│   ├── dgx_spark_utils.py      # System info, environment check
+│   ├── memory_utils.py         # Memory tracking, estimation
+│   └── benchmark_utils.py      # Direct API benchmarking
+│
+├── templates/
+│   ├── notebook_template.ipynb
+│   ├── module_readme_template.md
+│   ├── project-proposal.md
+│   ├── technical-report.md
+│   └── presentation-outline.md
+│
+├── phase-1-foundations/
+│   ├── module-01-dgx-spark-platform/README.md
+│   ├── module-02-python-for-ai/README.md
+│   ├── module-03-math-for-dl/README.md
+│   ├── module-04-neural-network-fundamentals/README.md
+│   └── module-05-phase1-capstone/README.md
+│
+├── phase-2-intermediate/
+│   ├── module-06-pytorch-deep-learning/README.md
+│   ├── module-07-computer-vision/README.md
+│   ├── module-08-nlp-transformers/README.md
+│   └── module-09-huggingface-ecosystem/README.md
+│
+├── phase-3-advanced/
+│   ├── module-10-llm-finetuning/README.md        ⭐ 70B QLoRA
+│   ├── module-11-quantization/README.md          ⭐ NVFP4
+│   ├── module-12-deployment-inference/README.md
+│   ├── module-13-ai-agents/README.md
+│   ├── module-14-multimodal/README.md
+│   └── module-15-benchmarking-mlops/README.md
+│
+└── phase-4-capstone/README.md
+```
+
 ## 📊 Progress Tracking
 
 Track your progress using the [Progress Tracker](CURRICULUM.md#appendix-c-progress-tracking) in the curriculum document.
@@ -105,9 +168,9 @@ Track your progress using the [Progress Tracker](CURRICULUM.md#appendix-c-progre
 
 Contributions are welcome! Please read [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 
-- 🐛 Found a bug? [Open an issue](https://github.com/YOUR_USERNAME/dgx-spark-ai-curriculum/issues)
-- 💡 Have an idea? [Start a discussion](https://github.com/YOUR_USERNAME/dgx-spark-ai-curriculum/discussions)
-- 📝 Want to contribute? [Submit a PR](https://github.com/YOUR_USERNAME/dgx-spark-ai-curriculum/pulls)
+- 🐛 Found a bug? [Open an issue](https://github.com/Trosfy/dgx-spark-ai-curriculum/issues)
+- 💡 Have an idea? [Start a discussion](https://github.com/Trosfy/dgx-spark-ai-curriculum/discussions)
+- 📝 Want to contribute? [Submit a PR](https://github.com/Trosfy/dgx-spark-ai-curriculum/pulls)
 
 ## 📄 License
 

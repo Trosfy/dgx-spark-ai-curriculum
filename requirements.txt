@@ -1,0 +1,119 @@
+# ============================================
+# DGX Spark AI Curriculum - Requirements
+# ============================================
+#
+# NOTE: For DGX Spark, use NGC containers for PyTorch and CUDA.
+# Standard pip install of PyTorch does NOT work on ARM64 + CUDA.
+#
+# Container: nvcr.io/nvidia/pytorch:25.11-py3
+#
+# These packages are additional dependencies to install inside
+# the NGC container or alongside pre-installed PyTorch.
+# ============================================
+
+# -----------------
+# Core Data Science
+# -----------------
+numpy>=1.24.0
+pandas>=2.0.0
+scipy>=1.10.0
+scikit-learn>=1.3.0
+
+# -----------------
+# Visualization
+# -----------------
+matplotlib>=3.8.0
+seaborn>=0.13.0
+plotly>=5.18.0
+
+# -----------------
+# Deep Learning (use NGC container versions)
+# -----------------
+# torch  # Provided by NGC container
+# torchvision  # Provided by NGC container
+# torchaudio  # Provided by NGC container
+
+# -----------------
+# Hugging Face Ecosystem
+# -----------------
+transformers>=4.40.0
+datasets>=2.18.0
+accelerate>=0.28.0
+peft>=0.10.0
+tokenizers>=0.19.0
+sentencepiece>=0.2.0
+safetensors>=0.4.0
+
+# -----------------
+# Quantization
+# -----------------
+bitsandbytes>=0.43.0
+# auto-gptq  # May need special install for ARM64
+# autoawq  # May need special install for ARM64
+
+# -----------------
+# AI Agents & RAG
+# -----------------
+langchain>=0.1.0
+langchain-community>=0.0.20
+llama-index>=0.10.0
+chromadb>=0.4.0
+faiss-cpu>=1.7.0  # Use faiss-gpu if available
+
+# -----------------
+# Evaluation
+# -----------------
+lm-eval>=0.4.0
+evaluate>=0.4.0
+
+# -----------------
+# Experiment Tracking
+# -----------------
+mlflow>=2.11.0
+tensorboard>=2.16.0
+# wandb>=0.16.0  # Optional, requires account
+
+# -----------------
+# API & Serving
+# -----------------
+fastapi>=0.110.0
+uvicorn>=0.27.0
+httpx>=0.27.0
+requests>=2.31.0
+
+# -----------------
+# Utilities
+# -----------------
+tqdm>=4.66.0
+rich>=13.7.0
+python-dotenv>=1.0.0
+einops>=0.7.0
+tiktoken>=0.6.0
+
+# -----------------
+# Jupyter & Development
+# -----------------
+jupyter>=1.0.0
+jupyterlab>=4.0.0
+ipywidgets>=8.1.0
+jupyter-resource-usage>=1.0.0
+
+# -----------------
+# Code Quality (Development)
+# -----------------
+black>=24.0.0
+isort>=5.13.0
+flake8>=7.0.0
+pytest>=8.0.0
+nbformat>=5.9.0
+
+# -----------------
+# Optional: Fast Fine-tuning
+# -----------------
+# unsloth  # Install separately: pip install unsloth
+
+# -----------------
+# Optional: Additional Tools
+# -----------------
+# gradio>=4.0.0  # For quick demos
+# streamlit>=1.30.0  # For dashboards

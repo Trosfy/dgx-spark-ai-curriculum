@@ -1,4 +1,10 @@
+# ============================================
+# DGX Spark AI Curriculum .gitignore
+# ============================================
+
+# -----------------
 # Python
+# -----------------
 __pycache__/
 *.py[cod]
 *$py.class
@@ -20,56 +26,167 @@ wheels/
 .installed.cfg
 *.egg
 
-# Jupyter
-.ipynb_checkpoints/
-*.ipynb_metadata/
-
 # Virtual environments
 venv/
 ENV/
 env/
 .venv/
 
-# IDE
+# -----------------
+# Jupyter Notebooks
+# -----------------
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+*/.ipynb_checkpoints/*
+
+# Notebook outputs (optional - uncomment to ignore all outputs)
+# *.ipynb
+
+# -----------------
+# IDE / Editors
+# -----------------
 .idea/
 .vscode/
 *.swp
 *.swo
 *~
+.project
+.pydevproject
+.settings/
+*.sublime-project
+*.sublime-workspace
 
-# OS
+# -----------------
+# OS Generated
+# -----------------
 .DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
 Thumbs.db
+desktop.ini
 
-# Models and large files
+# -----------------
+# ML/AI Specific
+# -----------------
+
+# Model files (large)
 *.bin
 *.pt
 *.pth
 *.onnx
 *.safetensors
 *.gguf
-models/
+*.ggml
+
+# Checkpoints
 checkpoints/
+*.ckpt
+lightning_logs/
 
-# Data
-*.csv
-*.parquet
-*.feather
-data/*.json
-!data/example_*.json
+# Hugging Face cache (don't commit, symlink instead)
+.cache/
+huggingface/
 
-# Logs
-*.log
-logs/
-mlruns/
+# Weights & Biases
 wandb/
 
-# Secrets
-.env
-*.key
-secrets/
+# MLflow
+mlruns/
+mlflow.db
 
+# TensorBoard
+runs/
+logs/
+tensorboard/
+
+# -----------------
+# Data Files
+# -----------------
+*.csv
+*.json
+*.jsonl
+*.parquet
+*.arrow
+*.feather
+!templates/*.json
+!.github/*.json
+
+# Large data directories
+# data/ # Data README.md explains how to handle data and scripts
+datasets/
+raw_data/
+processed_data/
+
+# -----------------
+# Output Files
+# -----------------
+outputs/
+results/
+predictions/
+exports/
+
+# Generated documentation
+docs/_build/
+site/
+
+# -----------------
+# Secrets & Config
+# -----------------
+.env
+.env.*
+*.pem
+*.key
+secrets.yaml
+secrets.json
+config.local.yaml
+
+# API keys
+*_api_key*
+*_token*
+
+# -----------------
+# Docker
+# -----------------
+docker-compose.override.yml
+
+# -----------------
 # Misc
+# -----------------
+*.log
+*.tmp
+*.temp
 *.bak
-tmp/
-temp/
+*.backup
+
+# Profiling
+*.prof
+*.lprof
+
+# Coverage
+.coverage
+htmlcov/
+.pytest_cache/
+
+# -----------------
+# Project Specific
+# -----------------
+
+# Benchmark results (regenerate locally)
+benchmark_results.json
+
+# Personal notes
+notes/
+scratch/
+personal/
+
+# Large files that should be in Git LFS or not committed
+*.zip
+*.tar.gz
+*.tar
+*.7z
+
+# Except specific allowed archives
+!templates/*.zip

@@ -1,0 +1,269 @@
+# Module 6: Deep Learning with PyTorch
+
+**Phase:** 2 - Intermediate  
+**Duration:** Weeks 7-8 (12-15 hours)  
+**Prerequisites:** Phase 1 complete
+
+---
+
+## Overview
+
+Now that you understand neural networks from scratch, it's time to use professional tools. This module covers PyTorch in depth—from custom modules to advanced training techniques. You'll learn to build, debug, and profile models effectively.
+
+---
+
+## Learning Outcomes
+
+By the end of this module, you will be able to:
+
+- ✅ Build complex neural networks using PyTorch's nn.Module
+- ✅ Implement custom datasets and data loaders
+- ✅ Utilize PyTorch's autograd for custom operations
+- ✅ Debug and profile PyTorch models effectively
+
+---
+
+## Learning Objectives
+
+| ID | Objective | Bloom's Level |
+|----|-----------|---------------|
+| 6.1 | Create custom nn.Module classes with proper initialization | Apply |
+| 6.2 | Implement Dataset and DataLoader for custom data | Apply |
+| 6.3 | Use hooks for model introspection and debugging | Apply |
+| 6.4 | Profile models with PyTorch Profiler | Analyze |
+
+---
+
+## Topics
+
+### 6.1 PyTorch Fundamentals
+- Tensors and operations
+- Autograd mechanics
+- GPU memory management
+- Mixed precision with AMP
+
+### 6.2 Building Models
+- nn.Module architecture
+- Sequential vs functional API
+- Parameter registration
+- State dict and checkpointing
+
+### 6.3 Data Pipeline
+- Dataset class implementation
+- DataLoader with workers
+- Transforms and augmentation
+- Efficient data loading on DGX Spark
+
+### 6.4 Training Infrastructure
+- Training loops
+- Validation and metrics
+- Learning rate scheduling
+- Gradient clipping and accumulation
+
+---
+
+## Tasks
+
+### Task 6.1: Custom Module Lab
+**Time:** 2 hours
+
+Implement ResNet building blocks.
+
+**Instructions:**
+1. Implement `BasicBlock` (two 3x3 convs with skip connection)
+2. Implement `Bottleneck` (1x1 → 3x3 → 1x1 with skip)
+3. Stack blocks to create ResNet-18
+4. Test on CIFAR-10
+
+**Deliverable:** Working ResNet-18 implementation
+
+---
+
+### Task 6.2: Dataset Pipeline
+**Time:** 2 hours
+
+Create efficient data loading.
+
+**Instructions:**
+1. Create custom `Dataset` for a local image folder
+2. Implement data augmentation transforms
+3. Create `DataLoader` with multiple workers
+4. Benchmark loading speed
+5. Optimize for DGX Spark (find optimal num_workers, batch_size)
+
+**Deliverable:** Optimized data pipeline with benchmarks
+
+---
+
+### Task 6.3: Autograd Deep Dive
+**Time:** 2 hours
+
+Create a custom autograd function.
+
+**Instructions:**
+1. Implement a novel activation (e.g., Swish, Mish)
+2. Use `torch.autograd.Function` with custom forward/backward
+3. Verify gradients with `torch.autograd.gradcheck`
+4. Benchmark against built-in version
+
+**Deliverable:** Custom autograd function with verified gradients
+
+---
+
+### Task 6.4: Mixed Precision Training
+**Time:** 2 hours
+
+Use Automatic Mixed Precision (AMP).
+
+**Instructions:**
+1. Train baseline model in FP32
+2. Convert to mixed precision with `torch.cuda.amp`
+3. Compare memory usage
+4. Compare training speed
+5. Verify accuracy is maintained
+
+**Deliverable:** AMP training notebook with comparisons
+
+---
+
+### Task 6.5: Profiling Workshop
+**Time:** 2 hours
+
+Profile and optimize training.
+
+**Instructions:**
+1. Profile a training loop with `torch.profiler`
+2. Generate Chrome trace
+3. Identify bottlenecks (CPU, GPU, data loading)
+4. Apply optimizations
+5. Measure improvement
+
+**Deliverable:** Profiling report with optimizations
+
+---
+
+### Task 6.6: Checkpointing System
+**Time:** 2 hours
+
+Implement robust checkpointing.
+
+**Instructions:**
+1. Save/load complete training state
+2. Implement best model tracking
+3. Implement early stopping
+4. Test interrupt and resume
+5. Handle optimizer state correctly
+
+**Deliverable:** Reusable checkpointing module
+
+---
+
+## Guidance
+
+### DGX Spark Memory Tips
+
+```python
+# With 128GB unified memory, you can use larger batches
+# Start with batch_size=64, increase until slowdown
+
+# Clear cache between experiments
+torch.cuda.empty_cache()
+import gc; gc.collect()
+
+# Monitor memory
+print(f"Allocated: {torch.cuda.memory_allocated()/1e9:.2f}GB")
+print(f"Reserved: {torch.cuda.memory_reserved()/1e9:.2f}GB")
+```
+
+### NGC Container for PyTorch
+
+```bash
+docker run --gpus all --ipc=host --net=host \
+    -v $HOME/.cache/huggingface:/root/.cache/huggingface \
+    -v $PWD:/workspace -w /workspace \
+    nvcr.io/nvidia/pytorch:25.11-py3 \
+    jupyter lab --ip=0.0.0.0 --allow-root
+```
+
+### Custom nn.Module Template
+
+```python
+class MyModel(nn.Module):
+    def __init__(self, in_features, out_features):
+        super().__init__()
+        self.linear = nn.Linear(in_features, out_features)
+        self.activation = nn.ReLU()
+        
+        # Initialize weights
+        nn.init.kaiming_normal_(self.linear.weight)
+    
+    def forward(self, x):
+        return self.activation(self.linear(x))
+```
+
+### Mixed Precision Training
+
+```python
+from torch.cuda.amp import autocast, GradScaler
+
+scaler = GradScaler()
+
+for batch in dataloader:
+    optimizer.zero_grad()
+    
+    with autocast():
+        output = model(batch)
+        loss = criterion(output, target)
+    
+    scaler.scale(loss).backward()
+    scaler.step(optimizer)
+    scaler.update()
+```
+
+### Profiling
+
+```python
+from torch.profiler import profile, ProfilerActivity
+
+with profile(
+    activities=[ProfilerActivity.CPU, ProfilerActivity.CUDA],
+    record_shapes=True,
+    profile_memory=True,
+    with_stack=True
+) as prof:
+    for batch in dataloader:
+        output = model(batch)
+        loss.backward()
+
+print(prof.key_averages().table(sort_by="cuda_time_total", row_limit=10))
+prof.export_chrome_trace("trace.json")
+```
+
+---
+
+## Milestone Checklist
+
+- [ ] ResNet-18 implemented with custom blocks
+- [ ] Custom dataset pipeline optimized for DGX Spark
+- [ ] Custom autograd function with verified gradients
+- [ ] AMP training with memory/speed comparison
+- [ ] Profiling report with identified bottlenecks
+- [ ] Checkpointing system with resume capability
+
+---
+
+## Next Steps
+
+After completing this module:
+1. ✅ Verify all milestones are checked
+2. 📁 Save reusable modules to `scripts/`
+3. ➡️ Proceed to [Module 7: Computer Vision](../module-07-computer-vision/)
+
+---
+
+## Resources
+
+- [PyTorch Tutorials](https://pytorch.org/tutorials/)
+- [PyTorch Autograd Mechanics](https://pytorch.org/docs/stable/notes/autograd.html)
+- [PyTorch Profiler](https://pytorch.org/tutorials/recipes/recipes/profiler_recipe.html)
+- [Mixed Precision Training](https://pytorch.org/docs/stable/amp.html)

@@ -1,0 +1,185 @@
+name: Validate Notebooks
+
+on:
+  push:
+    branches: [ main, develop ]
+    paths:
+      - '**.ipynb'
+      - '**.py'
+  pull_request:
+    branches: [ main ]
+    paths:
+      - '**.ipynb'
+      - '**.py'
+
+jobs:
+  validate-notebooks:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.10'
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install nbformat nbconvert jupyter-client ipykernel
+        pip install flake8 black isort
+    
+    - name: Validate notebook JSON structure
+      run: |
+        python << 'EOF'
+        import nbformat
+        import sys
+        from pathlib import Path
+        
+        errors = []
+        notebooks = list(Path('.').rglob('*.ipynb'))
+        
+        for nb_path in notebooks:
+            # Skip checkpoints
+            if '.ipynb_checkpoints' in str(nb_path):
+                continue
+            
+            try:
+                with open(nb_path, 'r', encoding='utf-8') as f:
+                    nb = nbformat.read(f, as_version=4)
+                print(f"✓ {nb_path}")
+            except Exception as e:
+                errors.append(f"✗ {nb_path}: {e}")
+                print(f"✗ {nb_path}: {e}")
+        
+        if errors:
+            print(f"\n{len(errors)} notebook(s) with errors")
+            sys.exit(1)
+        else:
+            print(f"\n✓ All {len(notebooks)} notebooks valid")
+        EOF
+    
+    - name: Check for large outputs
+      run: |
+        python << 'EOF'
+        import nbformat
+        import sys
+        from pathlib import Path
+        
+        MAX_OUTPUT_SIZE = 100000  # 100KB per output
+        warnings = []
+        
+        for nb_path in Path('.').rglob('*.ipynb'):
+            if '.ipynb_checkpoints' in str(nb_path):
+                continue
+            
+            with open(nb_path, 'r', encoding='utf-8') as f:
+                nb = nbformat.read(f, as_version=4)
+            
+            for i, cell in enumerate(nb.cells):
+                if cell.cell_type == 'code' and 'outputs' in cell:
+                    for output in cell.outputs:
+                        output_str = str(output)
+                        if len(output_str) > MAX_OUTPUT_SIZE:
+                            warnings.append(f"{nb_path}: Cell {i} has large output ({len(output_str)} bytes)")
+        
+        if warnings:
+            print("⚠ Notebooks with large outputs (consider clearing):")
+            for w in warnings:
+                print(f"  {w}")
+        else:
+            print("✓ No oversized outputs found")
+        EOF
+
+  lint-python:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.10'
+    
+    - name: Install linters
+      run: |
+        pip install flake8 black isort
+    
+    - name: Lint with flake8
+      run: |
+        # Stop on syntax errors or undefined names
+        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics --exclude=.git,__pycache__,.ipynb_checkpoints
+        # Warnings (non-blocking)
+        flake8 . --count --exit-zero --max-complexity=10 --max-line-length=100 --statistics --exclude=.git,__pycache__,.ipynb_checkpoints
+    
+    - name: Check formatting with black
+      run: |
+        black --check --diff utils/ || echo "Consider running: black utils/"
+    
+    - name: Check imports with isort
+      run: |
+        isort --check-only --diff utils/ || echo "Consider running: isort utils/"
+
+  check-links:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Check markdown links
+      uses: gaurav-nelson/github-action-markdown-link-check@v1
+      with:
+        use-quiet-mode: 'yes'
+        config-file: '.github/mlc_config.json'
+      continue-on-error: true  # Don't fail on broken external links
+
+  validate-structure:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Validate repository structure
+      run: |
+        python << 'EOF'
+        from pathlib import Path
+        import sys
+        
+        required_dirs = [
+            'docs',
+            'utils',
+            'templates',
+            'phase-1-foundations',
+            'phase-2-intermediate',
+            'phase-3-advanced',
+            'phase-4-capstone',
+        ]
+        
+        required_files = [
+            'README.md',
+            'CURRICULUM.md',
+            'CONTRIBUTING.md',
+            'LICENSE',
+            '.gitignore',
+        ]
+        
+        errors = []
+        
+        for d in required_dirs:
+            if not Path(d).is_dir():
+                errors.append(f"Missing directory: {d}")
+        
+        for f in required_files:
+            if not Path(f).is_file():
+                errors.append(f"Missing file: {f}")
+        
+        if errors:
+            print("❌ Structure validation failed:")
+            for e in errors:
+                print(f"  {e}")
+            sys.exit(1)
+        else:
+            print("✓ Repository structure valid")
+        EOF
