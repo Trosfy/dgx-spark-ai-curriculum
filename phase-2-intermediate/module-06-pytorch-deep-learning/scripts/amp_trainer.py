@@ -19,7 +19,7 @@ Author: DGX Spark AI Curriculum
 __all__ = [
     'TrainingMetrics',
     'AMPTrainer',
-    'benchmark_precision_modes',
+    'benchmark_precision',
 ]
 
 import torch
