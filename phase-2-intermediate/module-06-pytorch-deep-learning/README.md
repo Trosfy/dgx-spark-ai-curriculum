@@ -178,17 +178,19 @@ print(f"Reserved: {torch.cuda.memory_reserved()/1e9:.2f}GB")
 ### NGC Container for PyTorch
 
 ```bash
-docker run --gpus all --ipc=host --net=host \
+docker run --gpus all -it --rm \
+    -v $HOME/workspace:/workspace \
     -v $HOME/.cache/huggingface:/root/.cache/huggingface \
-    -v $PWD:/workspace -w /workspace \
+    --ipc=host \
+    -p 8888:8888 \
     nvcr.io/nvidia/pytorch:25.11-py3 \
-    jupyter lab --ip=0.0.0.0 --allow-root
+    jupyter lab --ip=0.0.0.0 --allow-root --no-browser
 ```
 
 > **Important flags:**
 > - `--gpus all`: Required to access GPU
 > - `--ipc=host`: **Required** when using `num_workers > 0` in DataLoader. Without it, you'll get "unable to open shared memory" errors because PyTorch workers use shared memory for inter-process communication.
-> - `--net=host`: Enables easy access to Jupyter and other services
+> - `-p 8888:8888`: Maps container port 8888 to host port 8888 for Jupyter access
 
 > **Note:** The container tag (`25.11-py3`) may need updating. Check [NGC PyTorch Containers](https://catalog.ngc.nvidia.com/orgs/nvidia/containers/pytorch) for the latest version compatible with DGX Spark.
 
