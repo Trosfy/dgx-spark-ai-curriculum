@@ -351,8 +351,6 @@ app.add_middleware(
 @app.middleware("http")
 async def logging_middleware(request: Request, call_next):
     """Log requests and apply rate limiting."""
-    global metrics
-
     # Get client IP
     client_ip = request.client.host if request.client else "unknown"
 
@@ -427,8 +425,6 @@ async def chat_completions(request: ChatCompletionRequest):
     Compatible with OpenAI's Chat Completions API.
     Supports both streaming and non-streaming responses.
     """
-    global metrics
-
     if not inference_client:
         raise HTTPException(
             status_code=status.HTTP_503_SERVICE_UNAVAILABLE,

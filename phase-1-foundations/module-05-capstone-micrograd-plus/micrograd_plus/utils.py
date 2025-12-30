@@ -16,10 +16,14 @@ Example:
 """
 
 from __future__ import annotations
-from typing import Callable, Optional, Tuple, List, Union
+from typing import Callable, Optional, Tuple, List, Union, TYPE_CHECKING
 import numpy as np
 import os
 import sys
+
+if TYPE_CHECKING:
+    from .tensor import Tensor
+    from .nn import Module
 
 __all__ = [
     'set_seed',

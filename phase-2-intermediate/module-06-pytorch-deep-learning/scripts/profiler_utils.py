@@ -23,7 +23,6 @@ __all__ = [
     'Timer',
     'MemoryTracker',
     'profile_training_step',
-    'profile_training_loop',
     'benchmark_dataloader',
     'profile_with_pytorch_profiler',
     'find_bottlenecks',
