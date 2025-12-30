@@ -1,14 +1,14 @@
 # Coherency Audit Report - Module 10
 
 **Module(s) Reviewed:** Module 10 - LLM Fine-tuning
-**Files Analyzed:** README, notebooks, scripts
+**Files Analyzed:** 15 (README, 7 notebooks, 7 solutions, 2 scripts, data README)
 **Inconsistencies Found:** 2 (All Fixed)
 **Audit Date:** 2025-12-30
 **Auditor:** ConsistencyAuditor SPARK
 
 ---
 
-## Summary
+## 📊 Summary
 
 | Category | Issues Found | Status |
 |----------|--------------|--------|
@@ -59,18 +59,60 @@ Updated to `25.11-py3` to match the standard across all modules.
 
 ---
 
-## Docker Command Consistency Check
+## 📋 Comprehensive Consistency Verification
 
-| Flag | Status |
-|------|--------|
-| `--gpus all` | ✅ Present |
-| `-it` | ✅ Present |
-| `--rm` | ✅ Present |
-| `-v $HOME/workspace:/workspace` | ✅ Present |
-| `-v $HOME/.cache/huggingface:/root/.cache/huggingface` | ✅ Present |
-| `--ipc=host` | ✅ Present |
-| `-p 8888:8888` | ✅ Present |
-| `nvcr.io/nvidia/pytorch:25.11-py3` | ✅ Present |
+### Docker Command Consistency
+
+| Flag | README.md | Notebook 06 | Status |
+|------|-----------|-------------|--------|
+| `--gpus all` | ✅ | ✅ | ✅ Consistent |
+| `-it` | ✅ | ✅ | ✅ Consistent |
+| `--rm` | ✅ | ✅ | ✅ Consistent |
+| `-v $HOME/workspace:/workspace` | ✅ | ✅ | ✅ Consistent |
+| `-v $HOME/.cache/huggingface:/root/.cache/huggingface` | ✅ | ✅ | ✅ Consistent |
+| `--ipc=host` | ✅ | ✅ | ✅ Consistent |
+| `-p 8888:8888` | ✅ | N/A (uses 7860) | ✅ Appropriate |
+| `nvcr.io/nvidia/pytorch:25.11-py3` | ✅ | ✅ | ✅ Consistent |
+
+### Terminology Consistency
+
+| Term | Usage | Status |
+|------|-------|--------|
+| Unified memory | "128GB unified memory" | ✅ Consistent |
+| Model names | `meta-llama/Llama-3.1-8B-Instruct` | ✅ Consistent |
+| LoRA rank | "r=16" as default recommendation | ✅ Consistent |
+| LoRA alpha | "α=32" (2×rank) | ✅ Consistent |
+| Container | "NGC container" | ✅ Consistent |
+
+### Value Consistency
+
+| Value | README | Notebooks | Status |
+|-------|--------|-----------|--------|
+| 70B QLoRA memory | ~45-55GB | ~45-55GB | ✅ Consistent |
+| DGX Spark memory | 128GB | 128GB | ✅ Consistent |
+| RTX 4090 memory | 24GB | 24GB | ✅ Consistent |
+| LoRA rank default | 16 | 16 | ✅ Consistent |
+| Learning rate | 2e-4 | 2e-4 | ✅ Consistent |
+
+### Cross-File Coherency
+
+| Check | Status |
+|-------|--------|
+| README tasks match notebook content | ✅ |
+| Solution notebooks match exercises | ✅ |
+| Memory estimates consistent | ✅ |
+| Buffer cache clear commands | ✅ Functionally equivalent |
+| Ollama API URL (localhost:11434) | ✅ Consistent |
+
+### Buffer Cache Clear Command Variations
+
+All variations are functionally equivalent:
+
+| Location | Command Style | Status |
+|----------|---------------|--------|
+| README.md | `sudo sh -c 'sync; echo 3 > /proc/sys/vm/drop_caches'` | ✅ |
+| Notebook 02 | Combined subprocess call | ✅ Equivalent |
+| Notebook 03 | Separate sync + drop_caches calls | ✅ Equivalent |
 
 ---
 
@@ -78,12 +120,16 @@ Updated to `25.11-py3` to match the standard across all modules.
 
 - [x] All HIGH impact issues resolved
 - [x] Docker commands standardized
-- [x] NGC container version consistent
+- [x] NGC container version consistent (`25.11-py3`)
+- [x] Memory values consistent (70B: ~45-55GB, DGX Spark: 128GB)
+- [x] Terminology consistent across all files
+- [x] README ↔ Notebook alignment verified
+- [x] Solution ↔ Exercise alignment verified
 
-**Coherency Status:** ✅ CONSISTENT (2 issues found and fixed)
+**Coherency Status:** ✅ CONSISTENT
 
 ---
 
 *Audit by ConsistencyAuditor SPARK*
 *Report generated: 2025-12-30*
-*Last updated: 2025-12-30 (Added Issue 2: Notebook container tag)*
+*Last updated: 2025-12-30 (Comprehensive review completed)*
