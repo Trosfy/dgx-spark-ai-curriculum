@@ -1,6 +1,6 @@
 # Module [X]: [Module Title]
 
-**Phase:** [1-4] - [Phase Name]  
+**Domain:** [1-4] - [Domain Name]  
 **Duration:** Week(s) [X] ([X-X hours])  
 **Prerequisites:** [Previous modules or skills required]
 
@@ -53,9 +53,9 @@ By the end of this module, you will be able to:
 
 ---
 
-## Tasks
+## Labs
 
-### Task X.1: [Task Title]
+### Lab X.1: [Lab Title]
 **Time:** [X hours]
 
 [Brief description of the task and its purpose]
@@ -71,7 +71,7 @@ By the end of this module, you will be able to:
 
 ---
 
-### Task X.2: [Task Title]
+### Lab X.2: [Lab Title]
 **Time:** [X hours]
 
 [Brief description]
@@ -85,7 +85,7 @@ By the end of this module, you will be able to:
 
 ---
 
-### Task X.3: [Task Title]
+### Lab X.3: [Lab Title]
 **Time:** [X hours]
 
 [Brief description]
@@ -125,9 +125,9 @@ example_code = "here"
 
 Use this checklist to track your progress:
 
-- [ ] Task X.1 completed
-- [ ] Task X.2 completed
-- [ ] Task X.3 completed
+- [ ] Lab X.1 completed
+- [ ] Lab X.2 completed
+- [ ] Lab X.3 completed
 - [ ] All notebooks documented with explanations
 - [ ] Key concepts understood and can be explained
 - [ ] [Any additional completion criteria]

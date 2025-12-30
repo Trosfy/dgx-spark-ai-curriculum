@@ -3,7 +3,7 @@
 
 **Author:** [Your Name]  
 **Date:** [Date]  
-**DGX Spark AI Curriculum - Phase 4 Capstone**
+**DGX Spark AI Curriculum - Domain 4 Capstone**
 
 ---
 
