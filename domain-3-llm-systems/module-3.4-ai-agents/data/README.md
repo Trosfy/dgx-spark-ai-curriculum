@@ -1,4 +1,4 @@
-# Module 13 Data Directory
+# Module 3.4 Data Directory
 
 This directory contains sample documents and data for the AI Agents module.
 

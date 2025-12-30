@@ -1,5 +1,5 @@
 """
-Module 15: Benchmarking, Evaluation & MLOps
+Module 4.2: Benchmarking, Evaluation & MLOps
 
 Utility scripts for LLM benchmarking, custom evaluation,
 experiment tracking, model versioning, and reproducibility.

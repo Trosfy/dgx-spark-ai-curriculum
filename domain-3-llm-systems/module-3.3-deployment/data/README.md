@@ -1,4 +1,4 @@
-# Module 12 Data Files
+# Module 3.3 Data Files
 
 This directory contains sample data for benchmarking and testing inference engines.
 

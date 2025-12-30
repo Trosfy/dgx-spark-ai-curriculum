@@ -2,7 +2,7 @@
 
 **Domain:** 2 - Deep Learning Frameworks  
 **Duration:** Weeks 13-14 (10-12 hours)  
-**Prerequisites:** Module 8 (Transformers)
+**Prerequisites:** Module 2.3 (Transformers)
 
 ---
 

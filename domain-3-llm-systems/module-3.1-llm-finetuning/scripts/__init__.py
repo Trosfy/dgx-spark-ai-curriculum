@@ -1,5 +1,5 @@
 """
-Module 10: LLM Fine-tuning - Scripts Package
+Module 3.1: LLM Fine-tuning - Scripts Package
 
 This package contains utility scripts for the LLM Fine-tuning module.
 

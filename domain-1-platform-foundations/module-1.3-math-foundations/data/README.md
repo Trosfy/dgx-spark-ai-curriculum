@@ -1,4 +1,4 @@
-# Data Directory - Module 3: Mathematics for Deep Learning
+# Data Directory - Module 1.3: Mathematics for Deep Learning
 
 This module primarily uses synthetic/generated data for demonstrations. No external datasets are required.
 

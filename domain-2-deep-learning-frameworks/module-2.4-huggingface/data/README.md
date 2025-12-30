@@ -1,4 +1,4 @@
-# Data Directory - Module 9: Hugging Face Ecosystem
+# Data Directory - Module 2.4: Hugging Face Ecosystem
 
 ## Overview
 

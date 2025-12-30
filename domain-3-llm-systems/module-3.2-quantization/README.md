@@ -2,7 +2,7 @@
 
 **Domain:** 3 - LLM Systems  
 **Duration:** Weeks 18-19 (10-12 hours)  
-**Prerequisites:** Module 10 (LLM Fine-tuning)
+**Prerequisites:** Module 3.1 (LLM Fine-tuning)
 
 ---
 

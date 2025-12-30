@@ -1,5 +1,5 @@
 """
-Module 14: Multimodal AI - Utility Scripts
+Module 4.1: Multimodal AI - Utility Scripts
 
 This package provides reusable utilities for multimodal AI tasks:
 - Vision-Language Models (VLMs)

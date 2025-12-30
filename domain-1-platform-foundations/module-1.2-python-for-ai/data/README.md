@@ -1,6 +1,6 @@
-# Data Directory - Module 2: Python for AI/ML
+# Data Directory - Module 1.2: Python for AI/ML
 
-This directory contains sample datasets and data generation utilities for the Module 2 exercises.
+This directory contains sample datasets and data generation utilities for the Module 1.2 exercises.
 
 ---
 

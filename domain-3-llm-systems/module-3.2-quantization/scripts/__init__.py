@@ -1,5 +1,5 @@
 """
-Module 11: Model Quantization & Optimization - Utility Scripts
+Module 3.2: Model Quantization & Optimization - Utility Scripts
 
 This package provides reusable utilities for quantizing and benchmarking models
 on DGX Spark with 128GB unified memory.

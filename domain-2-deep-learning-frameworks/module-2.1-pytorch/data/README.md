@@ -1,6 +1,6 @@
 # Data Directory
 
-This directory is used for storing datasets during the Module 6 exercises.
+This directory is used for storing datasets during the Module 2.1 exercises.
 
 ## DGX Spark Docker Configuration
 

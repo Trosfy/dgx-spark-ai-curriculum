@@ -135,6 +135,8 @@ async def query(request: QueryRequest) -> QueryResponse:
 # NGC Container used
 docker run --gpus all -it --rm \
     -v $HOME/workspace:/workspace \
+    -v $HOME/.cache/huggingface:/root/.cache/huggingface \
+    --ipc=host \
     nvcr.io/nvidia/pytorch:25.11-py3
 
 # Key dependencies

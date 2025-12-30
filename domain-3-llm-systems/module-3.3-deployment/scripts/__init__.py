@@ -1,5 +1,5 @@
 """
-Module 12: Model Deployment & Inference Engines - Utility Scripts
+Module 3.3: Model Deployment & Inference Engines - Utility Scripts
 
 This package provides utility modules for benchmarking, inference, and monitoring
 of LLM deployment on DGX Spark and other NVIDIA platforms.

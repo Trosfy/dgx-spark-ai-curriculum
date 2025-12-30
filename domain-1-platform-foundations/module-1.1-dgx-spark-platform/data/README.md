@@ -1,10 +1,10 @@
-# Module 1 Data Files
+# Module 1.1 Data Files
 
-This directory contains data files and outputs generated during Module 1: DGX Spark Platform Mastery.
+This directory contains data files and outputs generated during Module 1.1.1: DGX Spark Platform Mastery.
 
 ## Generated Files
 
-During the course of completing Module 1, the following files will be generated:
+During the course of completing Module 1.1, the following files will be generated:
 
 ### From Lab 1.1.1: System Exploration
 - `system_info.json` - Comprehensive system specification in JSON format
@@ -25,7 +25,7 @@ During the course of completing Module 1, the following files will be generated:
 
 ## Sample Data
 
-No external data files are required for Module 1. All exercises use:
+No external data files are required for Module 1.1. All exercises use:
 - System commands (nvidia-smi, lscpu, free, df)
 - PyTorch tensor allocations
 - Ollama API for model benchmarking

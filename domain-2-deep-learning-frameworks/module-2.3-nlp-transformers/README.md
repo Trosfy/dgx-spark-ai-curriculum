@@ -2,7 +2,7 @@
 
 **Domain:** 2 - Deep Learning Frameworks  
 **Duration:** Weeks 11-12 (12-15 hours)  
-**Prerequisites:** Module 6 (PyTorch)
+**Prerequisites:** Module 2.1 (PyTorch)
 
 ---
 

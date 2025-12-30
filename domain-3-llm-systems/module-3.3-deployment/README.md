@@ -2,7 +2,7 @@
 
 **Domain:** 3 - LLM Systems  
 **Duration:** Weeks 20-21 (10-12 hours)  
-**Prerequisites:** Module 11 (Quantization)
+**Prerequisites:** Module 3.2 (Quantization)
 
 ---
 
