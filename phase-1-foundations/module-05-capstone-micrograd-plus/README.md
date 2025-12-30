@@ -146,12 +146,13 @@ Implement the Tensor class with automatic differentiation.
 
 **Verification:**
 ```python
+import numpy as np
 a = Tensor([2.0], requires_grad=True)
 b = Tensor([3.0], requires_grad=True)
 c = a * b + a
-c.backward()
-assert a.grad == 4.0  # dc/da = b + 1 = 4
-assert b.grad == 2.0  # dc/db = a = 2
+c.sum().backward()  # Reduce to scalar before backward
+assert np.allclose(a.grad, 4.0)  # dc/da = b + 1 = 4
+assert np.allclose(b.grad, 2.0)  # dc/db = a = 2
 ```
 
 ---
@@ -379,6 +380,7 @@ docker run --gpus all -it --rm \
     -v $HOME/workspace:/workspace \
     -v $HOME/.cache:/root/.cache \
     --ipc=host \
+    -p 8888:8888 \
     nvcr.io/nvidia/pytorch:25.11-py3 \
     jupyter lab --ip=0.0.0.0 --allow-root --no-browser
 ```
