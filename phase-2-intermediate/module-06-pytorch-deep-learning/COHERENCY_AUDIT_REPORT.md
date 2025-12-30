@@ -1,8 +1,8 @@
 # Coherency Audit Report - Module 6
 
 **Module(s) Reviewed:** Module 6 - Deep Learning with PyTorch
-**Files Analyzed:** 20 files (README, 6 notebooks, 6 solutions, 4 scripts, data README)
-**Inconsistencies Found:** 1 (Fixed)
+**Files Analyzed:** 20 files (README, 6 notebooks, 6 solutions, 6 scripts, data README)
+**Inconsistencies Found:** 2 (All Fixed)
 **Audit Date:** 2025-12-30
 **Auditor:** ConsistencyAuditor SPARK
 
@@ -13,12 +13,12 @@
 | Category | Issues Found | Status |
 |----------|--------------|--------|
 | Code ↔ Explanation | 0 | ✅ |
-| Code ↔ Table | 1 | ✅ Fixed |
-| Cross-File | 0 | ✅ |
+| Code ↔ Table | 0 | ✅ |
+| Cross-File | 2 | ✅ Fixed |
 | Cross-Module | 0 | ✅ |
 | Terminology | 0 | ✅ |
 | Values | 0 | ✅ |
-| **TOTAL** | **1** | **✅ All Fixed** |
+| **TOTAL** | **2** | **✅ All Fixed** |
 
 ---
 
@@ -47,6 +47,51 @@ Issues:
 - Used `--net=host` instead of `-p 8888:8888`
 - Missing `-it` and `--rm` flags
 - Used `-v $PWD:/workspace -w /workspace` instead of `-v $HOME/workspace:/workspace`
+
+**Fix Applied:**
+```bash
+docker run --gpus all -it --rm \
+    -v $HOME/workspace:/workspace \
+    -v $HOME/.cache/huggingface:/root/.cache/huggingface \
+    --ipc=host \
+    -p 8888:8888 \
+    nvcr.io/nvidia/pytorch:25.11-py3 \
+    jupyter lab --ip=0.0.0.0 --allow-root --no-browser
+```
+
+---
+
+### Issue 2: Non-Standard Docker Command in data/README.md
+
+**Type:** Cross-File Inconsistency
+
+**Location:**
+- File: `data/README.md`
+- Section: DGX Spark Docker Configuration
+
+**The Inconsistency:**
+
+What was WRITTEN (non-standard):
+```bash
+docker run --gpus all --ipc=host -it \
+    -v $PWD:/workspace -w /workspace \
+    nvcr.io/nvidia/pytorch:25.11-py3 \
+    jupyter lab --ip=0.0.0.0 --allow-root
+```
+
+Issues:
+- Missing `--rm` flag (container cleanup)
+- Missing `-p 8888:8888` port mapping (CRITICAL - Jupyter inaccessible without this!)
+- Missing HuggingFace cache mount `-v $HOME/.cache/huggingface:/root/.cache/huggingface`
+- Used `-v $PWD:/workspace` instead of `-v $HOME/workspace:/workspace`
+- Missing `--no-browser` flag for jupyter command
+- Flag order didn't match standard pattern
+
+**Why It's Confusing:**
+Learners following data/README.md would get a Docker container that:
+1. Cannot access Jupyter Lab from their browser (no port mapping)
+2. Would need to re-download HuggingFace models every time
+3. Leaves orphan containers (no --rm)
 
 **Fix Applied:**
 ```bash
@@ -103,30 +148,33 @@ Consistent tag `nvcr.io/nvidia/pytorch:25.11-py3`.
 
 ## Docker Command Consistency Check
 
-| Flag | README (Fixed) | Status |
-|------|----------------|--------|
-| `--gpus all` | ✅ Present | ✅ |
-| `-it` | ✅ Present | ✅ |
-| `--rm` | ✅ Present | ✅ |
-| `-v $HOME/workspace:/workspace` | ✅ Present | ✅ |
-| `-v $HOME/.cache/huggingface:/root/.cache/huggingface` | ✅ Present | ✅ |
-| `--ipc=host` | ✅ Present | ✅ |
-| `-p 8888:8888` | ✅ Present | ✅ |
-| `nvcr.io/nvidia/pytorch:25.11-py3` | ✅ Present | ✅ |
+| Flag | README.md | data/README.md | Status |
+|------|-----------|----------------|--------|
+| `--gpus all` | ✅ | ✅ | ✅ |
+| `-it` | ✅ | ✅ | ✅ |
+| `--rm` | ✅ | ✅ | ✅ |
+| `-v $HOME/workspace:/workspace` | ✅ | ✅ | ✅ |
+| `-v $HOME/.cache/huggingface:/root/.cache/huggingface` | ✅ | ✅ | ✅ |
+| `--ipc=host` | ✅ | ✅ | ✅ |
+| `-p 8888:8888` | ✅ | ✅ | ✅ |
+| `nvcr.io/nvidia/pytorch:25.11-py3` | ✅ | ✅ | ✅ |
+| `--no-browser` (jupyter) | ✅ | ✅ | ✅ |
 
 ---
 
 ## ✅ SIGN-OFF
 
 - [x] All HIGH impact issues resolved
-- [x] Docker commands standardized
+- [x] Docker commands standardized across all files
 - [x] Terminology consistent
 - [x] Values consistent
-- [x] NGC container version consistent
+- [x] NGC container version consistent (25.11-py3)
+- [x] Cross-file references verified
 
-**Coherency Status:** ✅ CONSISTENT (1 issue found and fixed)
+**Coherency Status:** ✅ CONSISTENT (2 issues found and fixed)
 
 ---
 
 *Audit by ConsistencyAuditor SPARK*
 *Report generated: 2025-12-30*
+*Last updated: 2025-12-30 (Added Issue 2: data/README.md Docker command)*

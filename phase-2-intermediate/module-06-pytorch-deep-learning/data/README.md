@@ -7,10 +7,13 @@ This directory is used for storing datasets during the Module 6 exercises.
 When running on DGX Spark, ensure your Docker container is started with:
 
 ```bash
-docker run --gpus all --ipc=host -it \
-    -v $PWD:/workspace -w /workspace \
+docker run --gpus all -it --rm \
+    -v $HOME/workspace:/workspace \
+    -v $HOME/.cache/huggingface:/root/.cache/huggingface \
+    --ipc=host \
+    -p 8888:8888 \
     nvcr.io/nvidia/pytorch:25.11-py3 \
-    jupyter lab --ip=0.0.0.0 --allow-root
+    jupyter lab --ip=0.0.0.0 --allow-root --no-browser
 ```
 
 > **Critical:** The `--ipc=host` flag is **required** when using `num_workers > 0` in DataLoader.
