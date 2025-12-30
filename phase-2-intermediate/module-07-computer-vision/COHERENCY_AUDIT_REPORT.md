@@ -2,7 +2,7 @@
 
 **Module(s) Reviewed:** Module 7 - Computer Vision
 **Files Analyzed:** 18 files (README, 6 notebooks, solutions, scripts, data README)
-**Inconsistencies Found:** 1 (Fixed)
+**Inconsistencies Found:** 2 (All Fixed)
 **Audit Date:** 2025-12-30
 **Auditor:** ConsistencyAuditor SPARK
 
@@ -14,11 +14,11 @@
 |----------|--------------|--------|
 | Code ↔ Explanation | 0 | ✅ |
 | Code ↔ Table | 0 | ✅ |
-| Cross-File | 0 | ✅ |
+| Cross-File | 1 | ✅ Fixed |
 | Cross-Module | 1 | ✅ Fixed |
 | Terminology | 0 | ✅ |
 | Values | 0 | ✅ |
-| **TOTAL** | **1** | **✅ All Fixed** |
+| **TOTAL** | **2** | **✅ All Fixed** |
 
 ---
 
@@ -53,6 +53,36 @@ nvcr.io/nvidia/pytorch:25.11-py3
 - Updated container tag to `25.11-py3`
 - Standardized volume mounts to match other modules
 - Reordered flags to match standard pattern
+
+---
+
+### Issue 2: Container Tag in Notebook Comment
+
+**Type:** Cross-File Inconsistency
+
+**Location:**
+- File: `notebooks/01-cnn-architecture-study.ipynb`
+- Section: Cell 21 (DGX Spark Docker note comment)
+
+**The Inconsistency:**
+
+What was WRITTEN (outdated):
+```python
+# Example: docker run --gpus all --ipc=host -it nvcr.io/nvidia/pytorch:25.03-py3
+```
+
+What it SHOULD BE:
+```python
+# Example: docker run --gpus all --ipc=host -it nvcr.io/nvidia/pytorch:25.11-py3
+```
+
+**Why It Was Confusing:**
+- README.md had the correct `25.11-py3` tag
+- But the notebook comment still showed `25.03-py3`
+- Learners would see conflicting version information
+
+**Fix Applied:**
+- Updated container tag in notebook comment to `25.11-py3`
 
 ---
 
@@ -99,9 +129,10 @@ Clear task breakdown with time estimates and deliverables.
 - [x] NGC container version consistent with other modules
 - [x] Values consistent
 
-**Coherency Status:** ✅ CONSISTENT (1 issue found and fixed)
+**Coherency Status:** ✅ CONSISTENT (2 issues found and fixed)
 
 ---
 
 *Audit by ConsistencyAuditor SPARK*
 *Report generated: 2025-12-30*
+*Last updated: 2025-12-30 (Added Issue 2: Notebook container tag)*
