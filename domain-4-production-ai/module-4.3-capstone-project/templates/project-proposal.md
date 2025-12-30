@@ -160,7 +160,7 @@ transformers>=4.46.0
 - [Any additional hardware]
 
 ### 10.2 Software
-- NGC Container: pytorch:25.XX-py3
+- NGC Container: pytorch:25.11-py3
 - [Other software requirements]
 
 ### 10.3 Data Access
