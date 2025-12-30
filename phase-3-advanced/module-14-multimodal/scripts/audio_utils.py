@@ -248,7 +248,7 @@ class AudioTranscriber:
             audio,
             sampling_rate=16000,
             return_tensors="pt"
-        ).input_features.to(self.model.device, dtype=torch.float16)
+        ).input_features.to(self.model.device, dtype=torch.bfloat16)
 
         forced_decoder_ids = None
         if language:
