@@ -46,9 +46,10 @@ For optimal performance on DGX Spark, use the NGC container with all required fl
 
 ```bash
 docker run --gpus all -it --rm \
-    --ipc=host \
-    -v $HOME/.cache/huggingface:/root/.cache/huggingface \
     -v $HOME/workspace:/workspace \
+    -v $HOME/.cache/huggingface:/root/.cache/huggingface \
+    --ipc=host \
+    -p 8888:8888 \
     nvcr.io/nvidia/pytorch:25.11-py3 \
     jupyter lab --ip=0.0.0.0 --allow-root --no-browser
 ```
