@@ -130,11 +130,8 @@ dgx-spark-ai-curriculum/
 │   └── benchmark_utils.py      # Direct API benchmarking
 │
 ├── templates/
-│   ├── notebook_template.ipynb
-│   ├── module_readme_template.md
-│   ├── project-proposal.md
-│   ├── technical-report.md
-│   └── presentation-outline.md
+│   ├── notebook_template.ipynb      # Template for creating labs
+│   └── module_readme_template.md    # Template for module READMEs
 │
 ├── domain-1-platform-foundations/
 │   ├── module-1.1-dgx-spark-platform/
