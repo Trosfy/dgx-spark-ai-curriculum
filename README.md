@@ -10,12 +10,12 @@ From neural network fundamentals to fine-tuning 70B parameter models, this curri
 
 ## 🎯 What You'll Learn
 
-| Phase | Duration | Topics |
-|-------|----------|--------|
-| **Foundations** | Weeks 1-6 | DGX Spark platform, Python for AI, Math for DL, Neural Networks |
-| **Intermediate** | Weeks 7-14 | PyTorch, Computer Vision, NLP, Transformers, Hugging Face |
-| **Advanced** | Weeks 15-26 | LLM Fine-tuning (70B QLoRA!), Quantization (FP4!), Deployment, AI Agents, Multimodal |
-| **Capstone** | Weeks 27-32 | End-to-end AI project |
+| Domain | Duration | Topics |
+|--------|----------|--------|
+| **Platform Foundations** | Weeks 1-6 | DGX Spark platform, Python for AI, Math for DL, Neural Networks, MicroGrad+ |
+| **Deep Learning Frameworks** | Weeks 7-14 | PyTorch, Computer Vision, NLP, Transformers, Hugging Face |
+| **LLM Systems** | Weeks 15-22 | LLM Fine-tuning (70B QLoRA!), Quantization (FP4!), Deployment, AI Agents |
+| **Production AI** | Weeks 23-32 | Multimodal AI, Benchmarking & MLOps, Capstone Project |
 
 ## 🔥 DGX Spark Advantages
 
@@ -49,49 +49,49 @@ This curriculum specifically leverages DGX Spark's unique capabilities:
 
 3. **Start with Module 1**
 ```bash
-   cd phase-1-foundations/module-01-dgx-spark-platform
+   cd domain-1-platform-foundations/module-1.1-dgx-spark-platform
    jupyter lab
 ```
 
 ## 📚 Curriculum Structure
 
 <details>
-<summary><b>Phase 1: Foundations (Weeks 1-6)</b></summary>
+<summary><b>Domain 1: Platform Foundations (Weeks 1-6)</b></summary>
 
-- [Module 1: DGX Spark Platform Mastery](phase-1-foundations/module-01-dgx-spark-platform/)
-- [Module 2: Python for AI/ML](phase-1-foundations/module-02-python-for-ai/)
-- [Module 3: Mathematics for Deep Learning](phase-1-foundations/module-03-math-for-dl/)
-- [Module 4: Neural Network Fundamentals](phase-1-foundations/module-04-neural-network-fundamentals/)
-- [Module 5: Phase 1 Capstone](phase-1-foundations/module-05-capstone-micrograd-plus/)
-
-</details>
-
-<details>
-<summary><b>Phase 2: Intermediate (Weeks 7-14)</b></summary>
-
-- [Module 6: Deep Learning with PyTorch](phase-2-intermediate/module-06-pytorch-deep-learning/)
-- [Module 7: Computer Vision](phase-2-intermediate/module-07-computer-vision/)
-- [Module 8: NLP & Transformers](phase-2-intermediate/module-08-nlp-transformers/)
-- [Module 9: Hugging Face Ecosystem](phase-2-intermediate/module-09-huggingface-ecosystem/)
+- [Module 1.1: DGX Spark Platform Mastery](domain-1-platform-foundations/module-1.1-dgx-spark-platform/)
+- [Module 1.2: Python for AI/ML](domain-1-platform-foundations/module-1.2-python-for-ai/)
+- [Module 1.3: Mathematics for Deep Learning](domain-1-platform-foundations/module-1.3-math-foundations/)
+- [Module 1.4: Neural Network Fundamentals](domain-1-platform-foundations/module-1.4-neural-networks/)
+- [Module 1.5: Capstone — MicroGrad+](domain-1-platform-foundations/module-1.5-capstone-micrograd/)
 
 </details>
 
 <details>
-<summary><b>Phase 3: Advanced (Weeks 15-26)</b></summary>
+<summary><b>Domain 2: Deep Learning Frameworks (Weeks 7-14)</b></summary>
 
-- [Module 10: LLM Fine-Tuning](phase-3-advanced/module-10-llm-finetuning/) ⭐ 70B QLoRA!
-- [Module 11: Quantization & Optimization](phase-3-advanced/module-11-quantization/) ⭐ FP4!
-- [Module 12: Deployment & Inference](phase-3-advanced/module-12-deployment-inference/)
-- [Module 13: AI Agents](phase-3-advanced/module-13-ai-agents/)
-- [Module 14: Multimodal AI](phase-3-advanced/module-14-multimodal/)
-- [Module 15: Benchmarking & MLOps](phase-3-advanced/module-15-benchmarking-mlops/)
+- [Module 2.1: Deep Learning with PyTorch](domain-2-deep-learning-frameworks/module-2.1-pytorch/)
+- [Module 2.2: Computer Vision](domain-2-deep-learning-frameworks/module-2.2-computer-vision/)
+- [Module 2.3: NLP & Transformers](domain-2-deep-learning-frameworks/module-2.3-nlp-transformers/)
+- [Module 2.4: Hugging Face Ecosystem](domain-2-deep-learning-frameworks/module-2.4-huggingface/)
 
 </details>
 
 <details>
-<summary><b>Phase 4: Capstone (Weeks 27-32)</b></summary>
+<summary><b>Domain 3: LLM Systems (Weeks 15-22)</b></summary>
 
-- [Capstone Project Options](phase-4-capstone/)
+- [Module 3.1: LLM Fine-Tuning](domain-3-llm-systems/module-3.1-llm-finetuning/) ⭐ 70B QLoRA!
+- [Module 3.2: Quantization & Optimization](domain-3-llm-systems/module-3.2-quantization/) ⭐ FP4!
+- [Module 3.3: Deployment & Inference](domain-3-llm-systems/module-3.3-deployment/)
+- [Module 3.4: AI Agents](domain-3-llm-systems/module-3.4-ai-agents/)
+
+</details>
+
+<details>
+<summary><b>Domain 4: Production AI (Weeks 23-32)</b></summary>
+
+- [Module 4.1: Multimodal AI](domain-4-production-ai/module-4.1-multimodal/)
+- [Module 4.2: Benchmarking & MLOps](domain-4-production-ai/module-4.2-mlops/)
+- [Module 4.3: Capstone Project](domain-4-production-ai/module-4.3-capstone-project/)
 
 </details>
 
@@ -136,28 +136,29 @@ dgx-spark-ai-curriculum/
 │   ├── technical-report.md
 │   └── presentation-outline.md
 │
-├── phase-1-foundations/
-│   ├── module-01-dgx-spark-platform/README.md
-│   ├── module-02-python-for-ai/README.md
-│   ├── module-03-math-for-dl/README.md
-│   ├── module-04-neural-network-fundamentals/README.md
-│   └── module-05-capstone-micrograd-plus/README.md
+├── domain-1-platform-foundations/
+│   ├── module-1.1-dgx-spark-platform/
+│   ├── module-1.2-python-for-ai/
+│   ├── module-1.3-math-foundations/
+│   ├── module-1.4-neural-networks/
+│   └── module-1.5-capstone-micrograd/
 │
-├── phase-2-intermediate/
-│   ├── module-06-pytorch-deep-learning/README.md
-│   ├── module-07-computer-vision/README.md
-│   ├── module-08-nlp-transformers/README.md
-│   └── module-09-huggingface-ecosystem/README.md
+├── domain-2-deep-learning-frameworks/
+│   ├── module-2.1-pytorch/
+│   ├── module-2.2-computer-vision/
+│   ├── module-2.3-nlp-transformers/
+│   └── module-2.4-huggingface/
 │
-├── phase-3-advanced/
-│   ├── module-10-llm-finetuning/README.md        ⭐ 70B QLoRA
-│   ├── module-11-quantization/README.md          ⭐ NVFP4
-│   ├── module-12-deployment-inference/README.md
-│   ├── module-13-ai-agents/README.md
-│   ├── module-14-multimodal/README.md
-│   └── module-15-benchmarking-mlops/README.md
+├── domain-3-llm-systems/
+│   ├── module-3.1-llm-finetuning/         ⭐ 70B QLoRA
+│   ├── module-3.2-quantization/           ⭐ NVFP4
+│   ├── module-3.3-deployment/
+│   └── module-3.4-ai-agents/
 │
-└── phase-4-capstone/README.md
+└── domain-4-production-ai/
+    ├── module-4.1-multimodal/
+    ├── module-4.2-mlops/
+    └── module-4.3-capstone-project/
 ```
 
 ## 📊 Progress Tracking

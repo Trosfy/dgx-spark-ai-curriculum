@@ -6,12 +6,12 @@ Collects all files from a module directory and formats them
 for pasting into the Content Reviewer prompt.
 
 Usage:
-    python gather_module_for_review.py module-01-dgx-spark-platform/
-    python gather_module_for_review.py module-01-dgx-spark-platform/ --output review_input.txt
-    python gather_module_for_review.py module-01-dgx-spark-platform/ --notebooks-only
+    python gather_module_for_review.py module-1.1-dgx-spark-platform/
+    python gather_module_for_review.py module-1.1-dgx-spark-platform/ --output review_input.txt
+    python gather_module_for_review.py module-1.1-dgx-spark-platform/ --notebooks-only
 
 Example:
-    python gather_module_for_review.py phase-1-foundations/module-01-dgx-spark-platform/
+    python gather_module_for_review.py domain-1-platform-foundations/module-1.1-dgx-spark-platform/
 """
 
 import argparse
@@ -180,9 +180,9 @@ def main():
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Examples:
-    python gather_module_for_review.py module-01-dgx-spark-platform/
-    python gather_module_for_review.py module-01-dgx-spark-platform/ --output review.txt
-    python gather_module_for_review.py module-01-dgx-spark-platform/ --notebooks-only
+    python gather_module_for_review.py module-1.1-dgx-spark-platform/
+    python gather_module_for_review.py module-1.1-dgx-spark-platform/ --output review.txt
+    python gather_module_for_review.py module-1.1-dgx-spark-platform/ --notebooks-only
         """
     )
     

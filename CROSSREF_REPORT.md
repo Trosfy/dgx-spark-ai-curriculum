@@ -257,17 +257,17 @@ utils/
 ### Immediate (Before Release)
 
 1. **Create 2 Missing Solution Notebooks**
-   - `phase-3-advanced/module-10-llm-finetuning/solutions/06-llama-factory-exploration-solution.ipynb`
-   - `phase-3-advanced/module-10-llm-finetuning/solutions/07-ollama-integration-solution.ipynb`
+   - `domain-3-llm-systems/module-3.1-llm-finetuning/solutions/06-llama-factory-exploration-solution.ipynb`
+   - `domain-3-llm-systems/module-3.1-llm-finetuning/solutions/07-ollama-integration-solution.ipynb`
 
 2. **Create 6 Missing `__init__.py` Files**
    ```bash
-   touch phase-1-foundations/module-01-dgx-spark-platform/scripts/__init__.py
-   touch phase-1-foundations/module-02-python-for-ai/scripts/__init__.py
-   touch phase-1-foundations/module-03-math-for-dl/scripts/__init__.py
-   touch phase-1-foundations/module-04-neural-network-fundamentals/scripts/__init__.py
-   touch phase-2-intermediate/module-09-huggingface-ecosystem/scripts/__init__.py
-   touch phase-3-advanced/module-10-llm-finetuning/scripts/__init__.py
+   touch domain-1-platform-foundations/module-1.1-dgx-spark-platform/scripts/__init__.py
+   touch domain-1-platform-foundations/module-1.2-python-for-ai/scripts/__init__.py
+   touch domain-1-platform-foundations/module-1.3-math-foundations/scripts/__init__.py
+   touch domain-1-platform-foundations/module-1.4-neural-networks/scripts/__init__.py
+   touch domain-2-deep-learning-frameworks/module-2.4-huggingface/scripts/__init__.py
+   touch domain-3-llm-systems/module-3.1-llm-finetuning/scripts/__init__.py
    ```
 
 ### Future Enhancement

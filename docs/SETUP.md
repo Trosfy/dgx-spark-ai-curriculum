@@ -622,7 +622,7 @@ print(f"Ollama models: {[m['name'] for m in r.json().get('models', [])]}")
 Once setup is complete:
 
 1. Clone the curriculum repository
-2. Navigate to `phase-1-foundations/module-01-dgx-spark-platform/`
+2. Navigate to `domain-1-platform-foundations/module-1.1-dgx-spark-platform/`
 3. Open the first notebook and begin!
 
 For issues, see [TROUBLESHOOTING.md](TROUBLESHOOTING.md).

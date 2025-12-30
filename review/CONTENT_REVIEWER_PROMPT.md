@@ -284,7 +284,7 @@ Structure your paste as:
 ---
 
 Include ALL files from:
-- notebooks/*.ipynb (the main learning content)
+- labs/*.ipynb (the main learning content)
 - scripts/*.py (utility scripts)
 - solutions/*.ipynb (exercise solutions)
 - data/* (data files and documentation)
@@ -404,16 +404,16 @@ corrected_code_here()
 
 | File | Status | Missing Imports | Unused Imports | Local Imports Valid |
 |------|--------|-----------------|----------------|---------------------|
-| `notebooks/01-xxx.ipynb` | ✅/❌ | [list or "None"] | [list or "None"] | ✅/❌ |
-| `notebooks/02-xxx.ipynb` | ✅/❌ | | | |
+| `labs/01-xxx.ipynb` | ✅/❌ | [list or "None"] | [list or "None"] | ✅/❌ |
+| `labs/02-xxx.ipynb` | ✅/❌ | | | |
 | `scripts/xxx.py` | ✅/❌ | | | |
 
 ### Cross-File Dependencies
 
 | Source File | Depends On | Exists? | Signatures Match? |
 |-------------|------------|---------|-------------------|
-| `notebooks/01-xxx.ipynb` | `scripts/helper.py` | ✅/❌ | ✅/❌ |
-| `notebooks/02-xxx.ipynb` | `data/sample.csv` | ✅/❌ | N/A |
+| `labs/01-xxx.ipynb` | `scripts/helper.py` | ✅/❌ | ✅/❌ |
+| `labs/02-xxx.ipynb` | `data/sample.csv` | ✅/❌ | N/A |
 
 ### DGX Spark Compatibility
 
@@ -488,8 +488,8 @@ if __name__ == "__main__":
 
 | File | Status | Critical | High | Medium | Low |
 |------|--------|----------|------|--------|-----|
-| `notebooks/01-xxx.ipynb` | ✅/❌ | 0 | 1 | 2 | 1 |
-| `notebooks/02-xxx.ipynb` | ✅/❌ | 0 | 0 | 1 | 0 |
+| `labs/01-xxx.ipynb` | ✅/❌ | 0 | 1 | 2 | 1 |
+| `labs/02-xxx.ipynb` | ✅/❌ | 0 | 0 | 1 | 0 |
 | `scripts/xxx.py` | ✅/❌ | 0 | 0 | 0 | 1 |
 | **TOTAL** | | **0** | **1** | **3** | **2** |
 
@@ -560,7 +560,7 @@ done
 
 Or use the helper script:
 ```bash
-python gather_module_for_review.py module-01-dgx-spark-platform/
+python gather_module_for_review.py module-1.1-dgx-spark-platform/
 ```
 
 ### Step 2: Paste into Prompt
@@ -758,7 +758,7 @@ Here's what a review output looks like:
 
 ### C1: Missing torch import in memory lab
 
-**File:** `notebooks/02-memory-architecture-lab.ipynb`  
+**File:** `labs/02-memory-architecture-lab.ipynb`  
 **Location:** Cell 3, Line 1  
 **Category:** Import
 
@@ -785,7 +785,7 @@ allocated = torch.cuda.memory_allocated()
 
 ### C2: Script file referenced but doesn't exist
 
-**File:** `notebooks/05-ollama-benchmarking.ipynb`  
+**File:** `labs/05-ollama-benchmarking.ipynb`  
 **Location:** Cell 7, Line 2  
 **Category:** Cross-Reference
 

@@ -20,21 +20,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 #### Missing `__init__.py` Files (6 files)
 These files enable proper Python package imports from scripts directories:
-- `phase-1-foundations/module-01-dgx-spark-platform/scripts/__init__.py`
-- `phase-1-foundations/module-02-python-for-ai/scripts/__init__.py`
-- `phase-1-foundations/module-03-math-for-dl/scripts/__init__.py`
-- `phase-1-foundations/module-04-neural-network-fundamentals/scripts/__init__.py`
-- `phase-2-intermediate/module-09-huggingface-ecosystem/scripts/__init__.py`
-- `phase-3-advanced/module-10-llm-finetuning/scripts/__init__.py`
+- `domain-1-platform-foundations/module-1.1-dgx-spark-platform/scripts/__init__.py`
+- `domain-1-platform-foundations/module-1.2-python-for-ai/scripts/__init__.py`
+- `domain-1-platform-foundations/module-1.3-math-foundations/scripts/__init__.py`
+- `domain-1-platform-foundations/module-1.4-neural-networks/scripts/__init__.py`
+- `domain-2-deep-learning-frameworks/module-2.4-huggingface/scripts/__init__.py`
+- `domain-3-llm-systems/module-3.1-llm-finetuning/scripts/__init__.py`
 
 #### Missing Solution Notebooks (2 files)
-- `phase-3-advanced/module-10-llm-finetuning/solutions/06-llama-factory-exploration-solution.ipynb`
+- `domain-3-llm-systems/module-3.1-llm-finetuning/solutions/06-llama-factory-exploration-solution.ipynb`
   - Complete solutions for LLaMA Factory GUI and CLI usage
   - 25-example custom dataset for training exercises
   - Training configuration examples in YAML format
   - Comparison of GUI vs script-based workflows
 
-- `phase-3-advanced/module-10-llm-finetuning/solutions/07-ollama-integration-solution.ipynb`
+- `domain-3-llm-systems/module-3.1-llm-finetuning/solutions/07-ollama-integration-solution.ipynb`
   - Complete LoRA weight merging implementation
   - GGUF conversion with validation
   - Modelfile generation for multiple model families (Llama 3, Mistral)

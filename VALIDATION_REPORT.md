@@ -30,10 +30,10 @@ Status: ✅ ALL PASS
 
 **Files Validated:**
 - `utils/` - 4 files
-- `phase-1-foundations/` - 26 files
-- `phase-2-intermediate/` - 21 files
-- `phase-3-advanced/` - 30 files
-- `phase-4-capstone/` - 15 files
+- `domain-1-platform-foundations/` - 26 files
+- `domain-2-deep-learning-frameworks/` - 21 files
+- `domain-3-llm-systems/` - 30 files
+- `domain-4-production-ai/` - 15 files
 - `review/` - 2 files
 
 ---
@@ -160,12 +160,12 @@ NGC docs: "PyPI wheels are x86_64 only"
 
 | Location | Impact |
 |----------|--------|
-| phase-1-foundations/module-01-dgx-spark-platform/scripts/ | Medium |
-| phase-1-foundations/module-02-python-for-ai/scripts/ | Medium |
-| phase-1-foundations/module-03-math-for-dl/scripts/ | Medium |
-| phase-1-foundations/module-04-neural-network-fundamentals/scripts/ | Medium |
-| phase-2-intermediate/module-09-huggingface-ecosystem/scripts/ | Medium |
-| phase-3-advanced/module-10-llm-finetuning/scripts/ | Medium |
+| domain-1-platform-foundations/module-1.1-dgx-spark-platform/scripts/ | Medium |
+| domain-1-platform-foundations/module-1.2-python-for-ai/scripts/ | Medium |
+| domain-1-platform-foundations/module-1.3-math-foundations/scripts/ | Medium |
+| domain-1-platform-foundations/module-1.4-neural-networks/scripts/ | Medium |
+| domain-2-deep-learning-frameworks/module-2.4-huggingface/scripts/ | Medium |
+| domain-3-llm-systems/module-3.1-llm-finetuning/scripts/ | Medium |
 
 **Total Missing:** 6 files
 
@@ -274,12 +274,12 @@ grep -r "\-\-gpus all" --include="*.ipynb" --include="*.md" | wc -l
 
 1. **Create Missing `__init__.py` Files**
    ```bash
-   touch phase-1-foundations/module-01-dgx-spark-platform/scripts/__init__.py
-   touch phase-1-foundations/module-02-python-for-ai/scripts/__init__.py
-   touch phase-1-foundations/module-03-math-for-dl/scripts/__init__.py
-   touch phase-1-foundations/module-04-neural-network-fundamentals/scripts/__init__.py
-   touch phase-2-intermediate/module-09-huggingface-ecosystem/scripts/__init__.py
-   touch phase-3-advanced/module-10-llm-finetuning/scripts/__init__.py
+   touch domain-1-platform-foundations/module-1.1-dgx-spark-platform/scripts/__init__.py
+   touch domain-1-platform-foundations/module-1.2-python-for-ai/scripts/__init__.py
+   touch domain-1-platform-foundations/module-1.3-math-foundations/scripts/__init__.py
+   touch domain-1-platform-foundations/module-1.4-neural-networks/scripts/__init__.py
+   touch domain-2-deep-learning-frameworks/module-2.4-huggingface/scripts/__init__.py
+   touch domain-3-llm-systems/module-3.1-llm-finetuning/scripts/__init__.py
    ```
 
 2. **Add Type Hints** (future enhancement)
