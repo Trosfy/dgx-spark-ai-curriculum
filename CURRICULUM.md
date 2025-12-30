@@ -15,35 +15,36 @@
 ## Curriculum Structure
 
 ```
-PHASE 1: FOUNDATIONS (Weeks 1-6)
-├── Module 1: DGX Spark Platform Mastery
-├── Module 2: Python for AI/ML
-├── Module 3: Mathematics for Deep Learning
-└── Module 4: Neural Network Fundamentals
+DOMAIN 1: PLATFORM FOUNDATIONS (Weeks 1-6)
+├── Module 1.1: DGX Spark Platform Mastery
+├── Module 1.2: Python for AI/ML
+├── Module 1.3: Mathematics for Deep Learning
+├── Module 1.4: Neural Network Fundamentals
+└── Module 1.5: Capstone — MicroGrad+
 
-PHASE 2: INTERMEDIATE (Weeks 7-14)
-├── Module 5: Deep Learning with PyTorch
-├── Module 6: Computer Vision
-├── Module 7: Natural Language Processing & Transformers
-└── Module 8: Hugging Face Ecosystem
+DOMAIN 2: DEEP LEARNING FRAMEWORKS (Weeks 7-14)
+├── Module 2.1: Deep Learning with PyTorch
+├── Module 2.2: Computer Vision
+├── Module 2.3: NLP & Transformers
+└── Module 2.4: Hugging Face Ecosystem
 
-PHASE 3: ADVANCED (Weeks 15-24)
-├── Module 9: Large Language Model Fine-Tuning
-├── Module 10: Model Quantization & Optimization
-├── Module 11: Model Deployment & Inference Engines
-├── Module 12: AI Agents & Agentic Systems
-├── Module 13: Multimodal AI
-└── Module 14: Benchmarking, Evaluation & MLOps
+DOMAIN 3: LLM SYSTEMS (Weeks 15-22)
+├── Module 3.1: LLM Fine-Tuning ⭐
+├── Module 3.2: Quantization & Optimization ⭐
+├── Module 3.3: Deployment & Inference
+└── Module 3.4: AI Agents & Agentic Systems
 
-PHASE 4: CAPSTONE (Weeks 25-28)
-└── Module 15: Capstone Project
+DOMAIN 4: PRODUCTION AI (Weeks 23-32)
+├── Module 4.1: Multimodal AI
+├── Module 4.2: Benchmarking & MLOps
+└── Module 4.3: Capstone Project
 ```
 
 ---
 
-# PHASE 1: FOUNDATIONS
+# DOMAIN 1: PLATFORM FOUNDATIONS
 
-## Module 1: DGX Spark Platform Mastery
+## Module 1.1: DGX Spark Platform Mastery
 
 **Duration:** Week 1 (5-8 hours)
 
@@ -58,10 +59,10 @@ By the end of this module, you will be able to:
 
 | ID | Objective | Bloom's Level |
 |----|-----------|---------------|
-| 1.1 | Describe the Grace Blackwell GB10 architecture including CPU cores, GPU specs, and unified memory | Understand |
-| 1.2 | Execute system monitoring commands to verify GPU and memory status | Apply |
-| 1.3 | Configure NGC containers for PyTorch and other frameworks | Apply |
-| 1.4 | Differentiate between compatible and incompatible open-source tools | Analyze |
+| 1.1.1 | Describe the Grace Blackwell GB10 architecture including CPU cores, GPU specs, and unified memory | Understand |
+| 1.1.2 | Execute system monitoring commands to verify GPU and memory status | Apply |
+| 1.1.3 | Configure NGC containers for PyTorch and other frameworks | Apply |
+| 1.1.4 | Differentiate between compatible and incompatible open-source tools | Analyze |
 
 ### Topics
 
@@ -82,15 +83,15 @@ By the end of this module, you will be able to:
    - NGC required: PyTorch, JAX, Hugging Face
    - Partial support: vLLM, TensorRT-LLM, DeepSpeed
 
-### Tasks
+### Labs
 
-| # | Task | Description & Deliverable | Est. Time |
+| Lab | Title | Description & Deliverable | Est. Time |
 |---|------|---------------------------|-----------|
-| 1.1 | **System Exploration** | Run `nvidia-smi`, `lscpu`, `free -h` and document your system specs. Create a Jupyter notebook summarizing your DGX Spark configuration. | 1 hour |
-| 1.2 | **Memory Architecture Lab** | Write a Python script that allocates tensors of increasing size, monitoring memory with `torch.cuda.memory_summary()`. Document when CPU vs GPU memory is used. | 1.5 hours |
-| 1.3 | **NGC Container Setup** | Pull and configure the PyTorch NGC container. Create a docker-compose.yml that mounts your home directory and Hugging Face cache. | 1.5 hours |
-| 1.4 | **Compatibility Matrix** | Research and create a markdown table of 20 popular AI tools with their DGX Spark compatibility status and workarounds. | 2 hours |
-| 1.5 | **Ollama Integration** | Configure Ollama, pull 3 different model sizes (7B, 13B, 70B), benchmark each with your Web UI, document performance. | 2 hours |
+| 1.1.1 | **System Exploration** | Run `nvidia-smi`, `lscpu`, `free -h` and document your system specs. Create a Jupyter notebook summarizing your DGX Spark configuration. | 1 hour |
+| 1.1.2 | **Memory Architecture Lab** | Write a Python script that allocates tensors of increasing size, monitoring memory with `torch.cuda.memory_summary()`. Document when CPU vs GPU memory is used. | 1.5 hours |
+| 1.1.3 | **NGC Container Setup** | Pull and configure the PyTorch NGC container. Create a docker-compose.yml that mounts your home directory and Hugging Face cache. | 1.5 hours |
+| 1.1.4 | **Compatibility Matrix** | Research and create a markdown table of 20 popular AI tools with their DGX Spark compatibility status and workarounds. | 2 hours |
+| 1.1.5 | **Ollama Integration** | Configure Ollama, pull 3 different model sizes (7B, 13B, 70B), benchmark each with your Web UI, document performance. | 2 hours |
 
 ### Guidance
 
@@ -118,7 +119,7 @@ By the end of this module, you will be able to:
 
 ---
 
-## Module 2: Python for AI/ML
+## Module 1.2: Python for AI/ML
 
 **Duration:** Week 2 (8-10 hours)
 
@@ -133,10 +134,10 @@ By the end of this module, you will be able to:
 
 | ID | Objective | Bloom's Level |
 |----|-----------|---------------|
-| 2.1 | Implement vectorized operations using NumPy broadcasting | Apply |
-| 2.2 | Transform and clean datasets using Pandas operations | Apply |
-| 2.3 | Create multi-panel visualizations for model analysis | Create |
-| 2.4 | Profile Python code and identify performance bottlenecks | Analyze |
+| 1.2.1 | Implement vectorized operations using NumPy broadcasting | Apply |
+| 1.2.2 | Transform and clean datasets using Pandas operations | Apply |
+| 1.2.3 | Create multi-panel visualizations for model analysis | Create |
+| 1.2.4 | Profile Python code and identify performance bottlenecks | Analyze |
 
 ### Topics
 
@@ -163,15 +164,15 @@ By the end of this module, you will be able to:
    - Numba JIT compilation
    - Memory profiling
 
-### Tasks
+### Labs
 
-| # | Task | Description & Deliverable | Est. Time |
+| Lab | Title | Description & Deliverable | Est. Time |
 |---|------|---------------------------|-----------|
-| 2.1 | **NumPy Broadcasting Lab** | Implement matrix operations (batch matrix multiply, outer products) using broadcasting. Compare loop vs vectorized performance. Deliverable: Notebook with timing comparisons. | 2 hours |
-| 2.2 | **Dataset Preprocessing Pipeline** | Download a real dataset (e.g., Titanic, Housing), implement complete preprocessing pipeline: handling nulls, encoding categoricals, feature scaling. Deliverable: Reusable preprocessing class. | 2 hours |
-| 2.3 | **Visualization Dashboard** | Create a multi-panel figure showing: (1) training curves, (2) confusion matrix, (3) feature importance, (4) prediction distribution. Use synthetic data if needed. | 2 hours |
-| 2.4 | **Einsum Mastery** | Implement attention mechanism using `np.einsum`. Compare with explicit loop and matmul versions. Document einsum notation. | 2 hours |
-| 2.5 | **Profiling Exercise** | Profile a slow function, identify bottlenecks, optimize with vectorization/Numba. Achieve 10x+ speedup. Document before/after. | 2 hours |
+| 1.2.1 | **NumPy Broadcasting Lab** | Implement matrix operations (batch matrix multiply, outer products) using broadcasting. Compare loop vs vectorized performance. Deliverable: Notebook with timing comparisons. | 2 hours |
+| 1.2.2 | **Dataset Preprocessing Pipeline** | Download a real dataset (e.g., Titanic, Housing), implement complete preprocessing pipeline: handling nulls, encoding categoricals, feature scaling. Deliverable: Reusable preprocessing class. | 2 hours |
+| 1.2.3 | **Visualization Dashboard** | Create a multi-panel figure showing: (1) training curves, (2) confusion matrix, (3) feature importance, (4) prediction distribution. Use synthetic data if needed. | 2 hours |
+| 1.2.4 | **Einsum Mastery** | Implement attention mechanism using `np.einsum`. Compare with explicit loop and matmul versions. Document einsum notation. | 2 hours |
+| 1.2.5 | **Profiling Exercise** | Profile a slow function, identify bottlenecks, optimize with vectorization/Numba. Achieve 10x+ speedup. Document before/after. | 2 hours |
 
 ### Guidance
 
@@ -194,7 +195,7 @@ By the end of this module, you will be able to:
 
 ---
 
-## Module 3: Mathematics for Deep Learning
+## Module 1.3: Mathematics for Deep Learning
 
 **Duration:** Week 3 (8-10 hours)
 
@@ -209,10 +210,10 @@ By the end of this module, you will be able to:
 
 | ID | Objective | Bloom's Level |
 |----|-----------|---------------|
-| 3.1 | Compute partial derivatives for composite functions using chain rule | Apply |
-| 3.2 | Implement gradient descent variants from scratch | Apply |
-| 3.3 | Visualize and interpret loss landscapes | Analyze |
-| 3.4 | Perform matrix calculus for backpropagation derivation | Understand |
+| 1.3.1 | Compute partial derivatives for composite functions using chain rule | Apply |
+| 1.3.2 | Implement gradient descent variants from scratch | Apply |
+| 1.3.3 | Visualize and interpret loss landscapes | Analyze |
+| 1.3.4 | Perform matrix calculus for backpropagation derivation | Understand |
 
 ### Topics
 
@@ -240,15 +241,15 @@ By the end of this module, you will be able to:
    - Cross-entropy and KL divergence
    - Bayesian basics
 
-### Tasks
+### Labs
 
-| # | Task | Description & Deliverable | Est. Time |
+| Lab | Title | Description & Deliverable | Est. Time |
 |---|------|---------------------------|-----------|
-| 3.1 | **Manual Backprop** | Implement forward and backward pass for a 3-layer MLP from scratch (no autograd). Verify gradients match PyTorch autograd. | 3 hours |
-| 3.2 | **Optimizer Implementation** | Implement SGD, Momentum, and Adam optimizers from scratch. Train on a simple problem, compare convergence curves. | 2 hours |
-| 3.3 | **Loss Landscape Visualization** | Create 2D and 3D visualizations of loss landscapes for a simple network. Identify local minima, saddle points. | 2 hours |
-| 3.4 | **SVD for LoRA Intuition** | Decompose a weight matrix using SVD, reconstruct with varying ranks, visualize information loss. Connect to LoRA concept. | 2 hours |
-| 3.5 | **Probability Distributions Lab** | Implement and visualize common distributions. Derive cross-entropy loss from maximum likelihood principle. | 2 hours |
+| 1.3.1 | **Manual Backprop** | Implement forward and backward pass for a 3-layer MLP from scratch (no autograd). Verify gradients match PyTorch autograd. | 3 hours |
+| 1.3.2 | **Optimizer Implementation** | Implement SGD, Momentum, and Adam optimizers from scratch. Train on a simple problem, compare convergence curves. | 2 hours |
+| 1.3.3 | **Loss Landscape Visualization** | Create 2D and 3D visualizations of loss landscapes for a simple network. Identify local minima, saddle points. | 2 hours |
+| 1.3.4 | **SVD for LoRA Intuition** | Decompose a weight matrix using SVD, reconstruct with varying ranks, visualize information loss. Connect to LoRA concept. | 2 hours |
+| 1.3.5 | **Probability Distributions Lab** | Implement and visualize common distributions. Derive cross-entropy loss from maximum likelihood principle. | 2 hours |
 
 ### Guidance
 
@@ -271,7 +272,7 @@ By the end of this module, you will be able to:
 
 ---
 
-## Module 4: Neural Network Fundamentals
+## Module 1.4: Neural Network Fundamentals
 
 **Duration:** Weeks 4-5 (12-15 hours)
 
@@ -286,10 +287,10 @@ By the end of this module, you will be able to:
 
 | ID | Objective | Bloom's Level |
 |----|-----------|---------------|
-| 4.1 | Implement fully-connected layers with forward and backward passes | Apply |
-| 4.2 | Explain vanishing/exploding gradients and implement solutions | Understand |
-| 4.3 | Apply regularization techniques (L2, dropout) to prevent overfitting | Apply |
-| 4.4 | Diagnose training issues from loss curves and metrics | Analyze |
+| 1.4.1 | Implement fully-connected layers with forward and backward passes | Apply |
+| 1.4.2 | Explain vanishing/exploding gradients and implement solutions | Understand |
+| 1.4.3 | Apply regularization techniques (L2, dropout) to prevent overfitting | Apply |
+| 1.4.4 | Diagnose training issues from loss curves and metrics | Analyze |
 
 ### Topics
 
@@ -324,16 +325,16 @@ By the end of this module, you will be able to:
    - He initialization
    - Impact on training dynamics
 
-### Tasks
+### Labs
 
-| # | Task | Description & Deliverable | Est. Time |
+| Lab | Title | Description & Deliverable | Est. Time |
 |---|------|---------------------------|-----------|
-| 4.1 | **NumPy Neural Network** | Build a complete MLP from scratch: Linear, ReLU, Softmax, CrossEntropy, SGD. Train on MNIST to >95% accuracy. | 4 hours |
-| 4.2 | **Activation Function Study** | Implement 6 activation functions, visualize their outputs and gradients, train same network with each, compare results. | 2 hours |
-| 4.3 | **Regularization Experiments** | Train networks with varying L2 strength and dropout rates. Create visualization showing underfitting → good fit → overfitting. | 2 hours |
-| 4.4 | **Normalization Comparison** | Implement BatchNorm and LayerNorm from scratch. Compare training dynamics with/without normalization. | 2 hours |
-| 4.5 | **Training Diagnostics Lab** | Deliberately create training problems (bad LR, vanishing gradients, overfitting), document symptoms, implement fixes. | 2 hours |
-| 4.6 | **GPU Acceleration** | Port your NumPy MLP to PyTorch, compare training speed CPU vs GPU on DGX Spark. | 2 hours |
+| 1.4.1 | **NumPy Neural Network** | Build a complete MLP from scratch: Linear, ReLU, Softmax, CrossEntropy, SGD. Train on MNIST to >95% accuracy. | 4 hours |
+| 1.4.2 | **Activation Function Study** | Implement 6 activation functions, visualize their outputs and gradients, train same network with each, compare results. | 2 hours |
+| 1.4.3 | **Regularization Experiments** | Train networks with varying L2 strength and dropout rates. Create visualization showing underfitting → good fit → overfitting. | 2 hours |
+| 1.4.4 | **Normalization Comparison** | Implement BatchNorm and LayerNorm from scratch. Compare training dynamics with/without normalization. | 2 hours |
+| 1.4.5 | **Training Diagnostics Lab** | Deliberately create training problems (bad LR, vanishing gradients, overfitting), document symptoms, implement fixes. | 2 hours |
+| 1.4.6 | **GPU Acceleration** | Port your NumPy MLP to PyTorch, compare training speed CPU vs GPU on DGX Spark. | 2 hours |
 
 ### Guidance
 
@@ -355,7 +356,7 @@ By the end of this module, you will be able to:
 
 ---
 
-## Module 5: Phase 1 Capstone — From-Scratch Neural Network Library
+## Module 1.5: Capstone — MicroGrad+ — From-Scratch Neural Network Library
 
 **Duration:** Week 6 (8-10 hours)
 
@@ -369,10 +370,10 @@ By the end of this module, you will be able to:
 
 | ID | Objective | Bloom's Level |
 |----|-----------|---------------|
-| 5.1 | Design a modular architecture for neural network components | Create |
-| 5.2 | Implement automatic differentiation for common operations | Apply |
-| 5.3 | Write comprehensive unit tests for neural network operations | Apply |
-| 5.4 | Document code with docstrings and usage examples | Create |
+| 1.5.1 | Design a modular architecture for neural network components | Create |
+| 1.5.2 | Implement automatic differentiation for common operations | Apply |
+| 1.5.3 | Write comprehensive unit tests for neural network operations | Apply |
+| 1.5.4 | Document code with docstrings and usage examples | Create |
 
 ### Capstone Project: MicroGrad+
 
@@ -403,9 +404,9 @@ Build an extended version of Andrej Karpathy's micrograd with additional feature
 
 ---
 
-# PHASE 2: INTERMEDIATE
+# DOMAIN 2: DEEP LEARNING FRAMEWORKS
 
-## Module 6: Deep Learning with PyTorch
+## Module 2.1: Deep Learning with PyTorch
 
 **Duration:** Week 7-8 (12-15 hours)
 
@@ -420,10 +421,10 @@ By the end of this module, you will be able to:
 
 | ID | Objective | Bloom's Level |
 |----|-----------|---------------|
-| 6.1 | Create custom nn.Module classes with proper initialization | Apply |
-| 6.2 | Implement Dataset and DataLoader for custom data | Apply |
-| 6.3 | Use hooks for model introspection and debugging | Apply |
-| 6.4 | Profile models with PyTorch Profiler | Analyze |
+| 2.1.1 | Create custom nn.Module classes with proper initialization | Apply |
+| 2.1.2 | Implement Dataset and DataLoader for custom data | Apply |
+| 2.1.3 | Use hooks for model introspection and debugging | Apply |
+| 2.1.4 | Profile models with PyTorch Profiler | Analyze |
 
 ### Topics
 
@@ -451,16 +452,16 @@ By the end of this module, you will be able to:
    - Learning rate scheduling
    - Gradient clipping and accumulation
 
-### Tasks
+### Labs
 
-| # | Task | Description & Deliverable | Est. Time |
+| Lab | Title | Description & Deliverable | Est. Time |
 |---|------|---------------------------|-----------|
-| 6.1 | **Custom Module Lab** | Implement a ResNet block as custom nn.Module. Stack blocks to create ResNet-18. | 2 hours |
-| 6.2 | **Dataset Pipeline** | Create custom Dataset for a local image folder. Implement DataLoader with augmentation. Benchmark loading speed. | 2 hours |
-| 6.3 | **Autograd Deep Dive** | Implement custom autograd Function for a novel activation. Verify gradients with gradcheck. | 2 hours |
-| 6.4 | **Mixed Precision Training** | Train a model with AMP (torch.cuda.amp). Compare memory usage and speed vs FP32. | 2 hours |
-| 6.5 | **Profiling Workshop** | Profile a training loop with PyTorch Profiler. Identify bottlenecks, optimize, measure improvement. | 2 hours |
-| 6.6 | **Checkpointing System** | Implement robust checkpointing: save/resume training, best model tracking, early stopping. | 2 hours |
+| 2.1.1 | **Custom Module Lab** | Implement a ResNet block as custom nn.Module. Stack blocks to create ResNet-18. | 2 hours |
+| 2.1.2 | **Dataset Pipeline** | Create custom Dataset for a local image folder. Implement DataLoader with augmentation. Benchmark loading speed. | 2 hours |
+| 2.1.3 | **Autograd Deep Dive** | Implement custom autograd Function for a novel activation. Verify gradients with gradcheck. | 2 hours |
+| 2.1.4 | **Mixed Precision Training** | Train a model with AMP (torch.cuda.amp). Compare memory usage and speed vs FP32. | 2 hours |
+| 2.1.5 | **Profiling Workshop** | Profile a training loop with PyTorch Profiler. Identify bottlenecks, optimize, measure improvement. | 2 hours |
+| 2.1.6 | **Checkpointing System** | Implement robust checkpointing: save/resume training, best model tracking, early stopping. | 2 hours |
 
 ### Guidance
 
@@ -486,7 +487,7 @@ By the end of this module, you will be able to:
 
 ---
 
-## Module 7: Computer Vision
+## Module 2.2: Computer Vision
 
 **Duration:** Weeks 9-10 (12-15 hours)
 
@@ -501,10 +502,10 @@ By the end of this module, you will be able to:
 
 | ID | Objective | Bloom's Level |
 |----|-----------|---------------|
-| 7.1 | Explain the evolution from LeNet to modern architectures | Understand |
-| 7.2 | Implement data augmentation pipelines for image data | Apply |
-| 7.3 | Fine-tune pre-trained models on custom datasets | Apply |
-| 7.4 | Evaluate model performance using appropriate CV metrics | Analyze |
+| 2.2.1 | Explain the evolution from LeNet to modern architectures | Understand |
+| 2.2.2 | Implement data augmentation pipelines for image data | Apply |
+| 2.2.3 | Fine-tune pre-trained models on custom datasets | Apply |
+| 2.2.4 | Evaluate model performance using appropriate CV metrics | Analyze |
 
 ### Topics
 
@@ -534,16 +535,16 @@ By the end of this module, you will be able to:
    - Patch embeddings
    - DeiT and training tricks
 
-### Tasks
+### Labs
 
-| # | Task | Description & Deliverable | Est. Time |
+| Lab | Title | Description & Deliverable | Est. Time |
 |---|------|---------------------------|-----------|
-| 7.1 | **CNN Architecture Study** | Implement LeNet, AlexNet (simplified), and ResNet-18. Train on CIFAR-10, compare accuracy and training dynamics. | 3 hours |
-| 7.2 | **Transfer Learning Project** | Fine-tune a pre-trained EfficientNet on a custom dataset (e.g., food classification). Achieve >90% accuracy. | 3 hours |
-| 7.3 | **Object Detection Demo** | Use YOLOv8 to detect objects in custom images/video. Document inference speed on DGX Spark. | 2 hours |
-| 7.4 | **Segmentation Lab** | Implement U-Net for semantic segmentation. Train on a simple dataset (e.g., pet segmentation). | 3 hours |
-| 7.5 | **Vision Transformer** | Implement ViT from scratch. Train on CIFAR-10 and compare with CNN. | 3 hours |
-| 7.6 | **SAM Integration** | Use Segment Anything Model for interactive segmentation. Create a demo notebook. | 2 hours |
+| 2.2.1 | **CNN Architecture Study** | Implement LeNet, AlexNet (simplified), and ResNet-18. Train on CIFAR-10, compare accuracy and training dynamics. | 3 hours |
+| 2.2.2 | **Transfer Learning Project** | Fine-tune a pre-trained EfficientNet on a custom dataset (e.g., food classification). Achieve >90% accuracy. | 3 hours |
+| 2.2.3 | **Object Detection Demo** | Use YOLOv8 to detect objects in custom images/video. Document inference speed on DGX Spark. | 2 hours |
+| 2.2.4 | **Segmentation Lab** | Implement U-Net for semantic segmentation. Train on a simple dataset (e.g., pet segmentation). | 3 hours |
+| 2.2.5 | **Vision Transformer** | Implement ViT from scratch. Train on CIFAR-10 and compare with CNN. | 3 hours |
+| 2.2.6 | **SAM Integration** | Use Segment Anything Model for interactive segmentation. Create a demo notebook. | 2 hours |
 
 ### Guidance
 
@@ -571,7 +572,7 @@ By the end of this module, you will be able to:
 
 ---
 
-## Module 8: Natural Language Processing & Transformers
+## Module 2.3: NLP & Transformers
 
 **Duration:** Weeks 11-12 (12-15 hours)
 
@@ -586,10 +587,10 @@ By the end of this module, you will be able to:
 
 | ID | Objective | Bloom's Level |
 |----|-----------|---------------|
-| 8.1 | Implement multi-head self-attention from scratch | Apply |
-| 8.2 | Explain positional encoding strategies (sinusoidal, rotary) | Understand |
-| 8.3 | Tokenize text using BPE and SentencePiece | Apply |
-| 8.4 | Fine-tune BERT for classification tasks | Apply |
+| 2.3.1 | Implement multi-head self-attention from scratch | Apply |
+| 2.3.2 | Explain positional encoding strategies (sinusoidal, rotary) | Understand |
+| 2.3.3 | Tokenize text using BPE and SentencePiece | Apply |
+| 2.3.4 | Fine-tune BERT for classification tasks | Apply |
 
 ### Topics
 
@@ -621,16 +622,16 @@ By the end of this module, you will be able to:
    - GPT and causal language modeling
    - T5 and encoder-decoder models
 
-### Tasks
+### Labs
 
-| # | Task | Description & Deliverable | Est. Time |
+| Lab | Title | Description & Deliverable | Est. Time |
 |---|------|---------------------------|-----------|
-| 8.1 | **Attention from Scratch** | Implement scaled dot-product and multi-head attention. Visualize attention patterns on sample sentences. | 2 hours |
-| 8.2 | **Transformer Block** | Implement a complete Transformer encoder block. Stack 6 blocks to create encoder. | 3 hours |
-| 8.3 | **Positional Encoding Study** | Implement sinusoidal and RoPE encodings. Visualize and compare their properties. | 2 hours |
-| 8.4 | **Tokenization Lab** | Train a BPE tokenizer on custom text. Compare with pre-trained tokenizers (GPT-2, LLaMA). | 2 hours |
-| 8.5 | **BERT Fine-tuning** | Fine-tune BERT for sentiment classification. Evaluate on test set, analyze errors. | 2 hours |
-| 8.6 | **GPT Text Generation** | Load GPT-2, implement different decoding strategies (greedy, beam search, sampling). Test with your Ollama UI. | 2 hours |
+| 2.3.1 | **Attention from Scratch** | Implement scaled dot-product and multi-head attention. Visualize attention patterns on sample sentences. | 2 hours |
+| 2.3.2 | **Transformer Block** | Implement a complete Transformer encoder block. Stack 6 blocks to create encoder. | 3 hours |
+| 2.3.3 | **Positional Encoding Study** | Implement sinusoidal and RoPE encodings. Visualize and compare their properties. | 2 hours |
+| 2.3.4 | **Tokenization Lab** | Train a BPE tokenizer on custom text. Compare with pre-trained tokenizers (GPT-2, LLaMA). | 2 hours |
+| 2.3.5 | **BERT Fine-tuning** | Fine-tune BERT for sentiment classification. Evaluate on test set, analyze errors. | 2 hours |
+| 2.3.6 | **GPT Text Generation** | Load GPT-2, implement different decoding strategies (greedy, beam search, sampling). Test with your Ollama UI. | 2 hours |
 
 ### Guidance
 
@@ -653,7 +654,7 @@ By the end of this module, you will be able to:
 
 ---
 
-## Module 9: Hugging Face Ecosystem
+## Module 2.4: Hugging Face Ecosystem
 
 **Duration:** Weeks 13-14 (10-12 hours)
 
@@ -668,10 +669,10 @@ By the end of this module, you will be able to:
 
 | ID | Objective | Bloom's Level |
 |----|-----------|---------------|
-| 9.1 | Load and use pre-trained models from Hugging Face Hub | Apply |
-| 9.2 | Preprocess datasets using datasets library transformations | Apply |
-| 9.3 | Configure and use the Trainer API for fine-tuning | Apply |
-| 9.4 | Evaluate models using the evaluate library | Analyze |
+| 2.4.1 | Load and use pre-trained models from Hugging Face Hub | Apply |
+| 2.4.2 | Preprocess datasets using datasets library transformations | Apply |
+| 2.4.3 | Configure and use the Trainer API for fine-tuning | Apply |
+| 2.4.4 | Evaluate models using the evaluate library | Analyze |
 
 ### Topics
 
@@ -700,16 +701,16 @@ By the end of this module, you will be able to:
    - LoRA configuration
    - Merging adapters
 
-### Tasks
+### Labs
 
-| # | Task | Description & Deliverable | Est. Time |
+| Lab | Title | Description & Deliverable | Est. Time |
 |---|------|---------------------------|-----------|
-| 9.1 | **Hub Exploration** | Explore HF Hub, find 10 interesting models, document their use cases, download and test 3 locally. | 2 hours |
-| 9.2 | **Pipeline Showcase** | Create notebook demonstrating 5 different pipelines: text-generation, sentiment, NER, QA, summarization. | 2 hours |
-| 9.3 | **Dataset Processing** | Load a large dataset (>1M samples), apply preprocessing with map(), create train/val/test splits. | 2 hours |
-| 9.4 | **Trainer Fine-tuning** | Use Trainer API to fine-tune a model for text classification. Implement custom metrics callback. | 2 hours |
-| 9.5 | **LoRA Introduction** | Apply LoRA to a small model using PEFT. Compare trainable parameters and memory usage vs full fine-tuning. | 2 hours |
-| 9.6 | **Model Upload** | Fine-tune a model, create model card, upload to HF Hub (can be private). | 2 hours |
+| 2.4.1 | **Hub Exploration** | Explore HF Hub, find 10 interesting models, document their use cases, download and test 3 locally. | 2 hours |
+| 2.4.2 | **Pipeline Showcase** | Create notebook demonstrating 5 different pipelines: text-generation, sentiment, NER, QA, summarization. | 2 hours |
+| 2.4.3 | **Dataset Processing** | Load a large dataset (>1M samples), apply preprocessing with map(), create train/val/test splits. | 2 hours |
+| 2.4.4 | **Trainer Fine-tuning** | Use Trainer API to fine-tune a model for text classification. Implement custom metrics callback. | 2 hours |
+| 2.4.5 | **LoRA Introduction** | Apply LoRA to a small model using PEFT. Compare trainable parameters and memory usage vs full fine-tuning. | 2 hours |
+| 2.4.6 | **Model Upload** | Fine-tune a model, create model card, upload to HF Hub (can be private). | 2 hours |
 
 ### Guidance
 
@@ -732,9 +733,9 @@ By the end of this module, you will be able to:
 
 ---
 
-# PHASE 3: ADVANCED
+# DOMAIN 3: LLM SYSTEMS
 
-## Module 10: Large Language Model Fine-Tuning
+## Module 3.1: LLM Fine-Tuning
 
 **Duration:** Weeks 15-17 (15-18 hours)
 
@@ -749,10 +750,10 @@ By the end of this module, you will be able to:
 
 | ID | Objective | Bloom's Level |
 |----|-----------|---------------|
-| 10.1 | Explain the mathematical foundations of LoRA | Understand |
-| 10.2 | Configure and execute QLoRA fine-tuning for 70B models | Apply |
-| 10.3 | Prepare datasets in instruction-following formats | Apply |
-| 10.4 | Evaluate and compare fine-tuned models | Evaluate |
+| 3.1.1 | Explain the mathematical foundations of LoRA | Understand |
+| 3.1.2 | Configure and execute QLoRA fine-tuning for 70B models | Apply |
+| 3.1.3 | Prepare datasets in instruction-following formats | Apply |
+| 3.1.4 | Evaluate and compare fine-tuned models | Evaluate |
 
 ### Topics
 
@@ -787,17 +788,17 @@ By the end of this module, you will be able to:
    - DPO (Direct Preference Optimization)
    - ORPO, SimPO variants
 
-### Tasks
+### Labs
 
-| # | Task | Description & Deliverable | Est. Time |
+| Lab | Title | Description & Deliverable | Est. Time |
 |---|------|---------------------------|-----------|
-| 10.1 | **LoRA Theory Notebook** | Implement LoRA from scratch on a small transformer. Visualize weight updates. Document rank vs performance tradeoff. | 3 hours |
-| 10.2 | **8B Model LoRA Fine-tuning** | Fine-tune Llama 3.1 8B with LoRA on a custom dataset. Use Unsloth for acceleration. | 3 hours |
-| 10.3 | **70B Model QLoRA** | Fine-tune a 70B model using QLoRA. This is where DGX Spark shines—document memory usage, demonstrate capability. | 4 hours |
-| 10.4 | **Dataset Preparation** | Create an instruction dataset from raw data. Implement Alpaca and ChatML formats. Include data cleaning. | 2 hours |
-| 10.5 | **DPO Training** | Implement preference optimization using DPO. Compare with SFT-only baseline. | 3 hours |
-| 10.6 | **LLaMA Factory Exploration** | Use LLaMA Factory web UI for fine-tuning. Document the workflow and compare with script-based approach. | 2 hours |
-| 10.7 | **Integration with Ollama** | Convert fine-tuned model to GGUF, import to Ollama, test in your Web UI. | 2 hours |
+| 3.1.1 | **LoRA Theory Notebook** | Implement LoRA from scratch on a small transformer. Visualize weight updates. Document rank vs performance tradeoff. | 3 hours |
+| 3.1.2 | **8B Model LoRA Fine-tuning** | Fine-tune Llama 3.1 8B with LoRA on a custom dataset. Use Unsloth for acceleration. | 3 hours |
+| 3.1.3 | **70B Model QLoRA** | Fine-tune a 70B model using QLoRA. This is where DGX Spark shines—document memory usage, demonstrate capability. | 4 hours |
+| 3.1.4 | **Dataset Preparation** | Create an instruction dataset from raw data. Implement Alpaca and ChatML formats. Include data cleaning. | 2 hours |
+| 3.1.5 | **DPO Training** | Implement preference optimization using DPO. Compare with SFT-only baseline. | 3 hours |
+| 3.1.6 | **LLaMA Factory Exploration** | Use LLaMA Factory web UI for fine-tuning. Document the workflow and compare with script-based approach. | 2 hours |
+| 3.1.7 | **Integration with Ollama** | Convert fine-tuned model to GGUF, import to Ollama, test in your Web UI. | 2 hours |
 
 ### Guidance
 
@@ -837,7 +838,7 @@ By the end of this module, you will be able to:
 
 ---
 
-## Module 11: Model Quantization & Optimization
+## Module 3.2: Quantization & Optimization
 
 **Duration:** Weeks 18-19 (10-12 hours)
 
@@ -852,10 +853,10 @@ By the end of this module, you will be able to:
 
 | ID | Objective | Bloom's Level |
 |----|-----------|---------------|
-| 11.1 | Explain different quantization methods and their tradeoffs | Understand |
-| 11.2 | Quantize models using GPTQ, AWQ, and GGUF | Apply |
-| 11.3 | Apply Blackwell-exclusive FP4 quantization | Apply |
-| 11.4 | Measure and compare quality degradation from quantization | Evaluate |
+| 3.2.1 | Explain different quantization methods and their tradeoffs | Understand |
+| 3.2.2 | Quantize models using GPTQ, AWQ, and GGUF | Apply |
+| 3.2.3 | Apply Blackwell-exclusive FP4 quantization | Apply |
+| 3.2.4 | Measure and compare quality degradation from quantization | Evaluate |
 
 ### Topics
 
@@ -881,16 +882,16 @@ By the end of this module, you will be able to:
    - Task-specific benchmarks
    - Output comparison
 
-### Tasks
+### Labs
 
-| # | Task | Description & Deliverable | Est. Time |
+| Lab | Title | Description & Deliverable | Est. Time |
 |---|------|---------------------------|-----------|
-| 11.1 | **Quantization Overview** | Create comparison notebook: load same model in FP16, INT8, INT4. Measure size, speed, perplexity. | 2 hours |
-| 11.2 | **GPTQ Quantization** | Quantize a 7B model with GPTQ. Compare different group sizes (32, 64, 128). | 2 hours |
-| 11.3 | **AWQ Quantization** | Quantize same model with AWQ. Compare with GPTQ results. | 1.5 hours |
-| 11.4 | **GGUF Conversion** | Convert model to GGUF format. Test with llama.cpp, measure performance on DGX Spark. | 2 hours |
-| 11.5 | **FP4 Deep Dive** | Use TensorRT Model Optimizer for NVFP4 quantization. Benchmark against FP16 baseline. Document DGX Spark's FP4 advantage. | 3 hours |
-| 11.6 | **Quality Benchmark Suite** | Create standardized benchmark: perplexity, MMLU sample, generation quality. Run on all quantization variants. | 2 hours |
+| 3.2.1 | **Quantization Overview** | Create comparison notebook: load same model in FP16, INT8, INT4. Measure size, speed, perplexity. | 2 hours |
+| 3.2.2 | **GPTQ Quantization** | Quantize a 7B model with GPTQ. Compare different group sizes (32, 64, 128). | 2 hours |
+| 3.2.3 | **AWQ Quantization** | Quantize same model with AWQ. Compare with GPTQ results. | 1.5 hours |
+| 3.2.4 | **GGUF Conversion** | Convert model to GGUF format. Test with llama.cpp, measure performance on DGX Spark. | 2 hours |
+| 3.2.5 | **FP4 Deep Dive** | Use TensorRT Model Optimizer for NVFP4 quantization. Benchmark against FP16 baseline. Document DGX Spark's FP4 advantage. | 3 hours |
+| 3.2.6 | **Quality Benchmark Suite** | Create standardized benchmark: perplexity, MMLU sample, generation quality. Run on all quantization variants. | 2 hours |
 
 ### Guidance
 
@@ -916,7 +917,7 @@ By the end of this module, you will be able to:
 
 ---
 
-## Module 12: Model Deployment & Inference Engines
+## Module 3.3: Deployment & Inference
 
 **Duration:** Weeks 20-21 (10-12 hours)
 
@@ -931,10 +932,10 @@ By the end of this module, you will be able to:
 
 | ID | Objective | Bloom's Level |
 |----|-----------|---------------|
-| 12.1 | Compare inference engines (Ollama, llama.cpp, vLLM, TensorRT-LLM) | Analyze |
-| 12.2 | Deploy models as REST APIs | Apply |
-| 12.3 | Implement continuous batching for throughput optimization | Apply |
-| 12.4 | Configure and use speculative decoding | Apply |
+| 3.3.1 | Compare inference engines (Ollama, llama.cpp, vLLM, TensorRT-LLM) | Analyze |
+| 3.3.2 | Deploy models as REST APIs | Apply |
+| 3.3.3 | Implement continuous batching for throughput optimization | Apply |
+| 3.3.4 | Configure and use speculative decoding | Apply |
 
 ### Topics
 
@@ -962,16 +963,16 @@ By the end of this module, you will be able to:
    - Memory management
    - Scaling strategies
 
-### Tasks
+### Labs
 
-| # | Task | Description & Deliverable | Est. Time |
+| Lab | Title | Description & Deliverable | Est. Time |
 |---|------|---------------------------|-----------|
-| 12.1 | **Engine Benchmark** | Benchmark same model on Ollama, llama.cpp, vLLM, TensorRT-LLM. Measure prefill, decode, memory. Create comparison report. | 3 hours |
-| 12.2 | **vLLM Deployment** | Deploy model with vLLM. Implement continuous batching. Measure throughput under concurrent requests. | 2 hours |
-| 12.3 | **TensorRT-LLM Optimization** | Build TensorRT-LLM engine for a model. Compare with other engines on prefill speed. | 3 hours |
-| 12.4 | **Speculative Decoding** | Configure SGLang with EAGLE-3 speculative decoding. Measure speedup vs standard decoding. | 2 hours |
-| 12.5 | **Production API** | Create FastAPI wrapper around your preferred engine. Implement streaming, error handling, monitoring endpoint. | 2 hours |
-| 12.6 | **Ollama Web UI Integration** | Optimize your existing Ollama Web UI based on learnings. Add model switching, performance metrics display. | 2 hours |
+| 3.3.1 | **Engine Benchmark** | Benchmark same model on Ollama, llama.cpp, vLLM, TensorRT-LLM. Measure prefill, decode, memory. Create comparison report. | 3 hours |
+| 3.3.2 | **vLLM Deployment** | Deploy model with vLLM. Implement continuous batching. Measure throughput under concurrent requests. | 2 hours |
+| 3.3.3 | **TensorRT-LLM Optimization** | Build TensorRT-LLM engine for a model. Compare with other engines on prefill speed. | 3 hours |
+| 3.3.4 | **Speculative Decoding** | Configure SGLang with EAGLE-3 speculative decoding. Measure speedup vs standard decoding. | 2 hours |
+| 3.3.5 | **Production API** | Create FastAPI wrapper around your preferred engine. Implement streaming, error handling, monitoring endpoint. | 2 hours |
+| 3.3.6 | **Ollama Web UI Integration** | Optimize your existing Ollama Web UI based on learnings. Add model switching, performance metrics display. | 2 hours |
 
 ### Guidance
 
@@ -998,7 +999,7 @@ By the end of this module, you will be able to:
 
 ---
 
-## Module 13: AI Agents & Agentic Systems
+## Module 3.4: AI Agents & Agentic Systems
 
 **Duration:** Weeks 22-23 (12-15 hours)
 
@@ -1013,10 +1014,10 @@ By the end of this module, you will be able to:
 
 | ID | Objective | Bloom's Level |
 |----|-----------|---------------|
-| 13.1 | Implement RAG pipeline with vector database | Apply |
-| 13.2 | Create agents with custom tools | Apply |
-| 13.3 | Design multi-agent architectures | Create |
-| 13.4 | Evaluate agent performance and reliability | Evaluate |
+| 3.4.1 | Implement RAG pipeline with vector database | Apply |
+| 3.4.2 | Create agents with custom tools | Apply |
+| 3.4.3 | Design multi-agent architectures | Create |
+| 3.4.4 | Evaluate agent performance and reliability | Evaluate |
 
 ### Topics
 
@@ -1050,16 +1051,16 @@ By the end of this module, you will be able to:
    - AutoGen for coding agents
    - Task decomposition
 
-### Tasks
+### Labs
 
-| # | Task | Description & Deliverable | Est. Time |
+| Lab | Title | Description & Deliverable | Est. Time |
 |---|------|---------------------------|-----------|
-| 13.1 | **RAG Pipeline** | Build complete RAG system: document ingestion, embedding, ChromaDB storage, retrieval, generation. Test on technical documentation. | 3 hours |
-| 13.2 | **Custom Tools** | Create 5 custom tools (web search, calculator, code executor, file reader, API caller). Build agent that uses them. | 3 hours |
-| 13.3 | **LlamaIndex Query Engine** | Build advanced query engine with hybrid search, reranking, and source citations. | 2 hours |
-| 13.4 | **LangGraph Workflow** | Implement multi-step workflow with branching logic, error handling, human approval step. | 3 hours |
-| 13.5 | **Multi-Agent System** | Create 3-agent system (researcher, writer, reviewer) for content generation. Use CrewAI or custom orchestration. | 3 hours |
-| 13.6 | **Agent Benchmark** | Create evaluation framework: task completion rate, quality, token efficiency. Test your agents systematically. | 2 hours |
+| 3.4.1 | **RAG Pipeline** | Build complete RAG system: document ingestion, embedding, ChromaDB storage, retrieval, generation. Test on technical documentation. | 3 hours |
+| 3.4.2 | **Custom Tools** | Create 5 custom tools (web search, calculator, code executor, file reader, API caller). Build agent that uses them. | 3 hours |
+| 3.4.3 | **LlamaIndex Query Engine** | Build advanced query engine with hybrid search, reranking, and source citations. | 2 hours |
+| 3.4.4 | **LangGraph Workflow** | Implement multi-step workflow with branching logic, error handling, human approval step. | 3 hours |
+| 3.4.5 | **Multi-Agent System** | Create 3-agent system (researcher, writer, reviewer) for content generation. Use CrewAI or custom orchestration. | 3 hours |
+| 3.4.6 | **Agent Benchmark** | Create evaluation framework: task completion rate, quality, token efficiency. Test your agents systematically. | 2 hours |
 
 ### Guidance
 
@@ -1086,7 +1087,7 @@ By the end of this module, you will be able to:
 
 ---
 
-## Module 14: Multimodal AI
+## Module 4.1: Multimodal AI
 
 **Duration:** Week 24 (8-10 hours)
 
@@ -1101,10 +1102,10 @@ By the end of this module, you will be able to:
 
 | ID | Objective | Bloom's Level |
 |----|-----------|---------------|
-| 14.1 | Use vision-language models for image analysis | Apply |
-| 14.2 | Generate images using Stable Diffusion | Apply |
-| 14.3 | Build multimodal RAG systems | Apply |
-| 14.4 | Fine-tune vision-language models | Apply |
+| 4.1.1 | Use vision-language models for image analysis | Apply |
+| 4.1.2 | Generate images using Stable Diffusion | Apply |
+| 4.1.3 | Build multimodal RAG systems | Apply |
+| 4.1.4 | Fine-tune vision-language models | Apply |
 
 ### Topics
 
@@ -1130,15 +1131,15 @@ By the end of this module, you will be able to:
    - Video understanding
    - Multimodal RAG
 
-### Tasks
+### Labs
 
-| # | Task | Description & Deliverable | Est. Time |
+| Lab | Title | Description & Deliverable | Est. Time |
 |---|------|---------------------------|-----------|
-| 14.1 | **Vision-Language Demo** | Deploy LLaVA or Qwen-VL on DGX Spark. Create notebook demonstrating image understanding, VQA, OCR. | 2 hours |
-| 14.2 | **Image Generation** | Run SDXL or Flux on DGX Spark. Experiment with prompts, negative prompts, ControlNet. | 2 hours |
-| 14.3 | **Multimodal RAG** | Build RAG system that indexes images (using CLIP) and text. Query with natural language. | 2 hours |
-| 14.4 | **Document AI Pipeline** | Create pipeline for PDF processing: OCR, layout analysis, question answering over documents. | 2 hours |
-| 14.5 | **Audio Transcription** | Deploy Whisper, create transcription pipeline. Combine with LLM for audio Q&A. | 2 hours |
+| 4.1.1 | **Vision-Language Demo** | Deploy LLaVA or Qwen-VL on DGX Spark. Create notebook demonstrating image understanding, VQA, OCR. | 2 hours |
+| 4.1.2 | **Image Generation** | Run SDXL or Flux on DGX Spark. Experiment with prompts, negative prompts, ControlNet. | 2 hours |
+| 4.1.3 | **Multimodal RAG** | Build RAG system that indexes images (using CLIP) and text. Query with natural language. | 2 hours |
+| 4.1.4 | **Document AI Pipeline** | Create pipeline for PDF processing: OCR, layout analysis, question answering over documents. | 2 hours |
+| 4.1.5 | **Audio Transcription** | Deploy Whisper, create transcription pipeline. Combine with LLM for audio Q&A. | 2 hours |
 
 ### Guidance
 
@@ -1156,7 +1157,7 @@ By the end of this module, you will be able to:
 
 ---
 
-## Module 15: Benchmarking, Evaluation & MLOps
+## Module 4.2: Benchmarking & MLOps
 
 **Duration:** Week 25-26 (10-12 hours)
 
@@ -1171,10 +1172,10 @@ By the end of this module, you will be able to:
 
 | ID | Objective | Bloom's Level |
 |----|-----------|---------------|
-| 15.1 | Run standard LLM benchmarks (MMLU, HellaSwag, etc.) | Apply |
-| 15.2 | Design custom evaluation suites for specific use cases | Create |
-| 15.3 | Track experiments with MLflow or Weights & Biases | Apply |
-| 15.4 | Version datasets and models systematically | Apply |
+| 4.2.1 | Run standard LLM benchmarks (MMLU, HellaSwag, etc.) | Apply |
+| 4.2.2 | Design custom evaluation suites for specific use cases | Create |
+| 4.2.3 | Track experiments with MLflow or Weights & Biases | Apply |
+| 4.2.4 | Version datasets and models systematically | Apply |
 
 ### Topics
 
@@ -1202,15 +1203,15 @@ By the end of this module, you will be able to:
    - Reproducibility
    - CI/CD for ML
 
-### Tasks
+### Labs
 
-| # | Task | Description & Deliverable | Est. Time |
+| Lab | Title | Description & Deliverable | Est. Time |
 |---|------|---------------------------|-----------|
-| 15.1 | **Benchmark Suite** | Run lm-evaluation-harness on your models. Create comparison tables across model sizes and quantization levels. | 3 hours |
-| 15.2 | **Custom Eval Framework** | Design evaluation for your specific use case. Include automatic metrics and LLM-as-judge. | 2 hours |
-| 15.3 | **MLflow Setup** | Set up MLflow on DGX Spark. Log training runs, parameters, metrics, artifacts. Create dashboard. | 2 hours |
-| 15.4 | **Model Registry** | Create model versioning workflow. Track base models, fine-tuned versions, quantized variants. | 2 hours |
-| 15.5 | **Reproducibility Audit** | Document complete environment, dependencies, random seeds. Verify you can reproduce a previous training run. | 2 hours |
+| 4.2.1 | **Benchmark Suite** | Run lm-evaluation-harness on your models. Create comparison tables across model sizes and quantization levels. | 3 hours |
+| 4.2.2 | **Custom Eval Framework** | Design evaluation for your specific use case. Include automatic metrics and LLM-as-judge. | 2 hours |
+| 4.2.3 | **MLflow Setup** | Set up MLflow on DGX Spark. Log training runs, parameters, metrics, artifacts. Create dashboard. | 2 hours |
+| 4.2.4 | **Model Registry** | Create model versioning workflow. Track base models, fine-tuned versions, quantized variants. | 2 hours |
+| 4.2.5 | **Reproducibility Audit** | Document complete environment, dependencies, random seeds. Verify you can reproduce a previous training run. | 2 hours |
 
 ### Guidance
 
@@ -1237,9 +1238,9 @@ By the end of this module, you will be able to:
 
 ---
 
-# PHASE 4: CAPSTONE
+# DOMAIN 4: PRODUCTION AI
 
-## Module 16: Capstone Project
+## Module 4.3: Capstone Project
 
 **Duration:** Weeks 27-32 (40-50 hours)
 
@@ -1365,7 +1366,7 @@ Build a complete fine-tuning pipeline for continuous model improvement.
 |-------|-----------|-----------------|----------------|
 | Llama 3.1 8B | NVFP4 | 10,257 | 38.7 |
 | GPT-OSS 20B | MXFP4 | 4,500 | 59.0 |
-| Llama 3.1 70B | Q4 | 800 | 15.2 |
+| Llama 3.1 70B | Q4 | 800 | 4.2.2 |
 
 ### Common Commands
 ```bash
@@ -1433,22 +1434,22 @@ ollama run llama3.1:70b
 
 | Module | Status | Start Date | End Date | Notes |
 |--------|--------|------------|----------|-------|
-| 1. DGX Spark Platform | ⬜ | | | |
-| 2. Python for AI/ML | ⬜ | | | |
-| 3. Mathematics | ⬜ | | | |
-| 4. Neural Network Fundamentals | ⬜ | | | |
-| 5. Phase 1 Capstone | ⬜ | | | |
-| 6. PyTorch Deep Learning | ⬜ | | | |
-| 7. Computer Vision | ⬜ | | | |
-| 8. NLP & Transformers | ⬜ | | | |
-| 9. Hugging Face Ecosystem | ⬜ | | | |
-| 10. LLM Fine-Tuning | ⬜ | | | |
-| 11. Quantization & Optimization | ⬜ | | | |
-| 12. Deployment & Inference | ⬜ | | | |
-| 13. AI Agents | ⬜ | | | |
-| 14. Multimodal AI | ⬜ | | | |
-| 15. Benchmarking & MLOps | ⬜ | | | |
-| 16. Capstone Project | ⬜ | | | |
+| 1.1. DGX Spark Platform | ⬜ | | | |
+| 1.2. Python for AI/ML | ⬜ | | | |
+| 1.3. Mathematics | ⬜ | | | |
+| 1.4. Neural Network Fundamentals | ⬜ | | | |
+| 1.5. Capstone — MicroGrad+ | ⬜ | | | |
+| 2.1. PyTorch Deep Learning | ⬜ | | | |
+| 2.2. Computer Vision | ⬜ | | | |
+| 2.3. NLP & Transformers | ⬜ | | | |
+| 2.4. Hugging Face Ecosystem | ⬜ | | | |
+| 3.1. LLM Fine-Tuning | ⬜ | | | |
+| 3.2. Quantization & Optimization | ⬜ | | | |
+| 3.3. Deployment & Inference | ⬜ | | | |
+| 3.4. AI Agents | ⬜ | | | |
+| 4.1. Multimodal AI | ⬜ | | | |
+| 4.2. Benchmarking & MLOps | ⬜ | | | |
+| 4.3. Capstone Project | ⬜ | | | |
 
 ---
 

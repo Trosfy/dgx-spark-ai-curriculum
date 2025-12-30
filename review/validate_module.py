@@ -6,12 +6,12 @@ Automated validation of module content for common issues.
 Run this BEFORE using the AI reviewer prompt to catch obvious problems.
 
 Usage:
-    python validate_module.py module-01-dgx-spark-platform/
-    python validate_module.py module-01-dgx-spark-platform/ --fix
-    python validate_module.py module-01-dgx-spark-platform/ --verbose
+    python validate_module.py module-1.1-dgx-spark-platform/
+    python validate_module.py module-1.1-dgx-spark-platform/ --fix
+    python validate_module.py module-1.1-dgx-spark-platform/ --verbose
 
 Example:
-    python validate_module.py phase-1-foundations/module-01-dgx-spark-platform/
+    python validate_module.py domain-1-platform-foundations/module-1.1-dgx-spark-platform/
 """
 
 import argparse

@@ -294,7 +294,7 @@ This allows easy extraction of each file.
 
 ### Step 1: Prepare the Module Context
 
-Copy the module README (e.g., `module-10-llm-finetuning/README.md`) and paste it into the `<module_context>` section of the prompt.
+Copy the module README (e.g., `module-3.1-llm-finetuning/README.md`) and paste it into the `<module_context>` section of the prompt.
 
 ### Step 2: Run the Prompt
 

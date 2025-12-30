@@ -375,20 +375,20 @@ Has single combined `exercise-solutions.ipynb` instead of individual solution no
 
 | Location | Priority |
 |----------|----------|
-| phase-1-foundations/module-01-dgx-spark-platform/scripts/__init__.py | Medium |
-| phase-1-foundations/module-02-python-for-ai/scripts/__init__.py | Medium |
-| phase-1-foundations/module-03-math-for-dl/scripts/__init__.py | Medium |
-| phase-1-foundations/module-04-neural-network-fundamentals/scripts/__init__.py | Medium |
-| phase-2-intermediate/module-09-huggingface-ecosystem/scripts/__init__.py | Medium |
-| phase-3-advanced/module-10-llm-finetuning/scripts/__init__.py | Medium |
+| domain-1-platform-foundations/module-1.1-dgx-spark-platform/scripts/__init__.py | Medium |
+| domain-1-platform-foundations/module-1.2-python-for-ai/scripts/__init__.py | Medium |
+| domain-1-platform-foundations/module-1.3-math-foundations/scripts/__init__.py | Medium |
+| domain-1-platform-foundations/module-1.4-neural-networks/scripts/__init__.py | Medium |
+| domain-2-deep-learning-frameworks/module-2.4-huggingface/scripts/__init__.py | Medium |
+| domain-3-llm-systems/module-3.1-llm-finetuning/scripts/__init__.py | Medium |
 
 ### Missing Solution Notebooks (3)
 
 | Location | Priority |
 |----------|----------|
-| phase-3-advanced/module-10-llm-finetuning/solutions/06-llama-factory-exploration-solution.ipynb | High |
-| phase-3-advanced/module-10-llm-finetuning/solutions/07-ollama-integration-solution.ipynb | High |
-| phase-3-advanced/module-13-ai-agents/solutions/06-agent-benchmark-solution.ipynb | High |
+| domain-3-llm-systems/module-3.1-llm-finetuning/solutions/06-llama-factory-exploration-solution.ipynb | High |
+| domain-3-llm-systems/module-3.1-llm-finetuning/solutions/07-ollama-integration-solution.ipynb | High |
+| domain-3-llm-systems/module-3.4-ai-agents/solutions/06-agent-benchmark-solution.ipynb | High |
 
 ### Inconsistent Solution Format (1)
 
@@ -413,12 +413,12 @@ Has single combined `exercise-solutions.ipynb` instead of individual solution no
 
 ### Priority 1: Create Missing __init__.py Files
 ```bash
-touch phase-1-foundations/module-01-dgx-spark-platform/scripts/__init__.py
-touch phase-1-foundations/module-02-python-for-ai/scripts/__init__.py
-touch phase-1-foundations/module-03-math-for-dl/scripts/__init__.py
-touch phase-1-foundations/module-04-neural-network-fundamentals/scripts/__init__.py
-touch phase-2-intermediate/module-09-huggingface-ecosystem/scripts/__init__.py
-touch phase-3-advanced/module-10-llm-finetuning/scripts/__init__.py
+touch domain-1-platform-foundations/module-1.1-dgx-spark-platform/scripts/__init__.py
+touch domain-1-platform-foundations/module-1.2-python-for-ai/scripts/__init__.py
+touch domain-1-platform-foundations/module-1.3-math-foundations/scripts/__init__.py
+touch domain-1-platform-foundations/module-1.4-neural-networks/scripts/__init__.py
+touch domain-2-deep-learning-frameworks/module-2.4-huggingface/scripts/__init__.py
+touch domain-3-llm-systems/module-3.1-llm-finetuning/scripts/__init__.py
 ```
 
 ### Priority 2: Create Missing Solution Notebooks

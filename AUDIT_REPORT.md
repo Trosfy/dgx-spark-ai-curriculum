@@ -59,10 +59,10 @@ dgx-spark-ai-curriculum/
 │   ├── workflows/validate_notebooks.yml  ✅
 │   └── mlc_config.json       ✅
 │
-├── phase-1-foundations/       ✅ 5 modules - 56 notebooks
-├── phase-2-intermediate/      ✅ 4 modules - 43 notebooks
-├── phase-3-advanced/          ✅ 6 modules - 68 notebooks
-└── phase-4-capstone/          ✅ 8 notebooks + 4 project examples
+├── domain-1-platform-foundations/       ✅ 5 modules - 56 notebooks
+├── domain-2-deep-learning-frameworks/      ✅ 4 modules - 43 notebooks
+├── domain-3-llm-systems/          ✅ 6 modules - 68 notebooks
+└── domain-4-production-ai/          ✅ 8 notebooks + 4 project examples
 ```
 
 ---
@@ -466,12 +466,12 @@ None identified.
 
 ### Medium Priority Issues
 1. **Missing `__init__.py` Files (6 locations):**
-   - phase-1-foundations/module-01-dgx-spark-platform/scripts/
-   - phase-1-foundations/module-02-python-for-ai/scripts/
-   - phase-1-foundations/module-03-math-for-dl/scripts/
-   - phase-1-foundations/module-04-neural-network-fundamentals/scripts/
-   - phase-2-intermediate/module-09-huggingface-ecosystem/scripts/
-   - phase-3-advanced/module-10-llm-finetuning/scripts/
+   - domain-1-platform-foundations/module-1.1-dgx-spark-platform/scripts/
+   - domain-1-platform-foundations/module-1.2-python-for-ai/scripts/
+   - domain-1-platform-foundations/module-1.3-math-foundations/scripts/
+   - domain-1-platform-foundations/module-1.4-neural-networks/scripts/
+   - domain-2-deep-learning-frameworks/module-2.4-huggingface/scripts/
+   - domain-3-llm-systems/module-3.1-llm-finetuning/scripts/
 
 ### Low Priority Issues
 None identified.

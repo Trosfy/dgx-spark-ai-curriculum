@@ -112,20 +112,20 @@ Status: ✅ ALL PASS
 ### Files Created
 
 #### __init__.py Files (6)
-1. `phase-1-foundations/module-01-dgx-spark-platform/scripts/__init__.py`
-2. `phase-1-foundations/module-02-python-for-ai/scripts/__init__.py`
-3. `phase-1-foundations/module-03-math-for-dl/scripts/__init__.py`
-4. `phase-1-foundations/module-04-neural-network-fundamentals/scripts/__init__.py`
-5. `phase-2-intermediate/module-09-huggingface-ecosystem/scripts/__init__.py`
-6. `phase-3-advanced/module-10-llm-finetuning/scripts/__init__.py`
+1. `domain-1-platform-foundations/module-1.1-dgx-spark-platform/scripts/__init__.py`
+2. `domain-1-platform-foundations/module-1.2-python-for-ai/scripts/__init__.py`
+3. `domain-1-platform-foundations/module-1.3-math-foundations/scripts/__init__.py`
+4. `domain-1-platform-foundations/module-1.4-neural-networks/scripts/__init__.py`
+5. `domain-2-deep-learning-frameworks/module-2.4-huggingface/scripts/__init__.py`
+6. `domain-3-llm-systems/module-3.1-llm-finetuning/scripts/__init__.py`
 
 #### Solution Notebooks (2)
-1. `phase-3-advanced/module-10-llm-finetuning/solutions/06-llama-factory-exploration-solution.ipynb`
+1. `domain-3-llm-systems/module-3.1-llm-finetuning/solutions/06-llama-factory-exploration-solution.ipynb`
    - Complete solutions for LLaMA Factory exercises
    - 25-example custom dataset included
    - Training configuration examples
 
-2. `phase-3-advanced/module-10-llm-finetuning/solutions/07-ollama-integration-solution.ipynb`
+2. `domain-3-llm-systems/module-3.1-llm-finetuning/solutions/07-ollama-integration-solution.ipynb`
    - Complete LoRA merging solution
    - GGUF conversion with validation
    - Modelfile generation for multiple model families
