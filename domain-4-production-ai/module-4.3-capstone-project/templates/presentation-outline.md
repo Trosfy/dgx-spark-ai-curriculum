@@ -18,7 +18,7 @@ Use this template to structure your capstone presentation. Each section includes
 - Project Title
 - Your Name
 - Date
-- Module: Capstone Project (Phase 4)
+- Module: Capstone Project (Domain 4)
 - (Optional: Project logo or key visual)
 
 ---

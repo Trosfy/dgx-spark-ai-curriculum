@@ -151,10 +151,10 @@ jobs:
             'docs',
             'utils',
             'templates',
-            'phase-1-foundations',
-            'phase-2-intermediate',
-            'phase-3-advanced',
-            'phase-4-capstone',
+            'domain-1-platform-foundations',
+            'domain-2-deep-learning-frameworks',
+            'domain-3-llm-systems',
+            'domain-4-production-ai',
         ]
         
         required_files = [
