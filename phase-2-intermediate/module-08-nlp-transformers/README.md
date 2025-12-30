@@ -154,9 +154,10 @@ For optimal performance on DGX Spark, use the NGC PyTorch container:
 ```bash
 # Start the NGC container with all required flags
 docker run --gpus all -it --rm \
-    --ipc=host \
-    -v $HOME/.cache/huggingface:/root/.cache/huggingface \
     -v $HOME/workspace:/workspace \
+    -v $HOME/.cache/huggingface:/root/.cache/huggingface \
+    --ipc=host \
+    -p 8888:8888 \
     nvcr.io/nvidia/pytorch:25.11-py3 \
     jupyter lab --ip=0.0.0.0 --allow-root --no-browser
 ```
@@ -164,6 +165,7 @@ docker run --gpus all -it --rm \
 **Important flags:**
 - `--gpus all` - Enable GPU access
 - `--ipc=host` - Required for DataLoader multiprocessing
+- `-p 8888:8888` - Expose Jupyter port
 - `-v huggingface` - Share model cache between runs
 
 **DGX Spark Advantages (128GB Unified Memory):**

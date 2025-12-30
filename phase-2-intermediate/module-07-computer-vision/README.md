@@ -10,17 +10,18 @@
 
 ```bash
 # Launch NGC PyTorch container with GPU support
-docker run --gpus all --ipc=host -it --rm \
+docker run --gpus all -it --rm \
     -v $HOME/workspace:/workspace \
-    -v $HOME/.cache:/root/.cache \
+    -v $HOME/.cache/huggingface:/root/.cache/huggingface \
+    --ipc=host \
     -p 8888:8888 \
-    nvcr.io/nvidia/pytorch:25.03-py3 \
+    nvcr.io/nvidia/pytorch:25.11-py3 \
     jupyter lab --ip=0.0.0.0 --port=8888 --allow-root --no-browser
 
 # ⚠️ IMPORTANT FLAGS:
 # --gpus all    : Required for GPU access
 # --ipc=host    : Required for DataLoader with num_workers > 0
-# -v .cache     : Preserves downloaded models between sessions
+# -v .cache/huggingface : Preserves downloaded models between sessions
 ```
 
 **Pre-installed in NGC container:** PyTorch, torchvision, numpy, matplotlib, tqdm

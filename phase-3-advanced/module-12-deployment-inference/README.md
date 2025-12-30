@@ -85,8 +85,8 @@ This module was tested with the following NGC container versions. Check NGC for 
 
 | Container | Version Tested | NGC Catalog Link |
 |-----------|----------------|------------------|
-| PyTorch | `nvcr.io/nvidia/pytorch:24.10-py3` | [NGC PyTorch](https://catalog.ngc.nvidia.com/orgs/nvidia/containers/pytorch) |
-| Triton + TRT-LLM | `nvcr.io/nvidia/tritonserver:24.10-trtllm-python-py3` | [NGC Triton](https://catalog.ngc.nvidia.com/orgs/nvidia/containers/tritonserver) |
+| PyTorch | `nvcr.io/nvidia/pytorch:25.11-py3` | [NGC PyTorch](https://catalog.ngc.nvidia.com/orgs/nvidia/containers/pytorch) |
+| Triton + TRT-LLM | `nvcr.io/nvidia/tritonserver:25.11-trtllm-python-py3` | [NGC Triton](https://catalog.ngc.nvidia.com/orgs/nvidia/containers/tritonserver) |
 
 **Before using any container on DGX Spark:**
 1. Visit the NGC catalog link
@@ -106,7 +106,7 @@ docker run --gpus all -p 8000:8000 \
     -v ~/.cache/huggingface:/root/.cache/huggingface \
     -e HF_TOKEN=$HF_TOKEN \
     --ipc=host \
-    nvcr.io/nvidia/pytorch:24.10-py3 \
+    nvcr.io/nvidia/pytorch:25.11-py3 \
     bash -c "pip install vllm && python -m vllm.entrypoints.openai.api_server \
         --model meta-llama/Llama-3.1-8B-Instruct \
         --enforce-eager \

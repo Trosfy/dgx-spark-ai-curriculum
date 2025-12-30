@@ -2,7 +2,7 @@
 
 **Module(s) Reviewed:** Module 3 - Mathematics for Deep Learning
 **Files Analyzed:** 14 files (README, 5 notebooks, 5 solutions, 2 scripts, data README, __init__.py)
-**Inconsistencies Found:** 0
+**Inconsistencies Found:** 1 (Fixed)
 **Audit Date:** 2025-12-30
 **Auditor:** ConsistencyAuditor SPARK
 
@@ -10,16 +10,55 @@
 
 ## Summary
 
-| Category | Issues Found |
-|----------|--------------|
-| Code ↔ Explanation | 0 |
-| Code ↔ Table | 0 |
-| Cross-File | 0 |
-| Cross-Module | 0 |
-| Terminology | 0 |
-| Values | 0 |
-| Dependencies | 0 |
-| **TOTAL** | **0** |
+| Category | Issues Found | Status |
+|----------|--------------|--------|
+| Code ↔ Explanation | 1 | ✅ Fixed |
+| Code ↔ Table | 0 | ✅ |
+| Cross-File | 0 | ✅ |
+| Cross-Module | 0 | ✅ |
+| Terminology | 0 | ✅ |
+| Values | 0 | ✅ |
+| Dependencies | 0 | ✅ |
+| **TOTAL** | **1** | **✅ All Fixed** |
+
+---
+
+## 🔴 HIGH IMPACT Issues (Fixed)
+
+### Issue 1: Incorrect Hint for ReLU Derivative
+
+**Type:** Code ↔ Explanation Mismatch
+
+**Location:**
+- File: `notebooks/01-manual-backpropagation.ipynb`
+- Cell: 10 (ReLU exercise)
+
+**The Inconsistency:**
+
+What was WRITTEN (incorrect):
+```python
+def relu_derivative(z):
+    """Derivative of ReLU"""
+    # TODO: Implement ReLU derivative
+    raise NotImplementedError("Implement: return np.maximum(0, z)")
+```
+
+What it SHOULD BE:
+```python
+def relu_derivative(z):
+    """Derivative of ReLU"""
+    # TODO: Implement ReLU derivative
+    raise NotImplementedError("Implement: return (z > 0).astype(float)")
+```
+
+**Why It Was Confusing:**
+- `np.maximum(0, z)` is the **ReLU function itself**, NOT its derivative
+- The ReLU derivative is 1 for z > 0, and 0 otherwise: `(z > 0).astype(float)`
+- This would cause learners to implement the wrong function
+- Their solution would not match the expected gradient behavior
+- Contradicted the solution notebook and `ManualMLP.relu_derivative()` in the same file
+
+**Fix Applied:** Updated the hint to show the correct derivative implementation.
 
 ---
 
@@ -142,13 +181,15 @@ README also documents scikit-learn as a dependency for Task 3.3.
 
 ---
 
-## No Fixes Required
+## ✅ SIGN-OFF
 
-Module 3 is well-designed and internally consistent. No coherency issues were identified that require correction.
+- [x] All HIGH impact issues resolved
+- [x] Code examples match explanations
+- [x] Terminology consistent
+- [x] Values consistent
+- [x] Exercises match solution notebooks
 
----
-
-**Coherency Status:** ✅ NO ISSUES FOUND
+**Coherency Status:** ✅ CONSISTENT (1 issue found and fixed)
 
 ---
 
