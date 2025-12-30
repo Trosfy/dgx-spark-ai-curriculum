@@ -2,7 +2,7 @@
 
 **Domain:** 3 - LLM Systems
 **Duration:** Week 24 (8-10 hours)
-**Prerequisites:** Module 13 (AI Agents)
+**Prerequisites:** Module 3.4 (AI Agents)
 
 ---
 

@@ -1,6 +1,6 @@
 # Sample Data for LLM Fine-Tuning
 
-This directory contains sample datasets for Module 10: Large Language Model Fine-Tuning.
+This directory contains sample datasets for Module 3.1: Large Language Model Fine-Tuning.
 
 ## Files
 

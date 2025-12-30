@@ -1,4 +1,4 @@
-# Data Files for Module 4: Neural Network Fundamentals
+# Data Files for Module 1.4: Neural Network Fundamentals
 
 This directory stores dataset files used in the module notebooks.
 
@@ -115,4 +115,4 @@ A drop-in replacement for MNIST with clothing items (same format):
 ### CIFAR-10
 Color images (32x32x3), 10 classes, more challenging:
 - Source: https://www.cs.toronto.edu/~kriz/cifar.html
-- Note: Requires CNN architecture (covered in Module 7)
+- Note: Requires CNN architecture (covered in Module 2.2)

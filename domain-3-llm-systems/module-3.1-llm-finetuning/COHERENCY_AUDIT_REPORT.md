@@ -1,6 +1,6 @@
-# Coherency Audit Report - Module 10
+# Coherency Audit Report - Module 3.1
 
-**Module(s) Reviewed:** Module 10 - LLM Fine-tuning
+**Module(s) Reviewed:** Module 3.1 - LLM Fine-tuning
 **Files Analyzed:** 15 (README, 7 notebooks, 7 solutions, 2 scripts, data README)
 **Inconsistencies Found:** 2 (All Fixed)
 **Audit Date:** 2025-12-30

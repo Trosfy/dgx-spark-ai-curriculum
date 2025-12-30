@@ -1,6 +1,6 @@
-# Coherency Audit Report - Module 11
+# Coherency Audit Report - Module 3.2
 
-**Module(s) Reviewed:** Module 11 - Model Quantization & Optimization
+**Module(s) Reviewed:** Module 3.2 - Model Quantization & Optimization
 **Files Analyzed:** 7 notebooks, 2 solutions, 2 scripts, 2 README files
 **Inconsistencies Found:** 3 (All Fixed)
 **Audit Date:** 2025-12-30

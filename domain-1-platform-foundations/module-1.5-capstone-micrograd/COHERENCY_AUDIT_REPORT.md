@@ -1,6 +1,6 @@
-# Coherency Audit Report - Module 5
+# Coherency Audit Report - Module 1.5
 
-**Module(s) Reviewed:** Module 5 - Phase 1 Capstone: MicroGrad+
+**Module(s) Reviewed:** Module 1.5 - Phase 1 Capstone: MicroGrad+
 **Files Analyzed:** 25+ files (README, docs, notebooks, tests, micrograd_plus package, solutions, examples)
 **Inconsistencies Found:** 2 (Fixed)
 **Audit Date:** 2025-12-30

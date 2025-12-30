@@ -1,6 +1,6 @@
-# Coherency Audit Report - Module 8
+# Coherency Audit Report - Module 2.3
 
-**Module(s) Reviewed:** Module 8 - NLP & Transformers
+**Module(s) Reviewed:** Module 2.3 - NLP & Transformers
 **Files Analyzed:** 16 (README, 6 notebooks, 5 scripts, __init__.py, 6 solutions, data/README.md)
 **Inconsistencies Found:** 3 (All Fixed)
 **Audit Date:** 2025-12-30

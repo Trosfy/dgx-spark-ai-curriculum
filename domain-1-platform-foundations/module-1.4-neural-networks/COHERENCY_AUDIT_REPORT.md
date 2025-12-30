@@ -1,6 +1,6 @@
-# Coherency Audit Report - Module 4
+# Coherency Audit Report - Module 1.4
 
-**Module(s) Reviewed:** Module 4 - Neural Network Fundamentals
+**Module(s) Reviewed:** Module 1.4 - Neural Network Fundamentals
 **Files Analyzed:** 18 files (README, 6 notebooks, 6 solutions, 4 scripts, data README)
 **Inconsistencies Found:** 1 (Fixed)
 **Audit Date:** 2025-12-30

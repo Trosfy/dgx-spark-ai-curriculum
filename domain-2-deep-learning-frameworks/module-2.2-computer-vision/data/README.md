@@ -1,4 +1,4 @@
-# Data Directory for Module 7: Computer Vision
+# Data Directory for Module 2.2: Computer Vision
 
 This directory contains datasets and sample files for the computer vision module.
 

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Sample Data Generator for Module 2: Python for AI/ML
+Sample Data Generator for Module 1.2: Python for AI/ML
 =====================================================
 
 This script generates synthetic datasets for the module exercises.

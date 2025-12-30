@@ -1,6 +1,6 @@
-# Coherency Audit Report - Module 12
+# Coherency Audit Report - Module 3.3
 
-**Module(s) Reviewed:** Module 12 - Deployment & Inference
+**Module(s) Reviewed:** Module 3.3 - Deployment & Inference
 **Files Analyzed:** 14 (README, 6 notebooks, 3 solution notebooks, 3 scripts, data README)
 **Inconsistencies Found:** 6 (All Fixed)
 **Audit Date:** 2025-12-30

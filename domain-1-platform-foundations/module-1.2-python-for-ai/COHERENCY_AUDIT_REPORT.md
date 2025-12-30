@@ -1,6 +1,6 @@
-# Coherency Audit Report - Module 2
+# Coherency Audit Report - Module 1.2
 
-**Module(s) Reviewed:** Module 2 - Python for AI/ML
+**Module(s) Reviewed:** Module 1.2 - Python for AI/ML
 **Files Analyzed:** 14 files (README, 5 notebooks, 5 solutions, 3 scripts, data README)
 **Inconsistencies Found:** 3
 **Audit Date:** 2025-12-30

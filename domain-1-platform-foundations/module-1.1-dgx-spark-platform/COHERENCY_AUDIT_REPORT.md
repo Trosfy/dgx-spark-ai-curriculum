@@ -1,6 +1,6 @@
 # Coherency Audit Report
 
-**Module(s) Reviewed:** Module 1 - DGX Spark Platform Mastery
+**Module(s) Reviewed:** Module 1.1 - DGX Spark Platform Mastery
 **Files Analyzed:** 16 files (README, 5 notebooks, 5 solutions, 1 script, data README)
 **Inconsistencies Found:** 12
 **Audit Date:** 2025-12-30
@@ -31,7 +31,7 @@
 
 **Location:**
 - File: `README.md`
-- Section: Task 1.5: Ollama Benchmarking (lines 154-155)
+- Section: Lab 1.1.5: Ollama Benchmarking (lines 154-155)
 
 **The Inconsistency:**
 

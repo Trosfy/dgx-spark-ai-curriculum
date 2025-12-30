@@ -2,7 +2,7 @@
 
 **Domain:** 3 - LLM Systems
 **Duration:** Weeks 15-17 (15-18 hours)
-**Prerequisites:** Domain 2 complete (specifically: Module 6 PyTorch Fundamentals, Module 8 NLP & Transformers)
+**Prerequisites:** Domain 2 complete (specifically: Module 2.1 PyTorch Fundamentals, Module 2.3 NLP & Transformers)
 
 ---
 

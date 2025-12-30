@@ -2,7 +2,7 @@
 
 **Domain:** 3 - LLM Systems  
 **Duration:** Weeks 22-23 (12-15 hours)  
-**Prerequisites:** Module 12 (Deployment)
+**Prerequisites:** Module 3.3 (Deployment)
 
 ---
 

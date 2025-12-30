@@ -1,6 +1,6 @@
-# Coherency Audit Report - Module 7
+# Coherency Audit Report - Module 2.2
 
-**Module(s) Reviewed:** Module 7 - Computer Vision
+**Module(s) Reviewed:** Module 2.2 - Computer Vision
 **Files Analyzed:** 18 files (README, 6 notebooks, solutions, scripts, data README)
 **Inconsistencies Found:** 2 (All Fixed)
 **Audit Date:** 2025-12-30

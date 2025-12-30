@@ -1,6 +1,6 @@
 # Data Directory
 
-This directory is for storing datasets used in Module 8: NLP & Transformers.
+This directory is for storing datasets used in Module 2.3: NLP & Transformers.
 
 ## Datasets Used in This Module
 

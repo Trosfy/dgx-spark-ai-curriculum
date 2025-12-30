@@ -1,6 +1,6 @@
-# Coherency Audit Report - Module 6
+# Coherency Audit Report - Module 2.1
 
-**Module(s) Reviewed:** Module 6 - Deep Learning with PyTorch
+**Module(s) Reviewed:** Module 2.1 - Deep Learning with PyTorch
 **Files Analyzed:** 20 files (README, 6 notebooks, 6 solutions, 6 scripts, data README)
 **Inconsistencies Found:** 2 (All Fixed)
 **Audit Date:** 2025-12-30

@@ -2,7 +2,7 @@
 
 **Domain:** 1 - Platform Foundations
 **Duration:** Week 3 (8-10 hours)
-**Prerequisites:** Module 2 (NumPy proficiency), High school calculus
+**Prerequisites:** Module 1.2 (NumPy proficiency), High school calculus
 
 ### Required Packages
 
