@@ -185,18 +185,30 @@ x.flags['C_CONTIGUOUS']
 ### Profiling Quick Start
 
 ```python
-# cProfile
+# cProfile (stdlib - always available)
 import cProfile
 cProfile.run('my_function()', sort='cumulative')
 
-# line_profiler (install: pip install line_profiler)
+# line_profiler
+# For x86_64 systems: pip install line_profiler
+# For DGX Spark (ARM64): Use version from NGC container or conda
+#   conda install -c conda-forge line_profiler
 %load_ext line_profiler
 %lprun -f my_function my_function()
 
 # Memory profiler
+# For basic tracking: tracemalloc (stdlib) works without install
+# For detailed profiling: pip install memory_profiler psutil
 %load_ext memory_profiler
 %memit my_function()
 ```
+
+### DGX Spark Compatibility Notes
+
+On DGX Spark with ARM64 architecture:
+- **cProfile and tracemalloc** work out of the box (stdlib)
+- **line_profiler and memory_profiler** may need conda installation
+- Use NGC containers which have pre-built ARM64 packages
 
 ---
 

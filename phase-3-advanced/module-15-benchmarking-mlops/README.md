@@ -76,22 +76,52 @@ By the end of this module, you will be able to:
 
 ## Guidance
 
-### LM Evaluation Harness
+### DGX Spark Environment Setup
+
+All commands should be run inside an NGC container. Start your container with:
 
 ```bash
+# Start NGC container with GPU and shared memory support
+docker run --gpus all --ipc=host -it \
+    -v $HOME/workspace:/workspace \
+    -v $HOME/.cache/huggingface:/root/.cache/huggingface \
+    -p 5000:5000 \
+    nvcr.io/nvidia/pytorch:25.01-py3
+
+# Inside the container, install additional tools:
+pip install lm-eval mlflow
+```
+
+**Important flags:**
+- `--gpus all` - Enable GPU access
+- `--ipc=host` - Required for PyTorch DataLoader with multiple workers
+- `-p 5000:5000` - Expose MLflow UI port
+
+### LM Evaluation Harness
+
+Inside your NGC container:
+
+```bash
+# Install lm-eval (pure Python, works on ARM64)
 pip install lm-eval
 
+# Run benchmarks
 lm_eval --model hf \
-    --model_args pretrained=meta-llama/Llama-3.1-8B \
+    --model_args pretrained=meta-llama/Llama-3.1-8B,dtype=bfloat16 \
     --tasks mmlu,hellaswag,arc_easy \
     --batch_size 8 \
     --output_path ./results
 ```
 
+**Note:** Use `dtype=bfloat16` for native Blackwell GPU support.
+
 ### MLflow on DGX Spark
 
 ```bash
-# Start tracking server
+# Install MLflow (pure Python, works on ARM64)
+pip install mlflow
+
+# Start tracking server (accessible from host via -p 5000:5000)
 mlflow server --host 0.0.0.0 --port 5000
 
 # In training script
@@ -115,6 +145,30 @@ Response: {response}
 Criteria: Accuracy, Helpfulness, Clarity
 Output JSON: {"score": X, "reasoning": "..."}
 """
+```
+
+### Experiment Naming Convention
+
+For consistency across the module, use these naming patterns:
+
+| Context | Pattern | Example |
+|---------|---------|---------|
+| MLflow Experiment | `{Task}-{ModelFamily}` | `Sentiment-Analysis-Models` |
+| MLflow Run | `{model}-{variant}` | `phi2-lora-r16` |
+| Benchmark Output | `{model}_{benchmark}` | `phi2_quick_test` |
+| Model Registry | `PascalCase` | `SentimentClassifier` |
+
+**Example workflow:**
+```python
+# Experiment name groups related runs
+mlflow.set_experiment("LLM-Finetuning-Demo")
+
+# Run name identifies the specific configuration
+with mlflow.start_run(run_name="llama-8b-lora-r32"):
+    ...
+
+# Registered model name is the artifact
+mlflow.pytorch.log_model(model, registered_model_name="InstructionFollower")
 ```
 
 ---

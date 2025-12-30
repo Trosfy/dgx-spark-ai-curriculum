@@ -250,7 +250,7 @@ b = np.zeros(fan_out)
 After completing this module:
 1. ✅ Verify all milestones are checked
 2. 📁 Save layer implementations to `scripts/`
-3. ➡️ Proceed to [Module 5: Phase 1 Capstone](../module-05-phase1-capstone/)
+3. ➡️ Proceed to [Module 5: Phase 1 Capstone](../module-05-capstone-micrograd-plus/)
 
 ---
 

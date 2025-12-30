@@ -1,8 +1,86 @@
 # Module 7: Computer Vision
 
-**Phase:** 2 - Intermediate  
-**Duration:** Weeks 9-10 (12-15 hours)  
+**Phase:** 2 - Intermediate
+**Duration:** Weeks 9-10 (12-15 hours)
 **Prerequisites:** Module 6 (PyTorch)
+
+---
+
+## 🚀 Quick Start with DGX Spark
+
+```bash
+# Launch NGC PyTorch container with GPU support
+docker run --gpus all --ipc=host -it --rm \
+    -v $HOME/workspace:/workspace \
+    -v $HOME/.cache:/root/.cache \
+    -p 8888:8888 \
+    nvcr.io/nvidia/pytorch:25.03-py3 \
+    jupyter lab --ip=0.0.0.0 --port=8888 --allow-root --no-browser
+
+# ⚠️ IMPORTANT FLAGS:
+# --gpus all    : Required for GPU access
+# --ipc=host    : Required for DataLoader with num_workers > 0
+# -v .cache     : Preserves downloaded models between sessions
+```
+
+**Pre-installed in NGC container:** PyTorch, torchvision, numpy, matplotlib, tqdm
+
+**Install additional packages (run once):**
+```bash
+pip install timm ultralytics scikit-learn
+```
+
+---
+
+## Directory Structure
+
+```
+module-07-computer-vision/
+├── README.md                    # This file
+├── notebooks/
+│   ├── 01-cnn-architecture-study.ipynb
+│   ├── 02-transfer-learning-project.ipynb
+│   ├── 03-object-detection-demo.ipynb
+│   ├── 04-segmentation-lab.ipynb
+│   ├── 05-vision-transformer.ipynb
+│   └── 06-sam-integration.ipynb
+├── scripts/
+│   ├── cnn_architectures.py     # CNN implementations (LeNet, AlexNet, VGG, ResNet, U-Net)
+│   ├── training_utils.py        # Training helpers and Trainer class
+│   ├── visualization_utils.py   # Visualization helpers
+│   └── metrics.py               # Evaluation metrics (IoU, mAP, etc.)
+├── solutions/
+│   └── exercise-solutions.ipynb # Solutions for all exercises
+└── data/
+    └── README.md                # Dataset documentation
+```
+
+---
+
+## Using the Scripts Directory
+
+The `scripts/` directory contains production-ready implementations that you can import and reuse:
+
+```python
+# Import CNN architectures
+from scripts.cnn_architectures import LeNet5, AlexNet, VGG11, ResNet18, UNet, get_model
+
+# Import training utilities
+from scripts.training_utils import Trainer, get_optimizer, get_scheduler, EarlyStopping
+
+# Import visualization helpers
+from scripts.visualization_utils import (
+    plot_training_history,
+    visualize_predictions,
+    plot_confusion_matrix,
+    visualize_segmentation
+)
+
+# Import metrics
+from scripts.metrics import ClassificationMetrics, SegmentationMetrics, compute_iou, compute_dice
+```
+
+**Note:** The notebooks implement architectures from scratch for educational purposes. For production use or quick experimentation, use the scripts instead.
 
 ---
 
@@ -121,9 +199,33 @@ optimizer = torch.optim.Adam([
 
 ---
 
+## DGX Spark Advantages
+
+This module is optimized for DGX Spark's unique capabilities:
+
+| Feature | Benefit |
+|---------|---------|
+| 128GB Unified Memory | Load SAM ViT-H (2.5GB) with room to spare |
+| Blackwell GPU | Fast inference for real-time detection |
+| Tensor Cores | Accelerated training with mixed precision |
+
+### Memory Usage Guide
+
+| Task | Typical VRAM | DGX Spark |
+|------|-------------|-----------|
+| Training ResNet-18 on CIFAR-10 | ~2 GB | ✓ Easy |
+| Fine-tuning EfficientNet-B3 | ~8 GB | ✓ Easy |
+| YOLOv8-X inference | ~4 GB | ✓ Easy |
+| SAM ViT-H + multiple images | ~12 GB | ✓ Easy |
+| Training ViT-Large | ~16 GB | ✓ Easy |
+
+---
+
 ## Resources
 
 - [CS231n](http://cs231n.stanford.edu/)
 - [timm library](https://github.com/huggingface/pytorch-image-models)
 - [Ultralytics YOLOv8](https://docs.ultralytics.com/)
 - [Segment Anything](https://segment-anything.com/)
+- [PyTorch Vision](https://pytorch.org/vision/stable/index.html)
+- [Hugging Face Transformers (Vision)](https://huggingface.co/docs/transformers/model_doc/vit)

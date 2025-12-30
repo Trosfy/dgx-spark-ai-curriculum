@@ -22,7 +22,7 @@ Example usage:
 """
 
 import numpy as np
-from typing import Dict, List, Tuple, Optional, Union
+from typing import Callable, Dict, List, Tuple, Optional, Union
 from dataclasses import dataclass, field
 
 
@@ -556,7 +556,7 @@ def entropy(p: np.ndarray, eps: float = 1e-10) -> float:
 # =============================================================================
 
 def numerical_gradient(
-    f: callable,
+    f: Callable[[np.ndarray], float],
     x: np.ndarray,
     eps: float = 1e-5
 ) -> np.ndarray:

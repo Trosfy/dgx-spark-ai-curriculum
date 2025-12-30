@@ -547,6 +547,70 @@ class MSELoss:
         return 2 * (predictions - targets) / n
 
 
+class Dropout(Layer):
+    """
+    Dropout regularization layer.
+
+    Randomly sets a fraction of input units to zero during training.
+    This helps prevent overfitting by making the network more robust.
+
+    ELI5: Dropout is like randomly asking some students to skip class.
+    The remaining students can't rely on their absent friends, so they
+    have to learn the material themselves. This makes the whole class
+    stronger and less dependent on any single student!
+
+    Parameters:
+        rate: Probability of dropping a neuron (0 to 1)
+
+    Note: Uses "inverted dropout" - scales by 1/(1-rate) during training
+    so no scaling is needed at test time.
+
+    Example:
+        >>> dropout = Dropout(rate=0.5)
+        >>> x = np.ones((4, 10))
+        >>> out = dropout(x, training=True)  # ~half the values are 0
+        >>> out = dropout(x, training=False)  # all values unchanged
+    """
+
+    def __init__(self, rate: float = 0.5):
+        super().__init__()
+        if not 0 <= rate < 1:
+            raise ValueError(f"Dropout rate must be in [0, 1), got {rate}")
+        self.rate = rate
+        self.mask: Optional[np.ndarray] = None
+
+    def forward(self, x: np.ndarray, training: bool = True) -> np.ndarray:
+        """
+        Forward pass with dropout.
+
+        Args:
+            x: Input array
+            training: If True, apply dropout. If False, pass through unchanged.
+
+        Returns:
+            Output with dropout applied (training) or unchanged (inference)
+        """
+        if training and self.rate > 0:
+            # Create binary mask: 1 = keep, 0 = drop
+            self.mask = (np.random.rand(*x.shape) > self.rate).astype(np.float32)
+            # Apply mask and scale by 1/(1-rate) to maintain expected values
+            return x * self.mask / (1 - self.rate)
+        else:
+            self.mask = None
+            return x
+
+    def backward(self, grad_output: np.ndarray) -> np.ndarray:
+        """
+        Backward pass: apply same mask as forward pass.
+        """
+        if self.mask is not None:
+            return grad_output * self.mask / (1 - self.rate)
+        return grad_output
+
+    def __call__(self, x: np.ndarray, training: bool = True) -> np.ndarray:
+        return self.forward(x, training)
+
+
 class Sequential:
     """
     Container for a sequence of layers.

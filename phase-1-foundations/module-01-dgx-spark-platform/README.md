@@ -151,7 +151,7 @@ Benchmark Ollama models using direct API calls for accurate metrics.
 1. Open `05-ollama-benchmarking.ipynb`
 2. Verify Ollama service: `curl http://localhost:11434/api/tags`
 3. Pull models: `ollama pull llama3.2:3b llama3.1:8b llama3.1:70b`
-4. Use the benchmark utility from `utils/benchmark_utils.py`
+4. Use the benchmark utility from `scripts/benchmark_utils.py`
 5. Measure prefill (pp) and decode (tg) tokens/sec via API
 6. Record memory usage per model
 7. Compare with NVIDIA published specs

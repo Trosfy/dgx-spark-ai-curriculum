@@ -62,7 +62,7 @@ This curriculum specifically leverages DGX Spark's unique capabilities:
 - [Module 2: Python for AI/ML](phase-1-foundations/module-02-python-for-ai/)
 - [Module 3: Mathematics for Deep Learning](phase-1-foundations/module-03-math-for-dl/)
 - [Module 4: Neural Network Fundamentals](phase-1-foundations/module-04-neural-network-fundamentals/)
-- [Module 5: Phase 1 Capstone](phase-1-foundations/module-05-phase1-capstone/)
+- [Module 5: Phase 1 Capstone](phase-1-foundations/module-05-capstone-micrograd-plus/)
 
 </details>
 
@@ -141,7 +141,7 @@ dgx-spark-ai-curriculum/
 │   ├── module-02-python-for-ai/README.md
 │   ├── module-03-math-for-dl/README.md
 │   ├── module-04-neural-network-fundamentals/README.md
-│   └── module-05-phase1-capstone/README.md
+│   └── module-05-capstone-micrograd-plus/README.md
 │
 ├── phase-2-intermediate/
 │   ├── module-06-pytorch-deep-learning/README.md

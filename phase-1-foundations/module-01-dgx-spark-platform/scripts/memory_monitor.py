@@ -29,7 +29,6 @@ import signal
 import sys
 from datetime import datetime
 from typing import Dict, Optional, List
-import os
 
 # ANSI color codes for terminal output
 class Colors:

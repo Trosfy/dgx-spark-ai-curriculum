@@ -33,6 +33,13 @@ Date: 2024
 """
 
 from typing import Dict, List, Optional, Tuple, Union, Any
+
+__all__ = [
+    'MLVisualizer',
+    'plot_learning_rate_finder',
+    'plot_correlation_matrix',
+    'PALETTES',
+]
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt

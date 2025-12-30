@@ -49,16 +49,17 @@ class BenchmarkResult:
         generated_tokens: Number of tokens generated
         prefill_tps: Prompt processing speed (tokens/second)
         decode_tps: Generation speed (tokens/second)
-        total_time_ms: Total request time in milliseconds
+        total_time_s: Total request time in seconds
         memory_gb: GPU memory used (if available)
         timestamp: When the benchmark was run
+        error: Error message if benchmark failed
     """
     model: str
     prompt_tokens: int = 0
     generated_tokens: int = 0
     prefill_tps: float = 0.0
     decode_tps: float = 0.0
-    total_time_ms: float = 0.0
+    total_time_s: float = 0.0
     memory_gb: float = 0.0
     timestamp: str = field(default_factory=lambda: datetime.now().isoformat())
     error: Optional[str] = None
@@ -223,7 +224,7 @@ Please structure your response with clear sections and provide specific examples
             generated_tokens=int(statistics.mean(r["generated_tokens"] for r in results)),
             prefill_tps=statistics.mean(r["prefill_tps"] for r in results),
             decode_tps=statistics.mean(r["decode_tps"] for r in results),
-            total_time_ms=statistics.mean(r["total_time_ms"] for r in results),
+            total_time_s=statistics.mean(r["total_time_s"] for r in results),
             memory_gb=statistics.mean(memory_readings) if memory_readings else 0.0
         )
 
@@ -285,7 +286,7 @@ Please structure your response with clear sections and provide specific examples
                 "generated_tokens": generated_tokens,
                 "prefill_tps": prefill_tps,
                 "decode_tps": decode_tps,
-                "total_time_ms": total_time
+                "total_time_s": total_time / 1000  # Convert ms to seconds
             }
 
         except requests.exceptions.Timeout:
@@ -447,10 +448,17 @@ class PyTorchBenchmark:
             import torch
             self.torch = torch
             if not torch.cuda.is_available():
-                raise RuntimeError("CUDA not available")
+                raise RuntimeError(
+                    "CUDA not available. Ensure you're running inside an NGC container with GPU access:\n"
+                    "  docker run --gpus all -it nvcr.io/nvidia/pytorch:25.11-py3 python your_script.py"
+                )
             self.device = torch.device("cuda")
         except ImportError:
-            raise RuntimeError("PyTorch not installed - use NGC container")
+            raise RuntimeError(
+                "PyTorch not installed. On DGX Spark, you must run inside an NGC container:\n"
+                "  docker run --gpus all -it nvcr.io/nvidia/pytorch:25.11-py3 bash\n"
+                "Then run your script inside the container."
+            )
 
     def benchmark_matmul(
         self,

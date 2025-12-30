@@ -78,7 +78,10 @@ No external data files are required for Module 1. All exercises use:
 
 To remove generated files and start fresh:
 ```bash
-rm -f *.json *.md docker-compose.yml start_pytorch.sh verify_gpu.py
+# Remove generated files (keeps this README)
+rm -f system_info.json benchmark_results_*.json compatibility_matrix.json
+rm -f benchmark_report.md compatibility_matrix.md
+rm -f docker-compose.yml start_pytorch.sh verify_gpu.py
 ```
 
 Keep benchmark results if you want to track performance over time!

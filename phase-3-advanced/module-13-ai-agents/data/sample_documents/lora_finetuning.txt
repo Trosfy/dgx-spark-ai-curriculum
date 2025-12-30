@@ -1,0 +1,228 @@
+# LoRA Fine-Tuning: Efficient Adaptation of Large Language Models
+
+## Introduction
+
+Low-Rank Adaptation (LoRA) is a parameter-efficient fine-tuning technique that enables adapting large language models with minimal computational resources. Instead of updating all model parameters, LoRA adds small, trainable matrices that learn task-specific adaptations.
+
+## The Core Idea
+
+### Full Fine-Tuning Problems
+Traditional fine-tuning updates all model parameters:
+- 7B model = 7 billion parameters to train
+- Requires multiple copies of the model
+- High memory and compute requirements
+- Risk of catastrophic forgetting
+
+### LoRA Solution
+LoRA keeps the original weights frozen and adds low-rank decomposition matrices:
+- Original weight matrix: W (d × k)
+- LoRA matrices: A (d × r) and B (r × k)
+- Adapted output: Wx + BAx
+- Where r << min(d, k) (rank is small)
+
+## Mathematical Foundation
+
+### Low-Rank Decomposition
+Instead of learning a full update matrix ΔW, LoRA approximates it:
+```
+ΔW ≈ BA
+```
+Where:
+- B is shape (d, r)
+- A is shape (r, k)
+- r is the rank (typically 8-64)
+
+### Forward Pass
+```python
+# Original: output = Wx
+# With LoRA: output = Wx + (scaling * BAx)
+def forward(x, W, A, B, scaling):
+    base_output = W @ x
+    lora_output = B @ (A @ x)
+    return base_output + scaling * lora_output
+```
+
+### Scaling Factor
+The scaling factor α/r controls the adaptation magnitude:
+```
+scaling = lora_alpha / lora_rank
+```
+
+## Implementation Details
+
+### Which Layers to Adapt
+Common configurations:
+- Query and Value projections (most common)
+- All attention projections (Q, K, V, O)
+- Feed-forward layers (for more capacity)
+
+### Typical Hyperparameters
+```python
+lora_config = {
+    "r": 16,              # Rank (8, 16, 32, 64)
+    "lora_alpha": 32,     # Scaling factor
+    "lora_dropout": 0.05, # Dropout for regularization
+    "target_modules": ["q_proj", "v_proj"],
+    "bias": "none"        # Don't train biases
+}
+```
+
+### Memory Savings
+For a 7B model with r=16:
+- Full fine-tuning: 7B trainable parameters
+- LoRA: ~4-8M trainable parameters (0.1% of total)
+- Memory reduction: 10-100x for optimizer states
+
+## Training LoRA Adapters
+
+### Setup with PEFT Library
+```python
+from peft import LoraConfig, get_peft_model
+
+config = LoraConfig(
+    r=16,
+    lora_alpha=32,
+    target_modules=["q_proj", "v_proj", "k_proj", "o_proj"],
+    lora_dropout=0.05,
+    bias="none",
+    task_type="CAUSAL_LM"
+)
+
+model = get_peft_model(base_model, config)
+model.print_trainable_parameters()
+# Output: trainable params: 4,194,304 || all params: 7,000,000,000 || trainable%: 0.06
+```
+
+### Training Loop
+```python
+from transformers import Trainer, TrainingArguments
+
+training_args = TrainingArguments(
+    output_dir="./lora_adapter",
+    per_device_train_batch_size=4,
+    gradient_accumulation_steps=4,
+    learning_rate=2e-4,  # Higher LR than full fine-tuning
+    num_train_epochs=3,
+    fp16=True,  # or bf16=True on DGX Spark
+    save_strategy="epoch"
+)
+
+trainer = Trainer(
+    model=model,
+    args=training_args,
+    train_dataset=train_data,
+    data_collator=collator
+)
+
+trainer.train()
+```
+
+## QLoRA: Quantized LoRA
+
+### Combining Quantization and LoRA
+QLoRA enables fine-tuning quantized models:
+- Base model in 4-bit precision
+- LoRA adapters in full precision
+- Enables fine-tuning 70B models on consumer GPUs
+
+### Implementation
+```python
+from transformers import BitsAndBytesConfig
+
+bnb_config = BitsAndBytesConfig(
+    load_in_4bit=True,
+    bnb_4bit_quant_type="nf4",
+    bnb_4bit_compute_dtype=torch.bfloat16,
+    bnb_4bit_use_double_quant=True
+)
+
+model = AutoModelForCausalLM.from_pretrained(
+    "meta-llama/Llama-3.1-70B",
+    quantization_config=bnb_config,
+    device_map="auto"
+)
+```
+
+## Merging Adapters
+
+### Combining LoRA with Base Model
+After training, you can merge LoRA weights into the base model:
+```python
+# Merge and save
+merged_model = model.merge_and_unload()
+merged_model.save_pretrained("./merged_model")
+```
+
+### Advantages of Merging
+- No inference overhead
+- Standard model format
+- Can be quantized for deployment
+
+### Keeping Separate
+Benefits of keeping adapters separate:
+- Swap adapters for different tasks
+- Smaller storage per task
+- Easy rollback to base model
+
+## Advanced Techniques
+
+### Multiple LoRA Adapters
+Combine multiple adapters for multi-task learning:
+```python
+model.load_adapter("adapter_1", adapter_name="task1")
+model.load_adapter("adapter_2", adapter_name="task2")
+model.set_adapter("task1")  # Switch between adapters
+```
+
+### DoRA: Weight-Decomposed LoRA
+Decomposes weights into magnitude and direction:
+- Better matches full fine-tuning performance
+- Slightly more parameters than LoRA
+
+### LoRA+
+Optimizes learning rates for A and B matrices separately:
+- Matrix B: standard learning rate
+- Matrix A: higher learning rate
+- Improves convergence
+
+## DGX Spark Optimization
+
+### Taking Advantage of 128GB Memory
+```python
+# Can load 70B model without quantization
+model = AutoModelForCausalLM.from_pretrained(
+    "meta-llama/Llama-3.1-70B",
+    torch_dtype=torch.bfloat16,  # Native Blackwell support
+    device_map="cuda"
+)
+
+# Apply LoRA
+model = get_peft_model(model, lora_config)
+```
+
+### Recommended Settings for DGX Spark
+```python
+# For 7B models: Can use larger rank
+lora_config_7b = LoraConfig(r=64, lora_alpha=128, ...)
+
+# For 70B models: Use moderate rank
+lora_config_70b = LoraConfig(r=16, lora_alpha=32, ...)
+```
+
+## Best Practices
+
+### Hyperparameter Guidelines
+- Start with r=16, adjust based on task complexity
+- lora_alpha = 2 * r is a common starting point
+- Use smaller dropout (0.05) for larger datasets
+- Target Q and V projections first, add more if needed
+
+### Common Mistakes
+1. Learning rate too low (use 1e-4 to 5e-4)
+2. Too few training steps
+3. Forgetting to set model to training mode
+4. Not properly formatting training data
+
+## Conclusion
+
+LoRA enables efficient fine-tuning of large language models by training only small adapter matrices. Combined with the 128GB memory of DGX Spark, you can fine-tune models up to 70B parameters locally. This makes LoRA an essential technique for building specialized AI agents and applications.

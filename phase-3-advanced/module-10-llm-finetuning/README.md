@@ -1,8 +1,8 @@
 # Module 10: Large Language Model Fine-Tuning
 
-**Phase:** 3 - Advanced  
-**Duration:** Weeks 15-17 (15-18 hours)  
-**Prerequisites:** Phase 2 complete
+**Phase:** 3 - Advanced
+**Duration:** Weeks 15-17 (15-18 hours)
+**Prerequisites:** Phase 2 complete (specifically: Module 6 PyTorch Fundamentals, Module 8 NLP & Transformers)
 
 ---
 
@@ -186,6 +186,49 @@ Deploy your fine-tuned model.
 ---
 
 ## Guidance
+
+### Model Access Requirements
+
+**Important:** Llama 3.1 models require approval from Meta before download.
+
+1. **Request Access:** Visit https://huggingface.co/meta-llama/Llama-3.1-8B-Instruct and request access
+2. **Login to HuggingFace:**
+   ```bash
+   huggingface-cli login
+   ```
+3. **Alternative Models (No Approval Required):**
+   - `mistralai/Mistral-7B-Instruct-v0.2`
+   - `TinyLlama/TinyLlama-1.1B-Chat-v1.0` (for quick testing)
+
+### Launching NGC Container for This Module
+
+```bash
+# Recommended: NGC PyTorch container with all dependencies
+docker run --gpus all -it --rm \
+    -v $HOME/workspace:/workspace \
+    -v $HOME/.cache/huggingface:/root/.cache/huggingface \
+    --ipc=host \
+    -p 8888:8888 \
+    nvcr.io/nvidia/pytorch:25.03-py3 \
+    jupyter lab --ip=0.0.0.0 --allow-root --no-browser
+
+# Access at: http://localhost:8888
+# The NGC container includes: PyTorch, CUDA, cuDNN, bitsandbytes (ARM64-optimized)
+
+# Additional packages (usually pre-installed, but install if missing):
+# pip install psutil  # For memory monitoring in notebook 03
+
+# NETWORK OPTIONS:
+# If you need to access external services (HuggingFace Hub, Ollama, etc.):
+#   Option 1: Port mapping (shown above with -p 8888:8888)
+#   Option 2: Host networking (simpler, but less isolated):
+#             docker run --gpus all -it --rm --network=host ...
+#
+# Use --network=host when:
+#   - Connecting to Ollama running on the host
+#   - Downloading models from HuggingFace Hub
+#   - Running LLaMA Factory web UI that needs external access
+```
 
 ### QLoRA Configuration for 70B on DGX Spark
 

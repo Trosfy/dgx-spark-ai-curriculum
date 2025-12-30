@@ -12,6 +12,66 @@ Quantization is the key to running large models efficiently. This module covers 
 
 ---
 
+## Environment Setup
+
+### NGC Container (Required for DGX Spark)
+
+Launch the PyTorch NGC container with proper flags for DGX Spark:
+
+```bash
+docker run --gpus all -it --rm \
+    -v $HOME/workspace:/workspace \
+    -v $HOME/.cache/huggingface:/root/.cache/huggingface \
+    --ipc=host \
+    nvcr.io/nvidia/pytorch:25.11-py3 \
+    jupyter lab --ip=0.0.0.0 --allow-root --no-browser
+```
+
+**Important flags:**
+- `--gpus all`: Required for GPU access
+- `--ipc=host`: Required for DataLoader with multiple workers
+- Volume mounts: Persist your work and HuggingFace cache
+
+### Verifying Blackwell Hardware
+
+To confirm you're running on Blackwell (required for FP4):
+
+```python
+import torch
+cc = torch.cuda.get_device_capability()
+print(f"Compute Capability: {cc[0]}.{cc[1]}")
+
+if cc[0] >= 10:
+    print("✅ Blackwell detected! FP4 tensor cores available.")
+else:
+    print("⚠️  Non-Blackwell GPU. FP4 will run in emulation mode.")
+```
+
+### Pre-clearing Memory for Large Models
+
+Before loading models >10GB, clear the buffer cache:
+
+```bash
+sudo sh -c 'sync; echo 3 > /proc/sys/vm/drop_caches'
+```
+
+This ensures maximum available unified memory on DGX Spark's 128GB system.
+
+### Library Requirements by Notebook
+
+| Notebook | Required Libraries |
+|----------|-------------------|
+| 01-quantization-overview | transformers, torch, bitsandbytes |
+| 02-gptq-quantization | auto-gptq, transformers |
+| 03-awq-quantization | autoawq, transformers |
+| 04-gguf-conversion | llama.cpp (built from source), sentencepiece, gguf |
+| 05-fp4-deep-dive | nvidia-modelopt, transformers |
+| 06-quality-benchmark-suite | lm-eval, transformers, bitsandbytes |
+
+**Note:** Most libraries are pre-installed in the NGC PyTorch container.
+
+---
+
 ## Learning Outcomes
 
 By the end of this module, you will be able to:

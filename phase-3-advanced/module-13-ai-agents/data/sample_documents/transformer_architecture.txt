@@ -1,0 +1,157 @@
+# Transformer Architecture Deep Dive
+
+## Introduction
+
+The Transformer architecture, introduced in the landmark paper "Attention Is All You Need" (Vaswani et al., 2017), revolutionized natural language processing and has since become the foundation for modern large language models (LLMs). This document provides a comprehensive overview of how transformers work.
+
+## Core Innovation: Self-Attention
+
+### The Attention Mechanism
+At its heart, the transformer uses self-attention to process input sequences:
+- Each token can attend to every other token in the sequence
+- Attention weights determine how much each token influences others
+- Enables capturing long-range dependencies efficiently
+
+### Computing Attention
+The attention mechanism uses three learned projections:
+- Query (Q): What the current token is looking for
+- Key (K): What each token can be matched against
+- Value (V): The information each token provides
+
+The attention formula:
+```
+Attention(Q, K, V) = softmax(QK^T / sqrt(d_k)) * V
+```
+
+Where d_k is the dimension of the keys (for scaling).
+
+## Multi-Head Attention
+
+### Why Multiple Heads?
+Single attention can only focus on one type of relationship at a time. Multi-head attention allows the model to:
+- Attend to different positions simultaneously
+- Learn different types of relationships (syntactic, semantic, etc.)
+- Capture richer representations
+
+### Implementation
+```python
+class MultiHeadAttention:
+    def __init__(self, d_model, num_heads):
+        self.num_heads = num_heads
+        self.d_k = d_model // num_heads
+
+        # Separate projection matrices for Q, K, V
+        self.W_q = Linear(d_model, d_model)
+        self.W_k = Linear(d_model, d_model)
+        self.W_v = Linear(d_model, d_model)
+        self.W_o = Linear(d_model, d_model)
+```
+
+## Positional Encoding
+
+### The Problem
+Unlike RNNs, transformers process all tokens in parallel. This means they have no inherent sense of position or order.
+
+### The Solution
+Add positional information to input embeddings using sinusoidal functions:
+```
+PE(pos, 2i) = sin(pos / 10000^(2i/d_model))
+PE(pos, 2i+1) = cos(pos / 10000^(2i/d_model))
+```
+
+### Modern Alternatives
+- Learned positional embeddings
+- Rotary Position Embedding (RoPE)
+- ALiBi (Attention with Linear Biases)
+
+## Feed-Forward Networks
+
+Each transformer layer includes a position-wise feed-forward network:
+```python
+class FeedForward:
+    def __init__(self, d_model, d_ff):
+        self.linear1 = Linear(d_model, d_ff)
+        self.linear2 = Linear(d_ff, d_model)
+        self.activation = GELU()
+
+    def forward(self, x):
+        return self.linear2(self.activation(self.linear1(x)))
+```
+
+The hidden dimension (d_ff) is typically 4x the model dimension.
+
+## Layer Normalization
+
+### Pre-Layer Norm vs Post-Layer Norm
+Original transformers used post-layer normalization:
+```
+output = LayerNorm(x + Sublayer(x))
+```
+
+Modern LLMs prefer pre-layer normalization for training stability:
+```
+output = x + Sublayer(LayerNorm(x))
+```
+
+### RMSNorm
+Many recent models use RMSNorm for efficiency:
+```
+RMSNorm(x) = x / sqrt(mean(x^2) + eps) * gamma
+```
+
+## Encoder-Decoder vs Decoder-Only
+
+### Encoder-Decoder (Original)
+- Encoder: Bidirectional attention (sees all tokens)
+- Decoder: Causal attention (only sees past tokens)
+- Cross-attention: Decoder attends to encoder outputs
+- Used for: Translation, summarization
+
+### Decoder-Only (Modern LLMs)
+- Causal (autoregressive) attention only
+- Simpler architecture, easier to scale
+- Used for: GPT, LLaMA, Mistral
+- More efficient for generation tasks
+
+## Scaling Laws
+
+### Key Observations
+- Performance improves predictably with scale
+- Compute, data, and parameters should scale together
+- Larger models are more sample-efficient
+
+### Chinchilla Scaling
+Optimal training requires ~20 tokens per parameter:
+- 7B model needs ~140B tokens
+- 70B model needs ~1.4T tokens
+
+## Modern Optimizations
+
+### Flash Attention
+- Reduces memory from O(n^2) to O(n)
+- Fuses operations for faster execution
+- Enables longer context lengths
+
+### Grouped Query Attention (GQA)
+- Shares key-value heads across query heads
+- Reduces KV-cache memory during inference
+- Used in LLaMA 2 and later models
+
+### Sliding Window Attention
+- Limits attention to local context
+- Reduces computation for very long sequences
+- Used in Mistral and Longformer
+
+## Key Hyperparameters
+
+| Parameter | Typical Values | Description |
+|-----------|---------------|-------------|
+| d_model | 4096-8192 | Hidden dimension |
+| n_heads | 32-64 | Number of attention heads |
+| n_layers | 32-80 | Number of transformer layers |
+| d_ff | 4*d_model | Feed-forward dimension |
+| vocab_size | 32K-128K | Vocabulary size |
+
+## Conclusion
+
+The transformer architecture's ability to model long-range dependencies through self-attention, combined with its parallelizability, makes it the dominant architecture for modern AI systems. Understanding these fundamentals is essential for working with large language models and building AI agents.

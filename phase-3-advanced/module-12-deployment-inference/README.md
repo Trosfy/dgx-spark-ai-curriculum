@@ -67,20 +67,65 @@ By the end of this module, you will be able to:
 
 ---
 
+## DGX Spark Compatibility Notes
+
+> **Important:** DGX Spark uses ARM64 (aarch64) architecture with NVIDIA Blackwell GPU. Always verify container ARM64 support before use.
+
+- Use NGC PyTorch containers as the base for most workloads
+- Always include `--gpus all` and `--ipc=host` in docker commands
+- Use `bfloat16` (not float16) for native Blackwell support
+- Clear buffer cache before loading large models (70B+):
+  ```bash
+  sudo sh -c 'sync; echo 3 > /proc/sys/vm/drop_caches'
+  ```
+
+### Container Versions
+
+This module was tested with the following NGC container versions. Check NGC for the latest ARM64-compatible releases:
+
+| Container | Version Tested | NGC Catalog Link |
+|-----------|----------------|------------------|
+| PyTorch | `nvcr.io/nvidia/pytorch:24.10-py3` | [NGC PyTorch](https://catalog.ngc.nvidia.com/orgs/nvidia/containers/pytorch) |
+| Triton + TRT-LLM | `nvcr.io/nvidia/tritonserver:24.10-trtllm-python-py3` | [NGC Triton](https://catalog.ngc.nvidia.com/orgs/nvidia/containers/tritonserver) |
+
+**Before using any container on DGX Spark:**
+1. Visit the NGC catalog link
+2. Check the "Tags" or "Supported Platforms" section
+3. Verify `linux/arm64` or `aarch64` is listed
+4. If not available, use PyTorch NGC container and install packages from source
+
+---
+
 ## Guidance
 
 ### vLLM on DGX Spark
 
 ```bash
-# Use NVIDIA container
-docker pull nvcr.io/nvidia/vllm:spark
+# Option 1: Use PyTorch NGC container with vLLM installed
+docker run --gpus all -p 8000:8000 \
+    -v ~/.cache/huggingface:/root/.cache/huggingface \
+    -e HF_TOKEN=$HF_TOKEN \
+    --ipc=host \
+    nvcr.io/nvidia/pytorch:24.10-py3 \
+    bash -c "pip install vllm && python -m vllm.entrypoints.openai.api_server \
+        --model meta-llama/Llama-3.1-8B-Instruct \
+        --enforce-eager \
+        --max-model-len 4096 \
+        --dtype bfloat16"
 
-# Run with --enforce-eager flag
-python -m vllm.entrypoints.openai.api_server \
-    --model meta-llama/Llama-3.1-8B-Instruct \
-    --enforce-eager \
-    --max-model-len 4096
+# Option 2: Use official vLLM container (verify ARM64 support)
+# docker run --gpus all -p 8000:8000 \
+#     -v ~/.cache/huggingface:/root/.cache/huggingface \
+#     --ipc=host \
+#     vllm/vllm-openai:latest \
+#     --model meta-llama/Llama-3.1-8B-Instruct \
+#     --enforce-eager
 ```
+
+**Key flags for DGX Spark:**
+- `--enforce-eager`: Required for ARM64 (disables CUDA graphs)
+- `--dtype bfloat16`: Native Blackwell support
+- `--ipc=host`: Required for DataLoader workers
 
 ### TensorRT-LLM Engine Build
 

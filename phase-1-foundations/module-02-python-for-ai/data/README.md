@@ -2,6 +2,29 @@
 
 This directory contains sample datasets and data generation utilities for the Module 2 exercises.
 
+---
+
+## ⚠️ IMPORTANT: Generate Data Before Running Notebooks
+
+**The notebooks require sample data files to be generated first.**
+
+Run this command before starting the exercises:
+
+```bash
+cd phase-1-foundations/module-02-python-for-ai/data
+python generate_sample_data.py
+```
+
+This creates the required files:
+- `sample_customers.csv`
+- `sample_training_history.json`
+- `sample_embeddings.npy`
+- `sample_confusion_data.json`
+
+**Note:** The notebooks include automatic data generation checks, but running the generator manually ensures all files are ready.
+
+---
+
 ## Contents
 
 ### Generated Files (created during exercises)

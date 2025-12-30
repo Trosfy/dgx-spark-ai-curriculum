@@ -143,6 +143,82 @@ def calculate(expression: str) -> str:
 
 ---
 
+## DGX Spark Setup
+
+### NGC Container Launch
+
+```bash
+# Start NGC container with all required flags
+docker run --gpus all -it --rm \
+    -v $HOME/workspace:/workspace \
+    -v $HOME/.cache/huggingface:/root/.cache/huggingface \
+    -v $HOME/.ollama:/root/.ollama \
+    --ipc=host \
+    -p 8888:8888 \
+    nvcr.io/nvidia/pytorch:25.11-py3 \
+    jupyter lab --ip=0.0.0.0 --allow-root --no-browser
+```
+
+### Install Agent Dependencies
+
+```bash
+# Inside the NGC container
+pip install langchain langchain-community chromadb llama-index \
+    llama-index-llms-ollama llama-index-embeddings-ollama \
+    langgraph rank_bm25 sentence-transformers
+```
+
+### Ollama Setup
+
+```bash
+# Start Ollama server (in a separate terminal)
+ollama serve
+
+# Pull required models
+ollama pull llama3.1:8b          # Fast responses for development
+ollama pull llama3.1:70b         # Best quality for production
+ollama pull nomic-embed-text     # Local embeddings
+```
+
+### Verify Setup
+
+```python
+# Run this in a notebook to verify everything is working
+import requests
+
+def verify_setup():
+    """Verify DGX Spark agent environment is ready."""
+    checks = []
+
+    # Check Ollama
+    try:
+        resp = requests.get("http://localhost:11434/api/tags", timeout=5)
+        if resp.status_code == 200:
+            models = [m['name'] for m in resp.json().get('models', [])]
+            checks.append(f"✅ Ollama running with models: {', '.join(models[:3])}")
+        else:
+            checks.append("❌ Ollama not responding properly")
+    except:
+        checks.append("❌ Ollama not running - start with: ollama serve")
+
+    # Check GPU
+    try:
+        import torch
+        if torch.cuda.is_available():
+            checks.append(f"✅ GPU available: {torch.cuda.get_device_name(0)}")
+        else:
+            checks.append("⚠️ No GPU detected")
+    except:
+        checks.append("⚠️ PyTorch not available")
+
+    print("\n".join(checks))
+    return all("✅" in c for c in checks)
+
+verify_setup()
+```
+
+---
+
 ## Resources
 
 - [LangChain Documentation](https://python.langchain.com/)

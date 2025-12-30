@@ -32,6 +32,12 @@ Date: 2024
 """
 
 from typing import Dict, List, Optional, Union, Any
+
+__all__ = [
+    'Preprocessor',
+    'detect_feature_types',
+    'create_preprocessing_report',
+]
 import numpy as np
 import pandas as pd
 import pickle
@@ -143,7 +149,7 @@ class Preprocessor:
             df: Training DataFrame. Must contain all specified features.
 
         Returns:
-            self: Returns the fitted preprocessor for method chaining.
+            Preprocessor: Returns self (the fitted preprocessor) for method chaining.
 
         Raises:
             ValueError: If required columns are missing from df.

@@ -185,6 +185,13 @@ docker run --gpus all --ipc=host --net=host \
     jupyter lab --ip=0.0.0.0 --allow-root
 ```
 
+> **Important flags:**
+> - `--gpus all`: Required to access GPU
+> - `--ipc=host`: **Required** when using `num_workers > 0` in DataLoader. Without it, you'll get "unable to open shared memory" errors because PyTorch workers use shared memory for inter-process communication.
+> - `--net=host`: Enables easy access to Jupyter and other services
+
+> **Note:** The container tag (`25.11-py3`) may need updating. Check [NGC PyTorch Containers](https://catalog.ngc.nvidia.com/orgs/nvidia/containers/pytorch) for the latest version compatible with DGX Spark.
+
 ### Custom nn.Module Template
 
 ```python
@@ -203,22 +210,29 @@ class MyModel(nn.Module):
 
 ### Mixed Precision Training
 
-```python
-from torch.cuda.amp import autocast, GradScaler
+> **DGX Spark Recommendation:** Use **BFloat16** (`torch.bfloat16`) instead of Float16 on DGX Spark with Blackwell GPU. BF16 has the same dynamic range as FP32, avoiding overflow/underflow issues and eliminating the need for gradient scaling.
 
-scaler = GradScaler()
+```python
+# PyTorch 2.0+ API - BFloat16 (Recommended for DGX Spark)
+from torch.amp import autocast, GradScaler
+
+# BF16 doesn't need gradient scaling
+scaler = GradScaler('cuda', enabled=False)
 
 for batch in dataloader:
     optimizer.zero_grad()
-    
-    with autocast():
+
+    # Use bfloat16 for Blackwell GPU native support
+    with autocast(device_type='cuda', dtype=torch.bfloat16):
         output = model(batch)
         loss = criterion(output, target)
-    
+
     scaler.scale(loss).backward()
     scaler.step(optimizer)
     scaler.update()
 ```
+
+For Float16 (legacy or comparison), use `dtype=torch.float16` with `GradScaler('cuda', enabled=True)` to prevent gradient underflow.
 
 ### Profiling
 

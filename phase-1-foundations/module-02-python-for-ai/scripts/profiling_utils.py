@@ -37,6 +37,21 @@ Author: Professor SPARK
 Date: 2024
 """
 
+__all__ = [
+    'Timer',
+    'TimingResult',
+    'MemoryResult',
+    'timeit',
+    'profile_function',
+    'memory_tracker',
+    'compare_implementations',
+    'get_array_memory',
+    'estimate_computation_memory',
+    'ProgressTimer',
+    'check_numba_available',
+    'suggest_optimizations',
+]
+
 import time
 import functools
 import cProfile

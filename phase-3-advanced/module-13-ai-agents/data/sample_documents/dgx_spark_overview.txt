@@ -1,0 +1,119 @@
+# NVIDIA DGX Spark Technical Overview
+
+## Introduction
+
+The NVIDIA DGX Spark is a revolutionary desktop AI supercomputer designed for developers, researchers, and data scientists who need powerful AI capabilities without cloud infrastructure costs. It represents the first time NVIDIA's enterprise-grade DGX technology has been available in a desktop form factor.
+
+## Hardware Specifications
+
+### GPU: NVIDIA Blackwell GB10 Superchip
+The heart of DGX Spark is the Blackwell GB10 Superchip, featuring:
+- 6,144 CUDA cores for parallel processing
+- 192 5th-generation Tensor Cores for AI acceleration
+- Native support for FP4, FP8, and bfloat16 precision
+- Up to 1 PFLOP of FP4 compute performance
+- Approximately 209 TFLOPS at FP8 precision
+
+### Memory: 128GB LPDDR5X Unified Memory
+One of DGX Spark's most distinctive features is its unified memory architecture:
+- 128GB of high-bandwidth LPDDR5X memory
+- Shared between CPU and GPU (no PCIe transfers needed)
+- Enables running 70B+ parameter models entirely in memory
+- Eliminates traditional GPU VRAM limitations
+
+### Connectivity
+- USB-C ports for peripherals
+- Ethernet for network connectivity
+- NVMe SSD storage support
+- Compact desktop form factor
+
+## Key Advantages
+
+### Unified Memory Architecture
+Traditional discrete GPUs require copying data between CPU RAM and GPU VRAM across the PCIe bus. DGX Spark's unified memory eliminates this bottleneck:
+- Zero-copy data access for both CPU and GPU
+- Larger models fit without memory management tricks
+- Simplified memory management in code
+- Reduced latency for data-intensive operations
+
+### Blackwell FP4 Support
+DGX Spark is among the first to support FP4 (4-bit floating point) inference:
+- 2x memory efficiency compared to FP8
+- Minimal accuracy loss for most models
+- Exclusive to Blackwell architecture
+- Enables larger batch sizes and faster inference
+
+### Desktop Form Factor
+Unlike rack-mounted datacenter systems:
+- Quiet operation suitable for office environments
+- Standard power requirements
+- No special cooling infrastructure needed
+- Perfect for individual developers and small teams
+
+## Use Cases
+
+### Model Development
+- Train and fine-tune models up to 70B parameters
+- Experiment with LoRA, QLoRA, and full fine-tuning
+- Rapid prototyping without cloud costs
+
+### Inference Deployment
+- Run large language models locally
+- Host multiple smaller models simultaneously
+- Privacy-preserving inference (no data leaves your network)
+
+### AI Research
+- Experiment with novel architectures
+- Benchmark new algorithms
+- Develop and test AI agents
+
+## Software Stack
+
+### NGC Containers
+DGX Spark uses NVIDIA NGC (GPU Cloud) containers:
+- Pre-configured PyTorch, TensorFlow environments
+- Optimized for ARM64 + CUDA architecture
+- Regular updates with latest optimizations
+
+### Recommended Container
+```bash
+docker run --gpus all -it --rm \
+    -v $HOME/workspace:/workspace \
+    -v $HOME/.cache/huggingface:/root/.cache/huggingface \
+    --ipc=host \
+    nvcr.io/nvidia/pytorch:25.11-py3 \
+    jupyter lab --ip=0.0.0.0 --allow-root --no-browser
+```
+
+### Important Notes
+- pip install for CUDA packages doesn't work on ARM64
+- Always use NGC containers for GPU-accelerated workloads
+- bfloat16 is the recommended default dtype
+
+## Memory Management Tips
+
+### Before Loading Large Models
+Clear system buffers to maximize available memory:
+```bash
+sudo sh -c 'sync; echo 3 > /proc/sys/vm/drop_caches'
+```
+
+### Monitor Memory Usage
+```python
+import torch
+print(f"Allocated: {torch.cuda.memory_allocated()/1e9:.2f} GB")
+print(f"Reserved: {torch.cuda.memory_reserved()/1e9:.2f} GB")
+```
+
+## Comparison with Cloud GPUs
+
+| Feature | DGX Spark | Cloud A100 | Cloud H100 |
+|---------|-----------|------------|------------|
+| Memory | 128GB unified | 80GB VRAM | 80GB VRAM |
+| Cost | One-time | Per-hour | Per-hour |
+| Privacy | Full control | Cloud provider | Cloud provider |
+| Availability | Always on | Subject to demand | Subject to demand |
+
+## Conclusion
+
+DGX Spark democratizes access to enterprise-grade AI infrastructure, enabling individual developers and small teams to work with the same powerful tools previously only available in datacenters. Its unified memory architecture is particularly valuable for large language model development and AI agent applications.

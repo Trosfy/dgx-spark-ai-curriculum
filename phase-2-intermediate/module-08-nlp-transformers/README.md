@@ -147,6 +147,82 @@ mask = cumsum <= p
 
 ---
 
+## DGX Spark Setup
+
+For optimal performance on DGX Spark, use the NGC PyTorch container:
+
+```bash
+# Start the NGC container with all required flags
+docker run --gpus all -it --rm \
+    --ipc=host \
+    -v $HOME/.cache/huggingface:/root/.cache/huggingface \
+    -v $HOME/workspace:/workspace \
+    nvcr.io/nvidia/pytorch:25.11-py3 \
+    jupyter lab --ip=0.0.0.0 --allow-root --no-browser
+```
+
+**Important flags:**
+- `--gpus all` - Enable GPU access
+- `--ipc=host` - Required for DataLoader multiprocessing
+- `-v huggingface` - Share model cache between runs
+
+**DGX Spark Advantages (128GB Unified Memory):**
+- Larger batch sizes (64 vs typical 16-32)
+- Full datasets in memory
+- Fine-tune larger models without gradient checkpointing
+- Use bfloat16 for native Blackwell optimization
+
+---
+
+## Using the Scripts Module
+
+The `scripts/` folder contains reusable implementations. There are several ways to import them:
+
+### Option 1: From Notebook Directory (Recommended)
+
+When running notebooks from the `notebooks/` directory:
+
+```python
+import sys
+from pathlib import Path
+
+# Add scripts directory to path
+scripts_path = Path.cwd().parent / "scripts"
+if str(scripts_path) not in sys.path:
+    sys.path.insert(0, str(scripts_path.parent))
+
+from scripts import (
+    MultiHeadAttention,
+    TransformerEncoder,
+    SinusoidalPositionalEncoding,
+    RoPE,
+    top_p_sampling,
+    SimpleBPE
+)
+```
+
+### Option 2: From Module Root
+
+When running from the module root directory (`module-08-nlp-transformers/`):
+
+```python
+from scripts import MultiHeadAttention, TransformerEncoder
+```
+
+### Option 3: Direct Import
+
+For standalone scripts, you can also use direct file imports:
+
+```python
+from scripts.attention import MultiHeadAttention, scaled_dot_product_attention
+from scripts.transformer import TransformerEncoder, TransformerEncoderBlock
+from scripts.positional_encoding import SinusoidalPositionalEncoding, RoPE
+from scripts.generation import greedy_decode, top_k_sampling, top_p_sampling
+from scripts.tokenizer_utils import SimpleBPE, estimate_token_cost
+```
+
+---
+
 ## Resources
 
 - [The Illustrated Transformer](http://jalammar.github.io/illustrated-transformer/)

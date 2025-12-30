@@ -1,8 +1,23 @@
 # Module 3: Mathematics for Deep Learning
 
-**Phase:** 1 - Foundations  
-**Duration:** Week 3 (8-10 hours)  
+**Phase:** 1 - Foundations
+**Duration:** Week 3 (8-10 hours)
 **Prerequisites:** Module 2 (NumPy proficiency), High school calculus
+
+### Required Packages
+
+This module uses the following Python packages (all included in NGC PyTorch containers):
+
+| Package | Purpose |
+|---------|---------|
+| NumPy | Core numerical computing |
+| PyTorch | Autograd verification, neural networks |
+| Matplotlib | Visualizations |
+| scikit-learn | PCA for loss landscape visualization (Task 3.3) |
+
+> **Note:** This module focuses on mathematical foundations using NumPy and basic PyTorch.
+> GPU acceleration is not heavily used—we're building intuition, not training large models.
+> GPU-accelerated training is covered in Module 4 onwards.
 
 ---
 
