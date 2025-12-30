@@ -142,6 +142,7 @@ docker run --gpus all -it --rm \
     -v $HOME/workspace:/workspace \
     -v $HOME/.cache/huggingface:/root/.cache/huggingface \
     --ipc=host \
+    -p 8888:8888 \
     nvcr.io/nvidia/pytorch:25.11-py3 \
     jupyter lab --ip=0.0.0.0 --allow-root --no-browser
 ```
