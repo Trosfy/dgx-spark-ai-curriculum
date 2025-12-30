@@ -82,11 +82,12 @@ All commands should be run inside an NGC container. Start your container with:
 
 ```bash
 # Start NGC container with GPU and shared memory support
-docker run --gpus all --ipc=host -it \
+docker run --gpus all -it --rm \
     -v $HOME/workspace:/workspace \
     -v $HOME/.cache/huggingface:/root/.cache/huggingface \
+    --ipc=host \
     -p 5000:5000 \
-    nvcr.io/nvidia/pytorch:25.01-py3
+    nvcr.io/nvidia/pytorch:25.11-py3
 
 # Inside the container, install additional tools:
 pip install lm-eval mlflow
