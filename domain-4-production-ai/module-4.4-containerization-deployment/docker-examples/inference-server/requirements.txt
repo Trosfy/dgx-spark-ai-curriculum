@@ -1,0 +1,25 @@
+# LLM Inference Server Dependencies
+# Optimized for DGX Spark
+
+# Core ML
+transformers>=4.37.0
+accelerate>=0.25.0
+safetensors>=0.4.0
+
+# Inference optimization
+bitsandbytes>=0.41.0
+
+# API Server
+fastapi>=0.109.0
+uvicorn[standard]>=0.27.0
+pydantic>=2.0.0
+
+# Monitoring
+prometheus-client>=0.19.0
+
+# GPU monitoring
+nvidia-ml-py>=12.535.0
+
+# Utilities
+httpx>=0.26.0
+python-multipart>=0.0.6

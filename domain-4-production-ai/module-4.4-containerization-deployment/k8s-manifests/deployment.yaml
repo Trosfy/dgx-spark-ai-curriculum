@@ -1,0 +1,200 @@
+# ============================================
+# LLM Inference Server Deployment
+# GPU-enabled for DGX Spark / Kubernetes
+# ============================================
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: llm-inference
+  labels:
+    app: llm-inference
+    version: v1
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: llm-inference
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  template:
+    metadata:
+      labels:
+        app: llm-inference
+        version: v1
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "8000"
+        prometheus.io/path: "/metrics"
+    spec:
+      containers:
+      - name: inference
+        image: llm-inference:latest
+        imagePullPolicy: Always
+        ports:
+        - name: http
+          containerPort: 8000
+          protocol: TCP
+        env:
+        - name: MODEL_PATH
+          value: "/models"
+        - name: CUDA_VISIBLE_DEVICES
+          value: "0"
+        - name: MAX_NEW_TOKENS
+          value: "512"
+        - name: TEMPERATURE
+          value: "0.7"
+        resources:
+          requests:
+            memory: "32Gi"
+            cpu: "8"
+            nvidia.com/gpu: 1
+          limits:
+            memory: "64Gi"
+            cpu: "16"
+            nvidia.com/gpu: 1
+        volumeMounts:
+        - name: model-storage
+          mountPath: /models
+          readOnly: true
+        - name: cache
+          mountPath: /data
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8000
+          initialDelaySeconds: 120
+          periodSeconds: 10
+          timeoutSeconds: 5
+          failureThreshold: 3
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8000
+          initialDelaySeconds: 60
+          periodSeconds: 10
+          timeoutSeconds: 5
+          failureThreshold: 3
+      volumes:
+      - name: model-storage
+        persistentVolumeClaim:
+          claimName: model-storage-pvc
+      - name: cache
+        emptyDir:
+          sizeLimit: 10Gi
+      tolerations:
+      - key: nvidia.com/gpu
+        operator: Exists
+        effect: NoSchedule
+      nodeSelector:
+        accelerator: nvidia-gpu
+      terminationGracePeriodSeconds: 60
+
+---
+# ============================================
+# Service
+# ============================================
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: llm-inference-service
+  labels:
+    app: llm-inference
+spec:
+  type: LoadBalancer
+  ports:
+  - name: http
+    port: 80
+    targetPort: 8000
+    protocol: TCP
+  selector:
+    app: llm-inference
+
+---
+# ============================================
+# Horizontal Pod Autoscaler
+# ============================================
+
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: llm-inference-hpa
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: llm-inference
+  minReplicas: 1
+  maxReplicas: 5
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 70
+  behavior:
+    scaleDown:
+      stabilizationWindowSeconds: 300
+      policies:
+      - type: Pods
+        value: 1
+        periodSeconds: 60
+    scaleUp:
+      stabilizationWindowSeconds: 60
+      policies:
+      - type: Pods
+        value: 2
+        periodSeconds: 60
+
+---
+# ============================================
+# PersistentVolumeClaim for Model Storage
+# ============================================
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: model-storage-pvc
+spec:
+  accessModes:
+    - ReadOnlyMany
+  resources:
+    requests:
+      storage: 100Gi
+  storageClassName: fast-ssd
+
+---
+# ============================================
+# ConfigMap for Model Configuration
+# ============================================
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: llm-config
+data:
+  MODEL_PATH: "/models"
+  MAX_NEW_TOKENS: "512"
+  TEMPERATURE: "0.7"
+  TOP_P: "0.9"
+  MAX_BATCH_SIZE: "32"
+
+---
+# ============================================
+# Pod Disruption Budget
+# ============================================
+
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: llm-inference-pdb
+spec:
+  minAvailable: 1
+  selector:
+    matchLabels:
+      app: llm-inference
