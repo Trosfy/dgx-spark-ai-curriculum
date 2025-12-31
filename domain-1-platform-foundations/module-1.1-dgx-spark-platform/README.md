@@ -53,8 +53,8 @@ By the end of this module, you will be able to:
   - Shared CPU/GPU memory pool
 
 - **Compute Capabilities**
-  - FP4: 1,000 TFLOPS (Blackwell exclusive)
-  - FP8: ~208 TFLOPS
+  - NVFP4: 1 PFLOP (Blackwell exclusive)
+  - FP8: ~209 TFLOPS
   - BF16: ~100 TFLOPS
   - FP32: ~31 TFLOPS
 
@@ -145,18 +145,18 @@ Research and document the DGX Spark ecosystem compatibility.
 ### Lab 1.1.5: Ollama Benchmarking
 **Time:** 2 hours
 
-Benchmark Ollama models using direct API calls for accurate metrics.
+Benchmark Ollama models using direct API calls for accurate metrics. Results can be verified through the Ollama Web UI.
 
 **Instructions:**
 1. Open `lab-1.1.5-ollama-benchmarking.ipynb`
 2. Verify Ollama service: `curl http://localhost:11434/api/tags`
 3. Pull models: `ollama pull llama3.2:3b llama3.1:8b llama3.1:70b`
 4. Use the benchmark utility from `utils/benchmark_utils.py`
-5. Measure prefill (pp) and decode (tg) tokens/sec via API
+5. Measure prefill tok/s and decode tok/s via API
 6. Record memory usage per model
-7. Compare with NVIDIA published specs
+7. Compare with NVIDIA published specs and verify in Ollama Web UI
 
-**Key:** Use direct API benchmarking, NOT web UI (adds latency overhead)
+**Key:** Use direct API calls for precise timing metrics (Ollama Web UI adds rendering overhead)
 
 ```python
 # Example: Direct API measurement
