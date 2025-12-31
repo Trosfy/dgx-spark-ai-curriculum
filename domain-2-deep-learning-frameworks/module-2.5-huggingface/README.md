@@ -76,19 +76,47 @@ By the end of this module, you will be able to:
 
 ---
 
+## DGX Spark Environment Setup
+
+Start your development environment with the NGC PyTorch container:
+
+```bash
+docker run --gpus all -it --rm \
+    -v $HOME/workspace:/workspace \
+    -v $HOME/.cache/huggingface:/root/.cache/huggingface \
+    --ipc=host \
+    nvcr.io/nvidia/pytorch:25.11-py3 \
+    jupyter lab --ip=0.0.0.0 --allow-root --no-browser
+```
+
+**DGX Spark Key Specs:**
+- NVIDIA Blackwell GB10 Superchip
+- 128GB unified LPDDR5X memory
+- 6,144 CUDA cores, 192 Tensor Cores (5th gen)
+- Native BF16 support for optimal training performance
+
+---
+
 ## Guidance
 
 ### Loading Models with DGX Spark Advantage
 
 ```python
 from transformers import AutoModelForCausalLM, AutoTokenizer
+import torch
 
-# With 128GB unified memory, you can load large models!
+# DGX Spark's 128GB unified memory enables loading large models!
+# BF16 inference supports up to 50-55B parameters
 model = AutoModelForCausalLM.from_pretrained(
-    "meta-llama/Llama-3.1-70B-Instruct",
-    torch_dtype=torch.bfloat16,
+    "meta-llama/Llama-3.1-8B-Instruct",  # Fits easily in BF16
+    torch_dtype=torch.bfloat16,  # Native Blackwell GB10 support
     device_map="auto"  # Automatic device placement
 )
+
+# For larger models (70B+), use quantization:
+# - FP8 inference: up to 90-100B parameters
+# - NVFP4 inference: up to ~200B parameters (Blackwell exclusive)
+# See Module 3.2 for quantization techniques
 ```
 
 ### Datasets Library Patterns
@@ -178,6 +206,18 @@ After completing this module:
 | Previous | Current | Next |
 |----------|---------|------|
 | [Module 2.4: Efficient Architectures](../module-2.4-efficient-architectures/) | **Module 2.5: Hugging Face Ecosystem** | [Module 2.6: Diffusion Models](../module-2.6-diffusion-models/) |
+
+---
+
+## Related Modules (v2.0 Curriculum)
+
+This module provides foundations for advanced topics:
+
+| Module | Connection |
+|--------|------------|
+| **Module 3.1: LLM Fine-Tuning** | Advanced LoRA techniques (DoRA, NEFTune, SimPO, ORPO) |
+| **Module 3.2: Quantization & Optimization** | NVFP4/FP8 for 100B+ models, QLoRA |
+| **Module 3.3: Deployment & Inference** | SGLang, vLLM for production serving |
 
 ---
 
