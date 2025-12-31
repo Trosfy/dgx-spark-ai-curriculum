@@ -8,6 +8,7 @@ including system information, memory management, benchmarking, training, and vis
 Subpackages:
     utils.benchmarks     - LLM, PyTorch, and quantization benchmarking
     utils.monitoring     - Memory and resource monitoring
+    utils.system         - System info and environment utilities
     utils.training       - NumPy and HuggingFace training utilities
     utils.visualization  - ML visualization tools
 
@@ -33,10 +34,11 @@ Usage:
     from utils.training import create_training_args, EarlyStopping
     from utils.visualization import MLVisualizer, plot_training_curves
     from utils.monitoring import RealtimeMonitor
+    from utils.system import verify_environment
 """
 
-# Benchmark utilities (re-exported from benchmarks)
-from .benchmark_utils import (
+# Benchmark utilities
+from .benchmarks import (
     BenchmarkResult,
     BenchmarkSuite,
     BenchmarkSummary,
@@ -48,8 +50,8 @@ from .benchmark_utils import (
     quick_benchmark,
 )
 
-# Core system utilities
-from .dgx_spark_utils import (
+# System utilities
+from .system import (
     SystemInfo,
     check_ngc_container,
     clear_buffer_cache,
@@ -62,8 +64,8 @@ from .dgx_spark_utils import (
     verify_environment,
 )
 
-# Memory utilities (re-exported from monitoring)
-from .memory_utils import (
+# Memory/monitoring utilities
+from .monitoring import (
     MemoryMonitor,
     MemorySnapshot,
     can_fit_model,
@@ -78,7 +80,7 @@ from .memory_utils import (
 __version__ = "0.3.0"
 
 __all__ = [
-    # dgx_spark_utils
+    # system
     "get_system_info",
     "print_system_info",
     "clear_buffer_cache",
@@ -89,7 +91,7 @@ __all__ = [
     "optimal_batch_size",
     "recommended_quantization",
     "SystemInfo",
-    # memory_utils
+    # monitoring
     "get_memory_snapshot",
     "print_memory_status",
     "clear_all_memory",
@@ -99,7 +101,7 @@ __all__ = [
     "MemorySnapshot",
     "estimate_model_memory",
     "can_fit_model",
-    # benchmark_utils
+    # benchmarks
     "BenchmarkResult",
     "BenchmarkSummary",
     "OllamaBenchmark",

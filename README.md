@@ -155,9 +155,11 @@ dgx-spark-ai-curriculum/
 │
 ├── utils/
 │   ├── __init__.py             # Package init with exports
-│   ├── dgx_spark_utils.py      # System info, environment check
-│   ├── memory_utils.py         # Memory tracking, estimation
-│   └── benchmark_utils.py      # Direct API benchmarking
+│   ├── benchmarks/             # LLM, PyTorch, quantization benchmarking
+│   ├── monitoring/             # Memory and resource monitoring
+│   ├── system/                 # System info, environment utilities
+│   ├── training/               # NumPy and HuggingFace training
+│   └── visualization/          # ML visualization tools
 │
 ├── templates/
 │   ├── notebook_template.ipynb      # Template for creating labs
