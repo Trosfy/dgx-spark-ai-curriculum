@@ -212,7 +212,7 @@ def get_model_readme(model_id: str) -> Optional[str]:
     """
     try:
         readme_path = hf_hub_download(repo_id=model_id, filename="README.md")
-        with open(readme_path, 'r') as f:
+        with open(readme_path, 'r', encoding='utf-8') as f:
             return f.read()
     except Exception:
         return None
