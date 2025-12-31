@@ -17,8 +17,14 @@ import seaborn as sns
 from typing import List, Optional, Dict, Any, Union
 import warnings
 
-# Set style
-plt.style.use('seaborn-v0_8-whitegrid')
+# Set style with fallback for older matplotlib versions
+try:
+    plt.style.use('seaborn-v0_8-whitegrid')
+except OSError:
+    try:
+        plt.style.use('seaborn-whitegrid')
+    except OSError:
+        pass  # Use default style if neither is available
 
 
 def plot_feature_importance(
