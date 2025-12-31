@@ -312,6 +312,19 @@ Use this checklist to track your progress:
 
 ---
 
+---
+
+## 📖 Study Materials
+
+| Document | Purpose |
+|----------|---------|
+| [QUICKSTART.md](./QUICKSTART.md) | Write your first GPU kernel in 5 minutes |
+| [ELI5.md](./ELI5.md) | Jargon-free explanations of warps, coalescing, shared memory |
+| [STUDY_GUIDE.md](./STUDY_GUIDE.md) | Learning roadmap and architecture overview |
+| [QUICK_REFERENCE.md](./QUICK_REFERENCE.md) | Kernel patterns and CuPy cheatsheet |
+
+---
+
 ## Next Steps
 
 After completing this module:

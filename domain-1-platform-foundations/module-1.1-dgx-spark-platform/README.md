@@ -257,6 +257,22 @@ Use this checklist to track your progress:
 | Docker can't access GPU | Add `--gpus all` flag |
 | Ollama not responding | Check `systemctl status ollama` |
 
+→ **For more detailed solutions, see [TROUBLESHOOTING.md](./TROUBLESHOOTING.md)**
+
+---
+
+## 📖 Study Materials
+
+| Document | Purpose |
+|----------|---------|
+| [QUICKSTART.md](./QUICKSTART.md) | Verify GPU access in 5 minutes |
+| [ELI5.md](./ELI5.md) | Jargon-free explanations of unified memory, NGC, CUDA |
+| [STUDY_GUIDE.md](./STUDY_GUIDE.md) | Learning roadmap and core concepts |
+| [QUICK_REFERENCE.md](./QUICK_REFERENCE.md) | Commands, specs, and patterns cheatsheet |
+| [LAB_PREP.md](./LAB_PREP.md) | Environment setup and pre-lab checklists |
+| [TROUBLESHOOTING.md](./TROUBLESHOOTING.md) | Common errors and detailed fixes |
+| [FAQ.md](./FAQ.md) | Frequently asked questions |
+
 ---
 
 ## Next Steps
