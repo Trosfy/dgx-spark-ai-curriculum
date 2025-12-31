@@ -354,8 +354,8 @@ from sagemaker.huggingface import HuggingFaceModel
 huggingface_model = HuggingFaceModel(
     model_data="s3://bucket/model.tar.gz",
     role=sagemaker.get_execution_role(),
-    transformers_version="4.37",
-    pytorch_version="2.1",
+    transformers_version="4.41",  # Check SageMaker docs for latest
+    pytorch_version="2.3",
     py_version="py311",  # Use latest available; check SageMaker docs for py313 support
 )
 

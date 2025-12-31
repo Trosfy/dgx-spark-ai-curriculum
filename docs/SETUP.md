@@ -415,7 +415,8 @@ scipy>=1.10.0
 scikit-learn>=1.3.0
 
 # Deep Learning
-transformers>=4.40.0
+torch>=2.5.0
+transformers>=4.46.0
 datasets>=2.18.0
 accelerate>=0.28.0
 peft>=0.10.0
@@ -436,7 +437,7 @@ tensorboard>=2.16.0
 langchain>=0.1.0
 langchain-community>=0.0.20
 llama-index>=0.10.0
-chromadb>=0.4.0
+chromadb>=0.4.22
 
 # Evaluation
 lm-eval>=0.4.0

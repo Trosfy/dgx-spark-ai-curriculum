@@ -325,7 +325,7 @@ prefill_tps = data["prompt_eval_count"] / (data["prompt_eval_duration"] / 1e9)
 ### v2 Curriculum-Specific Issues
 | Pattern | Severity | Fix |
 |---------|----------|-----|
-| Mamba model without HuggingFace transformers>=4.39 | HIGH | Update transformers version |
+| Mamba model without HuggingFace transformers>=4.46 | HIGH | Update transformers version |
 | DoRA without PEFT>=0.10.0 | HIGH | Update PEFT library |
 | NEFTune without TRL>=0.8.0 | HIGH | Update TRL library |
 | SimPO/ORPO without TRL>=0.9.0 | HIGH | Update TRL library |
