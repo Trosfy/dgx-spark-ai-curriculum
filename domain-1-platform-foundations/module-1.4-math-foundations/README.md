@@ -17,7 +17,7 @@ This module uses the following Python packages (all included in NGC PyTorch cont
 
 > **Note:** This module focuses on mathematical foundations using NumPy and basic PyTorch.
 > GPU acceleration is not heavily used—we're building intuition, not training large models.
-> GPU-accelerated training is covered in Module 4 onwards.
+> GPU-accelerated training is covered in Domain 2 onwards.
 
 ---
 
