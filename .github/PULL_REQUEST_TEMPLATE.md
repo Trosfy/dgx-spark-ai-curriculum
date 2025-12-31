@@ -32,13 +32,15 @@ Fixes #
 
 <!-- Which modules does this change affect? -->
 
-- [ ] Phase 1: Foundations
-- [ ] Phase 2: Intermediate
-- [ ] Phase 3: Advanced
-- [ ] Phase 4: Capstone
+- [ ] Domain 1: Platform Foundations (Weeks 1-7)
+- [ ] Domain 2: Deep Learning Frameworks (Weeks 8-15)
+- [ ] Domain 3: LLM Systems (Weeks 16-26)
+- [ ] Domain 4: Production AI (Weeks 27-40)
+- [ ] Optional Modules (Self-paced)
 - [ ] Documentation (`docs/`)
 - [ ] Utilities (`utils/`)
 - [ ] Templates (`templates/`)
+- [ ] Review (`review/`)
 - [ ] Repository configuration
 
 ## Testing
