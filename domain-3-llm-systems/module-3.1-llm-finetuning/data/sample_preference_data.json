@@ -1,0 +1,77 @@
+[
+    {
+        "prompt": "Explain neural networks to someone with no technical background.",
+        "chosen": "Neural networks are computing systems inspired by biological brains. They consist of layers of connected nodes that learn patterns from data. Like how you learn to recognize faces by seeing many examples, neural networks learn by processing thousands of examples until they can make accurate predictions. Each layer extracts increasingly complex features - early layers might detect edges, middle layers detect shapes, and final layers recognize whole objects.",
+        "rejected": "Neural networks are machine learning models used in AI."
+    },
+    {
+        "prompt": "What makes code maintainable?",
+        "chosen": "Maintainable code has several key qualities: 1) Readable - uses clear naming, proper formatting, and comments where needed so others can understand it. 2) Modular - broken into small, focused functions that do one thing well. 3) Tested - has automated tests to catch bugs when changes are made. 4) Documented - explains the 'why' behind design decisions. 5) Consistent - follows established patterns and style guides. Remember: code is read far more often than it's written!",
+        "rejected": "Good code works correctly and is efficient."
+    },
+    {
+        "prompt": "How can I stay motivated while learning programming?",
+        "chosen": "Build sustainable motivation with these strategies: Start with small, achievable projects (the 2-minute rule helps build habits). Track your wins - even fixing a small bug counts. Connect your learning to bigger goals you care about. Celebrate progress, not perfection. Take breaks when needed because burnout kills motivation faster than anything. Join communities where you can share struggles and victories. Most importantly, remember that motivation often follows action, not the other way around - just start, and motivation will come.",
+        "rejected": "Just push through and don't give up. Think positive thoughts."
+    },
+    {
+        "prompt": "Explain recursion with an example.",
+        "chosen": "Recursion is when a function calls itself to solve smaller versions of the same problem. Here's a practical example: To count people in a line, ask the person in front 'how many people are ahead of you?' They ask the next person, who asks the next, until someone at the front says 'zero' (the base case). Then answers bubble back: 'zero,' 'one,' 'two,' and so on. In code: factorial(n) = n * factorial(n-1), with base case factorial(1) = 1. The key is always having a base case that stops the recursion!",
+        "rejected": "Recursion is when a function calls itself. It needs a base case."
+    },
+    {
+        "prompt": "What is overfitting and how do you prevent it?",
+        "chosen": "Overfitting is when a model memorizes training data instead of learning general patterns. Imagine a student who memorizes test answers but can't solve new problems. Signs include: perfect training score but poor test score, model complexity much higher than needed. Prevention strategies: 1) Get more diverse training data, 2) Use simpler models or reduce parameters, 3) Apply regularization (L1, L2, dropout), 4) Use early stopping during training, 5) Cross-validate to detect overfitting early, 6) Data augmentation to artificially increase dataset diversity.",
+        "rejected": "Overfitting happens when a model is too complex for the data."
+    },
+    {
+        "prompt": "What is the best programming language to learn first?",
+        "chosen": "There's no single 'best' language - it depends on your goals. Python is excellent for beginners due to its readable syntax and versatility (web, data science, AI, automation). JavaScript is great if you want to build websites and see results immediately in a browser. For systems programming or game development, consider C++ or Rust. My recommendation: start with Python because it has gentle syntax, immediate feedback, and a huge community. You can always learn others later - programming concepts transfer between languages!",
+        "rejected": "Python is the best."
+    },
+    {
+        "prompt": "How do databases store data efficiently?",
+        "chosen": "Databases use several techniques for efficient storage: 1) Indexing - like a book's index, allows quick lookups without scanning everything. B-trees and hash indexes are common structures. 2) Normalization - reduces redundancy by splitting data into related tables. 3) Compression - stores data in compact formats to save space. 4) Caching - keeps frequently accessed data in fast memory. 5) Partitioning - splits large tables across multiple storage locations for parallel access. 6) Query optimization - the database engine analyzes queries and chooses the most efficient execution plan.",
+        "rejected": "They store data in tables with rows and columns."
+    },
+    {
+        "prompt": "What is the difference between HTTP and HTTPS?",
+        "chosen": "HTTPS is HTTP with encryption added for security. HTTP sends data as plain text - anyone intercepting the traffic can read it (passwords, credit cards, etc.). HTTPS encrypts the connection using TLS/SSL, so intercepted data appears as gibberish. You can verify HTTPS by the lock icon in your browser. HTTPS also authenticates websites using certificates, helping prevent man-in-the-middle attacks. Today, HTTPS is the standard - browsers mark HTTP sites as 'not secure,' and search engines prefer HTTPS sites.",
+        "rejected": "HTTPS has an S which stands for secure."
+    },
+    {
+        "prompt": "Explain the concept of an API.",
+        "chosen": "An API (Application Programming Interface) is a contract that defines how software components communicate. Think of it like a restaurant menu: it tells you what you can order (available operations), what information you need to provide (inputs), and what you'll receive (outputs). You don't need to know how the kitchen works - just use the menu. For example, a weather API might accept a city name and return temperature data. APIs enable modularity, letting different systems work together without knowing each other's internal details.",
+        "rejected": "API stands for Application Programming Interface. It lets programs communicate."
+    },
+    {
+        "prompt": "What is version control and why should I use it?",
+        "chosen": "Version control (like Git) tracks changes to your code over time, creating a complete history you can navigate. Benefits: 1) Undo mistakes - revert to any previous version instantly. 2) Experiment safely - create branches to try ideas without breaking working code. 3) Collaborate - multiple developers can work on the same project without overwriting each other. 4) Documentation - commit messages explain why changes were made. 5) Backup - your code exists in multiple places. Even solo developers benefit - I've saved myself countless times by reverting bad changes!",
+        "rejected": "Version control tracks changes to code."
+    },
+    {
+        "prompt": "How does machine learning differ from traditional programming?",
+        "chosen": "Traditional programming is explicit: you write rules that map inputs to outputs. Machine learning is implicit: you provide examples of inputs and desired outputs, and the algorithm figures out the rules. Traditional: 'If email contains these words, mark as spam.' ML: 'Here are 10,000 emails labeled spam/not-spam - learn what makes emails spam.' ML excels when rules are too complex to specify (image recognition, language understanding) or when patterns change over time (fraud detection). Traditional programming excels when rules are clear and stable.",
+        "rejected": "ML learns from data while traditional programming uses if-else statements."
+    },
+    {
+        "prompt": "What is containerization and why is Docker popular?",
+        "chosen": "Containerization packages an application with all its dependencies into an isolated unit called a container. Unlike VMs that virtualize hardware, containers share the host OS kernel, making them lightweight (start in seconds, use minimal resources). Docker popularized this by making containers easy to create, share, and run. Benefits: 'Works on my machine' problems disappear - same container runs identically everywhere. Easy deployment, scaling, and rollback. Clear dependency management. Docker Hub provides pre-built images for common software, so you can spin up a database or web server with one command.",
+        "rejected": "Docker runs applications in containers."
+    },
+    {
+        "prompt": "Explain the concept of 'Big O notation'.",
+        "chosen": "Big O notation describes how an algorithm's performance scales with input size. It answers: 'As data grows, how much slower does this get?' O(1) = constant time (hash table lookup - instant regardless of size). O(log n) = logarithmic (binary search - doubling data adds one step). O(n) = linear (searching unsorted list - double data, double time). O(n²) = quadratic (nested loops - double data, 4x time). This helps choose algorithms: sorting a million items with O(n²) might take hours, but O(n log n) takes seconds. We focus on the dominant term for large inputs.",
+        "rejected": "Big O measures algorithm efficiency."
+    },
+    {
+        "prompt": "What is the cloud and why do companies use it?",
+        "chosen": "The 'cloud' is computing resources (servers, storage, databases, networking) accessed over the internet instead of owned hardware. Companies use it for: 1) Flexibility - scale up/down instantly based on demand. 2) Cost - pay only for what you use, no upfront hardware investment. 3) Reliability - providers like AWS, Azure, Google Cloud offer 99.99% uptime across global data centers. 4) Speed - deploy new services in minutes, not months. 5) Focus - let cloud providers handle infrastructure while you focus on your product. Trade-offs include vendor lock-in and potential long-term costs at scale.",
+        "rejected": "The cloud stores data on the internet instead of your computer."
+    },
+    {
+        "prompt": "What is the difference between frontend and backend development?",
+        "chosen": "Frontend is what users see and interact with - the visual interface built with HTML (structure), CSS (styling), and JavaScript (interactivity). It runs in the browser and focuses on user experience, responsiveness, and design. Backend is the server-side logic users don't see - databases, authentication, business logic, APIs. It handles data processing, security, and serves information to the frontend. They communicate via HTTP/APIs. Full-stack developers work on both. Think of a restaurant: frontend is the dining room experience, backend is the kitchen operations.",
+        "rejected": "Frontend is the user interface, backend is the server."
+    }
+]

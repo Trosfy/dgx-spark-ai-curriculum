@@ -1,0 +1,102 @@
+[
+    {
+        "instruction": "What is machine learning?",
+        "input": "",
+        "output": "Machine learning is a subset of artificial intelligence that enables computers to learn patterns from data without being explicitly programmed. Instead of following hard-coded rules, ML algorithms improve their performance through experience, identifying patterns and making decisions based on the data they're trained on."
+    },
+    {
+        "instruction": "Explain the concept of overfitting in simple terms.",
+        "input": "",
+        "output": "Overfitting occurs when a machine learning model learns the training data too well, including its noise and outliers. This results in excellent performance on training data but poor generalization to new, unseen data. It's like memorizing answers instead of understanding concepts - you'll ace the practice test but struggle with new questions."
+    },
+    {
+        "instruction": "What is the difference between supervised and unsupervised learning?",
+        "input": "",
+        "output": "Supervised learning uses labeled data where we know the correct answers (like classifying emails as spam/not spam). The model learns to map inputs to known outputs. Unsupervised learning works with unlabeled data, finding hidden patterns or structures (like grouping similar customers). Think of it as learning with a teacher vs. exploring on your own."
+    },
+    {
+        "instruction": "Summarize the following text.",
+        "input": "The transformer architecture revolutionized natural language processing when it was introduced in 2017. Unlike previous models that processed text sequentially, transformers can process entire sequences in parallel using a mechanism called self-attention. This allows them to capture long-range dependencies in text more effectively and train much faster on modern hardware.",
+        "output": "Transformers, introduced in 2017, transformed NLP by processing text in parallel using self-attention, enabling better capture of long-range dependencies and faster training compared to sequential models."
+    },
+    {
+        "instruction": "Write a Python function to calculate factorial.",
+        "input": "",
+        "output": "```python\ndef factorial(n):\n    if n < 0:\n        raise ValueError('Factorial is not defined for negative numbers')\n    if n <= 1:\n        return 1\n    return n * factorial(n - 1)\n\n# Example usage:\nprint(factorial(5))  # Output: 120\n```"
+    },
+    {
+        "instruction": "What are the key hyperparameters in training neural networks?",
+        "input": "",
+        "output": "Key hyperparameters include: 1) Learning rate - controls step size during optimization, 2) Batch size - number of samples processed before updating weights, 3) Number of epochs - full passes through the dataset, 4) Network architecture - layers, neurons, activation functions, 5) Regularization - dropout rate, weight decay, 6) Optimizer choice - Adam, SGD, etc."
+    },
+    {
+        "instruction": "Explain gradient descent in simple terms.",
+        "input": "",
+        "output": "Imagine you're blindfolded on a hilly terrain, trying to find the lowest valley. Gradient descent is like feeling the slope with your feet and taking small steps downhill. The 'gradient' tells you which direction is steepest, and you keep stepping until you reach a valley (minimum loss). The step size is your 'learning rate'."
+    },
+    {
+        "instruction": "What is transfer learning?",
+        "input": "",
+        "output": "Transfer learning reuses knowledge from a model trained on one task to help with a different but related task. Like how learning to ride a bicycle helps you learn to ride a motorcycle - you don't start from scratch. In AI, we often take models pre-trained on large datasets and fine-tune them for specific tasks, saving time and data."
+    },
+    {
+        "instruction": "Compare batch normalization and layer normalization.",
+        "input": "",
+        "output": "Batch normalization normalizes across the batch dimension - it computes statistics from all samples in a batch. Layer normalization normalizes across the feature dimension - each sample is normalized independently. BatchNorm works well for CNNs and large batches, while LayerNorm is preferred for transformers and RNNs where batch sizes may vary."
+    },
+    {
+        "instruction": "What is LoRA and why is it useful?",
+        "input": "",
+        "output": "LoRA (Low-Rank Adaptation) is a technique for efficient fine-tuning of large language models. Instead of updating all model weights, LoRA adds small trainable matrices that capture the changes needed for your task. This reduces memory requirements by 10-100x and allows fine-tuning of models that wouldn't otherwise fit in GPU memory."
+    },
+    {
+        "instruction": "Explain attention mechanism in transformers.",
+        "input": "",
+        "output": "Attention allows a model to focus on relevant parts of the input when producing each output. In transformers, self-attention computes relationships between all positions in a sequence. Each position creates Query, Key, and Value vectors. The attention score between positions is computed as softmax(QK^T/√d) * V, allowing the model to dynamically weight which parts of the input matter for each output position."
+    },
+    {
+        "instruction": "What is the purpose of the softmax function?",
+        "input": "",
+        "output": "Softmax converts a vector of raw scores into a probability distribution. It exponentiates each value and divides by the sum of all exponentials, ensuring outputs are positive and sum to 1. This is essential for classification tasks where we need to interpret outputs as class probabilities, and in attention mechanisms where we need to create weighted combinations."
+    },
+    {
+        "instruction": "Explain the concept of embeddings in NLP.",
+        "input": "",
+        "output": "Embeddings are dense vector representations of discrete items like words or tokens. Instead of one-hot encoding (sparse, high-dimensional), embeddings map items to continuous vectors where similar items are close together. Word embeddings capture semantic relationships: 'king' - 'man' + 'woman' ≈ 'queen'. They're learned during training and serve as the input layer for most NLP models."
+    },
+    {
+        "instruction": "What is the difference between RNN and Transformer architectures?",
+        "input": "",
+        "output": "RNNs process sequences step-by-step, maintaining a hidden state that accumulates information. This sequential processing limits parallelization and struggles with long-range dependencies. Transformers process all positions in parallel using self-attention, directly computing relationships between any two positions regardless of distance. This makes transformers faster to train and better at capturing long-range dependencies."
+    },
+    {
+        "instruction": "Explain what a loss function does in machine learning.",
+        "input": "",
+        "output": "A loss function measures how wrong a model's predictions are compared to the actual targets. It provides a single number that the optimizer tries to minimize. Common examples: MSE for regression (measures squared differences), Cross-entropy for classification (measures probability distribution differences). The choice of loss function shapes what the model learns to optimize."
+    },
+    {
+        "instruction": "What is regularization and why is it important?",
+        "input": "",
+        "output": "Regularization is a set of techniques to prevent overfitting by adding constraints or penalties to the model. Common methods include: L1/L2 weight penalties (encourage smaller weights), Dropout (randomly zero neurons during training), Early stopping (stop before overfitting). Regularization helps models generalize better to unseen data rather than memorizing the training set."
+    },
+    {
+        "instruction": "Explain the concept of fine-tuning in deep learning.",
+        "input": "",
+        "output": "Fine-tuning starts with a pre-trained model and further trains it on task-specific data. The pre-trained weights provide a strong initialization with general knowledge. Fine-tuning adjusts these weights for your specific task, typically with a lower learning rate to preserve learned features. This transfers knowledge from large datasets to your smaller, specialized dataset."
+    },
+    {
+        "instruction": "What is quantization in the context of neural networks?",
+        "input": "",
+        "output": "Quantization reduces the precision of model weights and activations, typically from 32-bit or 16-bit floats to 8-bit or 4-bit integers. This reduces model size and memory usage, often by 2-8x, and can speed up inference on hardware that supports integer operations. The trade-off is a small potential decrease in model accuracy."
+    },
+    {
+        "instruction": "Explain the concept of tokenization in NLP.",
+        "input": "",
+        "output": "Tokenization splits text into smaller units (tokens) that models can process. Methods range from simple word-level splits to subword algorithms like BPE (Byte Pair Encoding) that break words into meaningful pieces. Subword tokenization handles unknown words by splitting them: 'unhappiness' might become ['un', 'happiness']. Each token maps to an embedding vector for model input."
+    },
+    {
+        "instruction": "What is the purpose of the learning rate in training?",
+        "input": "",
+        "output": "Learning rate controls the step size when updating model weights during optimization. Too high: training becomes unstable, overshooting optimal values. Too low: training is very slow and may get stuck in local minima. Finding the right learning rate is crucial - often using schedules that start higher and decay over time, or adaptive methods like Adam that adjust per-parameter."
+    }
+]
