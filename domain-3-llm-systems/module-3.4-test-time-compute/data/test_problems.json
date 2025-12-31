@@ -1,0 +1,203 @@
+{
+  "math": [
+    {"id": "math_001", "question": "What is 17 * 23?", "answer": 391, "difficulty": "easy"},
+    {"id": "math_002", "question": "If a train travels at 60 mph for 2.5 hours, how far does it go?", "answer": 150, "difficulty": "easy"},
+    {"id": "math_003", "question": "What is 15% of 240?", "answer": 36, "difficulty": "easy"},
+    {"id": "math_004", "question": "A rectangle has length 12 and width 7. What is its area?", "answer": 84, "difficulty": "easy"},
+    {"id": "math_005", "question": "If you buy 3 items at $4.50 each and pay with a $20 bill, how much change do you get?", "answer": 6.5, "difficulty": "easy"},
+    {"id": "math_006", "question": "What is the sum of all integers from 1 to 100?", "answer": 5050, "difficulty": "medium"},
+    {"id": "math_007", "question": "A circle has radius 7. What is its area? (Use pi = 3.14159)", "answer": 153.938, "difficulty": "medium"},
+    {"id": "math_008", "question": "If 3x + 7 = 22, what is x?", "answer": 5, "difficulty": "easy"},
+    {"id": "math_009", "question": "A car depreciates 20% per year. If it starts at $25,000, what is it worth after 2 years?", "answer": 16000, "difficulty": "medium"},
+    {"id": "math_010", "question": "What is 2^10?", "answer": 1024, "difficulty": "easy"},
+    {"id": "math_011", "question": "A store offers 30% off, then an additional 20% off the sale price. What is the total discount percentage?", "answer": 44, "difficulty": "hard"},
+    {"id": "math_012", "question": "If the average of 5 numbers is 12, what is their sum?", "answer": 60, "difficulty": "easy"},
+    {"id": "math_013", "question": "A pipe can fill a tank in 6 hours. Another pipe can fill it in 3 hours. How long to fill it with both pipes?", "answer": 2, "difficulty": "medium"},
+    {"id": "math_014", "question": "What is the LCM of 12 and 18?", "answer": 36, "difficulty": "medium"},
+    {"id": "math_015", "question": "A square has perimeter 36. What is its area?", "answer": 81, "difficulty": "easy"},
+    {"id": "math_016", "question": "If a = 3 and b = 4, what is a^2 + b^2?", "answer": 25, "difficulty": "easy"},
+    {"id": "math_017", "question": "A bank pays 5% annual interest compounded annually. If you deposit $1000, how much do you have after 3 years? Round to nearest dollar.", "answer": 1158, "difficulty": "medium"},
+    {"id": "math_018", "question": "In how many ways can you arrange the letters in 'BOOK'?", "answer": 12, "difficulty": "hard"},
+    {"id": "math_019", "question": "What is the probability of rolling an even number on a fair die?", "answer": 0.5, "difficulty": "easy"},
+    {"id": "math_020", "question": "If f(x) = x^2 + 3x - 4, what is f(5)?", "answer": 36, "difficulty": "medium"}
+  ],
+  "code": [
+    {
+      "id": "code_001",
+      "question": "Write a Python function called is_prime(n) that returns True if n is prime, False otherwise.",
+      "test_cases": [
+        {"input": 2, "expected": true},
+        {"input": 4, "expected": false},
+        {"input": 17, "expected": true},
+        {"input": 1, "expected": false},
+        {"input": 97, "expected": true}
+      ],
+      "difficulty": "medium"
+    },
+    {
+      "id": "code_002",
+      "question": "Write a Python function called reverse_string(s) that reverses a string without using slicing [::-1].",
+      "test_cases": [
+        {"input": "hello", "expected": "olleh"},
+        {"input": "a", "expected": "a"},
+        {"input": "", "expected": ""},
+        {"input": "Python", "expected": "nohtyP"}
+      ],
+      "difficulty": "easy"
+    },
+    {
+      "id": "code_003",
+      "question": "Write a Python function called factorial(n) that returns the factorial of n.",
+      "test_cases": [
+        {"input": 5, "expected": 120},
+        {"input": 0, "expected": 1},
+        {"input": 1, "expected": 1},
+        {"input": 10, "expected": 3628800}
+      ],
+      "difficulty": "easy"
+    },
+    {
+      "id": "code_004",
+      "question": "Write a Python function called fibonacci(n) that returns the nth Fibonacci number (0-indexed, so fibonacci(0)=0, fibonacci(1)=1).",
+      "test_cases": [
+        {"input": 0, "expected": 0},
+        {"input": 1, "expected": 1},
+        {"input": 10, "expected": 55},
+        {"input": 20, "expected": 6765}
+      ],
+      "difficulty": "medium"
+    },
+    {
+      "id": "code_005",
+      "question": "Write a Python function called two_sum(nums, target) that returns the indices of two numbers that add up to target. Assume exactly one solution exists.",
+      "test_cases": [
+        {"input": {"nums": [2, 7, 11, 15], "target": 9}, "expected": [0, 1]},
+        {"input": {"nums": [3, 2, 4], "target": 6}, "expected": [1, 2]},
+        {"input": {"nums": [3, 3], "target": 6}, "expected": [0, 1]}
+      ],
+      "difficulty": "medium"
+    },
+    {
+      "id": "code_006",
+      "question": "Write a Python function called is_palindrome(s) that returns True if the string is a palindrome (ignoring case and non-alphanumeric characters).",
+      "test_cases": [
+        {"input": "A man, a plan, a canal: Panama", "expected": true},
+        {"input": "race a car", "expected": false},
+        {"input": "", "expected": true}
+      ],
+      "difficulty": "medium"
+    },
+    {
+      "id": "code_007",
+      "question": "Write a Python function called count_vowels(s) that returns the number of vowels in a string.",
+      "test_cases": [
+        {"input": "Hello World", "expected": 3},
+        {"input": "aeiou", "expected": 5},
+        {"input": "xyz", "expected": 0}
+      ],
+      "difficulty": "easy"
+    },
+    {
+      "id": "code_008",
+      "question": "Write a Python function called merge_sorted(arr1, arr2) that merges two sorted arrays into one sorted array.",
+      "test_cases": [
+        {"input": {"arr1": [1, 3, 5], "arr2": [2, 4, 6]}, "expected": [1, 2, 3, 4, 5, 6]},
+        {"input": {"arr1": [], "arr2": [1, 2]}, "expected": [1, 2]},
+        {"input": {"arr1": [1], "arr2": []}, "expected": [1]}
+      ],
+      "difficulty": "medium"
+    },
+    {
+      "id": "code_009",
+      "question": "Write a Python function called binary_search(arr, target) that returns the index of target in a sorted array, or -1 if not found.",
+      "test_cases": [
+        {"input": {"arr": [1, 2, 3, 4, 5], "target": 3}, "expected": 2},
+        {"input": {"arr": [1, 2, 3, 4, 5], "target": 6}, "expected": -1},
+        {"input": {"arr": [1], "target": 1}, "expected": 0}
+      ],
+      "difficulty": "medium"
+    },
+    {
+      "id": "code_010",
+      "question": "Write a Python function called max_subarray_sum(arr) that returns the maximum sum of a contiguous subarray (Kadane's algorithm).",
+      "test_cases": [
+        {"input": [-2, 1, -3, 4, -1, 2, 1, -5, 4], "expected": 6},
+        {"input": [1], "expected": 1},
+        {"input": [-1, -2, -3], "expected": -1}
+      ],
+      "difficulty": "hard"
+    }
+  ],
+  "reasoning": [
+    {
+      "id": "reason_001",
+      "question": "If all roses are flowers and some flowers fade quickly, can we conclude that some roses fade quickly?",
+      "answer": "no",
+      "explanation": "We cannot conclude this. While all roses are flowers, we only know that SOME flowers fade quickly. The roses might not be among those flowers that fade quickly. This is a common logical fallacy.",
+      "difficulty": "medium"
+    },
+    {
+      "id": "reason_002",
+      "question": "Tom is taller than Jim. Jim is taller than Mary. Is Tom taller than Mary?",
+      "answer": "yes",
+      "explanation": "Yes, by transitivity. If Tom > Jim and Jim > Mary, then Tom > Mary.",
+      "difficulty": "easy"
+    },
+    {
+      "id": "reason_003",
+      "question": "A bat and a ball cost $1.10 in total. The bat costs $1.00 more than the ball. How much does the ball cost in cents?",
+      "answer": 5,
+      "explanation": "Let ball = x. Then bat = x + 1.00. Total: x + (x + 1.00) = 1.10. So 2x = 0.10, x = 0.05. The ball costs 5 cents.",
+      "difficulty": "medium"
+    },
+    {
+      "id": "reason_004",
+      "question": "In a lake, there is a patch of lily pads. Every day, the patch doubles in size. If it takes 48 days for the patch to cover the entire lake, how many days would it take for the patch to cover half of the lake?",
+      "answer": 47,
+      "explanation": "If the patch doubles every day and covers the whole lake on day 48, then on day 47 it covered exactly half the lake.",
+      "difficulty": "medium"
+    },
+    {
+      "id": "reason_005",
+      "question": "A farmer has 17 sheep and all but 9 die. How many sheep are left?",
+      "answer": 9,
+      "explanation": "The phrase 'all but 9' means '9 remain'. So 9 sheep are left.",
+      "difficulty": "easy"
+    },
+    {
+      "id": "reason_006",
+      "question": "If you have a 3-gallon jug and a 5-gallon jug, how can you measure exactly 4 gallons? What is the minimum number of steps?",
+      "answer": 6,
+      "explanation": "1) Fill 5-gallon. 2) Pour into 3-gallon until full, leaving 2 in 5-gallon. 3) Empty 3-gallon. 4) Pour 2 gallons from 5-gallon to 3-gallon. 5) Fill 5-gallon. 6) Pour into 3-gallon until full (1 gallon), leaving 4 in 5-gallon.",
+      "difficulty": "hard"
+    },
+    {
+      "id": "reason_007",
+      "question": "Three friends split a $30 bill. They each put in $10. Later the waiter realizes the bill was only $25 and returns $5. They each take $1 back and leave $2 as tip. So they each paid $9, totaling $27, plus $2 tip = $29. Where is the missing dollar?",
+      "answer": "no missing dollar",
+      "explanation": "There is no missing dollar. The $27 already includes the $2 tip. $25 for the bill + $2 tip = $27 total paid. The $3 returned accounts for the rest: $27 + $3 = $30.",
+      "difficulty": "hard"
+    },
+    {
+      "id": "reason_008",
+      "question": "You have 8 identical-looking balls. One is slightly heavier. Using a balance scale, what is the minimum number of weighings needed to find the heavy ball?",
+      "answer": 2,
+      "explanation": "Divide into 3 groups: 3, 3, 2. Weigh 3 vs 3. If balanced, the heavy ball is in the group of 2 (weigh them). If not balanced, take the heavier group of 3, weigh 1 vs 1. If balanced, it's the third. If not, it's the heavier one.",
+      "difficulty": "hard"
+    },
+    {
+      "id": "reason_009",
+      "question": "A snail is at the bottom of a 30-foot well. Each day it climbs up 3 feet but slips back 2 feet at night. How many days does it take to reach the top?",
+      "answer": 28,
+      "explanation": "Each day the snail makes net progress of 1 foot. After 27 days, it's at 27 feet. On day 28, it climbs 3 feet to reach 30 feet and escapes before slipping back.",
+      "difficulty": "medium"
+    },
+    {
+      "id": "reason_010",
+      "question": "What comes next in this sequence: 1, 1, 2, 3, 5, 8, 13, ?",
+      "answer": 21,
+      "explanation": "This is the Fibonacci sequence. Each number is the sum of the two preceding ones: 8 + 13 = 21.",
+      "difficulty": "easy"
+    }
+  ]
+}

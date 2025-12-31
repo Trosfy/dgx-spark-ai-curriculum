@@ -1,0 +1,273 @@
+{
+  "short": [
+    {
+      "id": "s1",
+      "text": "What is the capital of France?",
+      "expected_tokens": 10,
+      "category": "factual",
+      "difficulty": 1
+    },
+    {
+      "id": "s2",
+      "text": "What is 2 + 2?",
+      "expected_tokens": 5,
+      "category": "math",
+      "difficulty": 1
+    },
+    {
+      "id": "s3",
+      "text": "Name the largest planet in our solar system.",
+      "expected_tokens": 15,
+      "category": "factual",
+      "difficulty": 1
+    },
+    {
+      "id": "s4",
+      "text": "What color is the sky on a clear day?",
+      "expected_tokens": 10,
+      "category": "factual",
+      "difficulty": 1
+    },
+    {
+      "id": "s5",
+      "text": "Hello! How are you today?",
+      "expected_tokens": 20,
+      "category": "chat",
+      "difficulty": 1
+    }
+  ],
+  "medium": [
+    {
+      "id": "m1",
+      "text": "Explain machine learning in 3 sentences.",
+      "expected_tokens": 100,
+      "category": "explanation",
+      "difficulty": 2
+    },
+    {
+      "id": "m2",
+      "text": "What are the main differences between Python and JavaScript?",
+      "expected_tokens": 150,
+      "category": "comparison",
+      "difficulty": 2
+    },
+    {
+      "id": "m3",
+      "text": "Describe the water cycle and its importance for Earth's ecosystems.",
+      "expected_tokens": 120,
+      "category": "science",
+      "difficulty": 2
+    },
+    {
+      "id": "m4",
+      "text": "What are transformers in deep learning and why are they important?",
+      "expected_tokens": 180,
+      "category": "technical",
+      "difficulty": 3
+    },
+    {
+      "id": "m5",
+      "text": "Explain the concept of attention mechanisms in neural networks.",
+      "expected_tokens": 200,
+      "category": "technical",
+      "difficulty": 3
+    }
+  ],
+  "long": [
+    {
+      "id": "l1",
+      "text": "Write a comprehensive guide on how to train a neural network from scratch. Cover data preparation, model architecture selection, training loop implementation, hyperparameter tuning, and common pitfalls to avoid. Include specific examples and best practices.",
+      "expected_tokens": 500,
+      "category": "tutorial",
+      "difficulty": 4
+    },
+    {
+      "id": "l2",
+      "text": "Provide a detailed analysis of the evolution of large language models from GPT-1 to GPT-4. Discuss the architectural changes, scaling laws, training techniques, and emergent capabilities observed at each stage. Compare with other model families like PaLM and Claude.",
+      "expected_tokens": 600,
+      "category": "analysis",
+      "difficulty": 5
+    },
+    {
+      "id": "l3",
+      "text": "Create a complete business plan for an AI startup focused on healthcare applications. Include market analysis, competitive landscape, product roadmap, go-to-market strategy, financial projections, and risk assessment. Be specific and data-driven.",
+      "expected_tokens": 800,
+      "category": "business",
+      "difficulty": 5
+    }
+  ],
+  "code": [
+    {
+      "id": "c1",
+      "text": "Write a Python function that calculates the Fibonacci sequence up to n terms.",
+      "expected_tokens": 100,
+      "category": "algorithm",
+      "difficulty": 2
+    },
+    {
+      "id": "c2",
+      "text": "Implement a binary search tree in Python with insert, search, and delete methods.",
+      "expected_tokens": 300,
+      "category": "data_structure",
+      "difficulty": 3
+    },
+    {
+      "id": "c3",
+      "text": "Write a PyTorch training loop for a simple neural network classifier with proper batching, loss calculation, and optimizer steps.",
+      "expected_tokens": 250,
+      "category": "ml",
+      "difficulty": 3
+    },
+    {
+      "id": "c4",
+      "text": "Create a FastAPI endpoint that accepts POST requests with JSON data and returns a processed response with proper error handling.",
+      "expected_tokens": 200,
+      "category": "web",
+      "difficulty": 3
+    },
+    {
+      "id": "c5",
+      "text": "Implement a simple attention mechanism in PyTorch with query, key, and value projections.",
+      "expected_tokens": 350,
+      "category": "ml",
+      "difficulty": 4
+    }
+  ],
+  "reasoning": [
+    {
+      "id": "r1",
+      "text": "A farmer has 17 sheep. All but 9 run away. How many sheep does the farmer have left? Explain your reasoning step by step.",
+      "expected_tokens": 100,
+      "category": "logic",
+      "difficulty": 2
+    },
+    {
+      "id": "r2",
+      "text": "If it takes 5 machines 5 minutes to make 5 widgets, how long would it take 100 machines to make 100 widgets? Show your work.",
+      "expected_tokens": 150,
+      "category": "math",
+      "difficulty": 3
+    },
+    {
+      "id": "r3",
+      "text": "Three people check into a hotel room that costs $30. They each pay $10. Later, the manager realizes the room was only $25, so he gives $5 to the bellboy to return. The bellboy keeps $2 and gives $1 to each person. Now each person has paid $9 (total $27), the bellboy has $2, which equals $29. Where is the missing dollar?",
+      "expected_tokens": 200,
+      "category": "puzzle",
+      "difficulty": 4
+    },
+    {
+      "id": "r4",
+      "text": "You have 12 balls that look identical, but one is either heavier or lighter. Using a balance scale only 3 times, determine which ball is different and whether it's heavier or lighter. Explain your complete strategy.",
+      "expected_tokens": 400,
+      "category": "logic",
+      "difficulty": 5
+    }
+  ],
+  "chat": [
+    {
+      "id": "chat1",
+      "messages": [
+        {"role": "system", "content": "You are a helpful AI assistant."},
+        {"role": "user", "content": "Hello!"}
+      ],
+      "expected_tokens": 30,
+      "category": "greeting",
+      "difficulty": 1
+    },
+    {
+      "id": "chat2",
+      "messages": [
+        {"role": "system", "content": "You are a Python expert who helps with coding questions."},
+        {"role": "user", "content": "How do I read a CSV file in Python?"}
+      ],
+      "expected_tokens": 150,
+      "category": "technical",
+      "difficulty": 2
+    },
+    {
+      "id": "chat3",
+      "messages": [
+        {"role": "system", "content": "You are a helpful AI assistant that explains complex topics simply."},
+        {"role": "user", "content": "What is quantum computing?"},
+        {"role": "assistant", "content": "Quantum computing uses quantum mechanics principles like superposition and entanglement to process information differently than classical computers."},
+        {"role": "user", "content": "Can you explain superposition in simple terms?"}
+      ],
+      "expected_tokens": 200,
+      "category": "multi_turn",
+      "difficulty": 3
+    }
+  ],
+  "prefix_cache_test": [
+    {
+      "id": "prefix1",
+      "system_prompt": "You are an expert DGX Spark AI instructor. You help students understand deep learning, PyTorch, inference optimization, and NVIDIA hardware. Always provide practical examples and code when relevant.",
+      "user_messages": [
+        "What is the DGX Spark?",
+        "How much memory does it have?",
+        "Can it run a 70B model?",
+        "What inference engines work best on it?",
+        "How do I optimize for low latency?"
+      ],
+      "expected_tokens": 150,
+      "category": "radix_attention",
+      "difficulty": 2,
+      "notes": "All messages share the same system prompt - perfect for testing RadixAttention prefix caching"
+    },
+    {
+      "id": "prefix2",
+      "system_prompt": "You are a code reviewer. Review the following code for bugs, security issues, and performance problems. Be thorough and specific.",
+      "user_messages": [
+        "Review this Python function: def add(a, b): return a + b",
+        "Review this: for i in range(len(list)): print(list[i])",
+        "Review this: password = input('Enter password: ')",
+        "Review this: data = eval(user_input)"
+      ],
+      "expected_tokens": 200,
+      "category": "radix_attention",
+      "difficulty": 3,
+      "notes": "Code review scenarios with shared system prompt"
+    }
+  ],
+  "speculative_decoding_test": [
+    {
+      "id": "spec1",
+      "text": "Count from 1 to 20, one number per line.",
+      "expected_tokens": 60,
+      "category": "predictable",
+      "difficulty": 1,
+      "notes": "Highly predictable output - ideal for speculative decoding"
+    },
+    {
+      "id": "spec2",
+      "text": "List the days of the week, one per line.",
+      "expected_tokens": 20,
+      "category": "predictable",
+      "difficulty": 1,
+      "notes": "Very predictable output"
+    },
+    {
+      "id": "spec3",
+      "text": "Write the alphabet, with each letter on its own line.",
+      "expected_tokens": 52,
+      "category": "predictable",
+      "difficulty": 1,
+      "notes": "Highly predictable - good acceptance rate expected"
+    },
+    {
+      "id": "spec4",
+      "text": "Generate a random story about a dragon and a princess.",
+      "expected_tokens": 300,
+      "category": "creative",
+      "difficulty": 3,
+      "notes": "Less predictable - lower acceptance rate expected"
+    },
+    {
+      "id": "spec5",
+      "text": "Write a haiku about technology.",
+      "expected_tokens": 30,
+      "category": "creative",
+      "difficulty": 3,
+      "notes": "Creative but constrained format"
+    }
+  ]
+}

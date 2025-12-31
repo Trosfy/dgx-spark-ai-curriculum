@@ -1,0 +1,112 @@
+[
+    {
+        "prompt": "Explain what machine learning is in simple terms.",
+        "completion": "Machine learning is a type of artificial intelligence where computers learn from examples rather than being explicitly programmed. Just like how you learn to recognize dogs by seeing many pictures of dogs, computers can learn patterns from data. They get better at tasks through practice and experience.",
+        "label": true
+    },
+    {
+        "prompt": "Explain what machine learning is in simple terms.",
+        "completion": "its computers doing stuff",
+        "label": false
+    },
+    {
+        "prompt": "What are the benefits of regular exercise?",
+        "completion": "Regular exercise offers numerous benefits: it improves cardiovascular health by strengthening your heart, boosts mood through endorphin release, helps maintain a healthy weight, increases energy levels, improves sleep quality, and reduces the risk of chronic diseases like diabetes and heart disease.",
+        "label": true
+    },
+    {
+        "prompt": "What are the benefits of regular exercise?",
+        "completion": "exercise is good i guess",
+        "label": false
+    },
+    {
+        "prompt": "Write a Python function to check if a number is prime.",
+        "completion": "Here's a Python function to check if a number is prime:\n\n```python\ndef is_prime(n):\n    if n < 2:\n        return False\n    for i in range(2, int(n**0.5) + 1):\n        if n % i == 0:\n            return False\n    return True\n```\n\nThis function returns True if n is prime, False otherwise. It checks divisibility up to the square root of n for efficiency.",
+        "label": true
+    },
+    {
+        "prompt": "Write a Python function to check if a number is prime.",
+        "completion": "def prime(n): return n > 1",
+        "label": false
+    },
+    {
+        "prompt": "What is the capital of France?",
+        "completion": "The capital of France is Paris. It's located in the north-central part of the country along the Seine River and is the largest city in France.",
+        "label": true
+    },
+    {
+        "prompt": "What is the capital of France?",
+        "completion": "idk maybe london?",
+        "label": false
+    },
+    {
+        "prompt": "How do I make a good first impression at a job interview?",
+        "completion": "To make a good first impression at a job interview: 1) Arrive 10-15 minutes early, 2) Dress professionally and appropriately for the company culture, 3) Give a firm handshake and make eye contact, 4) Listen carefully and answer questions thoughtfully, 5) Show enthusiasm for the role, and 6) Prepare thoughtful questions about the position.",
+        "label": true
+    },
+    {
+        "prompt": "How do I make a good first impression at a job interview?",
+        "completion": "just be yourself man",
+        "label": false
+    },
+    {
+        "prompt": "Explain the difference between a list and a tuple in Python.",
+        "completion": "Lists and tuples are both sequence types in Python, but they have key differences:\n\n1. **Mutability**: Lists are mutable (can be changed after creation), tuples are immutable (cannot be modified)\n2. **Syntax**: Lists use square brackets [], tuples use parentheses ()\n3. **Performance**: Tuples are slightly faster due to immutability\n4. **Use cases**: Lists for collections that change, tuples for fixed data like coordinates",
+        "label": true
+    },
+    {
+        "prompt": "Explain the difference between a list and a tuple in Python.",
+        "completion": "theyre basically the same thing",
+        "label": false
+    },
+    {
+        "prompt": "What causes seasons on Earth?",
+        "completion": "Seasons are caused by Earth's axial tilt of about 23.5 degrees. As Earth orbits the Sun, different parts of the planet receive varying amounts of direct sunlight. When the Northern Hemisphere is tilted toward the Sun, it experiences summer while the Southern Hemisphere has winter, and vice versa.",
+        "label": true
+    },
+    {
+        "prompt": "What causes seasons on Earth?",
+        "completion": "the sun moves closer and farther away",
+        "label": false
+    },
+    {
+        "prompt": "How do I center a div in CSS?",
+        "completion": "There are several ways to center a div in CSS:\n\n**Flexbox (recommended):**\n```css\n.parent {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n```\n\n**Grid:**\n```css\n.parent {\n  display: grid;\n  place-items: center;\n}\n```\n\n**Margin auto (horizontal only):**\n```css\n.child {\n  margin: 0 auto;\n  width: 50%;\n}\n```",
+        "label": true
+    },
+    {
+        "prompt": "How do I center a div in CSS?",
+        "completion": "use margin or something",
+        "label": false
+    },
+    {
+        "prompt": "What is photosynthesis?",
+        "completion": "Photosynthesis is the process by which plants, algae, and some bacteria convert light energy (usually from the Sun) into chemical energy stored in glucose. The basic equation is: 6CO2 + 6H2O + light energy -> C6H12O6 + 6O2. Plants absorb carbon dioxide and water, use sunlight to power the reaction, and produce glucose and oxygen.",
+        "label": true
+    },
+    {
+        "prompt": "What is photosynthesis?",
+        "completion": "plants eating sunlight",
+        "label": false
+    },
+    {
+        "prompt": "Give me tips for writing better code.",
+        "completion": "Here are key tips for writing better code:\n\n1. **Use meaningful names**: Variables and functions should clearly describe their purpose\n2. **Keep functions small**: Each function should do one thing well\n3. **Write tests**: Test your code to catch bugs early\n4. **Comment wisely**: Explain 'why' not 'what'\n5. **Follow conventions**: Use consistent style (PEP 8 for Python)\n6. **Refactor regularly**: Improve code structure without changing behavior\n7. **Handle errors**: Use try-except and validate inputs",
+        "label": true
+    },
+    {
+        "prompt": "Give me tips for writing better code.",
+        "completion": "just practice more",
+        "label": false
+    },
+    {
+        "prompt": "Explain what an API is.",
+        "completion": "An API (Application Programming Interface) is a set of rules and protocols that allows different software applications to communicate with each other. Think of it like a waiter in a restaurant: you (the client) tell the waiter (API) what you want, and the waiter communicates with the kitchen (server) to get your order. APIs define how to request data or services and how responses are formatted.",
+        "label": true
+    },
+    {
+        "prompt": "Explain what an API is.",
+        "completion": "its how programs talk to each other or whatever",
+        "label": false
+    }
+]

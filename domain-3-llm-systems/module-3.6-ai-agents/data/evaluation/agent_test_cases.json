@@ -1,0 +1,144 @@
+{
+  "name": "AI Agent Benchmark Test Suite",
+  "version": "1.0",
+  "description": "Test cases for evaluating AI agents across multiple categories",
+  "test_cases": [
+    {
+      "id": "FACT001",
+      "query": "What is the capital of France?",
+      "expected_answer": "Paris is the capital of France.",
+      "category": "factual_retrieval",
+      "difficulty": "easy",
+      "keywords": ["Paris", "capital", "France"]
+    },
+    {
+      "id": "FACT002",
+      "query": "What is the memory capacity of DGX Spark?",
+      "expected_answer": "The DGX Spark has 128GB of unified LPDDR5X memory.",
+      "category": "factual_retrieval",
+      "difficulty": "easy",
+      "keywords": ["128GB", "unified", "memory", "LPDDR5X"],
+      "source_documents": ["dgx_spark_overview.txt"]
+    },
+    {
+      "id": "FACT003",
+      "query": "How many CUDA cores does DGX Spark have?",
+      "expected_answer": "DGX Spark has 6,144 CUDA cores on its Blackwell GB10 chip.",
+      "category": "factual_retrieval",
+      "difficulty": "easy",
+      "keywords": ["6144", "CUDA", "cores", "Blackwell"],
+      "source_documents": ["dgx_spark_overview.txt"]
+    },
+    {
+      "id": "CALC001",
+      "query": "What is 25 multiplied by 48?",
+      "expected_answer": "1200",
+      "category": "calculation",
+      "difficulty": "easy",
+      "keywords": ["1200"],
+      "requires_tool": "calculator"
+    },
+    {
+      "id": "CALC002",
+      "query": "Calculate the square root of 144",
+      "expected_answer": "12",
+      "category": "calculation",
+      "difficulty": "easy",
+      "keywords": ["12"],
+      "requires_tool": "calculator"
+    },
+    {
+      "id": "CALC003",
+      "query": "If a model has 7 billion parameters and each parameter takes 2 bytes in FP16, how much memory is needed in gigabytes?",
+      "expected_answer": "14 GB. 7 billion parameters × 2 bytes = 14 billion bytes = 14 GB.",
+      "category": "calculation",
+      "difficulty": "medium",
+      "keywords": ["14", "GB", "gigabytes"],
+      "requires_tool": "calculator"
+    },
+    {
+      "id": "REASON001",
+      "query": "If it takes 5 machines 5 minutes to make 5 widgets, how long would it take 100 machines to make 100 widgets?",
+      "expected_answer": "5 minutes. Each machine makes 1 widget in 5 minutes, so 100 machines can make 100 widgets simultaneously in 5 minutes.",
+      "category": "multi_hop_reasoning",
+      "difficulty": "medium",
+      "keywords": ["5 minutes", "each machine", "simultaneously"]
+    },
+    {
+      "id": "REASON002",
+      "query": "A train travels at 60 mph. A car starts 30 miles ahead and travels at 40 mph. When does the train catch the car?",
+      "expected_answer": "The train catches the car in 1.5 hours. The train closes the gap at 20 mph (60-40), so 30 miles / 20 mph = 1.5 hours.",
+      "category": "multi_hop_reasoning",
+      "difficulty": "medium",
+      "keywords": ["1.5 hours", "20 mph", "gap"]
+    },
+    {
+      "id": "TOOL001",
+      "query": "Search for information about transformer architecture and explain the attention mechanism.",
+      "expected_answer": "The transformer architecture uses self-attention mechanisms that allow the model to weigh the importance of different input tokens. The attention formula is: Attention(Q, K, V) = softmax(QK^T / sqrt(d_k)) × V.",
+      "category": "tool_use",
+      "difficulty": "medium",
+      "keywords": ["attention", "transformer", "self-attention", "softmax", "query", "key", "value"],
+      "requires_tool": "search",
+      "source_documents": ["transformer_architecture.txt"]
+    },
+    {
+      "id": "TOOL002",
+      "query": "Look up LoRA fine-tuning and explain the key concept.",
+      "expected_answer": "LoRA (Low-Rank Adaptation) is an efficient fine-tuning method that freezes the original model weights and adds trainable low-rank decomposition matrices. This reduces memory requirements by 10-100x while maintaining performance.",
+      "category": "tool_use",
+      "difficulty": "medium",
+      "keywords": ["LoRA", "Low-Rank", "fine-tuning", "trainable", "frozen"],
+      "requires_tool": "search",
+      "source_documents": ["lora_finetuning.txt"]
+    },
+    {
+      "id": "CODE001",
+      "query": "Write a Python function that calculates the factorial of a number.",
+      "expected_answer": "def factorial(n):\n    if n <= 1:\n        return 1\n    return n * factorial(n - 1)",
+      "category": "code_generation",
+      "difficulty": "easy",
+      "keywords": ["def", "factorial", "return", "if"]
+    },
+    {
+      "id": "CODE002",
+      "query": "Write a Python function that checks if a string is a palindrome.",
+      "expected_answer": "def is_palindrome(s):\n    s = s.lower().replace(' ', '')\n    return s == s[::-1]",
+      "category": "code_generation",
+      "difficulty": "easy",
+      "keywords": ["def", "palindrome", "return", "[::-1]"]
+    },
+    {
+      "id": "SYNTH001",
+      "query": "Compare quantization and LoRA as model optimization techniques.",
+      "expected_answer": "Quantization reduces model size by lowering precision (e.g., FP16 to INT8), trading some accuracy for speed and memory savings. LoRA modifies model behavior through low-rank weight updates, enabling task-specific fine-tuning with minimal parameters. Quantization is best for deployment efficiency, while LoRA is ideal for adaptation.",
+      "category": "synthesis",
+      "difficulty": "hard",
+      "keywords": ["quantization", "LoRA", "precision", "memory", "fine-tuning"],
+      "source_documents": ["quantization_guide.txt", "lora_finetuning.txt"]
+    },
+    {
+      "id": "SYNTH002",
+      "query": "What are the best practices for deploying LLMs in production?",
+      "expected_answer": "Key best practices include: 1) Use quantization for memory efficiency, 2) Implement caching for common queries, 3) Set up load balancing for scalability, 4) Monitor latency and throughput metrics, 5) Use guardrails for safety, 6) Implement fallback strategies for failures.",
+      "category": "synthesis",
+      "difficulty": "hard",
+      "keywords": ["quantization", "caching", "load balancing", "monitoring", "guardrails"],
+      "source_documents": ["deployment_best_practices.txt"]
+    }
+  ],
+  "metadata": {
+    "created_by": "Professor SPARK",
+    "course": "DGX Spark AI Curriculum - Module 3.6",
+    "categories": [
+      "factual_retrieval",
+      "calculation",
+      "multi_hop_reasoning",
+      "tool_use",
+      "code_generation",
+      "synthesis"
+    ],
+    "difficulty_levels": ["easy", "medium", "hard"],
+    "total_tests": 14
+  }
+}
