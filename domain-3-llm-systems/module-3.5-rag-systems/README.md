@@ -309,7 +309,7 @@ reranker = CrossEncoder("BAAI/bge-reranker-large", device="cuda")
 ```python
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_community.vectorstores import Chroma
-from langchain_community.embeddings import HuggingFaceEmbeddings
+from langchain_huggingface import HuggingFaceEmbeddings
 
 # 1. Load and chunk documents
 splitter = RecursiveCharacterTextSplitter(
@@ -447,7 +447,6 @@ docker run --gpus all -it --rm \
     -v $HOME/.ollama:/root/.ollama \
     --ipc=host \
     --network=host \
-    -p 8888:8888 \
     nvcr.io/nvidia/pytorch:25.11-py3 \
     jupyter lab --ip=0.0.0.0 --allow-root --no-browser
 ```
@@ -458,12 +457,16 @@ docker run --gpus all -it --rm \
 # Inside NGC container
 pip install \
     langchain langchain-community langchain-huggingface \
-    chromadb faiss-gpu qdrant-client \
+    chromadb faiss-cpu qdrant-client \
     sentence-transformers \
     rank_bm25 \
     ragas \
     pypdf2 pdfplumber python-docx beautifulsoup4 \
+    nltk \
     ollama
+
+# Download required NLTK data
+python -c "import nltk; nltk.download('punkt'); nltk.download('stopwords'); nltk.download('punkt_tab')"
 ```
 
 ### Ollama Setup

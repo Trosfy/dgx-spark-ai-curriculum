@@ -51,9 +51,11 @@ class BM25Retriever:
         if remove_stopwords:
             try:
                 self.stop_words = set(stopwords.words('english'))
-            except:
+            except LookupError:
                 import nltk
                 nltk.download('stopwords', quiet=True)
+                nltk.download('punkt', quiet=True)
+                nltk.download('punkt_tab', quiet=True)
                 self.stop_words = set(stopwords.words('english'))
         else:
             self.stop_words = set()

@@ -32,7 +32,8 @@ from .embedding_utils import (
 from .vector_store import (
     create_chroma_store,
     create_faiss_store,
-    load_vector_store
+    load_vector_store,
+    search_with_score
 )
 
 from .hybrid_search import (
@@ -69,6 +70,7 @@ __all__ = [
     "create_chroma_store",
     "create_faiss_store",
     "load_vector_store",
+    "search_with_score",
     # Hybrid search
     "BM25Retriever",
     "DenseRetriever",
