@@ -112,11 +112,11 @@ This curriculum specifically leverages DGX Spark's unique capabilities:
 <details>
 <summary><b>Optional Modules (Self-paced)</b></summary>
 
-- [Optional A: Learning Theory Deep Dive](optional-modules/optional-a-learning-theory/)
-- [Optional B: Recommender Systems](optional-modules/optional-b-recommender-systems/)
-- [Optional C: Mechanistic Interpretability](optional-modules/optional-c-mechanistic-interpretability/)
-- [Optional D: Reinforcement Learning Fundamentals](optional-modules/optional-d-reinforcement-learning/)
-- [Optional E: Graph Neural Networks](optional-modules/optional-e-graph-neural-networks/)
+- [Optional A: Statistical Learning Theory](optional-modules/module-A-statistical-learning-theory/)
+- [Optional B: Recommender Systems](optional-modules/module-B-recommender-systems/)
+- [Optional C: Mechanistic Interpretability](optional-modules/module-C-mechanistic-interpretability/)
+- [Optional D: Reinforcement Learning](optional-modules/module-D-reinforcement-learning/)
+- [Optional E: Graph Neural Networks](optional-modules/module-E-graph-neural-networks/)
 
 </details>
 
@@ -197,11 +197,11 @@ dgx-spark-ai-curriculum/
 │   └── module-4.6-capstone-project/
 │
 └── optional-modules/                    # Self-paced
-    ├── optional-a-learning-theory/
-    ├── optional-b-recommender-systems/
-    ├── optional-c-mechanistic-interpretability/
-    ├── optional-d-reinforcement-learning/
-    └── optional-e-graph-neural-networks/
+    ├── module-A-statistical-learning-theory/
+    ├── module-B-recommender-systems/
+    ├── module-C-mechanistic-interpretability/
+    ├── module-D-reinforcement-learning/
+    └── module-E-graph-neural-networks/
 ```
 
 ## Progress Tracking

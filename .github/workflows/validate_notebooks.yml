@@ -217,11 +217,11 @@ jobs:
 
         # Optional modules
         optional_modules = [
-            'optional-a-learning-theory',
-            'optional-b-recommender-systems',
-            'optional-c-mechanistic-interpretability',
-            'optional-d-reinforcement-learning',
-            'optional-e-graph-neural-networks',
+            'module-A-statistical-learning-theory',
+            'module-B-recommender-systems',
+            'module-C-mechanistic-interpretability',
+            'module-D-reinforcement-learning',
+            'module-E-graph-neural-networks',
         ]
 
         errors = []
