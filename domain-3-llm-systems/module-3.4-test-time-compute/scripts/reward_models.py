@@ -24,7 +24,13 @@ import time
 from dataclasses import dataclass
 from typing import Any, Callable, Dict, List, Optional, Tuple, Union
 
-import torch
+# Try to import torch (may not be available in all environments)
+try:
+    import torch
+    HAS_TORCH = True
+except ImportError:
+    HAS_TORCH = False
+    torch = None  # type: ignore
 
 # Try to import transformers (may not be available in all environments)
 try:
@@ -84,6 +90,11 @@ def load_reward_model(
         ... )
         >>> # Memory used: ~16GB on DGX Spark
     """
+    if not HAS_TORCH:
+        raise ImportError(
+            "PyTorch library required. Install with: pip install torch"
+        )
+
     if not HAS_TRANSFORMERS:
         raise ImportError(
             "transformers library required. Install with: pip install transformers"
@@ -731,6 +742,6 @@ def clear_reward_model_cache():
     import gc
 
     gc.collect()
-    if torch.cuda.is_available():
+    if HAS_TORCH and torch is not None and torch.cuda.is_available():
         torch.cuda.empty_cache()
         torch.cuda.synchronize()

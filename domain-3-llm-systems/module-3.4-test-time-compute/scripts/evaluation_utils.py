@@ -676,7 +676,10 @@ class ReasoningEvaluator:
 
         Generates multiple reasoning paths and uses majority voting.
         """
-        from .reasoning_utils import self_consistency, extract_answer
+        try:
+            from .reasoning_utils import self_consistency, extract_answer
+        except ImportError:
+            from scripts.reasoning_utils import self_consistency, extract_answer
 
         results = []
 
