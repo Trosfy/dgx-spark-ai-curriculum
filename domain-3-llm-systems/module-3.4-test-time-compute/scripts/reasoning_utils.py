@@ -414,7 +414,7 @@ class ThoughtNode:
     """A node in the Tree-of-Thought."""
     thought: str
     value: float = 0.0
-    children: List['ThoughtNode'] = None
+    children: Optional[List['ThoughtNode']] = None
     parent: Optional['ThoughtNode'] = None
     depth: int = 0
 
