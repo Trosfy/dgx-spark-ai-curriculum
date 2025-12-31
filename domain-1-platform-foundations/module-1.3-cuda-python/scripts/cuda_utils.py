@@ -66,8 +66,8 @@ def get_device_info(device_id: int = 0) -> Dict[str, Any]:
         "max_grid_dim_y": device.MAX_GRID_DIM_Y,
         "max_grid_dim_z": device.MAX_GRID_DIM_Z,
         "max_shared_memory_per_block": device.MAX_SHARED_MEMORY_PER_BLOCK,
-        "total_memory_bytes": device.total_memory if hasattr(device, 'total_memory') else None,
-        "total_memory_gb": device.total_memory / 1e9 if hasattr(device, 'total_memory') else None,
+        "total_memory_bytes": device.total_memory if hasattr(device, 'total_memory') and device.total_memory else None,
+        "total_memory_gb": device.total_memory / 1e9 if hasattr(device, 'total_memory') and device.total_memory else None,
         "warp_size": device.WARP_SIZE,
         "multiprocessor_count": device.MULTIPROCESSOR_COUNT,
     }
