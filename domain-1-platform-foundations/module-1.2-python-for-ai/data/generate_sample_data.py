@@ -246,7 +246,7 @@ def main():
     # Get script directory
     script_dir = Path(__file__).parent
 
-    print("Generating sample data for Module 2...")
+    print("Generating sample data for Module 1.2...")
     print("=" * 50)
 
     # 1. Customer data
@@ -288,7 +288,7 @@ def main():
 
     print("\n" + "=" * 50)
     print("All sample data generated successfully!")
-    print("\nYou can now run the Module 2 notebooks.")
+    print("\nYou can now run the Module 1.2 notebooks.")
 
 
 if __name__ == '__main__':
