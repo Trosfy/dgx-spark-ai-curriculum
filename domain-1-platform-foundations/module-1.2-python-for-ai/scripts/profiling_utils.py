@@ -5,7 +5,7 @@ Profiling Utilities for Python Performance Optimization
 Tools for profiling and optimizing Python code, with a focus on
 numerical computing and machine learning workloads.
 
-This module is part of the DGX Spark AI Curriculum - Module 2.
+This module is part of the DGX Spark AI Curriculum - Module 1.2: Python for AI/ML.
 
 Features:
 - Simple timing decorators and context managers

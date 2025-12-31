@@ -506,46 +506,6 @@ corrected_code_here()
 
 ---
 
-## 🔧 AUTO-FIX SCRIPT
-
-```python
-#!/usr/bin/env python3
-"""
-Auto-fix script for Module [X] issues.
-Run: python fix_module_X.py
-
-This fixes issues: C1, C2, H1, H3, M2
-Manual review still required for: H2, M1
-"""
-
-import json
-import re
-from pathlib import Path
-
-def fix_C1():
-    """Fix: [Description of C1]"""
-    filepath = Path("[filepath]")
-    # Fix implementation
-    print("✅ Fixed C1: [description]")
-
-def fix_C2():
-    """Fix: [Description of C2]"""
-    # Fix implementation
-    print("✅ Fixed C2: [description]")
-
-# ... more fixes ...
-
-if __name__ == "__main__":
-    print("Applying fixes to Module [X]...")
-    fix_C1()
-    fix_C2()
-    # ...
-    print("\n✅ Automated fixes complete!")
-    print("⚠️  Manual review still required for: H2, M1")
-```
-
----
-
 ## 📋 SUMMARY
 
 ### Files Status

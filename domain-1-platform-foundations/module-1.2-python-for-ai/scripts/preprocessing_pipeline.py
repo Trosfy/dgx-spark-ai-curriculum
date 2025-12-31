@@ -6,7 +6,7 @@ A production-ready data preprocessing pipeline designed for ML workflows.
 Handles missing values, categorical encoding, and feature scaling with
 proper train/test separation to avoid data leakage.
 
-This module is part of the DGX Spark AI Curriculum - Module 2.
+This module is part of the DGX Spark AI Curriculum - Module 1.2: Python for AI/ML.
 
 Example Usage:
     >>> from preprocessing_pipeline import Preprocessor

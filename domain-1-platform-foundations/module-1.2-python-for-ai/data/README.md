@@ -84,12 +84,15 @@ Random embeddings for numerical exercises:
 - Data sizes are chosen to be manageable on any system
 - For DGX Spark exercises, feel free to scale up the data sizes
 
+---
+
 ## Memory Estimates
 
-| Dataset | Size | Memory |
-|---------|------|--------|
-| sample_customers.csv | 1000 rows | ~100 KB |
-| sample_embeddings.npy | 1000 × 128 | ~500 KB |
+| Dataset | Size | Memory (approx.) |
+|---------|------|------------------|
+| sample_customers.csv | 1,000 rows | ~100 KB |
+| sample_embeddings.npy | 1,000 × 128 | ~500 KB |
 | sample_training_history.json | 100 epochs | ~10 KB |
+| sample_confusion_data.json | 10-class matrix | ~5 KB |
 
-For larger-scale experiments on DGX Spark (128GB memory), you can safely scale these by 100-1000x.
+> **Scaling Note:** For larger-scale experiments on DGX Spark (128GB memory), you can safely scale these datasets by 100-1000x.

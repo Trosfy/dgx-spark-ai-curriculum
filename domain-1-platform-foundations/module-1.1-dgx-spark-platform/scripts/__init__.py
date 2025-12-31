@@ -16,9 +16,14 @@ from .system_info import *
 # Re-export consolidated utilities for convenience
 import sys
 from pathlib import Path
+
+# Add project root to path for importing shared utilities
 project_root = Path(__file__).parent.parent.parent.parent
 if str(project_root) not in sys.path:
     sys.path.insert(0, str(project_root))
+
+# Track what utilities are available
+_UTILS_AVAILABLE = False
 
 try:
     from utils.benchmarks import (
@@ -33,6 +38,20 @@ try:
         print_memory_status,
         MemoryMonitor,
     )
+    _UTILS_AVAILABLE = True
 except ImportError:
-    # utils not available, running standalone
-    pass
+    # utils package not available when running standalone
+    # This is expected when the module is used independently
+    BenchmarkResult = None
+    BenchmarkSummary = None
+    OllamaBenchmark = None
+    quick_benchmark = None
+    MemorySnapshot = None
+    get_memory_snapshot = None
+    print_memory_status = None
+    MemoryMonitor = None
+
+
+def is_utils_available() -> bool:
+    """Check if the shared utils package is available."""
+    return _UTILS_AVAILABLE

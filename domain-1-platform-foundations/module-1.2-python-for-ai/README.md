@@ -203,12 +203,54 @@ cProfile.run('my_function()', sort='cumulative')
 %memit my_function()
 ```
 
+### Comparing Implementations
+
+Use the `compare_implementations` utility to benchmark different approaches:
+
+```python
+from scripts.profiling_utils import compare_implementations
+
+# Example: Compare loop vs vectorized implementations
+def slow_sum(arr):
+    total = 0
+    for x in arr:
+        total += x
+    return total
+
+def fast_sum(arr):
+    return np.sum(arr)
+
+arr = np.random.rand(100000)
+
+results = compare_implementations(
+    functions=[slow_sum, fast_sum],
+    names=['Loop', 'NumPy'],
+    args=(arr,),
+    n_runs=10
+)
+# Prints comparison table with speedup factors
+```
+
 ### DGX Spark Compatibility Notes
 
 On DGX Spark with ARM64 architecture:
 - **cProfile and tracemalloc** work out of the box (stdlib)
 - **line_profiler and memory_profiler** may need conda installation
 - Use NGC containers which have pre-built ARM64 packages
+
+### Memory Requirements
+
+| Lab | Peak Memory (Est.) | Notes |
+|-----|-------------------|-------|
+| Lab 1.2.1: NumPy Broadcasting | ~500 MB | Large array operations for timing comparisons |
+| Lab 1.2.2: Preprocessing | ~200 MB | Dataset loading + transformations |
+| Lab 1.2.3: Visualization | ~300 MB | Multiple figures + datasets in memory |
+| Lab 1.2.4: Einsum | ~400 MB | Batch attention matrix operations |
+| Lab 1.2.5: Profiling | ~500 MB | Memory profiling may require additional overhead |
+
+**Total recommended:** 2 GB RAM minimum for comfortable execution.
+
+> **Note:** Memory estimates are approximate. Actual usage depends on dataset sizes and batch configurations. Run cleanup cells between labs to free memory.
 
 ---
 

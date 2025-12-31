@@ -5,7 +5,7 @@ Visualization Utilities for Machine Learning
 Production-ready visualization functions for ML model analysis.
 Designed for publication-quality figures with consistent styling.
 
-This module is part of the DGX Spark AI Curriculum - Module 2.
+This module is part of the DGX Spark AI Curriculum - Module 1.2: Python for AI/ML.
 
 Features:
 - Training curve plots with automatic overfitting detection

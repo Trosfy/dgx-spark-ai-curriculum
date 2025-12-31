@@ -312,7 +312,7 @@ def relu(x: np.ndarray) -> np.ndarray:
     return np.maximum(0, x)
 
 
-def gelu(x: np.ndarray, approximate: bool = False) -> np.ndarray:
+def gelu(x: np.ndarray, approximate: bool = True) -> np.ndarray:
     """
     Gaussian Error Linear Unit activation.
 
@@ -320,17 +320,28 @@ def gelu(x: np.ndarray, approximate: bool = False) -> np.ndarray:
 
     Args:
         x: Input array
-        approximate: If True, use faster approximation
+        approximate: If True (default), use faster tanh approximation.
+                    If False, requires scipy for exact computation.
 
     Returns:
         GELU-activated values
+
+    Note:
+        The exact computation (approximate=False) requires scipy.
+        Install with: pip install scipy
     """
     if approximate:
-        # tanh approximation (faster)
+        # tanh approximation (faster, no scipy required)
         return 0.5 * x * (1 + np.tanh(np.sqrt(2 / np.pi) * (x + 0.044715 * x**3)))
     else:
         # Exact computation using error function
-        from scipy.special import erf
+        try:
+            from scipy.special import erf
+        except ImportError:
+            raise ImportError(
+                "scipy is required for exact GELU computation. "
+                "Install with: pip install scipy, or use approximate=True"
+            )
         return 0.5 * x * (1 + erf(x / np.sqrt(2)))
 
 
