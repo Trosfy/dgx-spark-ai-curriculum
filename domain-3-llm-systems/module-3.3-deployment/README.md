@@ -323,6 +323,21 @@ After completing this module:
 
 ---
 
+## 📖 Study Materials
+
+| Document | Purpose |
+|----------|---------|
+| [QUICKSTART.md](./QUICKSTART.md) | Deploy with vLLM in 5 minutes |
+| [ELI5.md](./ELI5.md) | Inference engines, batching, speculative decoding explained |
+| [PREREQUISITES.md](./PREREQUISITES.md) | Self-check before starting |
+| [STUDY_GUIDE.md](./STUDY_GUIDE.md) | Learning objectives and lab roadmap |
+| [QUICK_REFERENCE.md](./QUICK_REFERENCE.md) | Engine commands and patterns |
+| [LAB_PREP.md](./LAB_PREP.md) | Environment setup and port mapping |
+| [TROUBLESHOOTING.md](./TROUBLESHOOTING.md) | vLLM, SGLang, TensorRT errors |
+| [FAQ.md](./FAQ.md) | Frequently asked questions |
+
+---
+
 ## Resources
 
 - [vLLM Documentation](https://docs.vllm.ai/)

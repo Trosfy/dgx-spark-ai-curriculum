@@ -573,6 +573,21 @@ After completing this module:
 
 ---
 
+## 📖 Study Materials
+
+| Document | Purpose |
+|----------|---------|
+| [QUICKSTART.md](./QUICKSTART.md) | Add LoRA to a model in 5 minutes |
+| [ELI5.md](./ELI5.md) | Jargon-free explanations of LoRA, QLoRA, DPO |
+| [PREREQUISITES.md](./PREREQUISITES.md) | Self-check before starting |
+| [STUDY_GUIDE.md](./STUDY_GUIDE.md) | Learning objectives and module roadmap |
+| [QUICK_REFERENCE.md](./QUICK_REFERENCE.md) | Commands, configs, and code patterns |
+| [LAB_PREP.md](./LAB_PREP.md) | Environment setup and model downloads |
+| [TROUBLESHOOTING.md](./TROUBLESHOOTING.md) | Common errors and fixes (OOM, training issues) |
+| [FAQ.md](./FAQ.md) | Frequently asked questions |
+
+---
+
 ## Resources
 
 - [LoRA Paper](https://arxiv.org/abs/2106.09685)

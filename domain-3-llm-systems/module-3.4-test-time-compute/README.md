@@ -421,6 +421,21 @@ After completing this module:
 
 ---
 
+## 📖 Study Materials
+
+| Document | Purpose |
+|----------|---------|
+| [QUICKSTART.md](./QUICKSTART.md) | Chain-of-Thought in 5 minutes |
+| [ELI5.md](./ELI5.md) | Test-time compute, CoT, reasoning models explained |
+| [PREREQUISITES.md](./PREREQUISITES.md) | Self-check before starting |
+| [STUDY_GUIDE.md](./STUDY_GUIDE.md) | Learning objectives and lab roadmap |
+| [QUICK_REFERENCE.md](./QUICK_REFERENCE.md) | Prompting patterns and code snippets |
+| [LAB_PREP.md](./LAB_PREP.md) | Ollama setup and R1 model downloads |
+| [TROUBLESHOOTING.md](./TROUBLESHOOTING.md) | Reasoning model errors and fixes |
+| [FAQ.md](./FAQ.md) | Frequently asked questions |
+
+---
+
 ## Resources
 
 - [DeepSeek-R1 Paper](https://arxiv.org/abs/2401.02954) - GRPO and reasoning training

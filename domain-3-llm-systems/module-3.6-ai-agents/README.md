@@ -385,6 +385,21 @@ After completing this module:
 
 ---
 
+## Study Materials
+
+| Document | Purpose | Time |
+|----------|---------|------|
+| [QUICKSTART.md](./QUICKSTART.md) | 5-minute working agent demo | 5 min |
+| [ELI5.md](./ELI5.md) | Plain-language concept explanations | 15 min |
+| [PREREQUISITES.md](./PREREQUISITES.md) | Skills check before starting | 10 min |
+| [STUDY_GUIDE.md](./STUDY_GUIDE.md) | Learning path and objectives | 10 min |
+| [QUICK_REFERENCE.md](./QUICK_REFERENCE.md) | Commands, patterns, and values | Reference |
+| [LAB_PREP.md](./LAB_PREP.md) | Environment setup checklist | 10 min |
+| [TROUBLESHOOTING.md](./TROUBLESHOOTING.md) | Common errors and solutions | Reference |
+| [FAQ.md](./FAQ.md) | Frequently asked questions | Reference |
+
+---
+
 ## Resources
 
 - [LangChain Documentation](https://python.langchain.com/)
