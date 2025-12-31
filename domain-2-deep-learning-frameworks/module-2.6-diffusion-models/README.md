@@ -130,11 +130,11 @@ Complete pipeline development:
 from diffusers import StableDiffusionXLPipeline
 import torch
 
-# Load SDXL on DGX Spark
+# Load SDXL on DGX Spark's 128GB unified memory
 pipe = StableDiffusionXLPipeline.from_pretrained(
     "stabilityai/stable-diffusion-xl-base-1.0",
     torch_dtype=torch.bfloat16,  # Native Blackwell support
-    variant="fp16",
+    variant="fp16",  # Downloads FP16 weights (smaller), cast to bfloat16
 )
 pipe = pipe.to("cuda")
 
