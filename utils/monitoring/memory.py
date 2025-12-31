@@ -7,15 +7,16 @@ unified memory architecture with 128GB shared between GPU and CPU.
 
 import gc
 import subprocess
-import time
 import threading
-from typing import Optional, Callable, Tuple
+import time
 from contextlib import contextmanager
 from dataclasses import dataclass
 from functools import wraps
+from typing import Callable, Optional, Tuple
 
 try:
     import torch
+
     HAS_TORCH = True
 except ImportError:
     HAS_TORCH = False
@@ -35,6 +36,7 @@ class MemorySnapshot:
         system_available_gb: Available system RAM
         system_buffers_gb: System buffer/cache memory
     """
+
     timestamp: float
     gpu_allocated_gb: float
     gpu_reserved_gb: float
@@ -69,8 +71,7 @@ def get_memory_snapshot() -> MemorySnapshot:
     # System memory via /proc/meminfo or free command
     try:
         mem_result = subprocess.run(
-            ["free", "-b"],
-            capture_output=True, text=True, timeout=5
+            ["free", "-b"], capture_output=True, text=True, timeout=5
         )
         mem_lines = mem_result.stdout.split("\n")
         mem_parts = mem_lines[1].split()
@@ -88,7 +89,7 @@ def get_memory_snapshot() -> MemorySnapshot:
         gpu_free_gb=gpu_free,
         system_total_gb=system_total,
         system_available_gb=system_available,
-        system_buffers_gb=system_buffers
+        system_buffers_gb=system_buffers,
     )
 
 
@@ -133,7 +134,9 @@ def clear_all_memory(clear_buffer_cache: bool = False) -> None:
         try:
             subprocess.run(
                 ["sudo", "sh", "-c", "sync; echo 3 > /proc/sys/vm/drop_caches"],
-                check=True, capture_output=True, timeout=30
+                check=True,
+                capture_output=True,
+                timeout=30,
             )
         except (subprocess.CalledProcessError, subprocess.TimeoutExpired):
             print("Warning: Could not clear buffer cache (needs sudo)")
@@ -194,10 +197,12 @@ def memory_tracker(func: Callable) -> Callable:
         def load_model():
             ...
     """
+
     @wraps(func)
     def wrapper(*args, **kwargs):
         with memory_tracked(func.__name__):
             return func(*args, **kwargs)
+
     return wrapper
 
 
@@ -277,7 +282,7 @@ def estimate_model_memory(
     num_params_billions: float,
     dtype: str = "bf16",
     include_optimizer: bool = False,
-    include_gradients: bool = False
+    include_gradients: bool = False,
 ) -> float:
     """
     Estimate memory required for a model on DGX Spark.
@@ -323,7 +328,7 @@ def can_fit_model(
     num_params_billions: float,
     dtype: str = "bf16",
     training: bool = False,
-    safety_margin_gb: float = 10.0
+    safety_margin_gb: float = 10.0,
 ) -> Tuple[bool, str]:
     """
     Check if a model can fit in DGX Spark memory.
@@ -343,7 +348,7 @@ def can_fit_model(
         num_params_billions,
         dtype,
         include_optimizer=training,
-        include_gradients=training
+        include_gradients=training,
     )
 
     can_fit = required <= available_gb
@@ -357,9 +362,10 @@ def can_fit_model(
         # Suggest alternatives
         if dtype.lower() in ["fp32", "bf16", "fp16"]:
             int4_required = estimate_model_memory(
-                num_params_billions, "int4",
+                num_params_billions,
+                "int4",
                 include_optimizer=training,
-                include_gradients=training
+                include_gradients=training,
             )
             explanation += f"\n  → Try int4 quantization: {int4_required:.1f}GB"
 

@@ -5,14 +5,15 @@ Specialized benchmarking for PyTorch operations on DGX Spark,
 including precision comparison and operation timing.
 """
 
-import time
 import gc
-from typing import Dict, List, Optional, Callable, Any
+import time
 from dataclasses import dataclass, field
+from typing import Any, Callable, Dict, List, Optional
 
 try:
     import torch
     import torch.nn as nn
+
     HAS_TORCH = True
 except ImportError:
     HAS_TORCH = False
@@ -35,6 +36,7 @@ class PyTorchBenchmarkResult:
         throughput: Operations per second (if applicable)
         metadata: Additional operation-specific data
     """
+
     operation: str
     dtype: str
     input_shape: tuple
@@ -76,11 +78,7 @@ class PyTorchBenchmark:
             if self.device == "cuda":
                 torch.cuda.synchronize()
 
-    def _time_operation(
-        self,
-        fn: Callable,
-        runs: int = 10
-    ) -> tuple:
+    def _time_operation(self, fn: Callable, runs: int = 10) -> tuple:
         """Time an operation over multiple runs."""
         times = []
 
@@ -97,6 +95,7 @@ class PyTorchBenchmark:
             times.append((time.perf_counter() - start) * 1000)  # ms
 
         import statistics
+
         return statistics.mean(times), statistics.stdev(times) if len(times) > 1 else 0
 
     def benchmark_matmul(
@@ -104,7 +103,7 @@ class PyTorchBenchmark:
         shape: tuple = (4096, 4096),
         dtype: Any = None,
         runs: int = 10,
-        warmup: int = 3
+        warmup: int = 3,
     ) -> PyTorchBenchmarkResult:
         """
         Benchmark matrix multiplication.
@@ -164,7 +163,7 @@ class PyTorchBenchmark:
             std_ms=std_time,
             memory_mb=memory_mb,
             throughput=tflops,
-            metadata={"tflops": tflops}
+            metadata={"tflops": tflops},
         )
 
     def benchmark_attention(
@@ -175,7 +174,7 @@ class PyTorchBenchmark:
         head_dim: int = 64,
         dtype: Any = None,
         runs: int = 10,
-        warmup: int = 3
+        warmup: int = 3,
     ) -> PyTorchBenchmarkResult:
         """
         Benchmark scaled dot-product attention.
@@ -194,12 +193,20 @@ class PyTorchBenchmark:
 
         dtype = dtype or torch.float32
 
-        q = torch.randn(batch_size, num_heads, seq_len, head_dim, dtype=dtype, device=self.device)
-        k = torch.randn(batch_size, num_heads, seq_len, head_dim, dtype=dtype, device=self.device)
-        v = torch.randn(batch_size, num_heads, seq_len, head_dim, dtype=dtype, device=self.device)
+        q = torch.randn(
+            batch_size, num_heads, seq_len, head_dim, dtype=dtype, device=self.device
+        )
+        k = torch.randn(
+            batch_size, num_heads, seq_len, head_dim, dtype=dtype, device=self.device
+        )
+        v = torch.randn(
+            batch_size, num_heads, seq_len, head_dim, dtype=dtype, device=self.device
+        )
 
         def fn():
-            return torch.nn.functional.scaled_dot_product_attention(q, k, v)  # noqa: F821
+            return torch.nn.functional.scaled_dot_product_attention(
+                q, k, v  # noqa: F821
+            )
 
         self._warmup(fn, warmup)
         avg_time, std_time = self._time_operation(fn, runs)
@@ -217,7 +224,7 @@ class PyTorchBenchmark:
             input_shape=(batch_size, num_heads, seq_len, head_dim),
             time_ms=avg_time,
             std_ms=std_time,
-            metadata={"batch_size": batch_size, "seq_len": seq_len}
+            metadata={"batch_size": batch_size, "seq_len": seq_len},
         )
 
     def benchmark_conv2d(
@@ -229,7 +236,7 @@ class PyTorchBenchmark:
         kernel_size: int = 3,
         dtype: Any = None,
         runs: int = 10,
-        warmup: int = 3
+        warmup: int = 3,
     ) -> PyTorchBenchmarkResult:
         """Benchmark 2D convolution."""
         if not HAS_TORCH:
@@ -237,8 +244,14 @@ class PyTorchBenchmark:
 
         dtype = dtype or torch.float32
 
-        x = torch.randn(batch_size, in_channels, size, size, dtype=dtype, device=self.device)
-        conv = nn.Conv2d(in_channels, out_channels, kernel_size, padding=1).to(self.device).to(dtype)
+        x = torch.randn(
+            batch_size, in_channels, size, size, dtype=dtype, device=self.device
+        )
+        conv = (
+            nn.Conv2d(in_channels, out_channels, kernel_size, padding=1)
+            .to(self.device)
+            .to(dtype)
+        )
 
         def fn():
             return conv(x)  # noqa: F821 - closure captures conv, x
@@ -259,14 +272,12 @@ class PyTorchBenchmark:
             input_shape=(batch_size, in_channels, size, size),
             time_ms=avg_time,
             std_ms=std_time,
-            metadata={"kernel_size": kernel_size, "out_channels": out_channels}
+            metadata={"kernel_size": kernel_size, "out_channels": out_channels},
         )
 
 
 def benchmark_operation(
-    operation: str,
-    dtype: Any = None,
-    **kwargs
+    operation: str, dtype: Any = None, **kwargs
 ) -> PyTorchBenchmarkResult:
     """
     Convenience function to benchmark a specific operation.
@@ -292,9 +303,7 @@ def benchmark_operation(
 
 
 def compare_precisions(
-    operation: str = "matmul",
-    dtypes: Optional[List] = None,
-    **kwargs
+    operation: str = "matmul", dtypes: Optional[List] = None, **kwargs
 ) -> Dict[str, PyTorchBenchmarkResult]:
     """
     Compare operation performance across different precisions.

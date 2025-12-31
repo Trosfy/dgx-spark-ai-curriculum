@@ -4,16 +4,17 @@ Base Benchmark Classes and Utilities
 Provides common infrastructure for all benchmark types in the curriculum.
 """
 
-import time
-import subprocess
 import statistics
+import subprocess
+import time
 from abc import ABC, abstractmethod
-from dataclasses import dataclass, field, asdict
-from typing import List, Dict, Any, Optional
+from dataclasses import asdict, dataclass, field
 from datetime import datetime
+from typing import Any, Dict, List, Optional
 
 try:
     import torch
+
     HAS_TORCH = True
 except ImportError:
     HAS_TORCH = False
@@ -43,6 +44,7 @@ class BenchmarkResult:
         error: Error message if benchmark failed
         metadata: Additional benchmark-specific data
     """
+
     model: str
     backend: str = "unknown"
     quantization: str = "unknown"
@@ -81,6 +83,7 @@ class BenchmarkSummary:
 
     Aggregates results from multiple runs to provide statistical measures.
     """
+
     model: str
     backend: str
     quantization: str
@@ -111,12 +114,16 @@ class BenchmarkSummary:
             quantization=results[0].quantization,
             runs=len(results),
             avg_prefill_tps=statistics.mean(prefill_values) if prefill_values else 0,
-            std_prefill_tps=statistics.stdev(prefill_values) if len(prefill_values) > 1 else 0,
+            std_prefill_tps=(
+                statistics.stdev(prefill_values) if len(prefill_values) > 1 else 0
+            ),
             avg_decode_tps=statistics.mean(decode_values) if decode_values else 0,
-            std_decode_tps=statistics.stdev(decode_values) if len(decode_values) > 1 else 0,
+            std_decode_tps=(
+                statistics.stdev(decode_values) if len(decode_values) > 1 else 0
+            ),
             avg_memory_gb=statistics.mean(memory_values) if memory_values else 0,
             avg_total_time_s=statistics.mean(time_values) if time_values else 0,
-            results=results
+            results=results,
         )
 
     def to_dict(self) -> Dict[str, Any]:
@@ -162,11 +169,7 @@ class BaseBenchmark(ABC):
         pass
 
     def benchmark(
-        self,
-        *args,
-        runs: int = 5,
-        warmup_runs: int = 1,
-        **kwargs
+        self, *args, runs: int = 5, warmup_runs: int = 1, **kwargs
     ) -> BenchmarkSummary:
         """
         Run multiple benchmark iterations and return summary.
@@ -193,8 +196,7 @@ class BaseBenchmark(ABC):
                 print(f"  Run {i+1}/{runs}: {result}")
             except Exception as e:
                 error_result = BenchmarkResult(
-                    model=kwargs.get("model", "unknown"),
-                    error=str(e)
+                    model=kwargs.get("model", "unknown"), error=str(e)
                 )
                 results.append(error_result)
 
@@ -210,7 +212,9 @@ def get_gpu_memory_gb() -> float:
     try:
         result = subprocess.run(
             ["nvidia-smi", "--query-gpu=memory.used", "--format=csv,noheader,nounits"],
-            capture_output=True, text=True, timeout=5
+            capture_output=True,
+            text=True,
+            timeout=5,
         )
         return float(result.stdout.strip()) / 1024
     except Exception:
@@ -218,8 +222,7 @@ def get_gpu_memory_gb() -> float:
 
 
 def format_results_table(
-    results: List[BenchmarkSummary],
-    title: str = "Benchmark Results"
+    results: List[BenchmarkSummary], title: str = "Benchmark Results"
 ) -> str:
     """
     Format benchmark results as a markdown table.

@@ -120,7 +120,7 @@ jobs:
     
     - name: Check imports with isort
       run: |
-        isort --check-only --diff utils/ || echo "Consider running: isort utils/"
+        isort --check-only --diff --profile black utils/ || echo "Consider running: isort --profile black utils/"
 
   check-links:
     runs-on: ubuntu-latest
