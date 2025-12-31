@@ -5,27 +5,27 @@ Specialized benchmarking for Large Language Model inference on DGX Spark.
 Supports Ollama and llama.cpp backends.
 """
 
-import time
 import json
-import subprocess
 import statistics
+import subprocess
+import time
 from pathlib import Path
-from typing import List, Optional, Dict, Any
+from typing import Any, Dict, List, Optional
 
 try:
     import requests
+
     HAS_REQUESTS = True
 except ImportError:
     HAS_REQUESTS = False
 
 from .base import (
+    BaseBenchmark,
     BenchmarkResult,
     BenchmarkSummary,
-    BaseBenchmark,
-    get_gpu_memory_gb,
     format_results_table,
+    get_gpu_memory_gb,
 )
-
 
 # Standard prompts for benchmarking
 DEFAULT_PROMPTS = {
@@ -89,17 +89,13 @@ class OllamaBenchmark(BaseBenchmark):
             requests.post(
                 f"{self.base_url}/api/generate",
                 json={"model": model, "prompt": prompt, "stream": False},
-                timeout=60
+                timeout=60,
             )
         except Exception:
             pass
 
     def benchmark_single(
-        self,
-        model: str,
-        prompt: str,
-        max_tokens: int = 128,
-        **kwargs
+        self, model: str, prompt: str, max_tokens: int = 128, **kwargs
     ) -> BenchmarkResult:
         """Run a single benchmark iteration."""
         if not HAS_REQUESTS:
@@ -114,9 +110,9 @@ class OllamaBenchmark(BaseBenchmark):
                     "model": model,
                     "prompt": prompt,
                     "stream": False,
-                    "options": {"num_predict": max_tokens}
+                    "options": {"num_predict": max_tokens},
                 },
-                timeout=300
+                timeout=300,
             )
             response.raise_for_status()
         except Exception as e:
@@ -151,7 +147,7 @@ class OllamaBenchmark(BaseBenchmark):
             total_time_s=total_time,
             prefill_tps=prefill_tps,
             decode_tps=decode_tps,
-            memory_gb=get_gpu_memory_gb()
+            memory_gb=get_gpu_memory_gb(),
         )
 
     def _detect_quantization(self, model: str) -> str:
@@ -187,32 +183,28 @@ class LlamaCppBenchmark(BaseBenchmark):
         return self.bench_path.exists()
 
     def benchmark_single(
-        self,
-        model_path: str,
-        prompt_tokens: int = 512,
-        gen_tokens: int = 128,
-        **kwargs
+        self, model_path: str, prompt_tokens: int = 512, gen_tokens: int = 128, **kwargs
     ) -> BenchmarkResult:
         """Run a single benchmark using llama-bench."""
         if not self.is_available():
-            return BenchmarkResult(
-                model=model_path,
-                error="llama-bench not found"
-            )
+            return BenchmarkResult(model=model_path, error="llama-bench not found")
 
         cmd = [
             str(self.bench_path),
-            "-m", model_path,
-            "-p", str(prompt_tokens),
-            "-n", str(gen_tokens),
-            "-r", "1",
-            "-o", "json"
+            "-m",
+            model_path,
+            "-p",
+            str(prompt_tokens),
+            "-n",
+            str(gen_tokens),
+            "-r",
+            "1",
+            "-o",
+            "json",
         ]
 
         try:
-            result = subprocess.run(
-                cmd, capture_output=True, text=True, timeout=300
-            )
+            result = subprocess.run(cmd, capture_output=True, text=True, timeout=300)
         except Exception as e:
             return BenchmarkResult(model=model_path, error=str(e))
 
@@ -244,13 +236,24 @@ class LlamaCppBenchmark(BaseBenchmark):
             total_time_s=0,
             prefill_tps=prefill_tps,
             decode_tps=decode_tps,
-            memory_gb=get_gpu_memory_gb()
+            memory_gb=get_gpu_memory_gb(),
         )
 
     def _detect_quantization(self, model_path: str) -> str:
         """Detect quantization from filename."""
         path_lower = model_path.lower()
-        for quant in ["q2_k", "q3_k", "q4_0", "q4_k", "q5_0", "q5_k", "q6_k", "q8_0", "f16", "f32"]:
+        for quant in [
+            "q2_k",
+            "q3_k",
+            "q4_0",
+            "q4_k",
+            "q5_0",
+            "q5_k",
+            "q6_k",
+            "q8_0",
+            "f16",
+            "f32",
+        ]:
             if quant in path_lower:
                 return quant.upper()
         return "unknown"
@@ -286,7 +289,7 @@ class BenchmarkSuite:
         models: List[str],
         prompt: str = DEFAULT_PROMPTS["medium"],
         max_tokens: int = 128,
-        runs: int = 5
+        runs: int = 5,
     ) -> List[BenchmarkSummary]:
         """Run benchmarks on multiple Ollama models."""
         if not self.ollama.is_available():
@@ -298,10 +301,7 @@ class BenchmarkSuite:
             print(f"\nBenchmarking {model}...")
             try:
                 summary = self.ollama.benchmark(
-                    model=model,
-                    prompt=prompt,
-                    max_tokens=max_tokens,
-                    runs=runs
+                    model=model, prompt=prompt, max_tokens=max_tokens, runs=runs
                 )
                 results.append(summary)
                 self.results.append(summary)
@@ -318,15 +318,13 @@ class BenchmarkSuite:
     def save_results(self, filepath: str = "benchmark_results.json"):
         """Save results to JSON file."""
         import json
+
         output = [summary.to_dict() for summary in self.results]
         with open(filepath, "w") as f:
             json.dump(output, f, indent=2)
         print(f"Results saved to {filepath}")
 
-    def compare_with_baseline(
-        self,
-        results: Optional[List[BenchmarkSummary]] = None
-    ):
+    def compare_with_baseline(self, results: Optional[List[BenchmarkSummary]] = None):
         """Compare results with NVIDIA published baselines."""
         results = results or self.results
 
@@ -340,13 +338,19 @@ class BenchmarkSuite:
                 prefill_ratio = r.avg_prefill_tps / baseline["prefill"] * 100
                 decode_ratio = r.avg_decode_tps / baseline["decode"] * 100
                 print(f"{r.model}:")
-                print(f"  Prefill: {r.avg_prefill_tps:.1f} tok/s ({prefill_ratio:.0f}% of baseline)")
-                print(f"  Decode:  {r.avg_decode_tps:.1f} tok/s ({decode_ratio:.0f}% of baseline)")
+                print(
+                    f"  Prefill: {r.avg_prefill_tps:.1f} tok/s ({prefill_ratio:.0f}% of baseline)"
+                )
+                print(
+                    f"  Decode:  {r.avg_decode_tps:.1f} tok/s ({decode_ratio:.0f}% of baseline)"
+                )
             else:
                 print(f"{r.model}: No baseline available")
 
 
-def quick_benchmark(model: str = "llama3.1:8b", runs: int = 3) -> Optional[BenchmarkSummary]:
+def quick_benchmark(
+    model: str = "llama3.1:8b", runs: int = 3
+) -> Optional[BenchmarkSummary]:
     """
     Quick benchmark for a single Ollama model.
 
@@ -365,15 +369,16 @@ def quick_benchmark(model: str = "llama3.1:8b", runs: int = 3) -> Optional[Bench
 
     print(f"Benchmarking {model} ({runs} runs)...")
     summary = benchmark.benchmark(
-        model=model,
-        prompt=DEFAULT_PROMPTS["medium"],
-        max_tokens=128,
-        runs=runs
+        model=model, prompt=DEFAULT_PROMPTS["medium"], max_tokens=128, runs=runs
     )
 
     print(f"\nResults:")
-    print(f"  Prefill: {summary.avg_prefill_tps:.1f} ± {summary.std_prefill_tps:.1f} tok/s")
-    print(f"  Decode:  {summary.avg_decode_tps:.1f} ± {summary.std_decode_tps:.1f} tok/s")
+    print(
+        f"  Prefill: {summary.avg_prefill_tps:.1f} ± {summary.std_prefill_tps:.1f} tok/s"
+    )
+    print(
+        f"  Decode:  {summary.avg_decode_tps:.1f} ± {summary.std_decode_tps:.1f} tok/s"
+    )
     print(f"  Memory:  {summary.avg_memory_gb:.1f} GB")
 
     return summary

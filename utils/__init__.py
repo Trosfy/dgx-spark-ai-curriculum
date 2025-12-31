@@ -31,44 +31,44 @@ Usage:
     from utils.monitoring import RealtimeMonitor
 """
 
+# Benchmark utilities (re-exported from benchmarks)
+from .benchmark_utils import (
+    BenchmarkResult,
+    BenchmarkSuite,
+    BenchmarkSummary,
+    LlamaCppBenchmark,
+    OllamaBenchmark,
+    PyTorchBenchmark,
+    compare_precisions,
+    get_gpu_memory_gb,
+    quick_benchmark,
+)
+
 # Core system utilities
 from .dgx_spark_utils import (
-    get_system_info,
-    print_system_info,
+    SystemInfo,
+    check_ngc_container,
     clear_buffer_cache,
     clear_gpu_memory,
     get_gpu_memory_usage,
-    check_ngc_container,
-    verify_environment,
+    get_system_info,
     optimal_batch_size,
+    print_system_info,
     recommended_quantization,
-    SystemInfo,
+    verify_environment,
 )
 
 # Memory utilities (re-exported from monitoring)
 from .memory_utils import (
-    get_memory_snapshot,
-    print_memory_status,
-    clear_all_memory,
-    memory_tracked,
-    memory_tracker,
     MemoryMonitor,
     MemorySnapshot,
-    estimate_model_memory,
     can_fit_model,
-)
-
-# Benchmark utilities (re-exported from benchmarks)
-from .benchmark_utils import (
-    BenchmarkResult,
-    BenchmarkSummary,
-    OllamaBenchmark,
-    LlamaCppBenchmark,
-    BenchmarkSuite,
-    quick_benchmark,
-    get_gpu_memory_gb,
-    PyTorchBenchmark,
-    compare_precisions,
+    clear_all_memory,
+    estimate_model_memory,
+    get_memory_snapshot,
+    memory_tracked,
+    memory_tracker,
+    print_memory_status,
 )
 
 __version__ = "0.2.0"
@@ -85,7 +85,6 @@ __all__ = [
     "optimal_batch_size",
     "recommended_quantization",
     "SystemInfo",
-
     # memory_utils
     "get_memory_snapshot",
     "print_memory_status",
@@ -96,7 +95,6 @@ __all__ = [
     "MemorySnapshot",
     "estimate_model_memory",
     "can_fit_model",
-
     # benchmark_utils
     "BenchmarkResult",
     "BenchmarkSummary",

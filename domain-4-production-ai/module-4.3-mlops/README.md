@@ -37,7 +37,7 @@ By the end of this module, you will be able to:
 
 ## Topics
 
-### 4.3.1 Experiment Tracking [P0]
+### 4.3.1 Experiment Tracking
 
 - **MLflow Setup**
   - Tracking server configuration
@@ -64,7 +64,7 @@ By the end of this module, you will be able to:
   - LLM-as-judge evaluation
   - Human evaluation protocols
 
-### 4.3.3 Model Monitoring [P1]
+### 4.3.3 Model Monitoring
 
 - **Drift Detection**
   - Concept drift
@@ -98,11 +98,11 @@ By the end of this module, you will be able to:
 
 | # | Task | Time | Deliverable |
 |---|------|------|-------------|
-| 4.3.1 | MLflow Setup [P0] | 2h | Tracking server with fine-tuning logs |
-| 4.3.2 | W&B Integration [P1] | 2h | Training dashboards and sweeps |
+| 4.3.1 | MLflow Setup | 2h | Tracking server with fine-tuning logs |
+| 4.3.2 | W&B Integration | 2h | Training dashboards and sweeps |
 | 4.3.3 | Benchmark Suite | 2h | lm-eval on multiple models |
 | 4.3.4 | Custom Evaluation | 2h | Task-specific + LLM-as-judge |
-| 4.3.5 | Drift Detection [P1] | 2h | Evidently AI monitoring setup |
+| 4.3.5 | Drift Detection | 2h | Evidently AI monitoring setup |
 | 4.3.6 | Model Registry | 2h | Version control workflow |
 | 4.3.7 | Reproducibility Audit | 2h | Verify training reproducibility |
 

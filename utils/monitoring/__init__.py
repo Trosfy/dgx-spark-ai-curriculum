@@ -23,17 +23,16 @@ Usage:
 """
 
 from .memory import (
+    MemoryMonitor,
     MemorySnapshot,
-    get_memory_snapshot,
-    print_memory_status,
+    can_fit_model,
     clear_all_memory,
+    estimate_model_memory,
+    get_memory_snapshot,
     memory_tracked,
     memory_tracker,
-    MemoryMonitor,
-    estimate_model_memory,
-    can_fit_model,
+    print_memory_status,
 )
-
 from .realtime import (
     Colors,
     RealtimeMonitor,

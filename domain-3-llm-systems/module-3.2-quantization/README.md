@@ -11,7 +11,7 @@
 
 Quantization is the key to running large models efficiently. This module covers all major quantization techniques, with special focus on Blackwell's exclusive NVFP4 and native FP8 capabilities—a unique advantage of the DGX Spark platform.
 
-**What's New in v2.0:** Deep dive into NVFP4 (3.5× memory reduction), FP8 training, and TensorRT-LLM engine building. This is where DGX Spark's Blackwell architecture truly shines!
+Deep dive into NVFP4 (3.5× memory reduction), FP8 training, and TensorRT-LLM engine building. This is where DGX Spark's Blackwell architecture truly shines!
 
 ---
 
@@ -209,7 +209,7 @@ results = evaluator.simple_evaluate(
 print(f"Perplexity: {results['results']['wikitext']['word_perplexity']}")
 ```
 
-### FP8 Training [P0]
+### FP8 Training
 
 ```python
 import torch
@@ -245,7 +245,7 @@ with fp8_autocast():
 
 - [ ] Data type precision visualization complete
 - [ ] **NVFP4 quantization of 70B model** ⭐ (DGX Spark showcase!)
-- [ ] FP8 training and inference demonstrated [P0]
+- [ ] FP8 training and inference demonstrated
 - [ ] GPTQ with multiple group sizes
 - [ ] AWQ vs GPTQ comparison
 - [ ] GGUF conversion and llama.cpp testing

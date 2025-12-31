@@ -17,16 +17,16 @@ For new code, prefer importing from utils.monitoring directly.
 
 # Re-export everything from the consolidated monitoring package
 from .monitoring.memory import (
+    DGX_SPARK_TOTAL_MEMORY_GB,
+    MemoryMonitor,
     MemorySnapshot,
-    get_memory_snapshot,
-    print_memory_status,
+    can_fit_model,
     clear_all_memory,
+    estimate_model_memory,
+    get_memory_snapshot,
     memory_tracked,
     memory_tracker,
-    MemoryMonitor,
-    estimate_model_memory,
-    can_fit_model,
-    DGX_SPARK_TOTAL_MEMORY_GB,
+    print_memory_status,
 )
 
 __all__ = [

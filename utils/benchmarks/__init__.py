@@ -22,26 +22,23 @@ Usage:
 """
 
 from .base import (
+    BaseBenchmark,
     BenchmarkResult,
     BenchmarkSummary,
-    BaseBenchmark,
-    get_gpu_memory_gb,
     format_results_table,
+    get_gpu_memory_gb,
 )
-
 from .llm import (
-    OllamaBenchmark,
-    LlamaCppBenchmark,
     BenchmarkSuite,
+    LlamaCppBenchmark,
+    OllamaBenchmark,
     quick_benchmark,
 )
-
 from .pytorch import (
     PyTorchBenchmark,
     benchmark_operation,
     compare_precisions,
 )
-
 from .quantization import (
     QuantizationBenchmarkResult,
     benchmark_quantized_model,

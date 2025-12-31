@@ -11,7 +11,7 @@
 
 Choose the right inference engine for your use case. This module covers all major options—from simple Ollama to high-performance TensorRT-LLM—with special focus on SGLang's RadixAttention and speculative decoding techniques that can achieve 2-3x speedups.
 
-**What's New in v2.0:** Deep dive into SGLang (29-45% faster than vLLM), Medusa heads, and EAGLE-3 speculative decoding for interactive speedups.
+Deep dive into SGLang (29-45% faster than vLLM), Medusa heads, and EAGLE-3 speculative decoding for interactive speedups.
 
 ---
 
@@ -114,10 +114,10 @@ By the end of this module, you will be able to:
 | # | Task | Time | Deliverable |
 |---|------|------|-------------|
 | 3.3.1 | Engine Benchmark | 3h | Comprehensive comparison report |
-| 3.3.2 | SGLang Deployment [P1] | 2h | RadixAttention with shared prefixes |
+| 3.3.2 | SGLang Deployment | 2h | RadixAttention with shared prefixes |
 | 3.3.3 | vLLM Continuous Batching | 2h | Throughput under load |
-| 3.3.4 | Medusa Speculative Decoding [P1] | 2h | Configure Medusa, measure speedup |
-| 3.3.5 | EAGLE-3 Implementation [P1] | 2h | Compare with Medusa |
+| 3.3.4 | Medusa Speculative Decoding | 2h | Configure Medusa, measure speedup |
+| 3.3.5 | EAGLE-3 Implementation | 2h | Compare with Medusa |
 | 3.3.6 | TensorRT-LLM Optimization | 2h | Build TRT engine, benchmark prefill |
 | 3.3.7 | Production API | 2h | FastAPI with streaming, monitoring |
 
@@ -210,7 +210,7 @@ async def chat(request: ChatRequest):
     return StreamingResponse(generate(), media_type="text/event-stream")
 ```
 
-### SGLang Deployment [P1]
+### SGLang Deployment
 
 ```python
 # Start SGLang server with RadixAttention
@@ -235,7 +235,7 @@ result = chat_with_context.run(
 )
 ```
 
-### Speculative Decoding with Medusa [P1]
+### Speculative Decoding with Medusa
 
 ```python
 # Medusa adds prediction heads to the model
@@ -279,10 +279,10 @@ model = add_medusa_heads(model, config)
 ## Milestone Checklist
 
 - [ ] Comprehensive engine benchmark report
-- [ ] SGLang deployment with RadixAttention tested [P1]
+- [ ] SGLang deployment with RadixAttention tested
 - [ ] vLLM with continuous batching working
-- [ ] Medusa speculative decoding speedup measured [P1]
-- [ ] EAGLE-3 comparison completed [P1]
+- [ ] Medusa speculative decoding speedup measured
+- [ ] EAGLE-3 comparison completed
 - [ ] TensorRT-LLM engine built and tested
 - [ ] Production FastAPI server implemented
 

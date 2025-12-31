@@ -6,45 +6,51 @@ on:
     paths:
       - '**.ipynb'
       - '**.py'
+      - '**.yml'
+      - '**.yaml'
+      - '**.md'
   pull_request:
     branches: [ main ]
     paths:
       - '**.ipynb'
       - '**.py'
+      - '**.yml'
+      - '**.yaml'
+      - '**.md'
 
 jobs:
   validate-notebooks:
     runs-on: ubuntu-latest
-    
+
     steps:
     - uses: actions/checkout@v4
-    
+
     - name: Set up Python
       uses: actions/setup-python@v5
       with:
         python-version: '3.10'
-    
+
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
         pip install nbformat nbconvert jupyter-client ipykernel
         pip install flake8 black isort
-    
+
     - name: Validate notebook JSON structure
       run: |
         python << 'EOF'
         import nbformat
         import sys
         from pathlib import Path
-        
+
         errors = []
         notebooks = list(Path('.').rglob('*.ipynb'))
-        
+
         for nb_path in notebooks:
             # Skip checkpoints
             if '.ipynb_checkpoints' in str(nb_path):
                 continue
-            
+
             try:
                 with open(nb_path, 'r', encoding='utf-8') as f:
                     nb = nbformat.read(f, as_version=4)
@@ -52,38 +58,38 @@ jobs:
             except Exception as e:
                 errors.append(f"✗ {nb_path}: {e}")
                 print(f"✗ {nb_path}: {e}")
-        
+
         if errors:
             print(f"\n{len(errors)} notebook(s) with errors")
             sys.exit(1)
         else:
             print(f"\n✓ All {len(notebooks)} notebooks valid")
         EOF
-    
+
     - name: Check for large outputs
       run: |
         python << 'EOF'
         import nbformat
         import sys
         from pathlib import Path
-        
+
         MAX_OUTPUT_SIZE = 100000  # 100KB per output
         warnings = []
-        
+
         for nb_path in Path('.').rglob('*.ipynb'):
             if '.ipynb_checkpoints' in str(nb_path):
                 continue
-            
+
             with open(nb_path, 'r', encoding='utf-8') as f:
                 nb = nbformat.read(f, as_version=4)
-            
+
             for i, cell in enumerate(nb.cells):
                 if cell.cell_type == 'code' and 'outputs' in cell:
                     for output in cell.outputs:
                         output_str = str(output)
                         if len(output_str) > MAX_OUTPUT_SIZE:
                             warnings.append(f"{nb_path}: Cell {i} has large output ({len(output_str)} bytes)")
-        
+
         if warnings:
             print("⚠ Notebooks with large outputs (consider clearing):")
             for w in warnings:
@@ -94,40 +100,40 @@ jobs:
 
   lint-python:
     runs-on: ubuntu-latest
-    
+
     steps:
     - uses: actions/checkout@v4
-    
+
     - name: Set up Python
       uses: actions/setup-python@v5
       with:
         python-version: '3.10'
-    
+
     - name: Install linters
       run: |
         pip install flake8 black isort
-    
+
     - name: Lint with flake8
       run: |
         # Stop on syntax errors or undefined names
         flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics --exclude=.git,__pycache__,.ipynb_checkpoints
         # Warnings (non-blocking)
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=100 --statistics --exclude=.git,__pycache__,.ipynb_checkpoints
-    
+
     - name: Check formatting with black
       run: |
         black --check --diff utils/ || echo "Consider running: black utils/"
-    
+
     - name: Check imports with isort
       run: |
-        isort --check-only --diff utils/ || echo "Consider running: isort utils/"
+        isort --check-only --diff --profile black utils/ || echo "Consider running: isort --profile black utils/"
 
   check-links:
     runs-on: ubuntu-latest
-    
+
     steps:
     - uses: actions/checkout@v4
-    
+
     - name: Check markdown links
       uses: gaurav-nelson/github-action-markdown-link-check@v1
       with:
@@ -137,49 +143,189 @@ jobs:
 
   validate-structure:
     runs-on: ubuntu-latest
-    
+
     steps:
     - uses: actions/checkout@v4
-    
+
     - name: Validate repository structure
       run: |
         python << 'EOF'
         from pathlib import Path
         import sys
-        
+
+        # Core directories required by curriculum
         required_dirs = [
             'docs',
             'utils',
             'templates',
+            'assets',
+            'review',
+            'optional-modules',
+            '.github',
             'domain-1-platform-foundations',
             'domain-2-deep-learning-frameworks',
             'domain-3-llm-systems',
             'domain-4-production-ai',
         ]
-        
+
+        # Core files required by curriculum
         required_files = [
             'README.md',
             'CURRICULUM.md',
             'CONTRIBUTING.md',
             'LICENSE',
             '.gitignore',
+            'requirements.txt',
         ]
-        
+
+        # Expected module structure per domain
+        expected_modules = {
+            'domain-1-platform-foundations': [
+                'module-1.1-dgx-spark-platform',
+                'module-1.2-python-for-ai',
+                'module-1.3-cuda-python',
+                'module-1.4-math-foundations',
+                'module-1.5-neural-networks',
+                'module-1.6-classical-ml',
+                'module-1.7-capstone-micrograd',
+            ],
+            'domain-2-deep-learning-frameworks': [
+                'module-2.1-pytorch',
+                'module-2.2-computer-vision',
+                'module-2.3-nlp-transformers',
+                'module-2.4-efficient-architectures',
+                'module-2.5-huggingface',
+                'module-2.6-diffusion-models',
+            ],
+            'domain-3-llm-systems': [
+                'module-3.1-llm-finetuning',
+                'module-3.2-quantization',
+                'module-3.3-deployment',
+                'module-3.4-test-time-compute',
+                'module-3.5-rag-systems',
+                'module-3.6-ai-agents',
+            ],
+            'domain-4-production-ai': [
+                'module-4.1-multimodal',
+                'module-4.2-ai-safety',
+                'module-4.3-mlops',
+                'module-4.4-containerization-deployment',
+                'module-4.5-demo-building',
+                'module-4.6-capstone-project',
+            ],
+        }
+
+        # Optional modules
+        optional_modules = [
+            'optional-a-learning-theory',
+            'optional-b-recommender-systems',
+            'optional-c-mechanistic-interpretability',
+            'optional-d-reinforcement-learning',
+            'optional-e-graph-neural-networks',
+        ]
+
         errors = []
-        
+        warnings = []
+
+        # Check required directories
         for d in required_dirs:
             if not Path(d).is_dir():
                 errors.append(f"Missing directory: {d}")
-        
+
+        # Check required files
         for f in required_files:
             if not Path(f).is_file():
                 errors.append(f"Missing file: {f}")
-        
+
+        # Check module structure per domain
+        for domain, modules in expected_modules.items():
+            domain_path = Path(domain)
+            if domain_path.is_dir():
+                for module in modules:
+                    module_path = domain_path / module
+                    if not module_path.is_dir():
+                        warnings.append(f"Missing module: {domain}/{module}")
+                    else:
+                        # Check for README in each module
+                        if not (module_path / 'README.md').is_file():
+                            warnings.append(f"Missing README: {domain}/{module}/README.md")
+
+        # Check optional modules
+        optional_path = Path('optional-modules')
+        if optional_path.is_dir():
+            for module in optional_modules:
+                if not (optional_path / module).is_dir():
+                    warnings.append(f"Missing optional module: optional-modules/{module}")
+
+        # Report results
         if errors:
-            print("❌ Structure validation failed:")
+            print("❌ Structure validation FAILED:")
             for e in errors:
-                print(f"  {e}")
+                print(f"  ERROR: {e}")
+            print()
+
+        if warnings:
+            print("⚠ Structure warnings (non-blocking):")
+            for w in warnings:
+                print(f"  WARN: {w}")
+            print()
+
+        if not errors and not warnings:
+            print("✓ Repository structure valid (all modules present)")
+        elif not errors:
+            print("✓ Core structure valid (some modules pending)")
+
+        # Only fail on errors, not warnings
+        if errors:
             sys.exit(1)
+        EOF
+
+  validate-module-structure:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Validate module contents
+      run: |
+        python << 'EOF'
+        from pathlib import Path
+        import sys
+
+        # Check that each module has expected structure
+        module_dirs = list(Path('.').glob('domain-*/module-*'))
+
+        warnings = []
+        notebook_count = 0
+
+        for module_path in module_dirs:
+            # Check for README
+            if not (module_path / 'README.md').is_file():
+                warnings.append(f"{module_path}: Missing README.md")
+
+            # Check for notebooks directory or notebooks in root
+            notebooks_dir = module_path / 'notebooks'
+            labs_dir = module_path / 'labs'
+
+            module_notebooks = list(module_path.rglob('*.ipynb'))
+            # Exclude checkpoints
+            module_notebooks = [nb for nb in module_notebooks if '.ipynb_checkpoints' not in str(nb)]
+
+            notebook_count += len(module_notebooks)
+
+            if len(module_notebooks) == 0:
+                warnings.append(f"{module_path}: No notebooks found")
+
+        # Report
+        print(f"📊 Module Statistics:")
+        print(f"   Total modules: {len(module_dirs)}")
+        print(f"   Total notebooks: {notebook_count}")
+        print()
+
+        if warnings:
+            print("⚠ Module structure warnings (non-blocking):")
+            for w in warnings:
+                print(f"  {w}")
         else:
-            print("✓ Repository structure valid")
+            print("✓ All modules have expected structure")
         EOF

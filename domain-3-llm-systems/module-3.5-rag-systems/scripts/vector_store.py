@@ -9,13 +9,16 @@ Example Usage:
     vectorstore = create_chroma_store(chunks, embedding_model)
 """
 
-from typing import List, Optional
+from typing import List, Optional, TYPE_CHECKING
 from pathlib import Path
 import shutil
 
 from langchain.schema import Document
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_community.vectorstores import Chroma
+
+if TYPE_CHECKING:
+    from langchain_community.vectorstores import FAISS
 
 
 def create_chroma_store(

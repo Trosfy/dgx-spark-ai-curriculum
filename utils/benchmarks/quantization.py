@@ -5,13 +5,14 @@ Specialized benchmarking for quantized models, measuring compression ratio,
 quality retention (perplexity), and inference speed on DGX Spark.
 """
 
-import time
 import gc
-from typing import Dict, List, Optional, Any
+import time
 from dataclasses import dataclass, field
+from typing import Any, Dict, List, Optional
 
 try:
     import torch
+
     HAS_TORCH = True
 except ImportError:
     HAS_TORCH = False
@@ -39,6 +40,7 @@ class QuantizationBenchmarkResult:
         task_scores: Dictionary of task-specific scores
         metadata: Additional metadata
     """
+
     model_name: str
     quantization_type: str
     model_size_mb: float
@@ -76,14 +78,14 @@ class QuantizationBenchmarkResult:
     def to_dict(self) -> dict:
         """Convert to dictionary for DataFrame creation."""
         result = {
-            'Model': self.model_name,
-            'Quantization': self.quantization_type,
-            'Size (MB)': self.model_size_mb,
-            'Perplexity': self.perplexity,
-            'Tokens/s': self.tokens_per_second,
-            'Prefill tok/s': self.prefill_tokens_per_second,
-            'Memory (GB)': self.memory_used_gb,
-            'Latency (ms)': self.latency_ms,
+            "Model": self.model_name,
+            "Quantization": self.quantization_type,
+            "Size (MB)": self.model_size_mb,
+            "Perplexity": self.perplexity,
+            "Tokens/s": self.tokens_per_second,
+            "Prefill tok/s": self.prefill_tokens_per_second,
+            "Memory (GB)": self.memory_used_gb,
+            "Latency (ms)": self.latency_ms,
         }
         result.update(self.task_scores)
         return result
@@ -98,7 +100,7 @@ def benchmark_quantized_model(
     num_tokens: int = 50,
     num_warmup: int = 2,
     num_runs: int = 5,
-    batch_size: int = 1
+    batch_size: int = 1,
 ) -> QuantizationBenchmarkResult:
     """
     Benchmark a quantized model's inference speed.
@@ -123,11 +125,9 @@ def benchmark_quantized_model(
     device = next(model.parameters()).device
 
     # Prepare input
-    inputs = tokenizer(
-        [prompt] * batch_size,
-        return_tensors="pt",
-        padding=True
-    ).to(device)
+    inputs = tokenizer([prompt] * batch_size, return_tensors="pt", padding=True).to(
+        device
+    )
 
     prompt_len = inputs.input_ids.shape[1]
 
@@ -138,7 +138,7 @@ def benchmark_quantized_model(
                 **inputs,
                 max_new_tokens=num_tokens,
                 do_sample=False,
-                pad_token_id=tokenizer.pad_token_id
+                pad_token_id=tokenizer.pad_token_id,
             )
 
     # Clear cache
@@ -182,6 +182,7 @@ def benchmark_quantized_model(
 
     # Calculate metrics
     import statistics
+
     avg_total = statistics.mean(total_times)
     avg_prefill = statistics.mean(prefill_times)
     avg_decode = statistics.mean(decode_times)
@@ -214,8 +215,7 @@ def benchmark_quantized_model(
 
 
 def compare_quantizations(
-    results: List[QuantizationBenchmarkResult],
-    baseline_name: str = "FP16"
+    results: List[QuantizationBenchmarkResult], baseline_name: str = "FP16"
 ) -> None:
     """
     Print comparison table for quantization benchmarks.
@@ -227,13 +227,15 @@ def compare_quantizations(
     # Find baseline
     baseline = next(
         (r for r in results if r.quantization_type.upper() == baseline_name.upper()),
-        results[0] if results else None
+        results[0] if results else None,
     )
 
     print("\n" + "=" * 90)
     print("Quantization Comparison")
     print("=" * 90)
-    print(f"{'Quantization':<15} {'Size (MB)':<12} {'Compression':<12} {'Tokens/s':<12} {'Speedup':<10} {'Memory (GB)':<12}")
+    print(
+        f"{'Quantization':<15} {'Size (MB)':<12} {'Compression':<12} {'Tokens/s':<12} {'Speedup':<10} {'Memory (GB)':<12}"
+    )
     print("-" * 90)
 
     for r in results:
