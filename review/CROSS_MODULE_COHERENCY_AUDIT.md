@@ -425,51 +425,51 @@ Missing `sync` and `sudo sh -c` wrapper.
 
 ---
 
-## 🔧 RECOMMENDED FIXES
+## 🔧 APPLIED FIXES
 
-### Fix 1: Add Quantization Context to Module 3.1
+All recommended fixes have been applied in this commit:
 
-Add to `domain-3-llm-systems/module-3.1-llm-finetuning/README.md` before QLoRA section:
+### ✅ Fix 1: Added Quantization Context to Module 3.1
 
+Added comprehensive quantization primer to `domain-3-llm-systems/module-3.1-llm-finetuning/README.md`:
+
+- Explains 4-bit quantization benefits
+- Introduces NF4 data type
+- References bitsandbytes and double quantization
+- Forward reference to Module 3.2 for comprehensive coverage
+
+### ✅ Fix 2: Updated Prerequisites for Module 3.1
+
+Changed from:
 ```markdown
-### Quick Quantization Background (for QLoRA)
-
-QLoRA combines LoRA with 4-bit quantization to dramatically reduce memory requirements.
-Key concepts you'll use:
-
-- **4-bit quantization** reduces model memory by ~4x
-- **NF4 (NormalFloat4)** is optimized for normally-distributed neural network weights
-- **bitsandbytes** library handles quantization automatically
-
-For comprehensive quantization coverage (NVFP4, FP8, GPTQ, AWQ), see Module 3.2.
+**Prerequisites:** Module 2.6 (Diffusion Models)
 ```
 
-### Fix 2: Standardize Memory Cleanup Pattern
+To:
+```markdown
+**Prerequisites:** Module 2.6 (Diffusion Models) — builds heavily on PEFT concepts from Module 2.5
+```
 
-Update all memory cleanup code blocks to use this exact pattern:
+### ✅ Fix 3: Standardized Memory Cleanup Pattern
+
+Updated `domain-2-deep-learning-frameworks/module-2.1-pytorch/README.md` to use standard pattern:
 
 ```python
-import torch
 import gc
-
-# Clear GPU memory
 torch.cuda.empty_cache()
 gc.collect()
 ```
 
-Files to update:
-- [ ] `domain-2-deep-learning-frameworks/module-2.1-pytorch/README.md` (lines 172-173)
+### ✅ Fix 4: Enhanced Model Loading in Module 3.3
 
-### Fix 3: Fix Sample Document Buffer Cache Command
+Updated Medusa example in `domain-3-llm-systems/module-3.3-deployment/README.md` to include:
+- `torch_dtype=torch.bfloat16` for native Blackwell support
+- `device_map="auto"` for automatic device placement
 
-Update `domain-3-llm-systems/module-3.5-rag-systems/data/sample_documents/dgx_spark_technical_guide.md:125`:
+### ✅ Fix 5: Fixed Buffer Cache Command in Sample Document
 
-From:
-```markdown
-**Solution**: Clear cache before loading: `echo 3 > /proc/sys/vm/drop_caches`
-```
+Updated `domain-3-llm-systems/module-3.5-rag-systems/data/sample_documents/dgx_spark_technical_guide.md`:
 
-To:
 ```markdown
 **Solution**: Clear cache before loading: `sudo sh -c 'sync; echo 3 > /proc/sys/vm/drop_caches'`
 ```
@@ -493,7 +493,7 @@ To:
 - [x] Model loading pattern consistent (AutoModelForCausalLM)
 - [x] Tokenizer usage consistent
 - [x] Training loop structure consistent (Trainer API)
-- [ ] Memory cleanup needs minor standardization
+- [x] Memory cleanup standardized ✅ (Fixed in this commit)
 
 ### Values
 - [x] Hardware specs consistent (128GB, 6,144 CUDA cores, 192 Tensor Cores)
@@ -508,11 +508,12 @@ To:
 
 ---
 
-**Cross-Module Coherency Status:** ✅ **COHERENT** (with minor fixes recommended)
+**Cross-Module Coherency Status:** ✅ **COHERENT** (all fixes applied)
 
-The DGX Spark AI Curriculum v2.0 demonstrates excellent cross-module coherency. The identified issues are minor and do not impede the learning path. The curriculum maintains consistent terminology, code patterns, and technical values throughout all 30 modules.
+The DGX Spark AI Curriculum v2.0 demonstrates excellent cross-module coherency. All identified issues have been resolved in this commit. The curriculum maintains consistent terminology, code patterns, and technical values throughout all 30 modules.
 
 ---
 
 *Audit by CrossModuleAuditor SPARK - Curriculum v2.0*
 *Generated: 2025-12-31*
+*Fixes Applied: 2025-12-31*

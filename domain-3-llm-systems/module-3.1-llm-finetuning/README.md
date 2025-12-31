@@ -2,7 +2,7 @@
 
 **Domain:** 3 - LLM Systems
 **Duration:** Weeks 16-18 (18-22 hours)
-**Prerequisites:** Module 2.6 (Diffusion Models)
+**Prerequisites:** Module 2.6 (Diffusion Models) — builds heavily on PEFT concepts from Module 2.5
 **Priority:** P1 Expanded (DoRA, NEFTune, SimPO, ORPO, KTO)
 
 ---
@@ -38,6 +38,17 @@ By the end of this module, you will be able to:
 ---
 
 ## Topics
+
+### Quick Quantization Background (for QLoRA)
+
+> **Note:** QLoRA combines LoRA with 4-bit quantization to dramatically reduce memory requirements.
+> Key concepts you'll use:
+> - **4-bit quantization** reduces model memory by ~4x
+> - **NF4 (NormalFloat4)** is a data type optimized for normally-distributed neural network weights
+> - **bitsandbytes** library handles quantization automatically via `BitsAndBytesConfig`
+> - **Double quantization** further reduces memory by quantizing the quantization constants
+>
+> For comprehensive quantization coverage (NVFP4, FP8, GPTQ, AWQ, GGUF), see [Module 3.2: Quantization & Optimization](../module-3.2-quantization/).
 
 ### 3.1.1 Fine-Tuning Strategies
 

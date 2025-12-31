@@ -122,7 +122,7 @@ The unified memory architecture is ideal for:
 ### Common Issues
 
 **Issue**: Out of Memory (OOM) during model loading
-**Solution**: Clear cache before loading: `echo 3 > /proc/sys/vm/drop_caches`
+**Solution**: Clear cache before loading: `sudo sh -c 'sync; echo 3 > /proc/sys/vm/drop_caches'`
 
 **Issue**: Slow performance with PyTorch
 **Solution**: Use NGC containers instead of pip-installed PyTorch
