@@ -108,6 +108,20 @@ By the end of this module, you will be able to:
 
 ---
 
+## Study Materials
+
+| Document | Purpose |
+|----------|---------|
+| [QUICKSTART.md](./QUICKSTART.md) | Set up MLflow and log first run in 5 minutes |
+| [STUDY_GUIDE.md](./STUDY_GUIDE.md) | Learning objectives and module roadmap |
+| [QUICK_REFERENCE.md](./QUICK_REFERENCE.md) | Commands, configs, and benchmark patterns |
+| [LAB_PREP.md](./LAB_PREP.md) | Environment setup and checklist |
+| [WORKFLOWS.md](./WORKFLOWS.md) | Step-by-step MLOps workflows |
+| [TROUBLESHOOTING.md](./TROUBLESHOOTING.md) | Common errors and fixes |
+| [FAQ.md](./FAQ.md) | Frequently asked questions |
+
+---
+
 ## Guidance
 
 ### DGX Spark Environment Setup

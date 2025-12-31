@@ -102,17 +102,31 @@ The 128GB unified memory means you can run multiple models simultaneously - for 
 
 ---
 
+## Study Materials
+
+| Document | Purpose |
+|----------|---------|
+| [QUICKSTART.md](./QUICKSTART.md) | Get VLM to describe an image in 5 minutes |
+| [ELI5.md](./ELI5.md) | Jargon-free explanations of VLMs, CLIP, diffusion |
+| [STUDY_GUIDE.md](./STUDY_GUIDE.md) | Learning objectives and module roadmap |
+| [QUICK_REFERENCE.md](./QUICK_REFERENCE.md) | Commands and code patterns cheatsheet |
+| [LAB_PREP.md](./LAB_PREP.md) | Environment setup and download checklist |
+| [TROUBLESHOOTING.md](./TROUBLESHOOTING.md) | Common errors and fixes |
+| [FAQ.md](./FAQ.md) | Frequently asked questions |
+
+---
+
 ## Directory Structure
 
 ```
 module-4.1-multimodal/
 ├── README.md                           # This file
 ├── labs/
-│   ├── 01-vision-language-demo.ipynb   # VLM introduction
-│   ├── 02-image-generation.ipynb       # Diffusion models
-│   ├── 03-multimodal-rag.ipynb         # CLIP + vector search
-│   ├── 04-document-ai-pipeline.ipynb   # PDF processing
-│   └── 05-audio-transcription.ipynb    # Whisper integration
+│   ├── lab-4.1.1-vision-language-demo.ipynb   # VLM introduction
+│   ├── lab-4.1.2-image-generation.ipynb       # Diffusion models
+│   ├── lab-4.1.3-multimodal-rag.ipynb         # CLIP + vector search
+│   ├── lab-4.1.4-document-ai-pipeline.ipynb   # PDF processing
+│   └── lab-4.1.5-audio-transcription.ipynb    # Whisper integration
 ├── scripts/
 │   ├── __init__.py
 │   ├── vlm_utils.py                    # Vision-language utilities
@@ -121,11 +135,11 @@ module-4.1-multimodal/
 │   ├── document_ai.py                  # Document processing
 │   └── audio_utils.py                  # Audio transcription
 ├── solutions/
-│   ├── 01-vision-language-demo-solution.ipynb
-│   ├── 02-image-generation-solution.ipynb
-│   ├── 03-multimodal-rag-solution.ipynb
-│   ├── 04-document-ai-pipeline-solution.ipynb
-│   └── 05-audio-transcription-solution.ipynb
+│   ├── lab-4.1.1-vision-language-demo-solution.ipynb
+│   ├── lab-4.1.2-image-generation-solution.ipynb
+│   ├── lab-4.1.3-multimodal-rag-solution.ipynb
+│   ├── lab-4.1.4-document-ai-pipeline-solution.ipynb
+│   └── lab-4.1.5-audio-transcription-solution.ipynb
 ├── pipelines/                          # End-to-end pipelines
 └── data/
     └── README.md                       # Data documentation
