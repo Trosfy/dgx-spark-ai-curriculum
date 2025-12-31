@@ -106,7 +106,7 @@ ARCHITECTURE_PROFILES = {
         dgx_spark_context_limit=65536,  # Larger with 128GB
     ),
     "mamba": ArchitectureProfile(
-        name="Mamba (State Space)",
+        name="Mamba (State Space Models)",
         attention_complexity="O(n)",
         memory_scaling="constant",
         kv_cache_required=False,

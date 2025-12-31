@@ -1,5 +1,5 @@
 """
-Mamba (State Space Model) Utilities for DGX Spark
+Mamba (State Space Models) Utilities for DGX Spark
 
 This module provides utilities for loading, running, and analyzing Mamba models.
 Mamba offers O(n) complexity vs transformers' O(n^2), enabling efficient long-context processing.

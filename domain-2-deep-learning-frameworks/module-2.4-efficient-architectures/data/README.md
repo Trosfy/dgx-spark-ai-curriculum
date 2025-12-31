@@ -82,7 +82,7 @@ def format_instruction(example):
 
 ## Memory Considerations for DGX Spark
 
-### Model Memory Requirements (FP16/BF16)
+### Model Memory Requirements (BF16)
 | Model | Parameters | Memory | Notes |
 |-------|------------|--------|-------|
 | Mamba-130M | 130M | ~260MB | Good for learning |
@@ -91,6 +91,15 @@ def format_instruction(example):
 | DeepSeekMoE-16B | 16B total | ~32GB | 2.5B active |
 | Mixtral 8x7B | 45B total | ~90GB | 12.9B active |
 | Jamba-52B | 52B total | ~104GB | Hybrid architecture |
+
+### DGX Spark Model Capacity (Reference)
+| Scenario | Maximum Model | Memory Usage |
+|----------|---------------|--------------|
+| Full Fine-Tuning (FP16) | 12-16B | ~100-128GB |
+| QLoRA Fine-Tuning | 100-120B | ~50-70GB |
+| FP16 Inference | 50-55B | ~110-120GB |
+| FP8 Inference | 90-100B | ~90-100GB |
+| NVFP4 Inference | ~200B | ~100GB |
 
 ### Context Length Memory (Approximate)
 | Context | Transformer KV Cache | Mamba State |
