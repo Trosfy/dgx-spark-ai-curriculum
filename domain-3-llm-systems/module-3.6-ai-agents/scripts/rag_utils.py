@@ -5,10 +5,10 @@ This module provides production-ready utilities for building RAG pipelines,
 including document loading, chunking, embedding, and retrieval operations.
 
 Author: Professor SPARK
-Course: DGX Spark AI Curriculum - Module 13
+Course: DGX Spark AI Curriculum - Module 3.6: AI Agents & Agentic Systems
 """
 
-from typing import List, Dict, Any, Optional, Tuple, Union
+from typing import List, Dict, Any, Optional, Tuple, Union, Callable
 from pathlib import Path
 from dataclasses import dataclass, field
 import hashlib
@@ -188,7 +188,7 @@ class TextChunker:
         chunk_size: int = 512,
         chunk_overlap: int = 50,
         separators: Optional[List[str]] = None,
-        length_function: Optional[callable] = None
+        length_function: Optional[Callable[[str], int]] = None
     ):
         """
         Initialize the text chunker.
