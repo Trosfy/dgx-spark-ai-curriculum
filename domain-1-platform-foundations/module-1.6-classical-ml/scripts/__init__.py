@@ -12,34 +12,41 @@ Example:
     >>> from scripts.visualization_utils import plot_feature_importance
 """
 
-from .baseline_utils import BaselineExperiment, ModelResult
+from .baseline_utils import BaselineExperiment, ModelResult, quick_baseline
 from .data_utils import (
     load_dataset,
     preprocess_features,
     generate_synthetic_data,
-    get_dataset_info
+    get_dataset_info,
+    create_train_test_split
 )
 from .visualization_utils import (
     plot_feature_importance,
     plot_model_comparison,
     plot_cv_results,
-    plot_learning_curves
+    plot_learning_curves,
+    plot_confusion_matrix,
+    plot_prediction_scatter
 )
 
 __all__ = [
     # Baseline utilities
     'BaselineExperiment',
     'ModelResult',
+    'quick_baseline',
     # Data utilities
     'load_dataset',
     'preprocess_features',
     'generate_synthetic_data',
     'get_dataset_info',
+    'create_train_test_split',
     # Visualization utilities
     'plot_feature_importance',
     'plot_model_comparison',
     'plot_cv_results',
-    'plot_learning_curves'
+    'plot_learning_curves',
+    'plot_confusion_matrix',
+    'plot_prediction_scatter'
 ]
 
 __version__ = '1.0.0'
