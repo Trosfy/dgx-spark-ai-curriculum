@@ -95,4 +95,4 @@ Random embeddings for numerical exercises:
 | sample_training_history.json | 100 epochs | ~10 KB |
 | sample_confusion_data.json | 10-class matrix | ~5 KB |
 
-> **Scaling Note:** For larger-scale experiments on DGX Spark (128GB memory), you can safely scale these datasets by 100-1000x.
+> **Scaling Note:** For larger-scale experiments on DGX Spark (128GB unified memory), you can safely scale these datasets by 100-1000x.
