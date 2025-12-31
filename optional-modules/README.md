@@ -17,11 +17,11 @@ These optional modules cover advanced topics that extend beyond the core curricu
 
 | Module | Duration | Topics | Best For |
 |--------|----------|--------|----------|
-| [A: Learning Theory](./optional-a-learning-theory/) | 4-6 hours | VC dimension, bias-variance, PAC learning | Research roles, theoretical understanding |
-| [B: Recommender Systems](./optional-b-recommender-systems/) | 6-8 hours | Collaborative filtering, neural CF, two-tower | Industry ML, personalization |
-| [C: Mechanistic Interpretability](./optional-c-mechanistic-interpretability/) | 6-8 hours | Activation patching, circuit discovery | AI safety research |
-| [D: Reinforcement Learning](./optional-d-reinforcement-learning/) | 8-10 hours | MDP, Q-learning, DQN, PPO | RLHF understanding, robotics |
-| [E: Graph Neural Networks](./optional-e-graph-neural-networks/) | 6-8 hours | GCN, GraphSAGE, GAT, PyG | Drug discovery, knowledge graphs |
+| [A: Statistical Learning Theory](./module-A-statistical-learning-theory/) | 4-6 hours | VC dimension, bias-variance, PAC learning | Research roles, theoretical understanding |
+| [B: Recommender Systems](./module-B-recommender-systems/) | 6-8 hours | Collaborative filtering, neural CF, two-tower | Industry ML, personalization |
+| [C: Mechanistic Interpretability](./module-C-mechanistic-interpretability/) | 6-8 hours | Activation patching, circuit discovery | AI safety research |
+| [D: Reinforcement Learning](./module-D-reinforcement-learning/) | 8-10 hours | MDP, Q-learning, DQN, PPO | RLHF understanding, robotics |
+| [E: Graph Neural Networks](./module-E-graph-neural-networks/) | 6-8 hours | GCN, GraphSAGE, GAT, PyG | Drug discovery, knowledge graphs |
 
 ---
 
@@ -68,25 +68,35 @@ Specific modules have additional requirements listed in their READMEs.
 ```
 optional-modules/
 ├── README.md (this file)
-├── optional-a-learning-theory/
+├── module-A-statistical-learning-theory/
 │   ├── README.md
-│   ├── labs/
+│   ├── notebooks/
+│   ├── scripts/
+│   ├── solutions/
 │   └── data/
-├── optional-b-recommender-systems/
+├── module-B-recommender-systems/
 │   ├── README.md
-│   ├── labs/
+│   ├── notebooks/
+│   ├── scripts/
+│   ├── solutions/
 │   └── data/
-├── optional-c-mechanistic-interpretability/
+├── module-C-mechanistic-interpretability/
 │   ├── README.md
-│   ├── labs/
+│   ├── notebooks/
+│   ├── scripts/
+│   ├── solutions/
 │   └── data/
-├── optional-d-reinforcement-learning/
+├── module-D-reinforcement-learning/
 │   ├── README.md
-│   ├── labs/
+│   ├── notebooks/
+│   ├── scripts/
+│   ├── solutions/
 │   └── data/
-└── optional-e-graph-neural-networks/
+└── module-E-graph-neural-networks/
     ├── README.md
-    ├── labs/
+    ├── notebooks/
+    ├── scripts/
+    ├── solutions/
     └── data/
 ```
 
