@@ -9,7 +9,7 @@ This package provides reusable utilities for working with diffusion models:
 Example Usage:
     from scripts.diffusion_utils import NoiseScheduler, add_noise, denoise_step
     from scripts.image_utils import show_image_grid, prepare_control_image
-    from scripts.training_utils import prepare_dataset, LoRATrainer
+    from scripts.training_utils import prepare_dataset, SimpleTrainer
 """
 
 from .diffusion_utils import (
@@ -32,6 +32,10 @@ from .training_utils import (
     prepare_dataset,
     DiffusionDataset,
     compute_snr_weights,
+    SimpleTrainer,
+    TrainingConfig,
+    get_lora_config,
+    EMAModel,
 )
 
 __version__ = "1.0.0"
