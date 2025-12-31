@@ -5,7 +5,7 @@ This module provides production-ready custom tools for LangChain agents,
 including search, calculation, code execution, file operations, and API calls.
 
 Author: Professor SPARK
-Course: DGX Spark AI Curriculum - Module 13
+Course: DGX Spark AI Curriculum - Module 3.6: AI Agents & Agentic Systems
 
 IMPORTANT SECURITY NOTE:
 These tools are for educational purposes. In production:

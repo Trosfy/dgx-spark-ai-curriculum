@@ -5,7 +5,7 @@ This module provides utilities for building, managing, and orchestrating AI agen
 including agent memory, conversation management, and multi-agent coordination.
 
 Author: Professor SPARK
-Course: DGX Spark AI Curriculum - Module 13
+Course: DGX Spark AI Curriculum - Module 3.6: AI Agents & Agentic Systems
 """
 
 from typing import List, Dict, Any, Optional, Callable, Union
