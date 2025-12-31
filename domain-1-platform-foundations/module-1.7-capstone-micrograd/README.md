@@ -133,7 +133,7 @@ docs/
 
 ## Labs
 
-### Lab 1.5.1: Core Tensor Implementation
+### Lab 1.7.1: Core Tensor Implementation
 **Time:** 3 hours
 
 Implement the Tensor class with automatic differentiation.
@@ -157,7 +157,7 @@ assert np.allclose(b.grad, 2.0)  # dc/db = a = 2
 
 ---
 
-### Lab 1.5.2: Layer Implementation
+### Lab 1.7.2: Layer Implementation
 **Time:** 2 hours
 
 Implement neural network layers.
@@ -170,7 +170,7 @@ Implement neural network layers.
 
 ---
 
-### Lab 1.5.3: Loss and Optimizers
+### Lab 1.7.3: Loss and Optimizers
 **Time:** 1.5 hours
 
 Implement loss functions and optimizers.
@@ -183,7 +183,7 @@ Implement loss functions and optimizers.
 
 ---
 
-### Lab 1.5.4: Testing Suite
+### Lab 1.7.4: Testing Suite
 **Time:** 1.5 hours
 
 Write comprehensive tests.
@@ -212,7 +212,7 @@ def test_matmul_gradient():
 
 ---
 
-### Lab 1.5.5: MNIST Example
+### Lab 1.7.5: MNIST Example
 **Time:** 1.5 hours
 
 Train on MNIST using your library.
@@ -226,7 +226,7 @@ Train on MNIST using your library.
 
 ---
 
-### Lab 1.5.6: Documentation
+### Lab 1.7.6: Documentation
 **Time:** 1 hour
 
 Document your library.
