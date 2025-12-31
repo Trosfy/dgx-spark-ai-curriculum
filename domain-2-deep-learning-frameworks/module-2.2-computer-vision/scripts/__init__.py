@@ -33,6 +33,7 @@ from .training_utils import (
 from .visualization_utils import (
     CIFAR10_CLASSES,
     VOC_CLASSES,
+    VOC_COLORMAP,
     IMAGENET_MEAN,
     IMAGENET_STD,
     CIFAR10_MEAN,
@@ -42,6 +43,9 @@ from .visualization_utils import (
     visualize_predictions,
     plot_confusion_matrix,
     visualize_segmentation,
+    visualize_feature_maps,
+    visualize_detections,
+    compare_models,
 )
 
 # Metrics
@@ -51,6 +55,8 @@ from .metrics import (
     compute_iou,
     compute_dice,
     compute_pixel_accuracy,
+    compute_detection_metrics,
+    box_iou,
 )
 
 __all__ = [
@@ -60,11 +66,13 @@ __all__ = [
     # Training
     'Trainer', 'get_optimizer', 'get_scheduler', 'EarlyStopping', 'benchmark_inference',
     # Visualization
-    'CIFAR10_CLASSES', 'VOC_CLASSES', 'IMAGENET_MEAN', 'IMAGENET_STD',
+    'CIFAR10_CLASSES', 'VOC_CLASSES', 'VOC_COLORMAP', 'IMAGENET_MEAN', 'IMAGENET_STD',
     'CIFAR10_MEAN', 'CIFAR10_STD',
     'denormalize', 'plot_training_history', 'visualize_predictions',
-    'plot_confusion_matrix', 'visualize_segmentation',
+    'plot_confusion_matrix', 'visualize_segmentation', 'visualize_feature_maps',
+    'visualize_detections', 'compare_models',
     # Metrics
     'ClassificationMetrics', 'SegmentationMetrics',
     'compute_iou', 'compute_dice', 'compute_pixel_accuracy',
+    'compute_detection_metrics', 'box_iou',
 ]
