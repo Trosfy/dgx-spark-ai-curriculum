@@ -43,7 +43,7 @@ Paste the full error message here
 - **Device:** DGX Spark / Other (specify)
 - **DGX OS Version:** [e.g., 1.0]
 - **Container:** [e.g., nvcr.io/nvidia/pytorch:25.11-py3]
-- **Python Version:** [e.g., 3.10]
+- **Python Version:** [e.g., 3.13]
 - **PyTorch Version:** [e.g., 2.x]
 - **CUDA Version:** [e.g., 13.0]
 

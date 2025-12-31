@@ -3,11 +3,13 @@ DGX Spark AI Curriculum Utilities
 =================================
 
 A consolidated collection of utility functions for working with NVIDIA DGX Spark,
-including system information, memory management, benchmarking, and monitoring tools.
+including system information, memory management, benchmarking, training, and visualization.
 
 Subpackages:
-    utils.benchmarks  - LLM, PyTorch, and quantization benchmarking
-    utils.monitoring  - Memory and resource monitoring
+    utils.benchmarks     - LLM, PyTorch, and quantization benchmarking
+    utils.monitoring     - Memory and resource monitoring
+    utils.training       - NumPy and HuggingFace training utilities
+    utils.visualization  - ML visualization tools
 
 Usage:
     # Quick imports
@@ -22,12 +24,14 @@ Usage:
     with memory_tracked("Model Loading"):
         model = load_model()
 
-    # Benchmarking
+    # Benchmarking (Ollama)
     from utils import quick_benchmark
     result = quick_benchmark("llama3.1:8b")
 
-    # For specialized benchmarking, use subpackages directly:
-    from utils.benchmarks import PyTorchBenchmark, compare_precisions
+    # For specialized tools, use subpackages directly:
+    from utils.benchmarks import benchmark_inference, run_benchmark
+    from utils.training import create_training_args, EarlyStopping
+    from utils.visualization import MLVisualizer, plot_training_curves
     from utils.monitoring import RealtimeMonitor
 """
 
@@ -71,7 +75,7 @@ from .memory_utils import (
     print_memory_status,
 )
 
-__version__ = "0.2.0"
+__version__ = "0.3.0"
 
 __all__ = [
     # dgx_spark_utils

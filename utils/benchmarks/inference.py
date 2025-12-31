@@ -1,21 +1,16 @@
 """
-Benchmark Utilities for LLM Quantization Experiments
+LLM Inference Benchmarking Utilities
+====================================
 
-This module provides comprehensive benchmarking functions for measuring
-inference performance of quantized models on DGX Spark.
-
-Features:
-- Token-level throughput measurement
-- Latency profiling (prefill + decode)
-- Memory efficiency tracking
-- Multi-run statistical analysis
-- Comparison across quantization methods
+Comprehensive benchmarking functions for measuring inference performance
+of LLMs on DGX Spark, including token throughput, latency profiling,
+and memory efficiency tracking.
 
 Example:
-    >>> from benchmark_utils import benchmark_inference, compare_models
+    >>> from utils.benchmarks import benchmark_inference, compare_models
     >>>
     >>> results = benchmark_inference(model, tokenizer, "Hello world")
-    >>> print(f"Throughput: {results['tokens_per_second']:.1f} tok/s")
+    >>> print(f"Throughput: {results.tokens_per_second:.1f} tok/s")
     >>>
     >>> comparison = compare_models(
     ...     models={'fp16': model_fp16, 'int4': model_int4},
@@ -24,19 +19,24 @@ Example:
     >>> comparison.print_summary()
 """
 
-import torch
 import time
 import gc
-from typing import Dict, List, Optional, Any, Tuple, Union
+from typing import Dict, List, Optional, Any, Tuple
 from dataclasses import dataclass, field
 from statistics import mean, stdev
 import json
 from pathlib import Path
 
+try:
+    import torch
+    HAS_TORCH = True
+except ImportError:
+    HAS_TORCH = False
+
 
 @dataclass
-class BenchmarkResult:
-    """Results from a single benchmark run."""
+class InferenceBenchmarkResult:
+    """Results from a single inference benchmark run."""
     name: str
     tokens_per_second: float
     prefill_latency_ms: float
@@ -66,16 +66,12 @@ class BenchmarkResult:
 
 def get_gpu_memory() -> float:
     """Get current GPU memory allocated in GB."""
-    if torch.cuda.is_available():
+    if HAS_TORCH and torch.cuda.is_available():
         return torch.cuda.memory_allocated() / 1e9
     return 0.0
 
 
-def warmup_model(
-    model,
-    tokenizer,
-    num_warmup: int = 3
-) -> None:
+def warmup_model(model, tokenizer, num_warmup: int = 3) -> None:
     """
     Warm up the model to ensure accurate benchmarks.
 
@@ -92,7 +88,7 @@ def warmup_model(
         for _ in range(num_warmup):
             _ = model.generate(**inputs, max_new_tokens=10, do_sample=False)
 
-    if torch.cuda.is_available():
+    if HAS_TORCH and torch.cuda.is_available():
         torch.cuda.synchronize()
 
 
@@ -105,7 +101,7 @@ def benchmark_inference(
     warmup_runs: int = 2,
     name: str = "model",
     measure_prefill: bool = True
-) -> BenchmarkResult:
+) -> InferenceBenchmarkResult:
     """
     Benchmark inference performance of a language model.
 
@@ -120,12 +116,15 @@ def benchmark_inference(
         measure_prefill: If True, separately measure prefill latency
 
     Returns:
-        BenchmarkResult with timing and memory information
+        InferenceBenchmarkResult with timing and memory information
 
     Example:
         >>> result = benchmark_inference(model, tokenizer, "Hello", max_new_tokens=100)
         >>> print(f"Speed: {result.tokens_per_second:.1f} tokens/sec")
     """
+    if not HAS_TORCH:
+        raise ImportError("PyTorch is required for benchmark_inference")
+
     model.eval()
 
     # Prepare input
@@ -177,7 +176,7 @@ def benchmark_inference(
 
         start = time.perf_counter()
         with torch.no_grad():
-            outputs = model.generate(
+            _ = model.generate(
                 **inputs,
                 max_new_tokens=max_new_tokens,
                 do_sample=False,
@@ -191,14 +190,10 @@ def benchmark_inference(
     # Calculate statistics
     avg_time = mean(times)
     tokens_per_second = max_new_tokens / avg_time
-
-    # Decode time is total minus prefill
     decode_time = avg_time - prefill_time if measure_prefill else avg_time
-
-    # Get memory usage
     memory_gb = get_gpu_memory()
 
-    return BenchmarkResult(
+    return InferenceBenchmarkResult(
         name=name,
         tokens_per_second=tokens_per_second,
         prefill_latency_ms=prefill_time * 1000,
@@ -233,11 +228,10 @@ def benchmark_batch_inference(
 
     Returns:
         Dict with throughput and latency metrics
-
-    Example:
-        >>> prompts = ["Hello", "The weather is", "AI will"]
-        >>> results = benchmark_batch_inference(model, tokenizer, prompts, batch_size=2)
     """
+    if not HAS_TORCH:
+        raise ImportError("PyTorch is required")
+
     model.eval()
     tokenizer.padding_side = 'left'
     if tokenizer.pad_token is None:
@@ -281,9 +275,9 @@ def benchmark_batch_inference(
 
 
 @dataclass
-class ComparisonResult:
+class ModelComparisonResult:
     """Results from comparing multiple models."""
-    results: Dict[str, BenchmarkResult]
+    results: Dict[str, InferenceBenchmarkResult]
     baseline_name: str
 
     def print_summary(self) -> None:
@@ -310,7 +304,7 @@ class ComparisonResult:
         """Get the name of the best model by metric."""
         if metric in ['tokens_per_second']:
             return max(self.results.items(), key=lambda x: getattr(x[1], metric))[0]
-        else:  # Lower is better for latency/memory
+        else:
             return min(self.results.items(), key=lambda x: getattr(x[1], metric))[0]
 
     def to_dict(self) -> Dict[str, Any]:
@@ -328,7 +322,7 @@ def compare_models(
     max_new_tokens: int = 50,
     num_runs: int = 5,
     baseline_name: Optional[str] = None
-) -> ComparisonResult:
+) -> ModelComparisonResult:
     """
     Compare inference performance across multiple models.
 
@@ -341,7 +335,7 @@ def compare_models(
         baseline_name: Name of baseline model (default: first model)
 
     Returns:
-        ComparisonResult with all benchmark data
+        ModelComparisonResult with all benchmark data
 
     Example:
         >>> models = {
@@ -369,12 +363,12 @@ def compare_models(
         print(f"  {results[name].tokens_per_second:.1f} tok/s, "
               f"{results[name].memory_gb:.2f} GB")
 
-    return ComparisonResult(results=results, baseline_name=baseline_name)
+    return ModelComparisonResult(results=results, baseline_name=baseline_name)
 
 
 def benchmark_quantization_methods(
     model_name: str,
-    methods: List[str] = ['fp16', 'int8', 'int4'],
+    methods: List[str] = None,
     prompt: str = "Explain machine learning in simple terms:",
     max_new_tokens: int = 100,
     num_runs: int = 5,
@@ -387,7 +381,7 @@ def benchmark_quantization_methods(
 
     Args:
         model_name: HuggingFace model name
-        methods: List of quantization methods to test
+        methods: List of quantization methods (default: fp16, int8, int4)
         prompt: Test prompt
         max_new_tokens: Tokens to generate
         num_runs: Benchmark runs per method
@@ -395,16 +389,15 @@ def benchmark_quantization_methods(
 
     Returns:
         Dict with comprehensive benchmark results
-
-    Example:
-        >>> results = benchmark_quantization_methods(
-        ...     "meta-llama/Llama-2-7b-hf",
-        ...     methods=['fp16', 'int8', 'int4']
-        ... )
     """
+    if not HAS_TORCH:
+        raise ImportError("PyTorch is required")
+
+    if methods is None:
+        methods = ['fp16', 'int8', 'int4']
+
     from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig
 
-    # Load tokenizer once
     tokenizer = AutoTokenizer.from_pretrained(model_name)
     if tokenizer.pad_token is None:
         tokenizer.pad_token = tokenizer.eos_token
@@ -416,37 +409,27 @@ def benchmark_quantization_methods(
         print(f"Testing: {method}")
         print(f"{'='*60}")
 
-        # Clear memory before loading
         gc.collect()
         if torch.cuda.is_available():
             torch.cuda.empty_cache()
 
         try:
-            # Load model with appropriate quantization
             if method == 'fp32':
                 model = AutoModelForCausalLM.from_pretrained(
-                    model_name,
-                    torch_dtype=torch.float32,
-                    device_map="cuda"
+                    model_name, torch_dtype=torch.float32, device_map="cuda"
                 )
             elif method == 'fp16':
                 model = AutoModelForCausalLM.from_pretrained(
-                    model_name,
-                    torch_dtype=torch.float16,
-                    device_map="cuda"
+                    model_name, torch_dtype=torch.float16, device_map="cuda"
                 )
             elif method == 'bf16':
                 model = AutoModelForCausalLM.from_pretrained(
-                    model_name,
-                    torch_dtype=torch.bfloat16,
-                    device_map="cuda"
+                    model_name, torch_dtype=torch.bfloat16, device_map="cuda"
                 )
             elif method == 'int8':
                 config = BitsAndBytesConfig(load_in_8bit=True)
                 model = AutoModelForCausalLM.from_pretrained(
-                    model_name,
-                    quantization_config=config,
-                    device_map="cuda"
+                    model_name, quantization_config=config, device_map="cuda"
                 )
             elif method == 'int4':
                 config = BitsAndBytesConfig(
@@ -455,15 +438,12 @@ def benchmark_quantization_methods(
                     bnb_4bit_quant_type="nf4"
                 )
                 model = AutoModelForCausalLM.from_pretrained(
-                    model_name,
-                    quantization_config=config,
-                    device_map="cuda"
+                    model_name, quantization_config=config, device_map="cuda"
                 )
             else:
                 print(f"Unknown method: {method}, skipping")
                 continue
 
-            # Run benchmark
             result = benchmark_inference(
                 model=model,
                 tokenizer=tokenizer,
@@ -479,19 +459,16 @@ def benchmark_quantization_methods(
             print(f"  Memory: {result.memory_gb:.2f} GB")
             print(f"  Latency: {result.total_latency_ms:.1f} ms")
 
-            # Clean up
             del model
 
         except Exception as e:
             print(f"Error with {method}: {e}")
             results[method] = {'error': str(e)}
 
-        # Force cleanup
         gc.collect()
         if torch.cuda.is_available():
             torch.cuda.empty_cache()
 
-    # Save results if path provided
     if output_path:
         output = {
             'model_name': model_name,
@@ -507,15 +484,15 @@ def benchmark_quantization_methods(
     return results
 
 
-def format_benchmark_table(
-    results: Dict[str, BenchmarkResult],
+def format_inference_table(
+    results: Dict[str, InferenceBenchmarkResult],
     baseline: str = None
 ) -> str:
     """
     Format benchmark results as a markdown table.
 
     Args:
-        results: Dict of model name to BenchmarkResult
+        results: Dict of model name to InferenceBenchmarkResult
         baseline: Name of baseline model for speedup calculation
 
     Returns:
@@ -543,46 +520,10 @@ def format_benchmark_table(
 
 
 if __name__ == "__main__":
-    print("Benchmark Utils Demo")
+    print("LLM Inference Benchmark Utils Demo")
     print("=" * 50)
-
-    # Demo with a small model
-    try:
-        from transformers import AutoModelForCausalLM, AutoTokenizer
-
-        print("\nLoading GPT-2 for demo...")
-        tokenizer = AutoTokenizer.from_pretrained("gpt2")
-        model = AutoModelForCausalLM.from_pretrained(
-            "gpt2",
-            torch_dtype=torch.float16,
-            device_map="cuda" if torch.cuda.is_available() else "cpu"
-        )
-
-        if tokenizer.pad_token is None:
-            tokenizer.pad_token = tokenizer.eos_token
-
-        print("\nRunning benchmark...")
-        result = benchmark_inference(
-            model=model,
-            tokenizer=tokenizer,
-            prompt="The quick brown fox",
-            max_new_tokens=50,
-            num_runs=3,
-            name="gpt2-fp16"
-        )
-
-        print(f"\nResults:")
-        print(f"  Name: {result.name}")
-        print(f"  Tokens/sec: {result.tokens_per_second:.1f}")
-        print(f"  Prefill latency: {result.prefill_latency_ms:.1f} ms")
-        print(f"  Total latency: {result.total_latency_ms:.1f} ms")
-        print(f"  Memory: {result.memory_gb:.2f} GB")
-
-        # Cleanup
-        del model
-        gc.collect()
-        if torch.cuda.is_available():
-            torch.cuda.empty_cache()
-
-    except Exception as e:
-        print(f"Demo skipped: {e}")
+    print("\nThis module requires a model and tokenizer to benchmark.")
+    print("Example usage:")
+    print("  from utils.benchmarks import benchmark_inference")
+    print("  result = benchmark_inference(model, tokenizer, 'Hello')")
+    print("  print(f'Speed: {result.tokens_per_second:.1f} tok/s')")

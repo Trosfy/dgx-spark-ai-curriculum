@@ -169,8 +169,9 @@ Implement robust checkpointing.
 # Start with batch_size=64, increase until slowdown
 
 # Clear cache between experiments
+import gc
 torch.cuda.empty_cache()
-import gc; gc.collect()
+gc.collect()
 
 # Monitor memory
 print(f"Allocated: {torch.cuda.memory_allocated()/1e9:.2f}GB")

@@ -243,8 +243,14 @@ result = chat_with_context.run(
 
 from transformers import AutoModelForCausalLM
 from medusa import MedusaConfig, add_medusa_heads
+import torch
 
-model = AutoModelForCausalLM.from_pretrained("meta-llama/Llama-3.1-8B-Instruct")
+# Standard model loading pattern for DGX Spark
+model = AutoModelForCausalLM.from_pretrained(
+    "meta-llama/Llama-3.1-8B-Instruct",
+    torch_dtype=torch.bfloat16,  # Native Blackwell support
+    device_map="auto"
+)
 
 # Add Medusa heads (typically 3-5 heads)
 config = MedusaConfig(num_heads=4)

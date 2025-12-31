@@ -140,7 +140,7 @@ docker run --gpus all -it --rm \
     nvcr.io/nvidia/pytorch:25.11-py3
 
 # Key dependencies
-Python 3.11
+Python 3.13
 PyTorch 2.5.0
 Transformers 4.46.0
 [etc.]

@@ -258,9 +258,9 @@ def deploy_to_sagemaker(
     huggingface_model = HuggingFaceModel(
         model_data=model_data,
         role=sagemaker.get_execution_role(),
-        transformers_version="4.37",
-        pytorch_version="2.1",
-        py_version="py310",
+        transformers_version="4.41",  # Check SageMaker docs for latest
+        pytorch_version="2.3",
+        py_version="py311",  # Use latest available; check SageMaker docs for py313 support
     )
 
     predictor = huggingface_model.deploy(
@@ -430,9 +430,9 @@ scrape_configs:
 # templates/requirements.txt
 fastapi>=0.109.0
 uvicorn>=0.27.0
-transformers>=4.37.0
-torch>=2.1.0
-accelerate>=0.26.0
+transformers>=4.46.0
+torch>=2.5.0
+accelerate>=0.28.0
 prometheus-client>=0.19.0
 ```
 

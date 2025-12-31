@@ -498,7 +498,7 @@ maxUploadSize = 200
 # requirements.txt
 streamlit>=1.30.0
 ollama>=0.1.0
-chromadb>=0.4.0
+chromadb>=0.4.22
 ```
 
 ---

@@ -1,7 +1,10 @@
 """
-Training Utilities - Built from Scratch with NumPy
+NumPy-Based Training Utilities
+==============================
 
-This module provides utilities for training neural networks:
+Training utilities built from scratch with NumPy for learning fundamentals.
+
+This module provides:
 - Data loading and batching
 - Training loops
 - Metrics and evaluation
@@ -9,101 +12,23 @@ This module provides utilities for training neural networks:
 - Early stopping
 - Visualization helpers
 
-Professor SPARK says: "A well-organized training loop is like a well-run
-kitchen - ingredients (data), recipes (model), tasting (evaluation), and
-adjustments (optimization) all flowing smoothly!"
-
-Author: Professor SPARK
-Course: DGX Spark AI Curriculum - Module 1.5
+Example:
+    >>> from utils.training import create_batches, EarlyStopping, accuracy
+    >>>
+    >>> for X_batch, y_batch in create_batches(X_train, y_train, batch_size=32):
+    ...     output = model(X_batch)
+    ...     loss = compute_loss(output, y_batch)
 """
 
 import numpy as np
-from typing import Tuple, List, Dict, Optional, Callable, Generator
+from typing import Tuple, List, Dict, Optional, Generator
 import time
 from dataclasses import dataclass
-import gzip
-import os
 
 
 # ============================================================================
 # Data Loading and Batching
 # ============================================================================
-
-def load_mnist(
-    path: str = './data',
-    flatten: bool = True,
-    normalize: bool = True
-) -> Tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
-    """
-    Load MNIST dataset from local files or download if not present.
-
-    Args:
-        path: Directory to store/load MNIST files
-        flatten: Whether to flatten images to 1D (784,) or keep 2D (28, 28)
-        normalize: Whether to normalize pixel values to [0, 1]
-
-    Returns:
-        X_train, y_train, X_test, y_test
-
-    Example:
-        >>> X_train, y_train, X_test, y_test = load_mnist()
-        >>> print(f"Training: {X_train.shape}, Test: {X_test.shape}")
-        # Training: (60000, 784), Test: (10000, 784)
-    """
-    import urllib.request
-
-    os.makedirs(path, exist_ok=True)
-
-    base_url = 'http://yann.lecun.com/exdb/mnist/'
-    files = {
-        'train_images': 'train-images-idx3-ubyte.gz',
-        'train_labels': 'train-labels-idx1-ubyte.gz',
-        'test_images': 't10k-images-idx3-ubyte.gz',
-        'test_labels': 't10k-labels-idx1-ubyte.gz'
-    }
-
-    def download_if_needed(filename: str) -> str:
-        filepath = os.path.join(path, filename)
-        if not os.path.exists(filepath):
-            print(f"Downloading {filename}...")
-            urllib.request.urlretrieve(base_url + filename, filepath)
-        return filepath
-
-    def load_images(filepath: str) -> np.ndarray:
-        with gzip.open(filepath, 'rb') as f:
-            # Skip magic number and dimensions
-            f.read(16)
-            data = np.frombuffer(f.read(), dtype=np.uint8)
-            return data.reshape(-1, 28, 28)
-
-    def load_labels(filepath: str) -> np.ndarray:
-        with gzip.open(filepath, 'rb') as f:
-            # Skip magic number
-            f.read(8)
-            return np.frombuffer(f.read(), dtype=np.uint8)
-
-    # Download and load
-    X_train = load_images(download_if_needed(files['train_images']))
-    y_train = load_labels(download_if_needed(files['train_labels']))
-    X_test = load_images(download_if_needed(files['test_images']))
-    y_test = load_labels(download_if_needed(files['test_labels']))
-
-    # Convert to float
-    X_train = X_train.astype(np.float32)
-    X_test = X_test.astype(np.float32)
-
-    # Normalize
-    if normalize:
-        X_train /= 255.0
-        X_test /= 255.0
-
-    # Flatten
-    if flatten:
-        X_train = X_train.reshape(X_train.shape[0], -1)
-        X_test = X_test.reshape(X_test.shape[0], -1)
-
-    return X_train, y_train, X_test, y_test
-
 
 def create_batches(
     X: np.ndarray,
@@ -113,10 +38,6 @@ def create_batches(
 ) -> Generator[Tuple[np.ndarray, np.ndarray], None, None]:
     """
     Create mini-batches from dataset.
-
-    ELI5: Instead of looking at all examples at once (slow) or one at a
-    time (noisy), we look at small groups. Like grading papers in stacks
-    instead of all at once or one by one.
 
     Args:
         X: Features array
@@ -200,7 +121,7 @@ def accuracy(predictions: np.ndarray, targets: np.ndarray) -> float:
     """
     if predictions.ndim > 1:
         predictions = np.argmax(predictions, axis=1)
-    return np.mean(predictions == targets)
+    return float(np.mean(predictions == targets))
 
 
 def confusion_matrix(
@@ -224,11 +145,11 @@ def confusion_matrix(
         predictions = np.argmax(predictions, axis=1)
 
     if num_classes is None:
-        num_classes = max(predictions.max(), targets.max()) + 1
+        num_classes = max(int(predictions.max()), int(targets.max())) + 1
 
     cm = np.zeros((num_classes, num_classes), dtype=int)
     for true, pred in zip(targets, predictions):
-        cm[true, pred] += 1
+        cm[int(true), int(pred)] += 1
 
     return cm
 
@@ -267,8 +188,8 @@ def precision_recall_f1(
             precision_per_class[c] = tp / (tp + fp) if (tp + fp) > 0 else 0
             recall_per_class[c] = tp / (tp + fn) if (tp + fn) > 0 else 0
 
-        precision = np.mean(precision_per_class)
-        recall = np.mean(recall_per_class)
+        precision = float(np.mean(precision_per_class))
+        recall = float(np.mean(recall_per_class))
     else:  # micro
         tp = np.diag(cm).sum()
         fp = cm.sum() - np.diag(cm).sum()
@@ -290,18 +211,8 @@ class Dropout:
     """
     Dropout regularization layer.
 
-    ELI5: Dropout is like randomly asking some students to skip class.
-    The remaining students can't rely on their absent friends, so they
-    have to learn the material themselves. This makes the whole class
-    stronger and less dependent on any single student!
-
     Parameters:
         rate: Probability of dropping a neuron (0 to 1)
-
-    Notes:
-        - During training: randomly zero out neurons, scale remaining by 1/(1-rate)
-        - During inference: do nothing (use all neurons)
-        - The scaling ensures expected values are the same in train/test
 
     Example:
         >>> dropout = Dropout(rate=0.5)
@@ -320,9 +231,7 @@ class Dropout:
     def forward(self, x: np.ndarray, training: bool = True) -> np.ndarray:
         """Forward pass."""
         if training and self.rate > 0:
-            # Create binary mask
             self.mask = (np.random.rand(*x.shape) > self.rate).astype(float)
-            # Apply mask and scale
             return x * self.mask / (1 - self.rate)
         else:
             return x
@@ -337,14 +246,9 @@ class Dropout:
         return self.forward(x, training)
 
 
-def l2_regularization_loss(
-    layers: List,
-    lambda_: float
-) -> float:
+def l2_regularization_loss(layers: List, lambda_: float) -> float:
     """
     Compute L2 regularization loss.
-
-    L2 loss = lambda * sum(w^2) for all weights
 
     Args:
         layers: List of layers with weights
@@ -360,14 +264,9 @@ def l2_regularization_loss(
     return 0.5 * lambda_ * l2_loss
 
 
-def l2_regularization_gradient(
-    layers: List,
-    lambda_: float
-) -> None:
+def l2_regularization_gradient(layers: List, lambda_: float) -> None:
     """
     Add L2 regularization gradient to existing gradients.
-
-    dL2/dw = lambda * w
 
     Args:
         layers: List of layers with weights and gradients
@@ -405,11 +304,6 @@ class TrainingHistory:
 class EarlyStopping:
     """
     Early stopping to prevent overfitting.
-
-    ELI5: Early stopping is like knowing when to stop practicing.
-    If your test scores stop improving (or get worse), practicing
-    more might actually hurt! We save our best work and stop when
-    we're no longer improving.
 
     Parameters:
         patience: Number of epochs to wait for improvement
@@ -503,28 +397,20 @@ def train_epoch(
     n_samples = 0
 
     for X_batch, y_batch in create_batches(X_train, y_train, batch_size, shuffle=True):
-        # Forward pass
         output = model(X_batch)
-
-        # Compute loss
         loss = loss_fn(output, y_batch)
 
-        # Add L2 regularization
         if l2_lambda > 0:
             loss += l2_regularization_loss(model.layers, l2_lambda)
 
-        # Backward pass
         grad = loss_fn.backward()
         model.backward(grad)
 
-        # Add L2 gradient
         if l2_lambda > 0:
             l2_regularization_gradient(model.layers, l2_lambda)
 
-        # Update weights
         optimizer.step(model.get_trainable_layers())
 
-        # Track metrics
         batch_size_actual = X_batch.shape[0]
         total_loss += loss * batch_size_actual
         total_correct += np.sum(np.argmax(output, axis=1) == y_batch)
@@ -587,11 +473,6 @@ def train(
     """
     Full training loop.
 
-    ELI5: This is the main "learning" function. It shows the model
-    many examples (epochs), checks how well it's doing (evaluation),
-    and makes adjustments (optimization). Like practicing a skill
-    over many days with regular check-ins!
-
     Args:
         model: Sequential model
         X_train, y_train: Training data
@@ -613,16 +494,13 @@ def train(
     for epoch in range(epochs):
         start_time = time.time()
 
-        # Train
         train_loss, train_acc = train_epoch(
             model, X_train, y_train, loss_fn, optimizer,
             batch_size, l2_lambda
         )
 
-        # Evaluate
         val_loss, val_acc = evaluate(model, X_val, y_val, loss_fn, batch_size)
 
-        # Record history
         epoch_time = time.time() - start_time
         history.train_loss.append(train_loss)
         history.train_accuracy.append(train_acc)
@@ -631,11 +509,9 @@ def train(
         history.epoch_times.append(epoch_time)
         history.learning_rates.append(optimizer.learning_rate)
 
-        # Update scheduler
         if scheduler is not None:
             scheduler.step()
 
-        # Print progress
         if verbose:
             print(f"Epoch {epoch + 1:3d}/{epochs} | "
                   f"Train Loss: {train_loss:.4f} | "
@@ -644,7 +520,6 @@ def train(
                   f"Val Acc: {val_acc:.2%} | "
                   f"Time: {epoch_time:.2f}s")
 
-        # Early stopping
         if early_stopping is not None:
             if early_stopping(val_loss):
                 if verbose:
@@ -665,8 +540,6 @@ def plot_training_history(
     """
     Plot training curves.
 
-    Creates a 2x1 figure with loss and accuracy curves.
-
     Args:
         history: TrainingHistory object
         title: Plot title
@@ -679,7 +552,6 @@ def plot_training_history(
 
     fig, axes = plt.subplots(1, 2, figsize=(12, 4))
 
-    # Loss plot
     axes[0].plot(history.train_loss, label='Train Loss')
     axes[0].plot(history.val_loss, label='Val Loss')
     axes[0].set_xlabel('Epoch')
@@ -688,7 +560,6 @@ def plot_training_history(
     axes[0].legend()
     axes[0].grid(True, alpha=0.3)
 
-    # Accuracy plot
     axes[1].plot(history.train_accuracy, label='Train Accuracy')
     axes[1].plot(history.val_accuracy, label='Val Accuracy')
     axes[1].set_xlabel('Epoch')
@@ -736,7 +607,6 @@ def plot_confusion_matrix(
            ylabel='True label',
            xlabel='Predicted label')
 
-    # Add text annotations
     thresh = cm.max() / 2.
     for i in range(cm.shape[0]):
         for j in range(cm.shape[1]):
@@ -749,7 +619,7 @@ def plot_confusion_matrix(
 
 
 if __name__ == "__main__":
-    print("Testing Training Utilities")
+    print("NumPy Training Utilities Demo")
     print("=" * 50)
 
     # Test data creation
@@ -786,16 +656,4 @@ if __name__ == "__main__":
     print(f"   Training: {(out_train == 0).mean():.1%} zeros (expect ~50%)")
     print(f"   Testing: {(out_test == 0).mean():.1%} zeros (expect 0%)")
 
-    # Test early stopping
-    print("\n5. Testing Early Stopping:")
-    early_stop = EarlyStopping(patience=3, mode='min')
-    losses = [1.0, 0.8, 0.7, 0.75, 0.76, 0.77]
-    for i, loss in enumerate(losses):
-        if early_stop(loss):
-            print(f"   Stopped at step {i + 1} with loss {loss}")
-            break
-    else:
-        print(f"   Did not stop early")
-
-    print("\n" + "=" * 50)
-    print("All training utility tests passed!")
+    print("\nAll tests passed!")

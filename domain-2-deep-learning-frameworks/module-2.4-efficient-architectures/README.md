@@ -119,7 +119,7 @@ Run Mamba on DGX Spark and compare with transformers.
 
 **Instructions:**
 1. Open `labs/lab-2.4.1-mamba-inference.ipynb`
-2. Load Mamba-2.8B using HuggingFace transformers (>=4.39.0)
+2. Load Mamba-2.8B using HuggingFace transformers (>=4.46.0)
 3. Load comparable transformer model (similar parameters)
 4. Benchmark: tok/s (decode speed), memory usage, time-to-first-token
 5. Test with increasing context lengths (4K, 8K, 16K, 32K)
@@ -233,7 +233,7 @@ Fine-tune a Mamba model for a custom task.
 ```python
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
-# Requires transformers >= 4.39.0 for Mamba support
+# Requires transformers >= 4.46.0 for Mamba support
 model = AutoModelForCausalLM.from_pretrained(
     "state-spaces/mamba-2.8b-hf",
     torch_dtype=torch.bfloat16,
@@ -313,7 +313,7 @@ Use this checklist to track your progress:
 
 | Issue | Solution |
 |-------|----------|
-| `ImportError: Mamba not found` | Upgrade: `pip install transformers>=4.39.0` |
+| `ImportError: Mamba not found` | Upgrade: `pip install transformers>=4.46.0` |
 | MoE out of memory | Load with `load_in_8bit=True` or reduce batch size |
 | Mamba slow first token | Expected—initialization overhead. Subsequent tokens fast. |
 | Router weights not accessible | Use `model.model.layers[N].block_sparse_moe.gate.weight` |

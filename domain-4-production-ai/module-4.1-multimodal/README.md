@@ -151,7 +151,7 @@ docker run --gpus all -it --rm \
 
 ```bash
 # Inside the container (versions pinned for compatibility)
-pip install transformers>=4.45.0 accelerate>=0.27.0 bitsandbytes>=0.42.0
+pip install transformers>=4.46.0 accelerate>=0.28.0 bitsandbytes>=0.43.0
 pip install diffusers>=0.27.0 controlnet_aux>=0.0.7
 pip install sentence-transformers>=2.3.0 chromadb>=0.4.22
 pip install pdf2image pytesseract pymupdf>=1.23.0
