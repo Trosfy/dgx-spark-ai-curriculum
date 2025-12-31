@@ -66,7 +66,6 @@ from .profiler_utils import (
     Timer,
     MemoryTracker,
     profile_training_step,
-    profile_training_loop,
     benchmark_dataloader,
     profile_with_pytorch_profiler,
     find_bottlenecks,
@@ -117,6 +116,7 @@ __all__ = [
     'MemoryTracker',
     'profile_training_step',
     'benchmark_dataloader',
+    'profile_with_pytorch_profiler',
     'find_bottlenecks',
     'generate_profile_report',
 ]
