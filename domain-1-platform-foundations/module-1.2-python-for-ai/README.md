@@ -228,7 +228,7 @@ On DGX Spark with ARM64 architecture:
 After completing this module:
 1. ✅ Verify all milestones are checked
 2. 📁 Save preprocessing pipeline to `scripts/`
-3. ➡️ Proceed to [Module 1.3: Mathematics for Deep Learning](../module-1.3-math-foundations/)
+3. ➡️ Proceed to [Module 1.3: CUDA Python & GPU Programming](../module-1.3-cuda-python/)
 
 ---
 

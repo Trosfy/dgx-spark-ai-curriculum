@@ -1,8 +1,8 @@
 # Module 2.1: Deep Learning with PyTorch
 
-**Domain:** 2 - Deep Learning Frameworks  
-**Duration:** Weeks 7-8 (12-15 hours)  
-**Prerequisites:** Domain 1 complete
+**Domain:** 2 - Deep Learning Frameworks
+**Duration:** Weeks 8-9 (12-15 hours)
+**Prerequisites:** Domain 1 complete (Module 1.7 Capstone)
 
 ---
 
@@ -274,6 +274,14 @@ After completing this module:
 1. ✅ Verify all milestones are checked
 2. 📁 Save reusable modules to `scripts/`
 3. ➡️ Proceed to [Module 2.2: Computer Vision](../module-2.2-computer-vision/)
+
+---
+
+## Module Navigation
+
+| Previous | Current | Next |
+|----------|---------|------|
+| [Module 1.7: Capstone — MicroGrad+](../../domain-1-platform-foundations/module-1.7-capstone-micrograd/) | **Module 2.1: PyTorch** | [Module 2.2: Computer Vision](../module-2.2-computer-vision/) |
 
 ---
 

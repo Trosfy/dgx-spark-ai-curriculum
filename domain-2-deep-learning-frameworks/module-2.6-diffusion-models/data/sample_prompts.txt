@@ -1,0 +1,117 @@
+# Sample Prompts for Diffusion Models Module 2.6
+# Each section contains prompts optimized for different use cases
+# Format: Category, then prompts below
+
+# ============================================================
+# PHOTOREALISTIC
+# ============================================================
+
+A professional headshot of a young woman with natural makeup, soft studio lighting, shallow depth of field, 8K resolution, sharp focus on eyes
+
+A serene mountain landscape at golden hour, snow-capped peaks reflected in a crystal clear alpine lake, national geographic photography style
+
+Street photography of Tokyo at night, neon signs reflecting on wet pavement after rain, cinematic composition, Blade Runner aesthetic
+
+A cup of freshly brewed coffee with intricate latte art, morning sunlight streaming through a window, cozy cafe atmosphere, food photography
+
+An ancient redwood forest with sunbeams filtering through the canopy, misty atmosphere, dramatic lighting, landscape photography
+
+# ============================================================
+# ARTISTIC / PAINTERLY
+# ============================================================
+
+A dreamlike forest with bioluminescent trees and glowing mushrooms, fantasy art style, magical atmosphere, vibrant blues and purples
+
+Abstract geometric patterns flowing like liquid, vibrant complementary colors, digital art, inspired by Kandinsky and Escher
+
+A steampunk cityscape at sunset, intricate brass machinery and clockwork towers, oil painting style, warm copper tones
+
+Portrait of a wise elderly man, expressive brushstrokes, Rembrandt lighting, classical oil painting technique, visible texture
+
+A Japanese garden in autumn, koi pond with falling maple leaves, ukiyo-e woodblock print style, traditional composition
+
+# ============================================================
+# CHARACTERS / PORTRAITS
+# ============================================================
+
+A wise wizard with a long flowing beard, holding a glowing crystal staff, elaborate robes with arcane symbols, fantasy portrait, dramatic rim lighting
+
+A cyberpunk hacker with neon-colored hair and futuristic goggles, holographic interface reflections, sci-fi concept art style
+
+A cute cartoon cat astronaut floating in space, surrounded by stars and planets, Pixar animation style, heartwarming expression
+
+A fierce samurai warrior in traditional armor, cherry blossoms falling around them, dynamic pose, anime art style with detailed linework
+
+A Victorian-era detective with magnifying glass, foggy London street background, noir atmosphere, graphic novel illustration style
+
+# ============================================================
+# ARCHITECTURE / INTERIORS
+# ============================================================
+
+A futuristic space station interior with large windows showing Earth below, clean minimalist design, soft ambient lighting, sci-fi concept art
+
+An ancient library with towering bookshelves reaching to vaulted ceilings, warm candlelight, dust particles in light beams, fantasy setting
+
+A cozy cabin interior during winter, fireplace with crackling flames, comfortable armchair, warm lighting, hygge atmosphere
+
+A brutalist concrete building at sunset, dramatic geometric shadows, architectural photography, high contrast black and white
+
+Art deco ballroom with geometric patterns, golden accents, crystal chandeliers, 1920s glamour, elegant and luxurious
+
+# ============================================================
+# NATURE / WILDLIFE
+# ============================================================
+
+A majestic lion resting on a rock in the African savanna, golden hour lighting, wildlife photography style, National Geographic quality
+
+A hummingbird hovering near a tropical flower, frozen in motion, macro photography with beautiful bokeh background, vivid colors
+
+An underwater coral reef teeming with colorful fish, sunlight filtering from above, marine photography, crystal clear water
+
+A wolf pack in a snowy forest during twilight, breath visible in cold air, atmospheric lighting, wildlife documentary style
+
+A monarch butterfly migration, thousands of orange and black wings against blue sky, nature photography, sense of movement
+
+# ============================================================
+# FOOD / STILL LIFE
+# ============================================================
+
+A rustic wooden table with artisan bread, olive oil, fresh herbs, morning light, food photography, Mediterranean aesthetic
+
+A perfectly layered rainbow cake slice revealing colorful layers, professional food photography, white background, commercial quality
+
+Traditional Japanese tea ceremony setup, matcha in ceramic bowl, bamboo whisk, zen garden background, serene atmosphere
+
+Fresh market produce arranged in a cornucopia, vibrant colors, top-down composition, editorial food photography
+
+Belgian chocolate truffles on marble surface, dusted with cocoa powder, macro detail, luxury food advertising style
+
+# ============================================================
+# SCI-FI / FANTASY
+# ============================================================
+
+An alien planet with twin suns setting over crystalline mountains, bioluminescent flora, science fiction concept art, otherworldly beauty
+
+A dragon perched on a castle spire during a thunderstorm, lightning illuminating its scales, epic fantasy art, dramatic composition
+
+A time traveler's workshop filled with anachronistic technology, steampunk meets cyberpunk aesthetic, intricate details everywhere
+
+An underwater city with transparent domes and bioluminescent architecture, merpeople silhouettes, aquatic sci-fi concept art
+
+A floating island village connected by rope bridges, clouds below, Studio Ghibli inspired, whimsical fantasy landscape
+
+# ============================================================
+# NEGATIVE PROMPTS (Use these to avoid common issues)
+# ============================================================
+
+# Standard quality negative:
+blurry, low quality, distorted, deformed, bad anatomy, watermark, text, signature, oversaturated, underexposed
+
+# For portraits:
+bad hands, extra fingers, missing fingers, bad proportions, cross-eyed, mutated, disfigured, ugly, worst quality
+
+# For photorealism:
+cartoon, anime, illustration, painting, drawing, art, sketch, CGI, 3D render, artificial, fake looking
+
+# For artistic styles:
+photo, photograph, realistic, hyperrealistic, 3D, render, stock photo, low resolution

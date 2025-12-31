@@ -1,14 +1,17 @@
 # Module 3.2: Model Quantization & Optimization
 
-**Domain:** 3 - LLM Systems  
-**Duration:** Weeks 18-19 (10-12 hours)  
+**Domain:** 3 - LLM Systems
+**Duration:** Weeks 19-20 (12-15 hours)
 **Prerequisites:** Module 3.1 (LLM Fine-tuning)
+**Priority:** P0 Critical (NVFP4, FP8 Expansion)
 
 ---
 
 ## Overview
 
-Quantization is the key to running large models efficiently. This module covers all major quantization techniques, with special focus on Blackwell's exclusive FP4 capabilities—a unique advantage of the DGX Spark platform.
+Quantization is the key to running large models efficiently. This module covers all major quantization techniques, with special focus on Blackwell's exclusive NVFP4 and native FP8 capabilities—a unique advantage of the DGX Spark platform.
+
+**What's New in v2.0:** Deep dive into NVFP4 (3.5× memory reduction), FP8 training, and TensorRT-LLM engine building. This is where DGX Spark's Blackwell architecture truly shines!
 
 ---
 
@@ -88,9 +91,9 @@ By the end of this module, you will be able to:
 
 | ID | Objective | Bloom's Level |
 |----|-----------|---------------|
-| 3.2.1 | Explain different quantization methods and their tradeoffs | Understand |
-| 3.2.2 | Quantize models using GPTQ, AWQ, and GGUF | Apply |
-| 3.2.3 | Apply Blackwell-exclusive FP4 quantization | Apply |
+| 3.2.1 | Explain NVFP4 micro-block scaling and FP8 E4M3 format | Understand |
+| 3.2.2 | Quantize models using NVFP4 with TensorRT Model Optimizer | Apply |
+| 3.2.3 | Apply GPTQ, AWQ, and GGUF quantization | Apply |
 | 3.2.4 | Measure and compare quality degradation | Evaluate |
 
 ---
@@ -98,9 +101,15 @@ By the end of this module, you will be able to:
 ## Topics
 
 ### 3.2.1 Quantization Fundamentals
-- Data types: FP32 → FP16 → BF16 → INT8 → INT4 → FP8 → FP4
-- Post-training quantization vs quantization-aware training
-- Calibration datasets
+
+- **Data Types Overview**
+  - FP32 → FP16 → BF16 → INT8 → INT4 → FP8 → FP4
+  - Precision vs memory tradeoffs
+
+- **Quantization Approaches**
+  - Post-training quantization (PTQ): Fast, no retraining
+  - Quantization-aware training (QAT): Better quality, more effort
+  - Calibration datasets and their importance
 
 ### 3.2.2 Quantization Methods
 
@@ -109,14 +118,35 @@ By the end of this module, you will be able to:
 | GPTQ | 4-bit | GPU inference | ✅ |
 | AWQ | 4-bit | Activation-aware | ✅ |
 | GGUF | 2-8 bit | llama.cpp | ✅ |
-| FP8 | 8-bit | Training + inference | ✅ |
+| FP8 | 8-bit | Training + inference | ✅ Native |
 | **NVFP4** | 4-bit | Blackwell exclusive | ⭐ **Only on DGX Spark** |
 
-### 3.2.3 Blackwell-Specific (DGX Spark Exclusive)
-- NVFP4 format with dual-level scaling
-- MXFP4 (Open Compute Project)
-- 3.5× memory reduction vs FP16
-- <1% accuracy loss
+### 3.2.3 Blackwell-Specific Quantization [P0 Expansion]
+
+- **NVFP4 (NVIDIA FP4)**
+  - Dual-level scaling for accuracy
+  - Micro-block scaling within groups
+  - 3.5× memory reduction vs FP16
+  - <0.1% accuracy loss on MMLU
+  - ~10,000+ tok/s prefill on 8B models
+
+- **FP8 (E4M3/E5M2)**
+  - E4M3: 4-bit exponent, 3-bit mantissa (inference)
+  - E5M2: 5-bit exponent, 2-bit mantissa (training, larger range)
+  - Native Blackwell Tensor Core support
+  - 2× compute efficiency vs FP16
+
+- **MXFP4 (Open Compute Project)**
+  - Open standard for FP4
+  - Compatible with multiple vendors
+  - Similar quality to NVFP4
+
+### 3.2.4 TensorRT-LLM Integration
+
+- Building optimized TensorRT engines
+- Weight-only vs full quantization
+- INT8 KV cache for memory savings
+- Optimal configurations for DGX Spark
 
 ---
 
@@ -124,12 +154,14 @@ By the end of this module, you will be able to:
 
 | # | Task | Time | Deliverable |
 |---|------|------|-------------|
-| 3.2.1 | Quantization Overview | 2h | Compare FP16/INT8/INT4: size, speed, perplexity |
-| 3.2.2 | GPTQ Quantization | 2h | Quantize 7B with group sizes 32/64/128 |
-| 3.2.3 | AWQ Quantization | 1.5h | Compare AWQ vs GPTQ |
-| 3.2.4 | GGUF Conversion | 2h | Convert to GGUF, test with llama.cpp |
-| 3.2.5 | FP4 Deep Dive ⭐ | 3h | NVFP4 quantization (Blackwell exclusive!) |
-| 3.2.6 | Quality Benchmark Suite | 2h | Perplexity + MMLU across all variants |
+| 3.2.1 | Data Type Exploration | 1.5h | Visualize FP32→FP16→FP8→FP4 precision loss |
+| 3.2.2 | NVFP4 Quantization ⭐ | 3h | NVFP4 on 70B model (Blackwell showcase!) |
+| 3.2.3 | FP8 Training and Inference | 2h | Train with FP8, compare with FP16 |
+| 3.2.4 | GPTQ Quantization | 2h | Quantize 7B with group sizes 32/64/128 |
+| 3.2.5 | AWQ Quantization | 1.5h | Compare AWQ vs GPTQ |
+| 3.2.6 | GGUF Conversion | 2h | Convert to GGUF, test with llama.cpp |
+| 3.2.7 | Quality Benchmark Suite | 2h | Perplexity + MMLU across all variants |
+| 3.2.8 | TensorRT-LLM Engine | 2h | Build TRT engine with NVFP4, benchmark |
 
 ---
 
@@ -177,16 +209,77 @@ results = evaluator.simple_evaluate(
 print(f"Perplexity: {results['results']['wikitext']['word_perplexity']}")
 ```
 
+### FP8 Training [P0]
+
+```python
+import torch
+
+# Enable FP8 training with transformer engine
+from transformer_engine.pytorch import fp8_autocast
+
+with fp8_autocast():
+    outputs = model(input_ids, labels=labels)
+    loss = outputs.loss
+    loss.backward()
+
+# FP8 benefits:
+# - 2x compute throughput on Tensor Cores
+# - Reduced memory for activations
+# - Native Blackwell support
+```
+
+### DGX Spark Quantization Capacity
+
+| Quantization | 8B Model | 70B Model | 200B Model |
+|--------------|----------|-----------|------------|
+| FP16 | ✅ 16GB | ✅ 140GB* | ❌ OOM |
+| FP8 | ✅ 8GB | ✅ 70GB | ❌ OOM |
+| NVFP4 | ✅ 4GB | ✅ 35GB | ✅ ~100GB |
+| GPTQ/AWQ | ✅ 4GB | ✅ 35GB | ✅ ~100GB |
+
+*With gradient checkpointing or inference-only
+
 ---
 
 ## Milestone Checklist
 
-- [ ] Quantization comparison table (size, speed, perplexity)
+- [ ] Data type precision visualization complete
+- [ ] **NVFP4 quantization of 70B model** ⭐ (DGX Spark showcase!)
+- [ ] FP8 training and inference demonstrated [P0]
 - [ ] GPTQ with multiple group sizes
 - [ ] AWQ vs GPTQ comparison
 - [ ] GGUF conversion and llama.cpp testing
-- [ ] **NVFP4 quantization** ⭐ (DGX Spark exclusive)
 - [ ] Quality benchmark suite with all variants
+- [ ] TensorRT-LLM engine built and benchmarked
+
+---
+
+## Common Issues
+
+| Issue | Solution |
+|-------|----------|
+| NVFP4 not available | Verify Blackwell GPU (compute capability ≥ 10.0) |
+| FP8 NaN loss | Reduce learning rate, check gradient scaling |
+| GPTQ slow quantization | Reduce calibration samples or use GPU |
+| GGUF conversion fails | Check llama.cpp version compatibility |
+| TensorRT build fails | Verify TensorRT-LLM version matches container |
+
+---
+
+## Next Steps
+
+After completing this module:
+1. ✅ Verify all milestones are checked
+2. 📁 Save your quantized models
+3. ➡️ Proceed to [Module 3.3: Deployment & Inference](../module-3.3-deployment/)
+
+---
+
+## Module Navigation
+
+| Previous | Current | Next |
+|----------|---------|------|
+| [Module 3.1: LLM Fine-Tuning](../module-3.1-llm-finetuning/) | **Module 3.2: Quantization** | [Module 3.3: Deployment](../module-3.3-deployment/) |
 
 ---
 
@@ -194,5 +287,7 @@ print(f"Perplexity: {results['results']['wikitext']['word_perplexity']}")
 
 - [GPTQ Paper](https://arxiv.org/abs/2210.17323)
 - [AWQ Paper](https://arxiv.org/abs/2306.00978)
+- [NVIDIA FP8 Format](https://docs.nvidia.com/deeplearning/transformer-engine/user-guide/index.html)
+- [TensorRT Model Optimizer](https://developer.nvidia.com/tensorrt)
 - [llama.cpp](https://github.com/ggerganov/llama.cpp)
-- [NVIDIA TensorRT Model Optimizer](https://developer.nvidia.com/tensorrt)
+- [Transformer Engine](https://github.com/NVIDIA/TransformerEngine)

@@ -1,8 +1,9 @@
 # Module 2.3: Natural Language Processing & Transformers
 
-**Domain:** 2 - Deep Learning Frameworks  
-**Duration:** Weeks 11-12 (12-15 hours)  
-**Prerequisites:** Module 2.1 (PyTorch)
+**Domain:** 2 - Deep Learning Frameworks
+**Duration:** Week 12 (12-15 hours)
+**Prerequisites:** Module 2.2 (Computer Vision)
+**Priority:** P2 Expanded (Tokenizer Training)
 
 ---
 
@@ -28,9 +29,9 @@ By the end of this module, you will be able to:
 | ID | Objective | Bloom's Level |
 |----|-----------|---------------|
 | 2.3.1 | Implement multi-head self-attention from scratch | Apply |
-| 2.3.2 | Explain positional encoding strategies (sinusoidal, RoPE) | Understand |
-| 2.3.3 | Tokenize text using BPE and SentencePiece | Apply |
-| 2.3.4 | Fine-tune BERT for classification tasks | Apply |
+| 2.3.2 | Train custom tokenizers from scratch [P2 Expansion] | Apply |
+| 2.3.3 | Explain positional encoding strategies (sinusoidal, RoPE, ALiBi) | Understand |
+| 2.3.4 | Fine-tune BERT and GPT models for downstream tasks | Apply |
 
 ---
 
@@ -54,10 +55,12 @@ By the end of this module, you will be able to:
 - Rotary Position Embeddings (RoPE)
 - ALiBi
 
-### 2.3.4 Tokenization
-- Word-level vs subword
-- BPE algorithm
-- SentencePiece
+### 2.3.4 Tokenization [P2 Expansion]
+- Word-level vs subword tokenization
+- BPE algorithm implementation from scratch
+- SentencePiece and HuggingFace tokenizers
+- Training tokenizers on custom corpora
+- Vocabulary size tradeoffs
 
 ### 2.3.5 Pre-trained Models
 - BERT (masked LM)
@@ -71,9 +74,9 @@ By the end of this module, you will be able to:
 | # | Task | Time | Deliverable |
 |---|------|------|-------------|
 | 2.3.1 | Attention from Scratch | 2h | Scaled dot-product and multi-head attention with visualization |
-| 2.3.2 | Transformer Block | 3h | Complete encoder block, stack 6 layers |
+| 2.3.2 | Transformer Block | 2h | Complete encoder block, stack 6 layers |
 | 2.3.3 | Positional Encoding Study | 2h | Sinusoidal and RoPE implementation |
-| 2.3.4 | Tokenization Lab | 2h | Train BPE tokenizer, compare with GPT-2/LLaMA |
+| 2.3.4 | Tokenizer Training from Scratch | 3h | Implement BPE algorithm, train on custom corpus |
 | 2.3.5 | BERT Fine-tuning | 2h | Sentiment classification with evaluation |
 | 2.3.6 | GPT Text Generation | 2h | Implement decoding strategies (greedy, beam, sampling) |
 
@@ -141,7 +144,7 @@ mask = cumsum <= p
 - [ ] Multi-head attention implementation complete
 - [ ] Full Transformer encoder working
 - [ ] Both positional encoding types implemented
-- [ ] Custom BPE tokenizer trained
+- [ ] Custom BPE tokenizer trained from scratch
 - [ ] BERT fine-tuning achieving good accuracy
 - [ ] Text generation with multiple decoding strategies
 
@@ -225,9 +228,28 @@ from scripts.tokenizer_utils import SimpleBPE, estimate_token_cost
 
 ---
 
+## Next Steps
+
+After completing this module:
+1. ✅ Verify all milestones are checked
+2. 📁 Save reusable implementations to `scripts/`
+3. ➡️ Proceed to [Module 2.4: Efficient Architectures](../module-2.4-efficient-architectures/)
+
+---
+
+## Module Navigation
+
+| Previous | Current | Next |
+|----------|---------|------|
+| [Module 2.2: Computer Vision](../module-2.2-computer-vision/) | **Module 2.3: NLP & Transformers** | [Module 2.4: Efficient Architectures](../module-2.4-efficient-architectures/) |
+
+---
+
 ## Resources
 
 - [The Illustrated Transformer](http://jalammar.github.io/illustrated-transformer/)
 - [Attention Is All You Need](https://arxiv.org/abs/1706.03762)
 - [RoPE Paper](https://arxiv.org/abs/2104.09864)
 - [Hugging Face NLP Course](https://huggingface.co/learn/nlp-course)
+- [Tokenizers Library](https://huggingface.co/docs/tokenizers)
+- [SentencePiece](https://github.com/google/sentencepiece)

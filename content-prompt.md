@@ -53,6 +53,14 @@ Examples of good ELI5 analogies:
 - **Backpropagation**: "Like grading a group project backwards - you see the final grade, then figure out how much each person contributed to the mistakes"
 - **LoRA**: "Instead of repainting your entire house, you just add a thin layer of new wallpaper in the rooms that need updating"
 - **Quantization**: "Like JPEG compression for neural networks - smaller file, almost the same picture"
+- **Mamba/SSM**: "Instead of looking at every word simultaneously (attention), you read like humans do - one word at a time, keeping a 'summary' of what came before. Much faster for long books!"
+- **MoE (Mixture of Experts)**: "Like a hospital with specialist doctors. Instead of one doctor knowing everything, you have a 'receptionist' (router) who sends each patient to the right specialist"
+- **RAG**: "Giving AI a library card. Instead of memorizing every book, it can look things up when asked a question"
+- **Speculative Decoding**: "Like a secretary who drafts emails for the boss. The secretary writes quickly, the boss reviews and approves/corrects. Faster than the boss typing from scratch!"
+- **DPO/Preference Learning**: "Training a dog by showing two treats and rewarding which one it should prefer. No need to score each treat individually"
+- **Test-Time Compute**: "Spending more time 'thinking' on hard problems. A student who double-checks their math test answers will score better than one who rushes"
+- **CUDA Kernels**: "Writing a recipe specifically for a massive kitchen with 6,144 chefs (CUDA cores) who all cook the same dish simultaneously"
+- **Vector Database**: "A librarian who organizes books by 'vibes' instead of alphabetically - similar topics are shelved together"
 
 ## Real-World Applications
 Every concept must connect to something tangible:
@@ -61,6 +69,15 @@ Every concept must connect to something tangible:
 - Transformers → "How Google translates languages"
 - Fine-tuning → "Teaching a general assistant to be YOUR assistant"
 - RAG → "Giving AI the ability to look things up in your documents"
+- CUDA Programming → "Making your code run 100x faster on the GPU"
+- Quantization → "Running GPT-4 class models on your desktop"
+- AI Safety → "Preventing your chatbot from giving dangerous advice"
+- Mamba → "Processing hour-long videos without running out of memory"
+- MoE → "How DeepSeek built a 200B model that runs like a 20B model"
+- Speculative Decoding → "Making your local LLM respond 3x faster"
+- Diffusion Models → "How Midjourney creates images from text"
+- Object Detection → "How self-driving cars see pedestrians"
+- Test-Time Reasoning → "How OpenAI's o1 solves complex math problems"
 
 ## Code Quality Standards
 - Every code cell must run without errors
@@ -73,21 +90,45 @@ Every concept must connect to something tangible:
 <dgx_spark_context>
 ## Hardware Specifications (Always Reference)
 - GPU: NVIDIA Blackwell GB10 Superchip
-- Memory: 128GB LPDDR5X Unified (CPU+GPU shared)
+- CPU: 20 ARM v9.2 cores (10 Cortex-X925 + 10 Cortex-A725)
+- Memory: 128GB LPDDR5X Unified (CPU+GPU shared, 273 GB/s bandwidth)
 - CUDA Cores: 6,144
 - Tensor Cores: 192 (5th generation)
-- Compute: 1 PFLOP FP4, ~209 TFLOPS FP8
+- Compute: 1 PFLOP FP4, ~209 TFLOPS FP8, ~100 TFLOPS BF16
+
+## DGX Spark Model Capacity Matrix
+| Scenario | Maximum Model Size | Memory Usage | Notes |
+|----------|-------------------|--------------|-------|
+| Full Fine-Tuning (FP16) | **12-16B** | ~100-128GB | With gradient checkpointing |
+| QLoRA Fine-Tuning | **100-120B** | ~50-70GB | 4-bit quantized + adapters |
+| FP16 Inference | **50-55B** | ~110-120GB | Including KV cache headroom |
+| FP8 Inference | **90-100B** | ~90-100GB | Native Blackwell support |
+| **NVFP4 Inference** | **~200B** | ~100GB | Blackwell exclusive |
+| Dual Spark (256GB) FP4 | **~405B** | ~200GB | Model parallelism via NVLink |
 
 ## What Makes DGX Spark Special
 1. **Unified Memory**: No CPU↔GPU transfers needed. A 70B model fits entirely!
-2. **Blackwell FP4**: 4-bit inference exclusive to this architecture
-3. **Desktop Form Factor**: All this power without cloud costs
+2. **Blackwell NVFP4**: 4-bit inference exclusive to this architecture (3.5× memory reduction vs FP16)
+3. **FP8 Native**: E4M3 for inference, E5M2 for training
+4. **Desktop Form Factor**: All this power without cloud costs
+
+## NVIDIA Tools Compatibility (ARM64)
+| Tool | Status | Notes |
+|------|--------|-------|
+| NeMo Framework | ✅ Full | Blackwell support confirmed |
+| TensorRT-LLM | ⚠️ NGC | Requires NGC container/source build |
+| Triton Server | ✅ Full | Official aarch64 wheels |
+| RAPIDS (cuDF/cuML) | ✅ Full | Official ARM64 since v22.04 |
+| vLLM | ⚠️ Partial | Use `--enforce-eager` flag |
+| SGLang | ✅ Full | Blackwell/Jetson support, 29-45% faster than vLLM |
+| llama.cpp | ✅ Full | CUDA 13 + ARM64 supported |
 
 ## Critical Requirements
 - Always use NGC containers for PyTorch (pip install doesn't work on ARM64+CUDA)
 - Clear buffer cache before large model loading:
   `sudo sh -c 'sync; echo 3 > /proc/sys/vm/drop_caches'`
 - Use bfloat16 as default dtype (native Blackwell support)
+- For DataLoader workers, always use `--ipc=host` in Docker
 
 ## Container Command
 ```bash
@@ -98,6 +139,31 @@ docker run --gpus all -it --rm \
     nvcr.io/nvidia/pytorch:25.11-py3 \
     jupyter lab --ip=0.0.0.0 --allow-root --no-browser
 ```
+
+## v2 Curriculum Topics Reference
+
+### New P0 Critical Topics
+- **CUDA Python**: Numba, CuPy, memory coalescing, Nsight profiling
+- **NVFP4/FP8 Quantization**: TensorRT Model Optimizer, micro-block scaling
+- **RAG Systems**: Vector databases (ChromaDB, FAISS, Qdrant), hybrid search, reranking
+- **AI Safety**: NeMo Guardrails, Llama Guard, red teaming with DeepTeam/Promptfoo
+- **Docker/Containerization**: NGC customization, multi-stage builds, compose stacks
+
+### New P1 High Priority Topics
+- **Mamba/State Space Models**: Selective state spaces, linear complexity, no KV cache
+- **Mixture of Experts (MoE)**: Gating mechanisms, load balancing, DeepSeekMoE
+- **Modern Fine-Tuning**: DoRA (+3.7 pts), NEFTune (29.8%→64.7% AlpacaEval!), SimPO, ORPO, KTO
+- **SGLang/Speculative Decoding**: RadixAttention, Medusa (2-3x speedup), EAGLE
+- **Test-Time Compute**: CoT prompting, self-consistency, DeepSeek-R1 reasoning
+- **Diffusion Models**: SDXL, Flux, ControlNet, LoRA style training
+
+### P2 Medium Priority Topics
+- **Classical ML**: XGBoost, Random Forests, RAPIDS cuML acceleration
+- **Object Detection**: YOLO, Faster R-CNN, anchor-free detectors
+- **Vision Transformers**: ViT, DeiT, Swin Transformer
+- **Tokenizer Training**: BPE from scratch, SentencePiece
+- **Kubernetes**: Basic K8s for ML deployments
+- **Demo Building**: Gradio, Streamlit
 </dgx_spark_context>
 
 <output_format>

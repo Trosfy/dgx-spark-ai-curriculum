@@ -157,17 +157,79 @@ For each Python file and code cell:
 - [ ] Solutions available and correct
 - [ ] Difficulty is appropriate for the stage
 
+## 6. V2 CURRICULUM-SPECIFIC VALIDATION
+
+### 6.1 New Architecture Coverage
+When reviewing modules covering new architectures, verify:
+- **Mamba/SSM**: Explain selective state spaces, compare memory vs transformers
+- **MoE**: Explain gating mechanism, expert selection, load balancing
+- **ViT**: Patch embeddings, position embeddings, comparison with CNNs
+
+### 6.2 Modern Fine-Tuning Methods
+When reviewing fine-tuning content, verify:
+- **DoRA**: Weight decomposition (magnitude + direction) explained
+- **NEFTune**: Noise injection formula and alpha parameter covered
+- **SimPO/ORPO**: Reference model elimination explained
+- **KTO**: Binary feedback vs preference pairs distinction
+
+### 6.3 Quantization Accuracy
+When reviewing quantization content, verify:
+- **NVFP4**: Micro-block scaling explained, Blackwell exclusive noted
+- **FP8**: E4M3 vs E5M2 format distinction
+- **Calibration**: Dataset selection guidance provided
+
+### 6.4 RAG System Completeness
+When reviewing RAG content, verify:
+- Document chunking strategies compared
+- Embedding model selection criteria provided
+- Hybrid search (dense + sparse) explained
+- Evaluation metrics (Recall@K, MRR, RAGAS) included
+
+### 6.5 AI Safety Coverage
+When reviewing safety content, verify:
+- NeMo Guardrails configuration example provided
+- Red teaming methodology explained
+- Llama Guard classification example included
+- Model card requirements documented
+
+### 6.6 Inference Engine Accuracy
+When reviewing deployment content, verify:
+- SGLang RadixAttention explained
+- Speculative decoding (Medusa/EAGLE) mechanics covered
+- Continuous batching explained
+- Benchmark methodology is direct API (not UI overhead)
+
 </task>
 
 <dgx_spark_context>
 ## Hardware Specifications (Reference for Validation)
 - GPU: NVIDIA Blackwell GB10 Superchip
-- Memory: 128GB LPDDR5X Unified (CPU+GPU shared)
+- Memory: 128GB LPDDR5X Unified (CPU+GPU shared, 273 GB/s bandwidth)
 - CPU: 20 ARM v9.2 cores (Cortex-X925 + Cortex-A725)
 - Architecture: ARM64 (aarch64) - NOT x86_64!
 - CUDA Cores: 6,144
 - Tensor Cores: 192 (5th generation)
-- Compute: 1 PFLOP FP4, ~209 TFLOPS FP8
+- Compute: 1 PFLOP FP4, ~209 TFLOPS FP8, ~100 TFLOPS BF16
+
+## DGX Spark Model Capacity Matrix
+| Scenario | Maximum Model Size | Memory Usage |
+|----------|-------------------|--------------|
+| Full Fine-Tuning (FP16) | 12-16B | ~100-128GB |
+| QLoRA Fine-Tuning | 100-120B | ~50-70GB |
+| FP16 Inference | 50-55B | ~110-120GB |
+| FP8 Inference | 90-100B | ~90-100GB |
+| NVFP4 Inference | ~200B | ~100GB |
+
+## NVIDIA Tools Compatibility (Validate These!)
+| Tool | Status | Notes |
+|------|--------|-------|
+| NeMo Framework | ✅ Full | Blackwell support confirmed |
+| TensorRT-LLM | ⚠️ NGC | Requires NGC container/source build |
+| Triton Server | ✅ Full | Official aarch64 wheels |
+| RAPIDS (cuDF/cuML) | ✅ Full | Official ARM64 since v22.04 |
+| vLLM | ⚠️ Partial | Must use `--enforce-eager` flag |
+| SGLang | ✅ Full | Blackwell/Jetson support |
+| llama.cpp | ✅ Full | CUDA 13 + ARM64 supported |
 
 ## Critical Validation Rules
 
@@ -259,6 +321,30 @@ prefill_tps = data["prompt_eval_count"] / (data["prompt_eval_duration"] / 1e9)
 | Solution doesn't match exercise | HIGH | Update solution |
 | Script function signature changed | CRITICAL | Update all callers |
 | Data schema doesn't match code | CRITICAL | Align schema and code |
+
+### v2 Curriculum-Specific Issues
+| Pattern | Severity | Fix |
+|---------|----------|-----|
+| Mamba model without HuggingFace transformers>=4.39 | HIGH | Update transformers version |
+| DoRA without PEFT>=0.10.0 | HIGH | Update PEFT library |
+| NEFTune without TRL>=0.8.0 | HIGH | Update TRL library |
+| SimPO/ORPO without TRL>=0.9.0 | HIGH | Update TRL library |
+| SGLang without `sglang` package | CRITICAL | Add installation instructions |
+| ChromaDB without `chromadb` package | HIGH | Add to requirements |
+| FAISS-GPU on ARM64 | HIGH | Use CPU FAISS or cuVS instead |
+| NeMo Guardrails without `nemoguardrails` | HIGH | Add installation |
+| Llama Guard without 8B model download | HIGH | Add model pull command |
+| TensorRT Model Optimizer not in NGC | HIGH | Use NGC container |
+| NVFP4 outside NGC TensorRT-LLM | CRITICAL | Must use NGC container |
+| Medusa without compatible model | HIGH | Verify model supports Medusa heads |
+| DeepSeek-R1 without sufficient memory | HIGH | Use distilled versions (7B/14B) |
+| cuML on x86 pip install | CRITICAL | Must use NGC or conda |
+| RAPIDS without CUDA 12+ | HIGH | Update CUDA version |
+| Diffusion LoRA without diffusers>=0.27 | HIGH | Update diffusers |
+| ControlNet without appropriate preprocessors | MEDIUM | Install preprocessor packages |
+| BPE tokenizer from scratch incomplete | MEDIUM | Include merge operations |
+| XGBoost GPU mode failing | MEDIUM | Verify CUDA XGBoost build |
+| Gradio share=True security | MEDIUM | Warn about public sharing |
 </common_issues_database>
 
 <module_content>

@@ -1,8 +1,8 @@
 # Module 4.1: Multimodal AI
 
-**Domain:** 3 - LLM Systems
-**Duration:** Week 24 (8-10 hours)
-**Prerequisites:** Module 3.4 (AI Agents)
+**Domain:** 4 - Production AI
+**Duration:** Week 27 (8-10 hours)
+**Prerequisites:** Module 3.6 (AI Agents)
 
 ---
 
@@ -205,6 +205,23 @@ processor = CLIPProcessor.from_pretrained("openai/clip-vit-large-patch14")
 - [ ] Multimodal RAG indexing images + text
 - [ ] Document AI pipeline processing PDFs
 - [ ] Audio transcription and Q&A pipeline
+
+---
+
+## Next Steps
+
+After completing this module:
+1. Document your multimodal pipelines
+2. Save your best model configurations
+3. Proceed to [Module 4.2: AI Safety & Alignment](../module-4.2-ai-safety/)
+
+---
+
+## Module Navigation
+
+| Previous | Current | Next |
+|----------|---------|------|
+| [Module 3.6: AI Agents](../../domain-3-llm-systems/module-3.6-ai-agents/) | **Module 4.1: Multimodal AI** | [Module 4.2: AI Safety](../module-4.2-ai-safety/) |
 
 ---
 

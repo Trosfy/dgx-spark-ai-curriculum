@@ -17,6 +17,8 @@ __all__ = [
     'DataCleaner',
     'DatasetSplitter',
     'PreferenceDataGenerator',
+    'KTODataGenerator',
+    'DataQualityFilter',
     'save_dataset',
     'load_dataset',
 ]
@@ -477,6 +479,300 @@ class PreferenceDataGenerator:
                         })
 
         return pairs
+
+
+class KTODataGenerator:
+    """
+    Generate KTO (Kahneman-Tversky Optimization) training data.
+
+    KTO uses binary feedback (thumbs up/down) instead of paired comparisons.
+    Based on Prospect Theory from behavioral economics.
+
+    Example:
+        >>> data = KTODataGenerator.from_binary_feedback(feedback_data)
+        >>> print(f"Desirable: {len(data['desirable'])}")
+    """
+
+    @staticmethod
+    def from_binary_feedback(
+        data: List[Dict],
+        prompt_field: str = "prompt",
+        response_field: str = "response",
+        feedback_field: str = "feedback",  # "good"/"bad" or True/False
+    ) -> Dict[str, List[Dict]]:
+        """
+        Convert binary feedback data to KTO format.
+
+        Args:
+            data: List of dicts with prompt, response, and feedback
+            prompt_field: Key for prompt
+            response_field: Key for response
+            feedback_field: Key for feedback (bool or "good"/"bad")
+
+        Returns:
+            Dict with 'desirable' and 'undesirable' lists
+        """
+        desirable = []
+        undesirable = []
+
+        for item in data:
+            entry = {
+                "prompt": item[prompt_field],
+                "completion": item[response_field],
+            }
+
+            feedback = item[feedback_field]
+            is_good = feedback in [True, "good", "positive", 1, "1", "yes", "thumbs_up"]
+
+            if is_good:
+                entry["label"] = True
+                desirable.append(entry)
+            else:
+                entry["label"] = False
+                undesirable.append(entry)
+
+        return {
+            "desirable": desirable,
+            "undesirable": undesirable,
+            "total": len(data),
+            "desirable_ratio": len(desirable) / max(len(data), 1),
+        }
+
+    @staticmethod
+    def from_ratings(
+        data: List[Dict],
+        threshold: float = 3.5,
+        prompt_field: str = "prompt",
+        response_field: str = "response",
+        rating_field: str = "rating",
+    ) -> Dict[str, List[Dict]]:
+        """
+        Convert rated data to KTO format using threshold.
+
+        Args:
+            data: List of dicts with ratings
+            threshold: Rating threshold for desirable/undesirable split
+            prompt_field: Key for prompt
+            response_field: Key for response
+            rating_field: Key for rating (numeric)
+
+        Returns:
+            Dict with 'desirable' and 'undesirable' lists
+        """
+        desirable = []
+        undesirable = []
+
+        for item in data:
+            entry = {
+                "prompt": item[prompt_field],
+                "completion": item[response_field],
+            }
+
+            rating = float(item[rating_field])
+            if rating >= threshold:
+                entry["label"] = True
+                desirable.append(entry)
+            else:
+                entry["label"] = False
+                undesirable.append(entry)
+
+        return {
+            "desirable": desirable,
+            "undesirable": undesirable,
+            "total": len(data),
+            "desirable_ratio": len(desirable) / max(len(data), 1),
+        }
+
+    @staticmethod
+    def balance_dataset(
+        kto_data: Dict[str, List[Dict]],
+        target_ratio: float = 1.0,
+        seed: int = 42,
+    ) -> Dict[str, List[Dict]]:
+        """
+        Balance desirable/undesirable samples.
+
+        Args:
+            kto_data: Output from from_binary_feedback or from_ratings
+            target_ratio: Desired ratio of desirable:undesirable
+            seed: Random seed for reproducibility
+
+        Returns:
+            Balanced dataset
+        """
+        random.seed(seed)
+        desirable = kto_data["desirable"].copy()
+        undesirable = kto_data["undesirable"].copy()
+
+        if len(desirable) > len(undesirable) * target_ratio:
+            # Downsample desirable
+            target_count = int(len(undesirable) * target_ratio)
+            desirable = random.sample(desirable, min(target_count, len(desirable)))
+        elif len(undesirable) > len(desirable) / target_ratio:
+            # Downsample undesirable
+            target_count = int(len(desirable) / target_ratio)
+            undesirable = random.sample(undesirable, min(target_count, len(undesirable)))
+
+        return {
+            "desirable": desirable,
+            "undesirable": undesirable,
+            "total": len(desirable) + len(undesirable),
+            "desirable_ratio": len(desirable) / max(len(desirable) + len(undesirable), 1),
+        }
+
+
+class DataQualityFilter:
+    """
+    Advanced data quality filtering for LLM training.
+
+    Applies multiple quality checks including:
+    - Length filtering
+    - Repetition detection
+    - Language detection (basic)
+    - Content quality heuristics
+
+    Example:
+        >>> filter = DataQualityFilter()
+        >>> clean_data = filter.filter_dataset(raw_data)
+    """
+
+    def __init__(
+        self,
+        min_chars: int = 50,
+        max_chars: int = 10000,
+        min_words: int = 10,
+        max_words: int = 2000,
+        max_repetition_ratio: float = 0.3,
+        min_alpha_ratio: float = 0.5,
+    ):
+        self.min_chars = min_chars
+        self.max_chars = max_chars
+        self.min_words = min_words
+        self.max_words = max_words
+        self.max_repetition_ratio = max_repetition_ratio
+        self.min_alpha_ratio = min_alpha_ratio
+        self.stats = {"total": 0, "passed": 0, "filtered": {}}
+
+    def check_length(self, text: str) -> Tuple[bool, Optional[str]]:
+        """Check text length constraints."""
+        if len(text) < self.min_chars:
+            return False, "too_short_chars"
+        if len(text) > self.max_chars:
+            return False, "too_long_chars"
+
+        words = text.split()
+        if len(words) < self.min_words:
+            return False, "too_few_words"
+        if len(words) > self.max_words:
+            return False, "too_many_words"
+
+        return True, None
+
+    def check_repetition(self, text: str) -> Tuple[bool, Optional[str]]:
+        """Check for excessive word repetition."""
+        words = text.lower().split()
+        if len(words) < 10:
+            return True, None
+
+        unique_ratio = len(set(words)) / len(words)
+        if unique_ratio < self.max_repetition_ratio:
+            return False, "too_repetitive"
+
+        return True, None
+
+    def check_quality(self, text: str) -> Tuple[bool, Optional[str]]:
+        """Check general quality heuristics."""
+        # Alpha character ratio
+        alpha_chars = sum(c.isalpha() for c in text)
+        if len(text) > 0 and alpha_chars / len(text) < self.min_alpha_ratio:
+            return False, "too_many_special_chars"
+
+        # Excessive caps
+        upper_chars = sum(c.isupper() for c in text)
+        alpha_chars = max(alpha_chars, 1)
+        if upper_chars / alpha_chars > 0.7:
+            return False, "excessive_caps"
+
+        # Refusal patterns
+        refusal_patterns = [
+            r"i cannot",
+            r"i'm sorry",
+            r"i am unable",
+            r"as an ai",
+            r"i don't have access",
+        ]
+        text_lower = text.lower()
+        for pattern in refusal_patterns:
+            if re.search(pattern, text_lower):
+                return False, "contains_refusal"
+
+        return True, None
+
+    def filter_example(
+        self,
+        text: str
+    ) -> Tuple[bool, Optional[str]]:
+        """Apply all filters to a single text."""
+        checks = [
+            self.check_length,
+            self.check_repetition,
+            self.check_quality,
+        ]
+
+        for check in checks:
+            passed, reason = check(text)
+            if not passed:
+                return False, reason
+
+        return True, None
+
+    def filter_dataset(
+        self,
+        data: List[Dict],
+        text_field: str = "text",
+    ) -> List[Dict]:
+        """
+        Filter a dataset for quality.
+
+        Args:
+            data: List of examples
+            text_field: Field containing text to check
+
+        Returns:
+            Filtered list of examples
+        """
+        self.stats = {"total": len(data), "passed": 0, "filtered": {}}
+        filtered = []
+
+        for item in data:
+            text = item.get(text_field, "")
+            if isinstance(text, list):
+                text = " ".join(str(t) for t in text)
+
+            passed, reason = self.filter_example(text)
+
+            if passed:
+                filtered.append(item)
+                self.stats["passed"] += 1
+            else:
+                self.stats["filtered"][reason] = self.stats["filtered"].get(reason, 0) + 1
+
+        return filtered
+
+    def get_report(self) -> str:
+        """Get filtering report as string."""
+        lines = [
+            "Data Quality Report",
+            "=" * 40,
+            f"Total: {self.stats['total']}",
+            f"Passed: {self.stats['passed']} ({100*self.stats['passed']/max(self.stats['total'], 1):.1f}%)",
+            f"Filtered: {self.stats['total'] - self.stats['passed']}",
+            "",
+            "Reasons:",
+        ]
+        for reason, count in sorted(self.stats["filtered"].items(), key=lambda x: -x[1]):
+            lines.append(f"  {reason}: {count}")
+        return "\n".join(lines)
 
 
 def save_dataset(

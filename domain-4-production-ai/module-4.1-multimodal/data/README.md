@@ -1,4 +1,4 @@
-# Module 1.4.1: Multimodal AI - Data
+# Module 4.1: Multimodal AI - Data
 
 This directory contains sample data and data generation utilities for the Multimodal AI module.
 

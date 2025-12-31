@@ -1,8 +1,9 @@
 # Module 2.2: Computer Vision
 
 **Domain:** 2 - Deep Learning Frameworks
-**Duration:** Weeks 9-10 (12-15 hours)
+**Duration:** Weeks 10-11 (14-16 hours)
 **Prerequisites:** Module 2.1 (PyTorch)
+**Priority:** P2 Expanded (ViT, YOLO, Object Detection)
 
 ---
 
@@ -39,19 +40,25 @@ pip install timm ultralytics scikit-learn
 module-2.2-computer-vision/
 ├── README.md                    # This file
 ├── labs/
-│   ├── 01-cnn-architecture-study.ipynb
-│   ├── 02-transfer-learning-project.ipynb
-│   ├── 03-object-detection-demo.ipynb
-│   ├── 04-segmentation-lab.ipynb
-│   ├── 05-vision-transformer.ipynb
-│   └── 06-sam-integration.ipynb
+│   ├── lab-2.2.1-cnn-architecture-study.ipynb
+│   ├── lab-2.2.2-transfer-learning-project.ipynb
+│   ├── lab-2.2.3-object-detection-demo.ipynb
+│   ├── lab-2.2.4-segmentation-lab.ipynb
+│   ├── lab-2.2.5-vision-transformer.ipynb
+│   └── lab-2.2.6-sam-integration.ipynb
 ├── scripts/
+│   ├── __init__.py              # Package init
 │   ├── cnn_architectures.py     # CNN implementations (LeNet, AlexNet, VGG, ResNet, U-Net)
 │   ├── training_utils.py        # Training helpers and Trainer class
 │   ├── visualization_utils.py   # Visualization helpers
 │   └── metrics.py               # Evaluation metrics (IoU, mAP, etc.)
 ├── solutions/
-│   └── exercise-solutions.ipynb # Solutions for all exercises
+│   ├── lab-2.2.1-cnn-architecture-study-solution.ipynb
+│   ├── lab-2.2.2-transfer-learning-project-solution.ipynb
+│   ├── lab-2.2.3-object-detection-demo-solution.ipynb
+│   ├── lab-2.2.4-segmentation-lab-solution.ipynb
+│   ├── lab-2.2.5-vision-transformer-solution.ipynb
+│   └── lab-2.2.6-sam-integration-solution.ipynb
 └── data/
     └── README.md                # Dataset documentation
 ```
@@ -97,8 +104,8 @@ By the end of this module, you will be able to:
 
 - ✅ Implement and train CNN architectures for image classification
 - ✅ Apply transfer learning for custom image tasks
-- ✅ Perform object detection using pre-trained models
-- ✅ Understand and implement image segmentation
+- ✅ Perform object detection using YOLO and Faster R-CNN
+- ✅ Understand and implement Vision Transformers (ViT) from scratch
 
 ---
 
@@ -107,9 +114,9 @@ By the end of this module, you will be able to:
 | ID | Objective | Bloom's Level |
 |----|-----------|---------------|
 | 2.2.1 | Explain the evolution from LeNet to modern architectures | Understand |
-| 2.2.2 | Implement data augmentation pipelines for image data | Apply |
-| 2.2.3 | Fine-tune pre-trained models on custom datasets | Apply |
-| 2.2.4 | Evaluate model performance using appropriate CV metrics | Analyze |
+| 2.2.2 | Train and deploy YOLO for object detection | Apply |
+| 2.2.3 | Implement Vision Transformer (ViT) from scratch | Apply |
+| 2.2.4 | Fine-tune pre-trained models on custom datasets | Apply |
 
 ---
 
@@ -126,20 +133,23 @@ By the end of this module, you will be able to:
 - Feature extraction vs fine-tuning
 - Learning rate strategies
 
-### 2.2.3 Object Detection
-- R-CNN family
-- YOLO, SSD
-- Using pre-trained detectors
+### 2.2.3 Object Detection [P2 Expansion]
+- Region-based methods (R-CNN family, Faster R-CNN)
+- Single-shot detectors (YOLO family, SSD)
+- Anchor-free detectors (FCOS, CenterNet)
+- Using YOLOv8/YOLOv11 on DGX Spark
 
 ### 2.2.4 Image Segmentation
 - Semantic vs instance segmentation
 - U-Net architecture
 - Segment Anything Model (SAM)
 
-### 2.2.5 Vision Transformers
-- ViT architecture
-- Patch embeddings
-- DeiT training tricks
+### 2.2.5 Vision Transformers [P2 Expansion]
+- ViT architecture and patch embeddings
+- Positional embeddings for images
+- DeiT training tricks (distillation)
+- Swin Transformer (hierarchical)
+- Comparison with CNNs: when to use each
 
 ---
 
@@ -147,12 +157,12 @@ By the end of this module, you will be able to:
 
 | # | Task | Time | Deliverable |
 |---|------|------|-------------|
-| 2.2.1 | CNN Architecture Study | 3h | LeNet, AlexNet, ResNet comparison on CIFAR-10 |
-| 2.2.2 | Transfer Learning Project | 3h | Fine-tuned EfficientNet with >90% accuracy |
-| 2.2.3 | Object Detection Demo | 2h | YOLOv8 inference with DGX Spark benchmarks |
-| 2.2.4 | Segmentation Lab | 3h | U-Net implementation for semantic segmentation |
-| 2.2.5 | Vision Transformer | 3h | ViT implementation trained on CIFAR-10 |
-| 2.2.6 | SAM Integration | 2h | Segment Anything demo notebook |
+| 2.2.1 | CNN Architecture Study | 2h | LeNet, AlexNet, ResNet comparison on CIFAR-10 |
+| 2.2.2 | Transfer Learning Project | 2h | Fine-tuned EfficientNet with >90% accuracy |
+| 2.2.3 | YOLO Object Detection | 3h | YOLOv8 inference, custom training demo |
+| 2.2.4 | Semantic Segmentation | 2h | U-Net implementation, VOC dataset training |
+| 2.2.5 | Vision Transformer from Scratch | 3h | ViT implementation, compare with CNN |
+| 2.2.6 | SAM Integration | 2h | Segment Anything demo with interactive prompts |
 
 ---
 
@@ -191,12 +201,12 @@ optimizer = torch.optim.Adam([
 
 ## Milestone Checklist
 
-- [ ] Three CNN architectures implemented and compared
-- [ ] Transfer learning achieving >90% accuracy
-- [ ] Object detection demo working
-- [ ] U-Net segmentation trained
-- [ ] ViT implemented from scratch
-- [ ] SAM demo complete
+- [ ] Three CNN architectures implemented and compared (LeNet, AlexNet, ResNet)
+- [ ] Transfer learning achieving >90% accuracy on CIFAR-100
+- [ ] YOLOv8 object detection working with inference and custom training
+- [ ] U-Net semantic segmentation trained on VOC dataset
+- [ ] Vision Transformer implemented from scratch with attention visualization
+- [ ] SAM interactive segmentation demo complete
 
 ---
 
@@ -222,6 +232,23 @@ This module is optimized for DGX Spark's unique capabilities:
 
 ---
 
+## Next Steps
+
+After completing this module:
+1. ✅ Verify all milestones are checked
+2. 📁 Save reusable implementations to `scripts/`
+3. ➡️ Proceed to [Module 2.3: NLP & Transformers](../module-2.3-nlp-transformers/)
+
+---
+
+## Module Navigation
+
+| Previous | Current | Next |
+|----------|---------|------|
+| [Module 2.1: PyTorch](../module-2.1-pytorch/) | **Module 2.2: Computer Vision** | [Module 2.3: NLP & Transformers](../module-2.3-nlp-transformers/) |
+
+---
+
 ## Resources
 
 - [CS231n](http://cs231n.stanford.edu/)
@@ -230,3 +257,5 @@ This module is optimized for DGX Spark's unique capabilities:
 - [Segment Anything](https://segment-anything.com/)
 - [PyTorch Vision](https://pytorch.org/vision/stable/index.html)
 - [Hugging Face Transformers (Vision)](https://huggingface.co/docs/transformers/model_doc/vit)
+- [Vision Transformer Paper](https://arxiv.org/abs/2010.11929)
+- [Swin Transformer Paper](https://arxiv.org/abs/2103.14030)
