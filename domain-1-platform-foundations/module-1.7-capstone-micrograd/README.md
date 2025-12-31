@@ -356,7 +356,7 @@ print(f"Ratio: {your_time/pytorch_time:.1f}x slower")
 
 ## Next Steps
 
-Congratulations on completing Domain 1! 🎉
+Congratulations on completing Domain 1!
 
 You now have:
 - Deep understanding of neural network internals
@@ -378,12 +378,13 @@ in NGC containers. Use the PyTorch NGC container for the best experience:
 ```bash
 docker run --gpus all -it --rm \
     -v $HOME/workspace:/workspace \
-    -v $HOME/.cache:/root/.cache \
+    -v $HOME/.cache/huggingface:/root/.cache/huggingface \
     --ipc=host \
-    -p 8888:8888 \
     nvcr.io/nvidia/pytorch:25.11-py3 \
     jupyter lab --ip=0.0.0.0 --allow-root --no-browser
 ```
+
+Access the notebook at the URL shown in the terminal output (typically `http://localhost:8888`).
 
 This container includes NumPy, matplotlib, and all other common dependencies.
 The `--ipc=host` flag enables shared memory for DataLoader workers.
