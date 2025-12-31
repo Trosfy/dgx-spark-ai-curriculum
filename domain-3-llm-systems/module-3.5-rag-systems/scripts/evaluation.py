@@ -111,7 +111,11 @@ class RAGEvaluator:
         self.llm_model = llm_model
 
     def _llm_judge(self, prompt: str) -> str:
-        """Get LLM judgment."""
+        """Get LLM judgment.
+
+        Returns:
+            LLM response or "0.5" as fallback if LLM is unavailable.
+        """
         try:
             import ollama
             response = ollama.chat(
@@ -119,7 +123,14 @@ class RAGEvaluator:
                 messages=[{"role": "user", "content": prompt}]
             )
             return response["message"]["content"].strip()
-        except Exception as e:
+        except ImportError:
+            # Ollama package not installed
+            return "0.5"
+        except ConnectionError:
+            # Ollama server not running
+            return "0.5"
+        except Exception:
+            # Any other error (model not found, timeout, etc.)
             return "0.5"
 
     def _parse_score(self, response: str) -> float:

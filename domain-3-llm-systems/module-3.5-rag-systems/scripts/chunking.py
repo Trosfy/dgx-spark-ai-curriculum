@@ -169,6 +169,13 @@ def create_sentence_chunks(
     """
     try:
         from nltk.tokenize import sent_tokenize
+        # Ensure punkt data is available
+        try:
+            sent_tokenize("test")
+        except LookupError:
+            import nltk
+            nltk.download('punkt', quiet=True)
+            nltk.download('punkt_tab', quiet=True)
     except ImportError:
         raise ImportError("Please install nltk: pip install nltk")
 
