@@ -13,7 +13,7 @@ This module uses the following Python packages (all included in NGC PyTorch cont
 | NumPy | Core numerical computing |
 | PyTorch | Autograd verification, neural networks |
 | Matplotlib | Visualizations |
-| scikit-learn | PCA for loss landscape visualization (Lab 1.3.3) |
+| scikit-learn | PCA for loss landscape visualization (Lab 1.4.3) |
 
 > **Note:** This module focuses on mathematical foundations using NumPy and basic PyTorch.
 > GPU acceleration is not heavily used—we're building intuition, not training large models.
@@ -53,25 +53,25 @@ By the end of this module, you will be able to:
 
 ## Topics
 
-### 1.3.1 Linear Algebra for Neural Networks
+### 1.4.1 Linear Algebra for Neural Networks
 - Matrix/vector operations and their gradients
 - Eigenvalues/eigenvectors (for PCA, weight initialization)
 - Singular Value Decomposition (essential for understanding LoRA)
 - Tensor operations and reshaping
 
-### 1.3.2 Calculus for Backpropagation
+### 1.4.2 Calculus for Backpropagation
 - Chain rule for composite functions
 - Partial derivatives and gradients
 - Jacobian and Hessian matrices
 - Computational graphs
 
-### 1.3.3 Optimization Theory
+### 1.4.3 Optimization Theory
 - Gradient descent and learning rates
 - Momentum and adaptive methods (Adam, AdamW)
 - Learning rate schedules
 - Loss landscape geometry
 
-### 1.3.4 Probability for ML
+### 1.4.4 Probability for ML
 - Probability distributions (Gaussian, Categorical)
 - Maximum likelihood estimation
 - Cross-entropy and KL divergence
@@ -81,7 +81,7 @@ By the end of this module, you will be able to:
 
 ## Labs
 
-### Lab 1.3.1: Manual Backpropagation
+### Lab 1.4.1: Manual Backpropagation
 **Time:** 3 hours
 
 Implement forward and backward passes from scratch.
@@ -97,7 +97,7 @@ Implement forward and backward passes from scratch.
 
 ---
 
-### Lab 1.3.2: Optimizer Implementation
+### Lab 1.4.2: Optimizer Implementation
 **Time:** 2 hours
 
 Implement optimization algorithms from scratch.
@@ -114,7 +114,7 @@ Implement optimization algorithms from scratch.
 
 ---
 
-### Lab 1.3.3: Loss Landscape Visualization
+### Lab 1.4.3: Loss Landscape Visualization
 **Time:** 2 hours
 
 Visualize what neural networks are optimizing.
@@ -130,7 +130,7 @@ Visualize what neural networks are optimizing.
 
 ---
 
-### Lab 1.3.4: SVD for LoRA Intuition
+### Lab 1.4.4: SVD for LoRA Intuition
 **Time:** 2 hours
 
 Understand low-rank approximations that power LoRA.
@@ -147,7 +147,7 @@ Understand low-rank approximations that power LoRA.
 
 ---
 
-### Lab 1.3.5: Probability Distributions Lab
+### Lab 1.4.5: Probability Distributions Lab
 **Time:** 2 hours
 
 Connect probability to loss functions.
