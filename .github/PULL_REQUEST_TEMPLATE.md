@@ -40,7 +40,6 @@ Fixes #
 - [ ] Documentation (`docs/`)
 - [ ] Utilities (`utils/`)
 - [ ] Templates (`templates/`)
-- [ ] Review (`review/`)
 - [ ] Repository configuration
 
 ## Testing
