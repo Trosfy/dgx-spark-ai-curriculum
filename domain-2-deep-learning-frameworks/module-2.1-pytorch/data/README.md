@@ -26,8 +26,7 @@ The notebooks will automatically download required datasets when run:
 
 | Dataset | Size | Used In | Description |
 |---------|------|---------|-------------|
-| CIFAR-10 | ~170 MB | All tasks | 60,000 32x32 color images in 10 classes |
-| CIFAR-100 | ~170 MB | Lab 2.1.1 | 60,000 32x32 color images in 100 classes |
+| CIFAR-10 | ~170 MB | All labs | 60,000 32x32 color images in 10 classes |
 
 ## Directory Structure After Running Notebooks
 
@@ -47,7 +46,7 @@ data/
 
 ## Storage Notes for DGX Spark
 
-- **Total required**: ~500 MB for all datasets
+- **Total required**: ~170 MB for CIFAR-10 dataset
 - **Location**: Data is stored locally in this directory
 - **Persistence**: Datasets persist between notebook runs
 - **Cleanup**: Delete this directory to free space and force re-download

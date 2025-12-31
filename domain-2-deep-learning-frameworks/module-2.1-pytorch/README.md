@@ -29,8 +29,10 @@ By the end of this module, you will be able to:
 |----|-----------|---------------|
 | 2.1.1 | Create custom nn.Module classes with proper initialization | Apply |
 | 2.1.2 | Implement Dataset and DataLoader for custom data | Apply |
-| 2.1.3 | Use hooks for model introspection and debugging | Apply |
-| 2.1.4 | Profile models with PyTorch Profiler | Analyze |
+| 2.1.3 | Implement custom autograd functions and use hooks for introspection | Apply |
+| 2.1.4 | Use mixed precision training with AMP for memory and speed gains | Apply |
+| 2.1.5 | Profile models with PyTorch Profiler to identify bottlenecks | Analyze |
+| 2.1.6 | Implement robust checkpointing with early stopping | Apply |
 
 ---
 
