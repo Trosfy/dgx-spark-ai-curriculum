@@ -1,28 +1,32 @@
 """
-Benchmarking Utilities for Module 1.3
+General GPU/CPU Benchmarking Utilities
+======================================
 
-Utilities for accurate GPU benchmarking and performance comparison.
+Utilities for accurate GPU and CPU benchmarking with proper warmup,
+CUDA synchronization, and statistical analysis.
 
-Example usage:
-    >>> from benchmark_utils import benchmark_function, compare_implementations
-    >>>
-    >>> def my_gpu_function(x):
-    ...     return x * 2
+Example:
+    >>> from utils.benchmarks import benchmark_function, compare_implementations
     >>>
     >>> result = benchmark_function(my_gpu_function, (large_array,), warmup=3, iterations=10)
     >>> print(f"Time: {result['mean_ms']:.2f} ± {result['std_ms']:.2f} ms")
 """
 
 import time
-import numpy as np
 from typing import Callable, Any, Dict, List, Tuple, Optional
 from dataclasses import dataclass, field
 from contextlib import contextmanager
 
+try:
+    import numpy as np
+    HAS_NUMPY = True
+except ImportError:
+    HAS_NUMPY = False
+
 
 @dataclass
-class BenchmarkResult:
-    """Container for benchmark results."""
+class TimingResult:
+    """Container for timing benchmark results."""
     name: str
     times: List[float] = field(default_factory=list)
     iterations: int = 0
@@ -31,27 +35,45 @@ class BenchmarkResult:
     @property
     def mean_ms(self) -> float:
         """Mean time in milliseconds."""
-        return np.mean(self.times) * 1000 if self.times else 0
+        if not self.times:
+            return 0.0
+        if HAS_NUMPY:
+            return float(np.mean(self.times)) * 1000
+        return (sum(self.times) / len(self.times)) * 1000
 
     @property
     def std_ms(self) -> float:
         """Standard deviation in milliseconds."""
-        return np.std(self.times) * 1000 if self.times else 0
+        if not self.times or len(self.times) < 2:
+            return 0.0
+        if HAS_NUMPY:
+            return float(np.std(self.times)) * 1000
+        mean = sum(self.times) / len(self.times)
+        variance = sum((t - mean) ** 2 for t in self.times) / len(self.times)
+        return (variance ** 0.5) * 1000
 
     @property
     def min_ms(self) -> float:
         """Minimum time in milliseconds."""
-        return np.min(self.times) * 1000 if self.times else 0
+        return min(self.times) * 1000 if self.times else 0.0
 
     @property
     def max_ms(self) -> float:
         """Maximum time in milliseconds."""
-        return np.max(self.times) * 1000 if self.times else 0
+        return max(self.times) * 1000 if self.times else 0.0
 
     @property
     def median_ms(self) -> float:
         """Median time in milliseconds."""
-        return np.median(self.times) * 1000 if self.times else 0
+        if not self.times:
+            return 0.0
+        if HAS_NUMPY:
+            return float(np.median(self.times)) * 1000
+        sorted_times = sorted(self.times)
+        n = len(sorted_times)
+        if n % 2 == 0:
+            return (sorted_times[n//2 - 1] + sorted_times[n//2]) / 2 * 1000
+        return sorted_times[n//2] * 1000
 
     def __str__(self) -> str:
         return f"{self.name}: {self.mean_ms:.3f} ± {self.std_ms:.3f} ms"
@@ -69,13 +91,6 @@ class BenchmarkTimer:
     """
 
     def __init__(self, name: str = "operation", sync_cuda: bool = True):
-        """
-        Initialize the timer.
-
-        Args:
-            name: Name for this timing
-            sync_cuda: Whether to synchronize CUDA before/after timing
-        """
         self.name = name
         self.sync_cuda = sync_cuda
         self.start_time: Optional[float] = None
@@ -121,6 +136,22 @@ class BenchmarkTimer:
         return self.elapsed * 1000
 
 
+def _sync_cuda():
+    """Helper to synchronize CUDA."""
+    try:
+        from numba import cuda
+        if cuda.is_available():
+            cuda.synchronize()
+    except ImportError:
+        pass
+    try:
+        import torch
+        if torch.cuda.is_available():
+            torch.cuda.synchronize()
+    except ImportError:
+        pass
+
+
 def benchmark_function(
     func: Callable,
     args: Tuple = (),
@@ -129,7 +160,7 @@ def benchmark_function(
     iterations: int = 10,
     sync_cuda: bool = True,
     name: Optional[str] = None,
-) -> BenchmarkResult:
+) -> TimingResult:
     """
     Benchmark a function with proper warmup and statistics.
 
@@ -143,7 +174,7 @@ def benchmark_function(
         name: Name for the benchmark (defaults to function name)
 
     Returns:
-        BenchmarkResult with timing statistics
+        TimingResult with timing statistics
 
     Example:
         >>> import numpy as np
@@ -160,7 +191,7 @@ def benchmark_function(
     kwargs = kwargs or {}
     name = name or getattr(func, "__name__", "function")
 
-    result = BenchmarkResult(
+    result = TimingResult(
         name=name,
         iterations=iterations,
         warmup_iterations=warmup,
@@ -168,18 +199,7 @@ def benchmark_function(
 
     def sync():
         if sync_cuda:
-            try:
-                from numba import cuda
-                if cuda.is_available():
-                    cuda.synchronize()
-            except ImportError:
-                pass
-            try:
-                import torch
-                if torch.cuda.is_available():
-                    torch.cuda.synchronize()
-            except ImportError:
-                pass
+            _sync_cuda()
 
     # Warmup
     for _ in range(warmup):
@@ -205,7 +225,7 @@ def compare_implementations(
     warmup: int = 3,
     iterations: int = 10,
     baseline: Optional[str] = None,
-) -> Dict[str, BenchmarkResult]:
+) -> Dict[str, TimingResult]:
     """
     Compare multiple implementations of the same operation.
 
@@ -218,7 +238,7 @@ def compare_implementations(
         baseline: Name of baseline implementation for speedup calculation
 
     Returns:
-        Dictionary of BenchmarkResults
+        Dictionary of TimingResults
 
     Example:
         >>> implementations = {
@@ -242,28 +262,23 @@ def compare_implementations(
 
 
 def format_benchmark_table(
-    results: Dict[str, BenchmarkResult],
+    results: Dict[str, TimingResult],
     baseline: Optional[str] = None,
     show_std: bool = True,
 ) -> str:
     """
-    Format benchmark results as a nice table.
+    Format benchmark results as a table.
 
     Args:
-        results: Dictionary of BenchmarkResults
+        results: Dictionary of TimingResults
         baseline: Name of baseline for speedup calculation
         show_std: Whether to show standard deviation
 
     Returns:
         Formatted table string
-
-    Example:
-        >>> table = format_benchmark_table(results, baseline="numpy")
-        >>> print(table)
     """
     lines = []
 
-    # Header
     if show_std:
         header = f"{'Name':<20} {'Mean (ms)':<12} {'Std (ms)':<12} {'Min (ms)':<12}"
     else:
@@ -275,10 +290,8 @@ def format_benchmark_table(
     lines.append(header)
     lines.append("-" * len(header))
 
-    # Get baseline time
     baseline_time = results[baseline].mean_ms if baseline and baseline in results else None
 
-    # Data rows
     for name, result in results.items():
         if show_std:
             row = f"{name:<20} {result.mean_ms:<12.3f} {result.std_ms:<12.3f} {result.min_ms:<12.3f}"
@@ -324,10 +337,7 @@ def calculate_throughput(
     }
 
 
-def calculate_gflops(
-    n_operations: int,
-    time_seconds: float,
-) -> float:
+def calculate_gflops(n_operations: int, time_seconds: float) -> float:
     """
     Calculate GFLOPS (billions of floating-point operations per second).
 
@@ -372,26 +382,24 @@ def timed_section(name: str = "section", sync_cuda: bool = True, verbose: bool =
 
 
 if __name__ == "__main__":
-    # Demo
-    import numpy as np
-
-    print("Benchmark Utils Demo")
+    print("General Benchmark Utils Demo")
     print("=" * 50)
 
-    # Create test data
-    a = np.random.randn(1000, 1000).astype(np.float32)
-    b = np.random.randn(1000, 1000).astype(np.float32)
+    if HAS_NUMPY:
+        import numpy as np
 
-    # Benchmark single function
-    result = benchmark_function(np.dot, (a, b), iterations=5)
-    print(f"\nNumPy matmul: {result}")
+        a = np.random.randn(1000, 1000).astype(np.float32)
+        b = np.random.randn(1000, 1000).astype(np.float32)
 
-    # Calculate GFLOPS
-    flops = 2 * 1000 * 1000 * 1000  # 2*M*N*K
-    gflops = calculate_gflops(flops, result.mean_ms / 1000)
-    print(f"Performance: {gflops:.1f} GFLOPS")
+        result = benchmark_function(np.dot, (a, b), iterations=5)
+        print(f"\nNumPy matmul: {result}")
 
-    # Timed section
-    print("\nTimed section demo:")
-    with timed_section("numpy sum"):
-        _ = np.sum(a)
+        flops = 2 * 1000 * 1000 * 1000
+        gflops = calculate_gflops(flops, result.mean_ms / 1000)
+        print(f"Performance: {gflops:.1f} GFLOPS")
+
+        print("\nTimed section demo:")
+        with timed_section("numpy sum"):
+            _ = np.sum(a)
+    else:
+        print("NumPy not available for demo")

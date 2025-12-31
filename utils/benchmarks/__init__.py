@@ -5,20 +5,30 @@ DGX Spark Benchmark Utilities
 Consolidated benchmarking tools for the DGX Spark AI Curriculum.
 Provides specialized benchmarking for different use cases:
 
-- LLM inference (Ollama, llama.cpp)
-- PyTorch operations
-- Quantization metrics
-- Model deployment
+- General GPU/CPU timing (general.py)
+- LLM inference with Ollama/llama.cpp (llm.py)
+- LLM inference with HF models (inference.py)
+- PyTorch operations (pytorch.py)
+- Quantization metrics (quantization.py)
+- LM Evaluation Harness wrappers (evaluation.py)
 
 Usage:
-    from utils.benchmarks import BenchmarkResult, OllamaBenchmark, quick_benchmark
-
-    # Quick LLM benchmark
+    # Quick LLM benchmark via Ollama
+    from utils.benchmarks import quick_benchmark
     result = quick_benchmark("llama3.1:8b")
 
-    # Detailed benchmark
-    bench = OllamaBenchmark()
-    summary = bench.benchmark("llama3.1:8b", prompt, runs=5)
+    # HF model inference benchmark
+    from utils.benchmarks import benchmark_inference
+    result = benchmark_inference(model, tokenizer, "Hello world")
+
+    # General function timing
+    from utils.benchmarks import benchmark_function, timed_section
+    result = benchmark_function(my_func, args=(x,))
+
+    # LM Eval Harness
+    from utils.benchmarks import run_benchmark, get_benchmark_suite
+    suite = get_benchmark_suite("quick")
+    result = run_benchmark("microsoft/phi-2", suite["tasks"], "./results")
 """
 
 from .base import (
@@ -44,6 +54,35 @@ from .quantization import (
     benchmark_quantized_model,
     compare_quantizations,
 )
+from .general import (
+    TimingResult,
+    BenchmarkTimer,
+    benchmark_function,
+    compare_implementations,
+    format_benchmark_table,
+    calculate_throughput,
+    calculate_gflops,
+    timed_section,
+)
+from .inference import (
+    InferenceBenchmarkResult,
+    benchmark_inference,
+    benchmark_batch_inference,
+    warmup_model,
+    compare_models,
+    ModelComparisonResult,
+    benchmark_quantization_methods,
+    format_inference_table,
+)
+from .evaluation import (
+    EvalBenchmarkConfig,
+    EvalBenchmarkResult,
+    run_benchmark,
+    compare_models_eval,
+    format_eval_results,
+    BENCHMARK_SUITES,
+    get_benchmark_suite,
+)
 
 __all__ = [
     # Base classes
@@ -52,7 +91,7 @@ __all__ = [
     "BaseBenchmark",
     "get_gpu_memory_gb",
     "format_results_table",
-    # LLM benchmarking
+    # LLM benchmarking (Ollama)
     "OllamaBenchmark",
     "LlamaCppBenchmark",
     "BenchmarkSuite",
@@ -65,4 +104,30 @@ __all__ = [
     "QuantizationBenchmarkResult",
     "benchmark_quantized_model",
     "compare_quantizations",
+    # General timing
+    "TimingResult",
+    "BenchmarkTimer",
+    "benchmark_function",
+    "compare_implementations",
+    "format_benchmark_table",
+    "calculate_throughput",
+    "calculate_gflops",
+    "timed_section",
+    # HF inference benchmarking
+    "InferenceBenchmarkResult",
+    "benchmark_inference",
+    "benchmark_batch_inference",
+    "warmup_model",
+    "compare_models",
+    "ModelComparisonResult",
+    "benchmark_quantization_methods",
+    "format_inference_table",
+    # LM Eval Harness
+    "EvalBenchmarkConfig",
+    "EvalBenchmarkResult",
+    "run_benchmark",
+    "compare_models_eval",
+    "format_eval_results",
+    "BENCHMARK_SUITES",
+    "get_benchmark_suite",
 ]
