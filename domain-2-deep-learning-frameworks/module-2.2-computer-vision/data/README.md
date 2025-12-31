@@ -51,7 +51,7 @@ data/
 
 ## DGX Spark Memory Considerations
 
-With 128GB unified memory on DGX Spark:
+With DGX Spark's 128GB unified memory:
 - All datasets can be loaded into memory simultaneously
 - The largest SAM checkpoint (ViT-H, 2.5GB) loads easily
 - Multiple models can be kept in memory for comparison

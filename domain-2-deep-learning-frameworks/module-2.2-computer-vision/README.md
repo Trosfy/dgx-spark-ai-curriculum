@@ -105,7 +105,7 @@ By the end of this module, you will be able to:
 - ✅ Implement and train CNN architectures for image classification
 - ✅ Apply transfer learning for custom image tasks
 - ✅ Perform object detection using YOLO and Faster R-CNN
-- ✅ Understand and implement Vision Transformers (ViT) from scratch
+- ✅ Understand and implement Vision Transformer (ViT) from scratch
 
 ---
 
@@ -113,10 +113,10 @@ By the end of this module, you will be able to:
 
 | ID | Objective | Bloom's Level |
 |----|-----------|---------------|
-| 2.2.1 | Explain the evolution from LeNet to modern architectures | Understand |
-| 2.2.2 | Train and deploy YOLO for object detection | Apply |
-| 2.2.3 | Implement Vision Transformer (ViT) from scratch | Apply |
-| 2.2.4 | Fine-tune pre-trained models on custom datasets | Apply |
+| 2.2.1 | Explain the evolution from LeNet to modern CNN architectures | Understand |
+| 2.2.2 | Fine-tune pre-trained models on custom datasets | Apply |
+| 2.2.3 | Train and deploy YOLO for object detection | Apply |
+| 2.2.4 | Implement Vision Transformer (ViT) from scratch | Apply |
 
 ---
 
@@ -144,7 +144,7 @@ By the end of this module, you will be able to:
 - U-Net architecture
 - Segment Anything Model (SAM)
 
-### 2.2.5 Vision Transformers [P2 Expansion]
+### 2.2.5 Vision Transformer (ViT) [P2 Expansion]
 - ViT architecture and patch embeddings
 - Positional embeddings for images
 - DeiT training tricks (distillation)
@@ -157,11 +157,11 @@ By the end of this module, you will be able to:
 
 | # | Task | Time | Deliverable |
 |---|------|------|-------------|
-| 2.2.1 | CNN Architecture Study | 2h | LeNet, AlexNet, ResNet comparison on CIFAR-10 |
-| 2.2.2 | Transfer Learning Project | 2h | Fine-tuned EfficientNet with >90% accuracy |
-| 2.2.3 | YOLO Object Detection | 3h | YOLOv8 inference, custom training demo |
-| 2.2.4 | Semantic Segmentation | 2h | U-Net implementation, VOC dataset training |
-| 2.2.5 | Vision Transformer from Scratch | 3h | ViT implementation, compare with CNN |
+| 2.2.1 | CNN Architecture Study | 3h | LeNet, AlexNet, ResNet comparison on CIFAR-10 |
+| 2.2.2 | Transfer Learning Project | 3h | Fine-tuned EfficientNet with >90% accuracy |
+| 2.2.3 | YOLO Object Detection | 2h | YOLOv8 inference, custom training demo |
+| 2.2.4 | Semantic Segmentation | 3h | U-Net implementation, VOC dataset training |
+| 2.2.5 | Vision Transformer (ViT) from Scratch | 3h | ViT implementation, compare with CNN |
 | 2.2.6 | SAM Integration | 2h | Segment Anything demo with interactive prompts |
 
 ---
@@ -205,7 +205,7 @@ optimizer = torch.optim.Adam([
 - [ ] Transfer learning achieving >90% accuracy on CIFAR-100
 - [ ] YOLOv8 object detection working with inference and custom training
 - [ ] U-Net semantic segmentation trained on VOC dataset
-- [ ] Vision Transformer implemented from scratch with attention visualization
+- [ ] Vision Transformer (ViT) implemented from scratch with attention visualization
 - [ ] SAM interactive segmentation demo complete
 
 ---
@@ -216,9 +216,9 @@ This module is optimized for DGX Spark's unique capabilities:
 
 | Feature | Benefit |
 |---------|---------|
-| 128GB Unified Memory | Load SAM ViT-H (2.5GB) with room to spare |
+| 128GB unified memory | Load SAM ViT-H (2.5GB) with room to spare |
 | Blackwell GPU | Fast inference for real-time detection |
-| Tensor Cores | Accelerated training with mixed precision |
+| Tensor Cores (5th gen) | Accelerated training with mixed precision (bfloat16) |
 
 ### Memory Usage Guide
 
