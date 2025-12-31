@@ -1,16 +1,24 @@
 """
 Evaluation Metrics for Computer Vision Module
 
-This module provides evaluation metrics for:
-- Classification (accuracy, precision, recall, F1)
-- Segmentation (IoU, mIoU, Dice)
-- Detection (mAP, precision-recall)
+This module provides evaluation metrics for computer vision tasks on DGX Spark.
+
+Metrics included:
+- Classification: accuracy, precision, recall, F1-score
+- Segmentation: IoU, mIoU, Dice coefficient, pixel accuracy
+- Detection: mAP, precision-recall curves
 
 Example usage:
-    from metrics import compute_iou, compute_map, ClassificationMetrics
+    from metrics import compute_iou, ClassificationMetrics
 
+    # Segmentation evaluation
     iou = compute_iou(predictions, targets, num_classes=21)
     print(f"mIoU: {iou['miou']:.2%}")
+
+    # Classification evaluation
+    metrics = ClassificationMetrics(num_classes=10)
+    metrics.update(predictions, targets)
+    results = metrics.compute()
 """
 
 __all__ = [

@@ -2,14 +2,19 @@
 CNN Architectures for Computer Vision Module
 
 This module contains implementations of classic and modern CNN architectures
-optimized for DGX Spark.
+optimized for DGX Spark with Blackwell GPU and 128GB unified memory.
 
 Architectures included:
-- LeNet-5 (1998)
-- AlexNet (2012)
-- VGG-11 (2014)
-- ResNet-18 (2015)
-- U-Net for Segmentation
+- LeNet-5 (1998) - Classic architecture, ~62K parameters
+- AlexNet (2012) - Deep networks with ReLU and Dropout
+- VGG-11 (2014) - Uniform 3x3 convolutions
+- ResNet-18 (2015) - Skip connections and residual learning
+- U-Net for Segmentation - Encoder-decoder with skip connections
+
+DGX Spark Benefits:
+- All models load easily with 128GB unified memory
+- Training with large batch sizes (256-512) supported
+- Use with training_utils.Trainer for bfloat16 mixed precision
 
 Example usage:
     from cnn_architectures import LeNet5, AlexNet, VGG11, ResNet18, UNet

@@ -1,14 +1,19 @@
 """
 Training Utilities for Computer Vision Module
 
-This module provides training helpers optimized for DGX Spark.
+This module provides training helpers optimized for DGX Spark with Blackwell GPU.
 
 Features:
 - Training loops with progress bars
-- Evaluation functions
-- Learning rate schedulers
+- Evaluation functions with mixed precision (bfloat16)
+- Learning rate schedulers with warmup
 - Checkpoint management
-- Mixed precision training support
+- Native Blackwell bfloat16 support via PyTorch AMP
+
+DGX Spark Optimizations:
+- Uses bfloat16 mixed precision (native Blackwell support)
+- Gradient clipping for stable training
+- Pin memory for faster data transfer with 128GB unified memory
 
 Example usage:
     from training_utils import Trainer, get_optimizer, get_scheduler
@@ -103,6 +108,7 @@ class Trainer:
             optimizer.zero_grad()
 
             if self.use_amp:
+                # Use bfloat16 for native Blackwell GPU support on DGX Spark
                 with autocast(device_type='cuda', dtype=torch.bfloat16):
                     outputs = self.model(inputs)
                     loss = self.criterion(outputs, targets)

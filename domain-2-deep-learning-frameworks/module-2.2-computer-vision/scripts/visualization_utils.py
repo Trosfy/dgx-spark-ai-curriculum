@@ -2,7 +2,15 @@
 Visualization Utilities for Computer Vision Module
 
 This module provides visualization helpers for images, training metrics,
-and model outputs.
+and model outputs optimized for DGX Spark workflows.
+
+Functions included:
+- plot_training_history: Loss/accuracy curves
+- visualize_predictions: Model predictions with labels
+- plot_confusion_matrix: Classification analysis
+- visualize_feature_maps: CNN layer activations
+- visualize_segmentation: Semantic segmentation results
+- visualize_detections: Object detection boxes
 
 Example usage:
     from visualization_utils import plot_training_history, visualize_predictions
