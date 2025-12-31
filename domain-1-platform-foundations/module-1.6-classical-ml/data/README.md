@@ -126,7 +126,7 @@ gdf = cudf.DataFrame(X)
 
 ## Memory Considerations on DGX Spark
 
-With 128GB unified memory on DGX Spark:
+With the DGX Spark's 128GB unified memory (shared between CPU and GPU):
 
 | Dataset Size | Estimated Memory | Fits in GPU? |
 |--------------|------------------|--------------|

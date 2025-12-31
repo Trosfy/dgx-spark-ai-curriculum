@@ -277,11 +277,12 @@ Use this checklist to track your progress:
 
 | Issue | Solution |
 |-------|----------|
-| `ImportError: No module named cuml` | Use NGC container with RAPIDS installed |
+| `ImportError: No module named cuml` | Use NGC container: `nvcr.io/nvidia/rapidsai/base:25.11-py3` |
 | cuML results differ from sklearn | Minor numerical differences are normal |
 | XGBoost GPU OOM | Reduce `max_depth` or use `tree_method='hist'` |
 | Optuna slow | Use `n_jobs=-1` for parallel trials |
 | cuDF type errors | Ensure dtypes match (float32 preferred) |
+| `pip install torch` fails on ARM64 | Use NGC container - never pip install PyTorch on DGX Spark |
 
 ---
 
