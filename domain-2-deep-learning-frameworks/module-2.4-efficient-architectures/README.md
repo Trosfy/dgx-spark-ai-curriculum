@@ -9,7 +9,7 @@
 
 ## Overview
 
-Transformers revolutionized AI, but their O(n²) attention complexity limits sequence length. This module explores the cutting edge: **Mamba** (state space models) with linear complexity and **Mixture of Experts (MoE)** that activates only a fraction of parameters per token.
+Transformers revolutionized AI, but their O(n²) attention complexity limits sequence length. This module explores the cutting edge: **Mamba** (State Space Models) with linear complexity and **Mixture of Experts (MoE)** that activates only a fraction of parameters per token.
 
 On DGX Spark's 128GB unified memory, these architectures unlock capabilities impossible on consumer hardware—process 100K+ token contexts with Mamba, or run 200B+ MoE models that only activate 20B parameters per forward pass.
 
@@ -19,7 +19,7 @@ On DGX Spark's 128GB unified memory, these architectures unlock capabilities imp
 
 By the end of this module, you will be able to:
 
-- ✅ Explain State Space Models (Mamba) and their advantages over transformers
+- ✅ Explain Mamba (State Space Models) and their advantages over transformers
 - ✅ Understand Mixture of Experts (MoE) architecture and routing mechanisms
 - ✅ Compare transformer vs alternative architectures on memory, speed, and quality
 - ✅ Run and fine-tune Mamba and MoE models on DGX Spark
@@ -51,7 +51,7 @@ By the end of this module, you will be able to:
   - GPU memory limits practical context length
   - Why transformers struggle with 100K+ tokens
 
-### 2.4.2 State Space Models (Mamba)
+### 2.4.2 Mamba (State Space Models)
 
 - **Linear Time Complexity**
   - O(n) instead of O(n²)—transformative for long sequences
@@ -118,10 +118,10 @@ By the end of this module, you will be able to:
 Run Mamba on DGX Spark and compare with transformers.
 
 **Instructions:**
-1. Open `notebooks/lab-2.4.1-mamba-inference.ipynb`
+1. Open `labs/lab-2.4.1-mamba-inference.ipynb`
 2. Load Mamba-2.8B using HuggingFace transformers (>=4.39.0)
 3. Load comparable transformer model (similar parameters)
-4. Benchmark: tokens/second, memory usage, time-to-first-token
+4. Benchmark: tok/s (decode speed), memory usage, time-to-first-token
 5. Test with increasing context lengths (4K, 8K, 16K, 32K)
 6. Document where Mamba's linear scaling shines
 
@@ -135,7 +135,7 @@ Run Mamba on DGX Spark and compare with transformers.
 Understand Mamba's selective scan algorithm.
 
 **Instructions:**
-1. Open `notebooks/lab-2.4.2-mamba-architecture.ipynb`
+1. Open `labs/lab-2.4.2-mamba-architecture.ipynb`
 2. Implement simplified selective scan in PyTorch
 3. Visualize state evolution across a sequence
 4. Compare with attention patterns (what does each "look at"?)
@@ -151,7 +151,7 @@ Understand Mamba's selective scan algorithm.
 Run MoE models and analyze expert activation.
 
 **Instructions:**
-1. Open `notebooks/lab-2.4.3-moe-exploration.ipynb`
+1. Open `labs/lab-2.4.3-moe-exploration.ipynb`
 2. Load DeepSeekMoE-16B on DGX Spark
 3. Run inference on diverse prompts (code, math, creative writing)
 4. Log which experts activate for each token
@@ -168,7 +168,7 @@ Run MoE models and analyze expert activation.
 Deep dive into expert selection and load balancing.
 
 **Instructions:**
-1. Open `notebooks/lab-2.4.4-moe-router.ipynb`
+1. Open `labs/lab-2.4.4-moe-router.ipynb`
 2. Extract router weights from an MoE model
 3. Visualize expert selection distribution across 1000 tokens
 4. Identify any load imbalance
@@ -185,7 +185,7 @@ Deep dive into expert selection and load balancing.
 Systematic benchmark of Mamba vs Transformer vs MoE.
 
 **Instructions:**
-1. Open `notebooks/lab-2.4.5-architecture-comparison.ipynb`
+1. Open `labs/lab-2.4.5-architecture-comparison.ipynb`
 2. Select three models: Mamba-3B, Llama-3B, MoE-7B (similar active)
 3. Benchmark on perplexity (wikitext)
 4. Benchmark on generation speed
@@ -202,7 +202,7 @@ Systematic benchmark of Mamba vs Transformer vs MoE.
 Fine-tune a Mamba model for a custom task.
 
 **Instructions:**
-1. Open `notebooks/lab-2.4.6-mamba-finetuning.ipynb`
+1. Open `labs/lab-2.4.6-mamba-finetuning.ipynb`
 2. Load a small Mamba model (1.4B or 2.8B)
 3. Prepare a custom instruction dataset
 4. Apply LoRA (yes, LoRA works on Mamba!)
