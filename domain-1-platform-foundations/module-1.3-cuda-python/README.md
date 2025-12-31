@@ -13,7 +13,7 @@ This module teaches you to harness the full power of your DGX Spark's 6,144 CUDA
 
 By the end of this module, you'll be able to write custom CUDA kernels, profile GPU code, and understand why certain operations are fast or slow on the GPU.
 
-> **🚀 DGX Spark Performance Tip:** The Blackwell GB10 Superchip natively supports **bfloat16** at ~100 TFLOPS. While these labs use float32 for educational clarity and debugging, production code should leverage bfloat16 for 2x memory efficiency and optimal Tensor Core performance. The 192 fifth-generation Tensor Cores also support FP4 (1 PFLOP!) and FP8 (~209 TFLOPS) for inference workloads.
+> **🚀 DGX Spark Performance Tip:** The Blackwell GB10 Superchip natively supports **bfloat16** at ~100 TFLOPS. While these labs use float32 for educational clarity and debugging, production code should leverage bfloat16 for 2x memory efficiency and optimal Tensor Core performance. The 192 fifth-generation Tensor Cores also support NVFP4 (1 PFLOP!) and FP8 (~209 TFLOPS) for inference workloads.
 
 ---
 
@@ -56,7 +56,7 @@ By the end of this module, you will be able to:
 
 - **Tensor Cores**
   - 192 fifth-generation Tensor Cores
-  - FP4/FP8/BF16 acceleration
+  - NVFP4/FP8/BF16 acceleration
   - When they're used automatically
 
 ### 1.3.2 Memory Hierarchy
