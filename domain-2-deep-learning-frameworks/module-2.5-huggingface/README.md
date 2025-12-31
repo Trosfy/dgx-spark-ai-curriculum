@@ -181,6 +181,18 @@ model.print_trainable_parameters()
 
 ---
 
+## Study Materials
+
+| Document | Purpose |
+|----------|---------|
+| [QUICKSTART.md](./QUICKSTART.md) | Run your first HuggingFace pipeline in 5 minutes |
+| [STUDY_GUIDE.md](./STUDY_GUIDE.md) | Learning objectives and module roadmap |
+| [QUICK_REFERENCE.md](./QUICK_REFERENCE.md) | Commands, patterns, and code snippets |
+| [LAB_PREP.md](./LAB_PREP.md) | Environment setup and lab preparation |
+| [TROUBLESHOOTING.md](./TROUBLESHOOTING.md) | Common errors and solutions |
+
+---
+
 ## Milestone Checklist
 
 - [ ] 10 models documented from HF Hub

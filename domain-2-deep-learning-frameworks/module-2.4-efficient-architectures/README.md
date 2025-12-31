@@ -295,6 +295,20 @@ model = AutoModelForCausalLM.from_pretrained(
 
 ---
 
+## Study Materials
+
+| Document | Purpose |
+|----------|---------|
+| [QUICKSTART.md](./QUICKSTART.md) | Run Mamba inference in 5 minutes |
+| [PREREQUISITES.md](./PREREQUISITES.md) | Skills self-check before starting |
+| [STUDY_GUIDE.md](./STUDY_GUIDE.md) | Learning objectives and module roadmap |
+| [ELI5.md](./ELI5.md) | Intuitive explanations of Mamba, MoE, and hybrid architectures |
+| [QUICK_REFERENCE.md](./QUICK_REFERENCE.md) | Commands, patterns, and code snippets |
+| [LAB_PREP.md](./LAB_PREP.md) | Environment setup and lab preparation |
+| [TROUBLESHOOTING.md](./TROUBLESHOOTING.md) | Common errors and solutions |
+
+---
+
 ## Milestone Checklist
 
 Use this checklist to track your progress:

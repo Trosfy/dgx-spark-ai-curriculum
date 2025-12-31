@@ -151,6 +151,19 @@ image.save("lion.png")
 
 ---
 
+## Study Materials
+
+| Document | Purpose |
+|----------|---------|
+| [QUICKSTART.md](./QUICKSTART.md) | Generate your first image with SDXL in 5 minutes |
+| [STUDY_GUIDE.md](./STUDY_GUIDE.md) | Learning objectives and module roadmap |
+| [ELI5.md](./ELI5.md) | Intuitive explanations of diffusion, guidance, ControlNet |
+| [QUICK_REFERENCE.md](./QUICK_REFERENCE.md) | Commands, patterns, and code snippets |
+| [LAB_PREP.md](./LAB_PREP.md) | Environment setup and model downloads |
+| [TROUBLESHOOTING.md](./TROUBLESHOOTING.md) | Common errors and solutions |
+
+---
+
 ## Common Issues & Solutions
 
 | Issue | Solution |
