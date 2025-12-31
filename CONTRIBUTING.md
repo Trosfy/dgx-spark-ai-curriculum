@@ -83,7 +83,7 @@ Want to add new learning materials?
 
 - NVIDIA DGX Spark (or ability to test on compatible hardware)
 - Git
-- Python 3.10+
+- Python 3.13+
 - Familiarity with the curriculum content
 
 ### Fork and Clone

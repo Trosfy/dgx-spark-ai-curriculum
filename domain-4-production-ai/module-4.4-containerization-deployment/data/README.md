@@ -260,7 +260,7 @@ def deploy_to_sagemaker(
         role=sagemaker.get_execution_role(),
         transformers_version="4.37",
         pytorch_version="2.1",
-        py_version="py310",
+        py_version="py311",  # Use latest available; check SageMaker docs for py313 support
     )
 
     predictor = huggingface_model.deploy(

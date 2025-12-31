@@ -356,7 +356,7 @@ huggingface_model = HuggingFaceModel(
     role=sagemaker.get_execution_role(),
     transformers_version="4.37",
     pytorch_version="2.1",
-    py_version="py310",
+    py_version="py311",  # Use latest available; check SageMaker docs for py313 support
 )
 
 # Deploy to endpoint
