@@ -167,8 +167,11 @@ docker run --gpus all -it --rm \
 
 **Important flags:**
 - `--gpus all` - Enable GPU access
+- `-it` - Interactive terminal
+- `--rm` - Cleanup container on exit
 - `--ipc=host` - Required for DataLoader multiprocessing
 - `-p 8888:8888` - Expose Jupyter port
+- `-v workspace` - Persist your work
 - `-v huggingface` - Share model cache between runs
 
 **DGX Spark Advantages (128GB Unified Memory):**
