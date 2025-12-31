@@ -11,7 +11,7 @@
 
 This is where DGX Spark truly shines. With 128GB unified memory, you can fine-tune models that would require cloud GPUs or multiple high-end consumer cards. You'll master LoRA, QLoRA, DoRA, and advanced preference optimization methods—and successfully fine-tune a **70B parameter model** on your desktop.
 
-**What's New in v2.0:** This module now covers cutting-edge techniques like DoRA (+3.7 points on commonsense reasoning), NEFTune (29.8% → 64.7% on AlpacaEval!), SimPO, ORPO, and KTO for preference learning.
+This module now covers cutting-edge techniques like DoRA (+3.7 points on commonsense reasoning), NEFTune (29.8% → 64.7% on AlpacaEval!), SimPO, ORPO, and KTO for preference learning.
 
 ---
 
@@ -113,7 +113,7 @@ By the end of this module, you will be able to:
   - Single training stage
   - Great for memory-constrained setups
 
-- **KTO (Kahneman-Tversky Optimization)** [P2]
+- **KTO (Kahneman-Tversky Optimization)**
   - Works with binary feedback (thumbs up/down)
   - No preference pairs required
   - Human-aligned loss function
@@ -149,7 +149,7 @@ Understand LoRA mathematically and implement it.
 
 ---
 
-### Lab 3.1.2: DoRA Comparison [P1]
+### Lab 3.1.2: DoRA Comparison
 **Time:** 2 hours
 
 Compare LoRA vs DoRA for improved fine-tuning.
@@ -166,7 +166,7 @@ Compare LoRA vs DoRA for improved fine-tuning.
 
 ---
 
-### Lab 3.1.3: NEFTune Magic [P1]
+### Lab 3.1.3: NEFTune Magic
 **Time:** 1 hour
 
 Add NEFTune for dramatic quality boost.
@@ -248,7 +248,7 @@ Implement Direct Preference Optimization.
 
 ---
 
-### Lab 3.1.8: SimPO vs ORPO [P1]
+### Lab 3.1.8: SimPO vs ORPO
 **Time:** 2 hours
 
 Compare modern preference optimization methods.
@@ -264,7 +264,7 @@ Compare modern preference optimization methods.
 
 ---
 
-### Lab 3.1.9: KTO for Binary Feedback [P2]
+### Lab 3.1.9: KTO for Binary Feedback
 **Time:** 2 hours
 
 Train with thumbs up/down data.
@@ -446,7 +446,7 @@ model = FastLanguageModel.get_peft_model(
 # ~2x faster training than standard PEFT
 ```
 
-### DoRA Configuration [P1]
+### DoRA Configuration
 
 ```python
 from peft import LoraConfig
@@ -466,7 +466,7 @@ config = LoraConfig(
 # Provides +3.7 points improvement on commonsense reasoning
 ```
 
-### NEFTune Implementation [P1]
+### NEFTune Implementation
 
 ```python
 # NEFTune: 5 lines for massive quality improvement!
@@ -521,15 +521,15 @@ trainer = SimPOTrainer(
 ## Milestone Checklist
 
 - [ ] LoRA theory notebook with from-scratch implementation
-- [ ] DoRA comparison showing improvement [P1]
-- [ ] NEFTune improvement measured [P1]
+- [ ] DoRA comparison showing improvement
+- [ ] NEFTune improvement measured
 - [ ] 8B model fine-tuned with LoRA + NEFTune
 - [ ] **70B model fine-tuned with QLoRA** ⭐ (DGX Spark showcase!)
 - [ ] Memory usage documented for 70B (~45-55GB)
 - [ ] Custom instruction dataset created
 - [ ] DPO preference optimization completed
-- [ ] SimPO and ORPO compared [P1]
-- [ ] KTO trained with binary feedback [P2]
+- [ ] SimPO and ORPO compared
+- [ ] KTO trained with binary feedback
 - [ ] Fine-tuned model running in Ollama
 
 ---

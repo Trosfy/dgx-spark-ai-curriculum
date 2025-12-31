@@ -3,7 +3,6 @@
 **Category:** Optional - Structured Data
 **Duration:** 6-8 hours
 **Prerequisites:** Module 1.5 (Neural Networks), Module 2.1 (PyTorch)
-**Priority:** P3 (Optional - Specialized Domain)
 
 ---
 

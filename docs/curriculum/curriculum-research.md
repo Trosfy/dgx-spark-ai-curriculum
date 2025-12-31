@@ -36,7 +36,7 @@ The 128GB unified CPU+GPU memory architecture fundamentally changes what's achie
 
 ## Gap analysis reveals critical curriculum deficiencies
 
-### P0 Critical gaps requiring immediate attention
+### Critical gaps requiring immediate attention
 
 **CUDA/Accelerated Computing** is the most significant omission. Every other hardware-focused curriculum (NVIDIA DLI) covers GPU programming fundamentals. Students using DGX Spark hardware should understand memory coalescing, parallel algorithms, and CUDA kernel optimization to maximize their investment.
 
@@ -48,7 +48,7 @@ The 128GB unified CPU+GPU memory architecture fundamentally changes what's achie
 
 **MLOps Tooling Specifics** including MLflow, Weights & Biases, and DVC for experiment tracking and data versioning are industry-standard but not explicitly covered beyond general "Benchmarking & MLOps."
 
-### P1 High-priority gaps for curriculum enhancement
+### High-priority gaps for curriculum enhancement
 
 | Gap | Rationale | Recommended Duration |
 |-----|-----------|---------------------|
@@ -60,7 +60,7 @@ The 128GB unified CPU+GPU memory architecture fundamentally changes what's achie
 | **Diffusion Models** | Fast.ai covers extensively; growing industry demand | 2 weeks |
 | **Cloud Deployment (AWS/GCP)** | 35% of ML job postings require AWS skills | 2 weeks |
 
-### P2 Medium-priority enhancements
+### Medium-priority enhancements
 
 Classical ML algorithms (XGBoost, Random Forests) provide baseline comparison and remain industry-relevant with **17-26% mention rate** in job postings. Vision Transformers (ViT) and object detection architectures (YOLO, Faster R-CNN) would complete computer vision coverage. Kubernetes basics address the 58% of organizations using K8s for AI workloads.
 
@@ -70,21 +70,21 @@ Classical ML algorithms (XGBoost, Random Forests) provide baseline comparison an
 
 ### New fine-tuning methods beyond LoRA/QLoRA/DPO
 
-**DoRA (Weight-Decomposed Low-Rank Adaptation)** decomposes weights into magnitude and direction, consistently outperforming LoRA with **+3.7 points on commonsense reasoning** for Llama 7B at rank 8. Only 0.01% more parameters than LoRA; no inference overhead. **Priority: P1**
+**DoRA (Weight-Decomposed Low-Rank Adaptation)** decomposes weights into magnitude and direction, consistently outperforming LoRA with **+3.7 points on commonsense reasoning** for Llama 7B at rank 8. Only 0.01% more parameters than LoRA; no inference overhead. 
 
-**NEFTune (Noisy Embeddings Fine-Tuning)** adds random noise to embeddings during training, boosting LLaMA-2-7B performance from 29.8% to **64.7%** on AlpacaEval—a dramatic improvement with zero compute overhead and ~5 lines of code. **Priority: P1**
+**NEFTune (Noisy Embeddings Fine-Tuning)** adds random noise to embeddings during training, boosting LLaMA-2-7B performance from 29.8% to **64.7%** on AlpacaEval—a dramatic improvement with zero compute overhead and ~5 lines of code. 
 
-**SimPO** eliminates reference model requirements while outperforming DPO by **up to 6.4 points** on AlpacaEval 2. Simpler implementation, better memory efficiency. **Priority: P1**
+**SimPO** eliminates reference model requirements while outperforming DPO by **up to 6.4 points** on AlpacaEval 2. Simpler implementation, better memory efficiency. 
 
-**ORPO** combines SFT and preference alignment into a single stage, requiring **~50% less memory** than DPO by eliminating the reference model. Particularly useful for imbalanced preference data. **Priority: P1**
+**ORPO** combines SFT and preference alignment into a single stage, requiring **~50% less memory** than DPO by eliminating the reference model. Particularly useful for imbalanced preference data. 
 
-**KTO (Kahneman-Tversky Optimization)** works with binary signals (good/bad) rather than preference pairs, enabling use of more abundant feedback data. Matches DPO performance from 1B to 30B parameters. **Priority: P2**
+**KTO (Kahneman-Tversky Optimization)** works with binary signals (good/bad) rather than preference pairs, enabling use of more abundant feedback data. Matches DPO performance from 1B to 30B parameters. 
 
 ### Architecture trends to incorporate
 
 **Mamba/State Space Models** achieve **5x higher inference throughput** than equivalent transformers with O(n) complexity and no KV cache. IBM Granite 4.0 and AI21 Jamba use hybrid Mamba-transformer architectures. The linear memory scaling makes Mamba particularly suited for DGX Spark's 128GB unified memory—longer contexts become practical without quadratic memory growth.
 
-**Test-Time Compute/Inference Scaling** is rapidly maturing with DeepSeek-R1 achieving o1-level reasoning through GRPO training. Students can run distilled R1 models on DGX Spark and implement CoT prompting, sampling strategies, and basic reward models. **Priority: P1**
+**Test-Time Compute/Inference Scaling** is rapidly maturing with DeepSeek-R1 achieving o1-level reasoning through GRPO training. Students can run distilled R1 models on DGX Spark and implement CoT prompting, sampling strategies, and basic reward models. 
 
 **Mixture of Experts** is now **mature enough to teach**. DeepSeekMoE 16B runs on single 40GB GPU; architecture understanding, inference, and partial fine-tuning are all accessible. The DeepSeek-V3 architecture (671B total, 37B active) demonstrates MoE's production viability.
 
@@ -105,25 +105,25 @@ Classical ML algorithms (XGBoost, Random Forests) provide baseline comparison an
 **Yes, confirmed practical.** Official aarch64 wheels available. Build instructions exist for TensorRT-LLM backend integration. Suitable for production inference serving from single DGX Spark, particularly for lower-throughput applications prioritizing latency over batch throughput.
 
 ### Should we cover Mamba/State Space Models?
-**Yes—Priority P1.** Mamba is mature enough with available models (130M-2.8B), HuggingFace integration, and hybrid architectures in production (IBM Granite 4.0). Its linear memory scaling directly leverages DGX Spark's 128GB advantage. Cover SSM fundamentals, selective state spaces, and comparison with attention.
+**Yes.** Mamba is mature enough with available models (130M-2.8B), HuggingFace integration, and hybrid architectures in production (IBM Granite 4.0). Its linear memory scaling directly leverages DGX Spark's 128GB advantage. Cover SSM fundamentals, selective state spaces, and comparison with attention.
 
 ### Is MoE mature enough to teach?
-**Yes—Priority P1.** DeepSeek-V3 and Mixtral demonstrate production maturity. Smaller MoE models (DeepSeekMoE 16B) are accessible on DGX Spark. Teach architecture understanding, gating mechanisms, load balancing, and inference—not training from scratch.
+**Yes.** DeepSeek-V3 and Mixtral demonstrate production maturity. Smaller MoE models (DeepSeekMoE 16B) are accessible on DGX Spark. Teach architecture understanding, gating mechanisms, load balancing, and inference—not training from scratch.
 
 ### Should we include test-time compute/inference scaling?
-**Yes—Priority P1.** DeepSeek-R1 distilled models run on DGX Spark. Teachable aspects include CoT prompting, Best-of-N sampling, majority voting, and basic reward model concepts. Full o1-style RL training remains too compute-intensive.
+**Yes.** DeepSeek-R1 distilled models run on DGX Spark. Teachable aspects include CoT prompting, Best-of-N sampling, majority voting, and basic reward model concepts. Full o1-style RL training remains too compute-intensive.
 
 ### Are there new fine-tuning methods worth adding?
 **Yes—add DoRA, NEFTune, SimPO, ORPO.** All are implemented in HuggingFace TRL, require minimal additional compute, and provide measurable improvements. NEFTune particularly offers dramatic gains with trivial implementation.
 
 ### Should we cover synthetic data generation more deeply?
-**Yes—Priority P1.** Self-Instruct and Evol-Instruct are foundational techniques. Understanding synthetic data quality vs quantity tradeoffs, model collapse risks, and tools like Distilabel and NeMo-Curator is essential for modern LLM development.
+**Yes.** Self-Instruct and Evol-Instruct are foundational techniques. Understanding synthetic data quality vs quantity tradeoffs, model collapse risks, and tools like Distilabel and NeMo-Curator is essential for modern LLM development.
 
 ### Should Kubernetes/Docker be covered more deeply?
-**Docker: Yes (P0). Kubernetes: Partial (P1).** Docker containerization is required for any production deployment. Basic Kubernetes for ML deployments addresses 58% of organizations using K8s for AI workloads; advanced K8s/Kubeflow is P2.
+**Docker: Yes (Critical). Kubernetes: Partial (High Priority).** Docker containerization is required for any production deployment. Basic Kubernetes for ML deployments addresses 58% of organizations using K8s for AI workloads; advanced K8s/Kubeflow is P2.
 
 ### Is monitoring/observability for ML systems a gap?
-**Yes—Priority P1.** Concept drift detection, model performance monitoring, and alerting are critical production skills. Tools like Evidently AI, Prometheus/Grafana for ML, and MLflow model monitoring should be covered.
+**Yes.** Concept drift detection, model performance monitoring, and alerting are critical production skills. Tools like Evidently AI, Prometheus/Grafana for ML, and MLflow model monitoring should be covered.
 
 ---
 
@@ -135,10 +135,10 @@ Classical ML algorithms (XGBoost, Random Forests) provide baseline comparison an
 |-------|---------|-----------------|----------|------------|----------|
 | CUDA Programming | ❌ | ❌ | ❌ | ✅✅ | **P0** |
 | Diffusion Models | ✅✅ | ❌ | ⚠️ | ⚠️ | **P0** |
-| Classical ML (XGBoost) | ✅ | ✅✅ | ✅✅ | ⚠️ | P1 |
-| Object Detection | ⚠️ | ✅ | ✅✅ | ✅ | P1 |
-| Recommender Systems | ✅ | ✅ | ❌ | ⚠️ | P2 |
-| Learning Theory | ❌ | ⚠️ | ✅✅ | ❌ | P3 |
+| Classical ML (XGBoost) | ✅ | ✅✅ | ✅✅ | ⚠️ | High |
+| Object Detection | ⚠️ | ✅ | ✅✅ | ✅ | High |
+| Recommender Systems | ✅ | ✅ | ❌ | ⚠️ | Medium |
+| Learning Theory | ❌ | ⚠️ | ✅✅ | ❌ | Optional |
 
 ### Unique DGX Spark curriculum strengths not found elsewhere
 
@@ -170,7 +170,7 @@ The tools are mature and teachable: NeMo Guardrails has excellent documentation,
 
 ## Curriculum expansion proposals
 
-### Proposed new module: CUDA Python for DGX Spark (P0)
+### Proposed new module: CUDA Python for DGX Spark (Critical)
 
 **Placement:** Domain 1, Weeks 2-3 (after Python, before Math for Deep Learning)
 **Duration:** 2 weeks (6 sessions)
@@ -180,7 +180,7 @@ The tools are mature and teachable: NeMo Guardrails has excellent documentation,
 **DGX Spark relevance:** Essential for maximizing 128GB unified memory utilization and understanding Blackwell architecture
 **Rationale:** NVIDIA DLI covers this extensively; hardware-focused curriculum must include GPU programming fundamentals
 
-### Proposed new module: Modern quantization and inference (P0)
+### Proposed new module: Modern quantization and inference (Critical)
 
 **Placement:** Domain 3, Weeks 17-18 (expand existing Quantization section)
 **Duration:** 2 weeks (6 sessions)
@@ -190,7 +190,7 @@ The tools are mature and teachable: NeMo Guardrails has excellent documentation,
 **DGX Spark relevance:** Directly leverages Blackwell's 1 PFLOP FP4 capability—unique hardware advantage
 **Rationale:** Blackwell-native quantization is the platform's key differentiator; curriculum must exploit this
 
-### Proposed new module: RAG systems and vector databases (P0)
+### Proposed new module: RAG systems and vector databases (Critical)
 
 **Placement:** Domain 3, Weeks 19-20 (before AI Agents)
 **Duration:** 2 weeks (6 sessions)
@@ -200,7 +200,7 @@ The tools are mature and teachable: NeMo Guardrails has excellent documentation,
 **DGX Spark relevance:** 128GB enables large document corpora in memory; long context windows reduce chunking requirements
 **Rationale:** LangChain/RAG skills appear in majority of LLM engineer job postings; critical gap
 
-### Proposed new module: State Space Models and efficient architectures (P1)
+### Proposed new module: State Space Models and efficient architectures (High Priority)
 
 **Placement:** Domain 2, Week 10 (after Transformers, before Computer Vision)
 **Duration:** 1.5 weeks (4-5 sessions)
@@ -210,7 +210,7 @@ The tools are mature and teachable: NeMo Guardrails has excellent documentation,
 **DGX Spark relevance:** Linear memory scaling maximizes 128GB advantage for long contexts
 **Rationale:** Mamba maturity level sufficient; IBM/AI21 production adoption validates teachability
 
-### Proposed new module: MLOps tooling and production deployment (P1)
+### Proposed new module: MLOps tooling and production deployment (High Priority)
 
 **Placement:** Domain 4, Weeks 25-27 (expand existing MLOps section)
 **Duration:** 3 weeks (9 sessions)
@@ -224,7 +224,7 @@ The tools are mature and teachable: NeMo Guardrails has excellent documentation,
 
 ## Prioritized recommendations summary
 
-### P0 Critical (implement immediately)
+### Critical (implement immediately)
 
 1. **Add CUDA Python module** (2 weeks) — Essential for DGX Spark hardware mastery
 2. **Add NVFP4/FP8 quantization workflows** — Blackwell's key differentiator
@@ -233,7 +233,7 @@ The tools are mature and teachable: NeMo Guardrails has excellent documentation,
 5. **Add experiment tracking tools** (MLflow/W&B) — Industry-standard MLOps
 6. **Expand AI Safety to dedicated module** (2 weeks) — Regulatory compliance, industry demand
 
-### P1 High priority (implement in next revision)
+### High priority (implement in next revision)
 
 7. **Add State Space Models (Mamba)** (1.5 weeks) — Mature enough, leverages unified memory
 8. **Add Mixture of Experts architecture** (1 week) — Production-proven, smaller models accessible
@@ -245,7 +245,7 @@ The tools are mature and teachable: NeMo Guardrails has excellent documentation,
 14. **Add cloud deployment basics** (AWS SageMaker) — 35% of job postings require AWS
 15. **Expand MLOps** with drift detection, deployment patterns — Production readiness
 
-### P2 Medium priority (consider for future)
+### Medium priority (consider for future)
 
 16. Add Classical ML overview (XGBoost, Random Forests) — Baseline comparison
 17. Expand Computer Vision with object detection (YOLO), Vision Transformers
@@ -254,7 +254,7 @@ The tools are mature and teachable: NeMo Guardrails has excellent documentation,
 20. Add Gradio demo building
 21. Add KTO for binary feedback scenarios
 
-### P3 Low priority (optional enhancements)
+### Low priority (optional enhancements)
 
 22. Add learning theory (VC dimension, bias-variance)
 23. Add recommender systems
@@ -265,7 +265,7 @@ The tools are mature and teachable: NeMo Guardrails has excellent documentation,
 
 ## Implementation timeline recommendation
 
-Given the 24-32 week constraint, prioritize P0 items by restructuring existing content and adding 4-6 weeks of new material:
+Given the 24-32 week constraint, prioritize critical items by restructuring existing content and adding 4-6 weeks of new material:
 
 **Weeks 1-6 (Revised Domain 1):** Add CUDA Python (replace or compress some Python basics for students with prerequisites), add NVIDIA tools orientation including NGC catalog
 

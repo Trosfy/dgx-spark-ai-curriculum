@@ -85,7 +85,7 @@ By the end of this module, you will be able to:
   - Right-sizing instances
   - Serverless vs always-on
 
-### 4.4.3 Kubernetes Basics [P2]
+### 4.4.3 Kubernetes Basics
 
 - **Core Concepts**
   - Pods, Deployments, Services
@@ -101,7 +101,7 @@ By the end of this module, you will be able to:
   - Horizontal Pod Autoscaler
   - Replicas for inference
 
-### 4.4.4 Demo Building [P2]
+### 4.4.4 Demo Building
 
 - **Gradio for ML Interfaces**
   - Input/output components
@@ -129,7 +129,7 @@ By the end of this module, you will be able to:
 
 ## Labs
 
-### Lab 4.4.1: Docker ML Image [P0]
+### Lab 4.4.1: Docker ML Image
 **Time:** 2 hours
 
 Create an optimized Docker image for your inference server.
@@ -164,7 +164,7 @@ Create a complete ML stack with Docker Compose.
 
 ---
 
-### Lab 4.4.3: AWS SageMaker Deployment [P1]
+### Lab 4.4.3: AWS SageMaker Deployment
 **Time:** 2 hours
 
 Deploy your model to AWS SageMaker.
@@ -182,7 +182,7 @@ Deploy your model to AWS SageMaker.
 
 ---
 
-### Lab 4.4.4: GCP Vertex AI Deployment [P1]
+### Lab 4.4.4: GCP Vertex AI Deployment
 **Time:** 2 hours
 
 Deploy the same model to Google Cloud.
@@ -199,7 +199,7 @@ Deploy the same model to Google Cloud.
 
 ---
 
-### Lab 4.4.5: Kubernetes Deployment [P2]
+### Lab 4.4.5: Kubernetes Deployment
 **Time:** 2 hours
 
 Deploy inference server to local Kubernetes.
@@ -217,7 +217,7 @@ Deploy inference server to local Kubernetes.
 
 ---
 
-### Lab 4.4.6: Gradio Demo [P2]
+### Lab 4.4.6: Gradio Demo
 **Time:** 2 hours
 
 Build an interactive demo for your fine-tuned model.
@@ -235,7 +235,7 @@ Build an interactive demo for your fine-tuned model.
 
 ---
 
-### Lab 4.4.7: Streamlit Dashboard [P2]
+### Lab 4.4.7: Streamlit Dashboard
 **Time:** 2 hours
 
 Create a comprehensive model dashboard.

@@ -176,7 +176,7 @@ Deploy Llama Guard 3 as a safety classifier.
 
 ---
 
-### Lab 4.2.3: Automated Red Teaming [P0]
+### Lab 4.2.3: Automated Red Teaming
 **Time:** 3 hours
 
 Attack your own models to find vulnerabilities.

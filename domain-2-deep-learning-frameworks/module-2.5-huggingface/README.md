@@ -209,7 +209,7 @@ After completing this module:
 
 ---
 
-## Related Modules (v2.0 Curriculum)
+## Related Modules
 
 This module provides foundations for advanced topics:
 

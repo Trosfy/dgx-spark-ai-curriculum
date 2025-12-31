@@ -157,7 +157,7 @@ For each Python file and code cell:
 - [ ] Solutions available and correct
 - [ ] Difficulty is appropriate for the stage
 
-## 6. V2 CURRICULUM-SPECIFIC VALIDATION
+## 6. CURRICULUM-SPECIFIC VALIDATION
 
 ### 6.1 New Architecture Coverage
 When reviewing modules covering new architectures, verify:

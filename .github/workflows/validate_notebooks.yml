@@ -153,7 +153,7 @@ jobs:
         from pathlib import Path
         import sys
 
-        # Core directories required by curriculum v2
+        # Core directories required by curriculum
         required_dirs = [
             'docs',
             'utils',
@@ -168,18 +168,17 @@ jobs:
             'domain-4-production-ai',
         ]
 
-        # Core files required by curriculum v2
+        # Core files required by curriculum
         required_files = [
             'README.md',
             'CURRICULUM.md',
-            'CURRICULUM_V2.md',
             'CONTRIBUTING.md',
             'LICENSE',
             '.gitignore',
             'requirements.txt',
         ]
 
-        # Expected module structure per domain (v2 curriculum)
+        # Expected module structure per domain
         expected_modules = {
             'domain-1-platform-foundations': [
                 'module-1.1-dgx-spark-platform',
@@ -216,7 +215,7 @@ jobs:
             ],
         }
 
-        # Optional modules (v2 curriculum)
+        # Optional modules
         optional_modules = [
             'optional-a-learning-theory',
             'optional-b-recommender-systems',
