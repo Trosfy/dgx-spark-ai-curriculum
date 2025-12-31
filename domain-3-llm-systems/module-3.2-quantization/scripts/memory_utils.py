@@ -280,6 +280,18 @@ class MemoryTracker:
             return self.end_snapshot.timestamp - self.start_snapshot.timestamp
         return 0.0
 
+    @property
+    def elapsed_time(self) -> float:
+        """Alias for duration - operation time in seconds."""
+        return self.duration
+
+    @property
+    def peak_memory_gb(self) -> float:
+        """Peak GPU memory usage during operation in GB."""
+        if self.end_snapshot:
+            return self.end_snapshot.gpu_allocated
+        return 0.0
+
     def report(self) -> None:
         """Print a summary report of memory usage."""
         if not self.start_snapshot or not self.end_snapshot:
