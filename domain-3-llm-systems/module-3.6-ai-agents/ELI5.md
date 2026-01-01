@@ -127,7 +127,7 @@ For AI agents:
 - **Human-in-the-loop**: Pause for approval
 
 ### When You're Ready for Details
-→ See: [Lab 3.6.3](./labs/lab-3.6.3-langgraph.ipynb) for workflow implementation
+→ See: [Lab 3.6.3](./labs/lab-3.6.3-langgraph-workflow.ipynb) for workflow implementation
 
 ---
 
@@ -159,7 +159,7 @@ For AI agents:
 - **Better quality**: Multiple perspectives
 
 ### When You're Ready for Details
-→ See: [Lab 3.6.4](./labs/lab-3.6.4-multi-agent.ipynb) for multi-agent systems
+→ See: [Lab 3.6.4](./labs/lab-3.6.4-multi-agent-system.ipynb) for multi-agent systems
 
 ---
 
@@ -193,7 +193,7 @@ Editor (Role: Quality Editor)
 ```
 
 ### When You're Ready for Details
-→ See: [Lab 3.6.5](./labs/lab-3.6.5-crewai.ipynb) for CrewAI projects
+→ See: [Lab 3.6.5](./labs/lab-3.6.5-crewai-project.ipynb) for CrewAI projects
 
 ---
 

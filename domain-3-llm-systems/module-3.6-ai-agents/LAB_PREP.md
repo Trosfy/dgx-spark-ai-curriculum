@@ -21,14 +21,15 @@ docker run --gpus all -it --rm \
     nvcr.io/nvidia/pytorch:25.11-py3
 ```
 
-### Option B: Local Environment
+### Option B: Local Environment (x86_64 only)
 ```bash
-# Create virtual environment
+# ⚠️ WARNING: This option is for x86_64 systems only.
+# DGX Spark uses ARM64/aarch64 architecture - always use Option A (NGC container)
+# for proper PyTorch support. NEVER use pip install for PyTorch on ARM64.
+
+# For x86_64 development machines only:
 python -m venv agents-env
 source agents-env/bin/activate
-
-# Install PyTorch with CUDA
-pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
 ```
 
 ---
@@ -88,17 +89,19 @@ ollama pull llama3.1:70b
 ollama pull nomic-embed-text
 ```
 
-### Verify Ollama
+### Verify Ollama via Ollama Web UI
 ```bash
-# Check available models
+# Check available models via Ollama Web UI API
 curl http://localhost:11434/api/tags
 
-# Test generation
+# Test generation via Ollama Web UI API
 curl http://localhost:11434/api/generate -d '{
   "model": "llama3.1:8b",
   "prompt": "Hello!",
   "stream": false
 }'
+
+# Ollama Web UI endpoint: http://localhost:11434
 ```
 
 ---
@@ -375,7 +378,7 @@ Before starting each lab, verify:
 
 - [ ] NGC container or virtual environment activated
 - [ ] All dependencies installed
-- [ ] Ollama running with llama3.1:8b or 70b
+- [ ] Ollama running with llama3.1:8b or 70b (verify via Ollama Web UI at http://localhost:11434)
 - [ ] GPU memory available (check with `nvidia-smi`)
 - [ ] Working directory has write permissions
 
