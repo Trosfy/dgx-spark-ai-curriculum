@@ -137,7 +137,7 @@ docker run --network=host ...  # Container shares host network
 
 **Throughput**: Requests per unit time
 - "How many users can we serve simultaneously?"
-- Measured in requests/second or tokens/second
+- Measured in requests/second or tok/s
 - Higher is better
 
 **Tradeoff**: Batching increases throughput but may increase latency

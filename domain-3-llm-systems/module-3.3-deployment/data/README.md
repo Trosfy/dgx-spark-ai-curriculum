@@ -12,12 +12,6 @@ A collection of prompts organized by category for comprehensive benchmarking:
 - **code**: Programming-related prompts for code generation benchmarks
 - **reasoning**: Complex reasoning tasks for quality evaluation
 
-### `test_requests.json`
-Pre-formatted API requests for testing various inference servers:
-- OpenAI-compatible chat completion requests
-- Streaming vs non-streaming configurations
-- Various temperature and sampling settings
-
 ## Usage
 
 ```python

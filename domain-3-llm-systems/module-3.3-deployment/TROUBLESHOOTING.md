@@ -536,7 +536,7 @@ llm_large = LLM(model="meta-llama/Llama-3.1-70B-Instruct")
 
 **A**: Key metrics to track:
 - **Latency**: Time to first token, total time
-- **Throughput**: Requests/second, tokens/second
+- **Throughput**: Requests/second, tok/s
 - **GPU utilization**: Should be >80% under load
 - **Memory**: Track for leaks
 - **Error rate**: Track failures
