@@ -25,7 +25,7 @@ mamba_model = AutoModelForCausalLM.from_pretrained(
     device_map="auto"
 )
 mamba_tokenizer = AutoTokenizer.from_pretrained("state-spaces/mamba-2.8b-hf")
-print(f"Mamba loaded: {sum(p.numel() for p in mamba_model.parameters()/1e9):.1f}B params")
+print(f"Mamba loaded: {sum(p.numel() for p in mamba_model.parameters())/1e9:.1f}B params")
 ```
 
 ### Step 2: Generate with Mamba
