@@ -14,7 +14,7 @@ The DGX Spark features the NVIDIA Blackwell GB10 Superchip, representing the lat
 - **Memory**: 128GB LPDDR5X unified memory shared between CPU and GPU
 - **Memory Bandwidth**: 273 GB/s for high-throughput data access
 - **Compute Performance**:
-  - 1 PFLOP at FP4 precision
+  - 1 PFLOP at NVFP4 precision
   - ~209 TFLOPS at FP8 precision
   - ~100 TFLOPS at BF16 precision
 

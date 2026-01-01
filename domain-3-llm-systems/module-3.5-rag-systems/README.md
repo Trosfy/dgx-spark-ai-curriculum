@@ -430,7 +430,7 @@ class RerankingRetriever:
 | BGE-reranker-large | FP16 | ~2GB | ~100 pairs/sec |
 | ChromaDB | Default | ~1GB + index | ~1ms/query |
 | FAISS (GPU) | IVF-Flat | ~1GB + index | ~0.1ms/query |
-| Llama 3.1 70B | Q4 | ~45GB | ~20 tok/s |
+| Llama 3.1 70B | Q4 | ~45GB | ~20 decode tok/s |
 
 **Total for full RAG stack:** ~50GB, leaving plenty of headroom on 128GB system.
 
