@@ -53,6 +53,17 @@ These optional modules cover advanced topics that extend beyond the core curricu
 
 ---
 
+## 📖 Study Materials
+
+| Document | Purpose |
+|----------|---------|
+| [QUICKSTART.md](./QUICKSTART.md) | Choose your path in 10 minutes |
+| [PREREQUISITES.md](./PREREQUISITES.md) | Self-assessment before starting |
+
+Each module also has its own study materials - see individual module READMEs.
+
+---
+
 ## Prerequisites
 
 All optional modules assume completion of:

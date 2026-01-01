@@ -529,6 +529,18 @@ class PyGGAT(nn.Module):
 
 ---
 
+## 📖 Study Materials
+
+| Document | Purpose |
+|----------|---------|
+| [QUICKSTART.md](./QUICKSTART.md) | Run GCN on Cora in 5 minutes |
+| [QUICK_REFERENCE.md](./QUICK_REFERENCE.md) | PyG data structures and GNN patterns |
+| [TROUBLESHOOTING.md](./TROUBLESHOOTING.md) | Debug edge index errors and oversmoothing |
+| [ELI5.md](./ELI5.md) | Intuitive explanations with gossip network analogies |
+| [LAB_PREP.md](./LAB_PREP.md) | PyG installation and dataset downloads |
+
+---
+
 ## Milestone Checklist
 
 - [ ] PyG installed and Cora explored

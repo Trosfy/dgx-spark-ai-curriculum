@@ -470,6 +470,17 @@ def retrieve_candidates(index, query_embedding, k=100):
 
 ---
 
+## 📖 Study Materials
+
+| Document | Purpose |
+|----------|---------|
+| [QUICKSTART.md](./QUICKSTART.md) | Build your first recommender in 10 minutes |
+| [QUICK_REFERENCE.md](./QUICK_REFERENCE.md) | MF, NeuMF, Two-Tower patterns at a glance |
+| [TROUBLESHOOTING.md](./TROUBLESHOOTING.md) | Debug embedding collapse, cold start, and more |
+| [WORKFLOWS.md](./WORKFLOWS.md) | Step-by-step workflows for common tasks |
+
+---
+
 ## Milestone Checklist
 
 - [ ] Matrix factorization achieving RMSE < 0.95

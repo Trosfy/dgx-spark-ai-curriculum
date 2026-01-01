@@ -406,6 +406,18 @@ def analyze_features(sae, model, prompts):
 
 ---
 
+## 📖 Study Materials
+
+| Document | Purpose |
+|----------|---------|
+| [QUICKSTART.md](./QUICKSTART.md) | Peek inside GPT-2 in 5 minutes |
+| [QUICK_REFERENCE.md](./QUICK_REFERENCE.md) | TransformerLens cache access and patching patterns |
+| [TROUBLESHOOTING.md](./TROUBLESHOOTING.md) | Debug memory issues and patching inconsistencies |
+| [ELI5.md](./ELI5.md) | Intuitive explanations of circuits and features |
+| [LAB_PREP.md](./LAB_PREP.md) | Environment setup and pre-lab checklist |
+
+---
+
 ## Milestone Checklist
 
 - [ ] TransformerLens environment working

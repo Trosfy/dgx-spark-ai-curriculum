@@ -631,6 +631,17 @@ def rlhf_training_step(
 
 ---
 
+## 📖 Study Materials
+
+| Document | Purpose |
+|----------|---------|
+| [QUICKSTART.md](./QUICKSTART.md) | Train Q-learning on FrozenLake in 5 minutes |
+| [QUICK_REFERENCE.md](./QUICK_REFERENCE.md) | Bellman, Q-learning, DQN, PPO formulas |
+| [TROUBLESHOOTING.md](./TROUBLESHOOTING.md) | Debug convergence issues and training instability |
+| [ELI5.md](./ELI5.md) | Intuitive explanations with dog training and restaurant analogies |
+
+---
+
 ## Milestone Checklist
 
 - [ ] Q-learning solving FrozenLake
