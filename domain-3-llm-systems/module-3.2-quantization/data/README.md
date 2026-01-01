@@ -1,4 +1,4 @@
-# Module 1.3.2: Data Files
+# Module 3.2: Data Files
 
 ## Overview
 
@@ -6,7 +6,7 @@ This directory contains calibration data and evaluation datasets for quantizatio
 
 ## Calibration Data
 
-Quantization methods like GPTQ, AWQ, and FP4 require calibration data to compute optimal scaling factors.
+Quantization methods like GPTQ, AWQ, and NVFP4 require calibration data to compute optimal scaling factors.
 
 ### Requirements for Good Calibration Data
 
@@ -96,7 +96,7 @@ With 128GB unified memory, you can use larger calibration datasets:
 - Enhanced: 512 samples
 - Comprehensive: 1024+ samples
 
-More calibration data generally improves quantization quality, especially for FP4.
+More calibration data generally improves quantization quality, especially for NVFP4.
 
 ## Downloading Pre-Built Datasets
 
