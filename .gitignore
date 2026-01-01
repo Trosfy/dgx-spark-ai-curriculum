@@ -115,7 +115,6 @@ tensorboard/
 !.github/*.json
 
 # Large data directories
-# data/ # Data README.md explains how to handle data and scripts
 datasets/
 raw_data/
 processed_data/
