@@ -85,6 +85,7 @@ docker run --gpus all -it --rm \
     -v $HOME/workspace:/workspace \
     -v $HOME/.cache/huggingface:/root/.cache/huggingface \
     --ipc=host \
+    -p 8888:8888 \
     nvcr.io/nvidia/pytorch:25.11-py3 \
     jupyter lab --ip=0.0.0.0 --allow-root --no-browser
 ```
@@ -186,10 +187,25 @@ model.print_trainable_parameters()
 | Document | Purpose |
 |----------|---------|
 | [QUICKSTART.md](./QUICKSTART.md) | Run your first HuggingFace pipeline in 5 minutes |
+| [PREREQUISITES.md](./PREREQUISITES.md) | Skills self-check and required knowledge |
 | [STUDY_GUIDE.md](./STUDY_GUIDE.md) | Learning objectives and module roadmap |
 | [QUICK_REFERENCE.md](./QUICK_REFERENCE.md) | Commands, patterns, and code snippets |
 | [LAB_PREP.md](./LAB_PREP.md) | Environment setup and lab preparation |
 | [TROUBLESHOOTING.md](./TROUBLESHOOTING.md) | Common errors and solutions |
+
+---
+
+## Common Issues
+
+| Issue | Cause | Quick Fix |
+|-------|-------|-----------|
+| `OSError: model-name is not a valid model identifier` | Typo in model name | Check exact name on [huggingface.co/models](https://huggingface.co/models) |
+| `401 Client Error: Unauthorized` | Model requires auth | Run `huggingface-cli login` first |
+| `RuntimeError: CUDA out of memory` | Model too large | Use `torch_dtype=torch.bfloat16` and/or smaller batch size |
+| Tokenizer/model mismatch | Different checkpoints | Load both from same model ID |
+| LoRA not training | Wrong target_modules | Check model architecture with `print(model)` |
+
+See [TROUBLESHOOTING.md](./TROUBLESHOOTING.md) for detailed solutions.
 
 ---
 
