@@ -17,11 +17,12 @@ docker run --gpus all -it --rm \
     --ipc=host \
     -p 8888:8888 \
     nvcr.io/nvidia/pytorch:25.11-py3 \
-    jupyter lab --ip=0.0.0.0 --port=8888 --allow-root --no-browser
+    jupyter lab --ip=0.0.0.0 --allow-root --no-browser
 
 # ⚠️ IMPORTANT FLAGS:
 # --gpus all    : Required for GPU access
 # --ipc=host    : Required for DataLoader with num_workers > 0
+# -p 8888:8888  : Maps container port to host for JupyterLab access
 # -v .cache/huggingface : Preserves downloaded models between sessions
 ```
 
@@ -243,6 +244,21 @@ This module is optimized for DGX Spark's unique capabilities:
 | YOLOv8-X inference | ~4 GB | ✓ Easy |
 | SAM ViT-H + multiple images | ~12 GB | ✓ Easy |
 | Training ViT-Large | ~16 GB | ✓ Easy |
+
+---
+
+## 📖 Study Materials
+
+| Document | Description |
+|----------|-------------|
+| [QUICKSTART.md](./QUICKSTART.md) | Get started with computer vision in 5 minutes |
+| [PREREQUISITES.md](./PREREQUISITES.md) | Required knowledge and self-assessment |
+| [ELI5.md](./ELI5.md) | Simple explanations of complex concepts |
+| [STUDY_GUIDE.md](./STUDY_GUIDE.md) | Learning objectives and study plan |
+| [QUICK_REFERENCE.md](./QUICK_REFERENCE.md) | Commands and code patterns cheat sheet |
+| [LAB_PREP.md](./LAB_PREP.md) | Lab environment setup instructions |
+| [TROUBLESHOOTING.md](./TROUBLESHOOTING.md) | Solutions to common errors |
+| [FAQ.md](./FAQ.md) | Frequently asked questions |
 
 ---
 

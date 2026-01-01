@@ -64,7 +64,7 @@ docker run --gpus all -it --rm \
     --ipc=host \
     -p 8888:8888 \
     nvcr.io/nvidia/pytorch:25.11-py3 \
-    jupyter lab --ip=0.0.0.0 --port=8888 --allow-root --no-browser
+    jupyter lab --ip=0.0.0.0 --allow-root --no-browser
 ```
 
 ### 2. Install Additional Packages
