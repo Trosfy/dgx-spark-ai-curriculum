@@ -18,7 +18,7 @@ Example Usage:
     print(f"Tokens/sec at 16K context: {results[16384]['tokens_per_second']:.2f}")
 
 Requirements:
-    - transformers >= 4.39.0 (for Mamba support)
+    - transformers >= 4.46.0 (for Mamba support)
     - torch with CUDA support
     - mamba-ssm (optional, for advanced features)
 
@@ -517,8 +517,8 @@ if __name__ == "__main__":
         import transformers
         print(f"transformers version: {transformers.__version__}")
 
-        if tuple(map(int, transformers.__version__.split('.')[:2])) < (4, 39):
-            print("Warning: Mamba support requires transformers >= 4.39.0")
+        if tuple(map(int, transformers.__version__.split('.')[:2])) < (4, 46):
+            print("Warning: Mamba support requires transformers >= 4.46.0")
             print("Run: pip install --upgrade transformers")
     except ImportError:
         print("transformers not installed")

@@ -75,7 +75,7 @@ model = AutoModelForCausalLM.from_pretrained(
     torch_dtype=torch.bfloat16,
     device_map="auto"
 )
-print(f"Mamba loaded: {sum(p.numel() for p in model.parameters()/1e6):.0f}M params")
+print(f"Mamba loaded: {sum(p.numel() for p in model.parameters())/1e6:.0f}M params")
 print("Mamba support verified!")
 ```
 
@@ -219,7 +219,9 @@ print('All downloads complete!')
 
 | Feature | Benefit |
 |---------|---------|
-| 128GB Memory | Load full Mixtral without quantization |
-| 128GB Memory | Run Jamba hybrid with 256K context |
+| 128GB unified memory | Load full Mixtral 8x7B without quantization (~90GB) |
+| 128GB unified memory | Run Jamba hybrid with 256K context |
 | Fast Memory | Handle Mamba's sequential state updates efficiently |
-| BF16 Native | Train/fine-tune at full precision |
+| BF16 Native | Train/fine-tune at full precision (native Blackwell support) |
+| NVFP4 Support | Run ~200B MoE models with 4-bit quantization |
+| 1 PFLOP FP4 | Native Blackwell FP4 acceleration for quantized inference |
