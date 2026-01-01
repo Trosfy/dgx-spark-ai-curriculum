@@ -17,7 +17,7 @@ import numpy as np
 
 class Linear:
     def __init__(self, in_features, out_features):
-        # Xavier initialization
+        # He initialization (optimal for ReLU activations)
         self.W = np.random.randn(in_features, out_features) * np.sqrt(2 / in_features)
         self.b = np.zeros(out_features)
         self.x = None  # Store for backward
