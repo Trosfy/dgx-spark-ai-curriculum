@@ -10,7 +10,7 @@ Example usage:
     from demo_utils import create_gradio_chat_interface, StreamingLLMClient
 
     # Create a streaming LLM client
-    client = StreamingLLMClient(model="llama3.1:8b")
+    client = StreamingLLMClient(model="qwen3:8b")
 
     # Create Gradio chat interface
     demo = create_gradio_chat_interface(client)

@@ -12,7 +12,7 @@ inference engine (Ollama, vLLM, TensorRT-LLM) with:
 
 Example:
     # Start the server
-    $ python api_server.py --engine ollama --model llama3.1:8b --port 8080
+    $ python api_server.py --engine ollama --model qwen3:8b --port 8080
 
     # Or with uvicorn for production
     $ uvicorn api_server:app --host 0.0.0.0 --port 8080 --workers 4
@@ -21,12 +21,12 @@ Usage with curl:
     # Non-streaming
     $ curl -X POST http://localhost:8080/v1/chat/completions \\
         -H "Content-Type: application/json" \\
-        -d '{"model": "llama3.1:8b", "messages": [{"role": "user", "content": "Hello!"}]}'
+        -d '{"model": "qwen3:8b", "messages": [{"role": "user", "content": "Hello!"}]}'
 
     # Streaming
     $ curl -X POST http://localhost:8080/v1/chat/completions \\
         -H "Content-Type: application/json" \\
-        -d '{"model": "llama3.1:8b", "messages": [{"role": "user", "content": "Hello!"}], "stream": true}'
+        -d '{"model": "qwen3:8b", "messages": [{"role": "user", "content": "Hello!"}], "stream": true}'
 """
 
 from __future__ import annotations
@@ -287,7 +287,7 @@ async def lifespan(app: FastAPI):
 
     # Get configuration from environment
     engine = os.getenv("INFERENCE_ENGINE", "ollama")
-    model = os.getenv("INFERENCE_MODEL", "llama3.1:8b")
+    model = os.getenv("INFERENCE_MODEL", "qwen3:8b")
     base_url = os.getenv("INFERENCE_URL", "")
 
     logger.info(f"Starting API server with engine={engine}, model={model}")
@@ -580,7 +580,7 @@ def main():
 
     parser = argparse.ArgumentParser(description="LLM Inference API Server")
     parser.add_argument("--engine", default="ollama", choices=["ollama", "vllm", "sglang", "tensorrt-llm"])
-    parser.add_argument("--model", default="llama3.1:8b")
+    parser.add_argument("--model", default="qwen3:8b")
     parser.add_argument("--url", default="", help="Inference engine URL")
     parser.add_argument("--host", default="0.0.0.0")
     parser.add_argument("--port", type=int, default=8080)

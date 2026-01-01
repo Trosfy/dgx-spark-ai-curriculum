@@ -6,7 +6,7 @@ on DGX Spark. Supports Ollama, llama.cpp, vLLM, TensorRT-LLM, and SGLang.
 
 Example:
     >>> from benchmark_utils import InferenceBenchmark, BenchmarkResult
-    >>> benchmark = InferenceBenchmark(engine="ollama", model="llama3.1:8b")
+    >>> benchmark = InferenceBenchmark(engine="ollama", model="qwen3:8b")
     >>> result = benchmark.run_single("What is 2+2?", max_tokens=50)
     >>> print(f"TTFT: {result.time_to_first_token:.3f}s, Total: {result.total_time:.3f}s")
 """
@@ -227,7 +227,7 @@ class BaseInferenceClient(ABC):
 class OllamaClient(BaseInferenceClient):
     """Client for Ollama inference server."""
 
-    def __init__(self, base_url: str = "http://localhost:11434", model: str = "llama3.1:8b"):
+    def __init__(self, base_url: str = "http://localhost:11434", model: str = "qwen3:8b"):
         super().__init__(base_url, model)
 
     def generate(
@@ -561,7 +561,7 @@ class InferenceBenchmark:
     Main benchmark orchestrator for comparing inference engines.
 
     Example:
-        >>> benchmark = InferenceBenchmark(engine="ollama", model="llama3.1:8b")
+        >>> benchmark = InferenceBenchmark(engine="ollama", model="qwen3:8b")
         >>>
         >>> # Single request benchmark
         >>> result = benchmark.run_single("What is AI?")
@@ -590,7 +590,7 @@ class InferenceBenchmark:
     def __init__(
         self,
         engine: str = "ollama",
-        model: str = "llama3.1:8b",
+        model: str = "qwen3:8b",
         base_url: Optional[str] = None
     ):
         """
@@ -779,7 +779,7 @@ def compare_engines(
 
     Example:
         >>> engines = [
-        ...     {"engine": "ollama", "model": "llama3.1:8b"},
+        ...     {"engine": "ollama", "model": "qwen3:8b"},
         ...     {"engine": "vllm", "model": "meta-llama/Llama-3.1-8B-Instruct"},
         ... ]
         >>> prompts = ["Hello!", "What is Python?"]
@@ -884,7 +884,7 @@ if __name__ == "__main__":
 
     # Test with Ollama if available
     try:
-        benchmark = InferenceBenchmark(engine="ollama", model="llama3.1:8b")
+        benchmark = InferenceBenchmark(engine="ollama", model="qwen3:8b")
         result = benchmark.run_single("What is the capital of France?", max_tokens=50)
         print(f"\nSingle Request Results:")
         print(f"  TTFT: {result.time_to_first_token*1000:.1f}ms")

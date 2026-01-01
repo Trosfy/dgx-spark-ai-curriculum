@@ -27,7 +27,7 @@ Usage:
 
     # Benchmarking (Ollama)
     from utils import quick_benchmark
-    result = quick_benchmark("llama3.1:8b")
+    result = quick_benchmark("qwen3:8b")
 
     # For specialized tools, use subpackages directly:
     from utils.benchmarks import benchmark_inference, run_benchmark

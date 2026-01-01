@@ -6,7 +6,7 @@ including attack prompt libraries and vulnerability detection.
 
 Example usage:
     >>> from red_team_utils import RedTeamRunner, AttackPromptLibrary
-    >>> runner = RedTeamRunner(model="llama3.1:8b")
+    >>> runner = RedTeamRunner(model="qwen3:8b")
     >>> runner.load_attack_library(AttackPromptLibrary.STANDARD)
     >>> results = runner.run_all_tests()
     >>> print(runner.generate_report())

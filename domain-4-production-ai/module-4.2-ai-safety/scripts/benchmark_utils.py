@@ -6,7 +6,7 @@ and BBQ on language models.
 
 Example usage:
     >>> from benchmark_utils import BenchmarkRunner
-    >>> runner = BenchmarkRunner(model="llama3.1:8b")
+    >>> runner = BenchmarkRunner(model="qwen3:8b")
     >>> truthfulqa_results = runner.run_truthfulqa()
     >>> bbq_results = runner.run_bbq()
 """

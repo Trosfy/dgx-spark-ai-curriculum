@@ -15,7 +15,7 @@ Provides specialized benchmarking for different use cases:
 Usage:
     # Quick LLM benchmark via Ollama
     from utils.benchmarks import quick_benchmark
-    result = quick_benchmark("llama3.1:8b")
+    result = quick_benchmark("qwen3:8b")
 
     # HF model inference benchmark
     from utils.benchmarks import benchmark_inference

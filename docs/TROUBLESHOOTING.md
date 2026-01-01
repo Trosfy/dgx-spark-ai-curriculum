@@ -342,7 +342,7 @@ nvidia-smi  # Check what's using GPU
 kill <pid>  # Stop unnecessary processes
 
 # 3. Use smaller quantization
-ollama run llama3.1:70b-instruct-q4_0  # Instead of q8
+ollama run qwen3:32b-instruct-q4_0  # Instead of q8
 ```
 
 ### Ollama slow response
@@ -359,7 +359,7 @@ export OLLAMA_NUM_CTX=4096
 export OLLAMA_NUM_PARALLEL=1
 
 # 4. Use appropriate quantization for speed
-ollama run llama3.1:8b-instruct-q4_0
+ollama run qwen3:8b-instruct-q4_0
 ```
 
 ---

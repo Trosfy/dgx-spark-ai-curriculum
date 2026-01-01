@@ -370,7 +370,7 @@ def evaluate_accuracy(
 
     Example:
         >>> problems = load_gsm8k_sample()
-        >>> summary = evaluate_accuracy(client, "llama3.1:8b", problems)
+        >>> summary = evaluate_accuracy(client, "qwen3:8b", problems)
         >>> print(f"Accuracy: {summary.accuracy:.1%}")
     """
     extract_fn = extract_fn or extract_numerical_answer
@@ -493,11 +493,11 @@ def compare_models(
     Example:
         >>> result = compare_models(
         ...     client,
-        ...     "llama3.1:70b",
+        ...     "qwen3:32b",
         ...     "deepseek-r1:70b",
         ...     problems
         ... )
-        >>> print(f"Llama: {result.model_a_summary.accuracy:.1%}")
+        >>> print(f"Qwen: {result.model_a_summary.accuracy:.1%}")
         >>> print(f"R1: {result.model_b_summary.accuracy:.1%}")
     """
     if verbose:
