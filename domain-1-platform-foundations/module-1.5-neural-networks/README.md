@@ -233,6 +233,20 @@ b = np.zeros(fan_out)
 
 ---
 
+## Common Issues
+
+| Symptom | Cause | Solution |
+|---------|-------|----------|
+| `torch.cuda.is_available()` returns `False` | Not using NGC container or missing `--gpus all` | Use NGC container: `docker run --gpus all -it --rm nvcr.io/nvidia/pytorch:25.11-py3` |
+| Loss is `NaN` | Learning rate too high or numerical instability | Lower learning rate, add epsilon to divisions |
+| Loss barely decreases | Learning rate too low or vanishing gradients | Increase LR by 10x, use ReLU, check initialization |
+| Kernel crashes | Out of memory | Reduce batch size, clear memory with `gc.collect()` |
+| `ModuleNotFoundError` for scripts | Scripts directory not in path | Verify `sys.path.insert(0, str(scripts_dir))` is running |
+
+See [TROUBLESHOOTING.md](./TROUBLESHOOTING.md) for detailed solutions.
+
+---
+
 ## Milestone Checklist
 
 - [ ] NumPy MLP achieving >95% on MNIST
@@ -252,9 +266,13 @@ b = np.zeros(fan_out)
 | Document | Purpose |
 |----------|---------|
 | [QUICKSTART.md](./QUICKSTART.md) | Build a Linear + ReLU layer in 5 minutes |
+| [PREREQUISITES.md](./PREREQUISITES.md) | Required skills and self-assessment checklist |
 | [ELI5.md](./ELI5.md) | Intuitive explanations of activations, backprop, overfitting |
 | [STUDY_GUIDE.md](./STUDY_GUIDE.md) | Learning roadmap and concept overview |
 | [QUICK_REFERENCE.md](./QUICK_REFERENCE.md) | Layer implementations and debugging checklist |
+| [LAB_PREP.md](./LAB_PREP.md) | Environment setup and data preparation |
+| [TROUBLESHOOTING.md](./TROUBLESHOOTING.md) | Solutions to common problems |
+| [FAQ.md](./FAQ.md) | Frequently asked questions |
 
 ---
 
