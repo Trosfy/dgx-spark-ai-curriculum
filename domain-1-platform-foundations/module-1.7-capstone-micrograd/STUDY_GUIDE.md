@@ -154,6 +154,20 @@ docs/
 - [ ] Benchmark notebook comparing with PyTorch
 
 ## 📋 Before You Start
+
+→ Check [PREREQUISITES.md](./PREREQUISITES.md) to verify required skills
 → See [QUICKSTART.md](./QUICKSTART.md) for 5-minute autograd demo
+→ Read [ELI5.md](./ELI5.md) for simple explanations of core concepts
+→ Complete [LAB_PREP.md](./LAB_PREP.md) to set up your environment
 → Review Module 1.4 chain rule if rusty
 → Review Module 1.5 layer implementations
+
+## 📚 Additional Resources
+
+| Document | Purpose |
+|----------|---------|
+| [TROUBLESHOOTING.md](./TROUBLESHOOTING.md) | Solutions for common issues |
+| [FAQ.md](./FAQ.md) | Frequently asked questions |
+| [docs/API.md](./docs/API.md) | Complete API reference |
+| [docs/TUTORIAL.md](./docs/TUTORIAL.md) | Step-by-step getting started guide |
+| [QUICK_REFERENCE.md](./QUICK_REFERENCE.md) | Commands and code patterns |
