@@ -283,6 +283,21 @@ After completing this module:
 
 ---
 
+## 📖 Study Materials
+
+| Document | Purpose |
+|----------|---------|
+| [QUICKSTART.md](./QUICKSTART.md) | See memory savings in 5 minutes |
+| [ELI5.md](./ELI5.md) | Jargon-free explanations of FP4, FP8, GPTQ, AWQ |
+| [PREREQUISITES.md](./PREREQUISITES.md) | Self-check before starting |
+| [STUDY_GUIDE.md](./STUDY_GUIDE.md) | Learning objectives and lab roadmap |
+| [QUICK_REFERENCE.md](./QUICK_REFERENCE.md) | Data types, commands, and code patterns |
+| [LAB_PREP.md](./LAB_PREP.md) | Environment setup and downloads |
+| [TROUBLESHOOTING.md](./TROUBLESHOOTING.md) | NVFP4, GPTQ, AWQ, GGUF errors |
+| [FAQ.md](./FAQ.md) | Frequently asked questions |
+
+---
+
 ## Resources
 
 - [GPTQ Paper](https://arxiv.org/abs/2210.17323)
