@@ -112,7 +112,7 @@ HuggingFace                 Diffusion                   LLM Systems
 | Flux-dev | 1024×1024 | 50 | ~15-20s | ~12 GB |
 | SDXL + ControlNet | 1024×1024 | 30 | ~8-10s | ~10 GB |
 
-DGX Spark's 128GB easily handles all models at full precision, even with multiple ControlNets.
+DGX Spark's 128GB unified memory easily handles all models at full precision, even with multiple ControlNets.
 
 ---
 

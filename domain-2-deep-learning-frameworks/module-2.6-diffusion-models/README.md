@@ -117,10 +117,11 @@ Complete pipeline development:
 
 | Model | Resolution | Steps | Time | Memory |
 |-------|------------|-------|------|--------|
-| SDXL Base | 1024×1024 | 30 | ~5-8s | ~7GB |
-| SDXL + Refiner | 1024×1024 | 50 | ~12-15s | ~14GB |
-| Flux-schnell | 1024×1024 | 4 | ~3-4s | ~12GB |
-| Flux-dev | 1024×1024 | 50 | ~15-20s | ~12GB |
+| SDXL Base | 1024×1024 | 30 | ~5-8s | ~7 GB |
+| SDXL + Refiner | 1024×1024 | 50 | ~12-15s | ~14 GB |
+| SDXL + ControlNet | 1024×1024 | 30 | ~8-10s | ~10 GB |
+| Flux-schnell | 1024×1024 | 4 | ~3-4s | ~12 GB |
+| Flux-dev | 1024×1024 | 50 | ~15-20s | ~12 GB |
 
 ---
 
