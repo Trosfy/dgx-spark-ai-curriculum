@@ -265,6 +265,21 @@ On DGX Spark with ARM64 architecture:
 
 ---
 
+---
+
+## 📖 Study Materials
+
+| Document | Purpose |
+|----------|---------|
+| [QUICKSTART.md](./QUICKSTART.md) | See 100x+ speedup from vectorization in 5 minutes |
+| [STUDY_GUIDE.md](./STUDY_GUIDE.md) | Learning roadmap and core concepts |
+| [QUICK_REFERENCE.md](./QUICK_REFERENCE.md) | NumPy, Pandas, einsum, profiling cheatsheet |
+| [LAB_PREP.md](./LAB_PREP.md) | Environment setup and lab checklists |
+| [TROUBLESHOOTING.md](./TROUBLESHOOTING.md) | Common errors and fixes |
+| [FAQ.md](./FAQ.md) | Frequently asked questions |
+
+---
+
 ## Next Steps
 
 After completing this module:

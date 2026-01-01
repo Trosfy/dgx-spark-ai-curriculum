@@ -245,6 +245,19 @@ b = np.zeros(fan_out)
 
 ---
 
+---
+
+## 📖 Study Materials
+
+| Document | Purpose |
+|----------|---------|
+| [QUICKSTART.md](./QUICKSTART.md) | Build a Linear + ReLU layer in 5 minutes |
+| [ELI5.md](./ELI5.md) | Intuitive explanations of activations, backprop, overfitting |
+| [STUDY_GUIDE.md](./STUDY_GUIDE.md) | Learning roadmap and concept overview |
+| [QUICK_REFERENCE.md](./QUICK_REFERENCE.md) | Layer implementations and debugging checklist |
+
+---
+
 ## Next Steps
 
 After completing this module:

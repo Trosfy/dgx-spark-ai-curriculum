@@ -354,6 +354,16 @@ print(f"Ratio: {your_time/pytorch_time:.1f}x slower")
 
 ---
 
+## 📖 Study Materials
+
+| Document | Purpose |
+|----------|---------|
+| [QUICKSTART.md](./QUICKSTART.md) | Build a tiny autograd engine in 5 minutes |
+| [STUDY_GUIDE.md](./STUDY_GUIDE.md) | Learning roadmap and project structure |
+| [QUICK_REFERENCE.md](./QUICK_REFERENCE.md) | Tensor, layers, and optimizer implementations |
+
+---
+
 ## Next Steps
 
 Congratulations on completing Domain 1!

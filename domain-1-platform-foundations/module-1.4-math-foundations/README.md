@@ -236,6 +236,19 @@ def adam_step(param, grad, m, v, t, lr=1e-3, beta1=0.9, beta2=0.999, eps=1e-8):
 
 ---
 
+---
+
+## 📖 Study Materials
+
+| Document | Purpose |
+|----------|---------|
+| [QUICKSTART.md](./QUICKSTART.md) | Verify gradients match autograd in 5 minutes |
+| [ELI5.md](./ELI5.md) | Intuitive explanations of gradients, chain rule, optimizers |
+| [STUDY_GUIDE.md](./STUDY_GUIDE.md) | Learning roadmap and key formulas |
+| [QUICK_REFERENCE.md](./QUICK_REFERENCE.md) | Derivatives, backprop, optimizer cheatsheet |
+
+---
+
 ## Next Steps
 
 After completing this module:
