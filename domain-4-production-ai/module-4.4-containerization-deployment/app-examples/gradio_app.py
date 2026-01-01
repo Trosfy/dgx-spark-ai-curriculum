@@ -10,7 +10,7 @@ Usage:
 
 Environment variables:
     OLLAMA_HOST: Ollama server URL (default: http://localhost:11434)
-    MODEL_NAME: Model to use (default: llama3.1:8b)
+    MODEL_NAME: Model to use (default: qwen3:8b)
 """
 
 import os
@@ -25,7 +25,7 @@ import requests
 # ============================================
 
 OLLAMA_HOST = os.environ.get("OLLAMA_HOST", "http://localhost:11434")
-MODEL_NAME = os.environ.get("MODEL_NAME", "llama3.1:8b")
+MODEL_NAME = os.environ.get("MODEL_NAME", "qwen3:8b")
 
 # ============================================
 # LLM Client
@@ -50,7 +50,7 @@ def get_available_models() -> List[str]:
             return [m["name"] for m in models]
     except:
         pass
-    return ["llama3.1:8b", "mistral:7b", "codellama:7b"]  # Defaults
+    return ["qwen3:8b", "mistral:7b", "codellama:7b"]  # Defaults
 
 
 def stream_response(

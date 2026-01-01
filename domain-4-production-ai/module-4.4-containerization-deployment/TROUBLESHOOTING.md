@@ -430,7 +430,7 @@ import ollama
 # Load model before creating interface
 client = ollama.Client()
 # Warm up with dummy request
-client.generate(model="llama3.1:8b", prompt="Hello")
+client.generate(model="qwen3:8b", prompt="Hello")
 
 def chat(message, history):
     # Model already loaded

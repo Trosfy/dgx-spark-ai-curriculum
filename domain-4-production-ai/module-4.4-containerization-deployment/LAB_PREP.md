@@ -402,7 +402,7 @@ huggingface-cli download Qwen/Qwen3-8B-Instruct
 # Copy from /workspace/finetuned_model/
 
 # Legacy model (for comparison)
-ollama pull llama3.1:8b
+ollama pull qwen3:8b
 ```
 
 ---

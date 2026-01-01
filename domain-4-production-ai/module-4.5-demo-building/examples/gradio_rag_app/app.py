@@ -41,7 +41,7 @@ class RAGBackend:
 
         # Default settings
         self.llm_model = "llama3.2:3b"
-        self.embed_model = "nomic-embed-text"
+        self.embed_model = "qwen3-embedding:8b"
         self.n_results = 3
         self.temperature = 0.7
 
@@ -261,7 +261,7 @@ def create_demo():
                 with gr.Row():
                     with gr.Column():
                         model_select = gr.Dropdown(
-                            choices=["llama3.2:3b", "llama3.1:8b", "mistral:7b"],
+                            choices=["llama3.2:3b", "qwen3:8b", "mistral:7b"],
                             value="llama3.2:3b",
                             label="LLM Model"
                         )

@@ -247,7 +247,7 @@ collection = client.get_or_create_collection("my_docs")
 
 # Get embeddings
 def get_embedding(text):
-    response = ollama.embeddings(model="nomic-embed-text", prompt=text)
+    response = ollama.embeddings(model="qwen3-embedding:8b", prompt=text)
     return response["embedding"]
 
 # Add documents
@@ -459,7 +459,7 @@ def chat(message, history):
         messages.append({"role": "assistant", "content": h[1]})
     messages.append({"role": "user", "content": message})
 
-    response = ollama.chat(model="llama3.1:8b", messages=messages)
+    response = ollama.chat(model="qwen3:8b", messages=messages)
     return response["message"]["content"]
 
 demo = gr.ChatInterface(fn=chat, title="My Assistant")

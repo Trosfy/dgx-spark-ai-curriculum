@@ -242,8 +242,8 @@ with gr.Blocks(theme=gr.themes.Soft()) as demo:
         with gr.TabItem("⚙️ Settings"):
             with gr.Row():
                 model = gr.Dropdown(
-                    choices=["llama3.1:8b", "llama3.1:70b"],
-                    value="llama3.1:8b",
+                    choices=["qwen3:8b", "qwen3:32b"],
+                    value="qwen3:8b",
                     label="Model"
                 )
                 chunks = gr.Slider(1, 10, 3, step=1, label="Retrieved Chunks")

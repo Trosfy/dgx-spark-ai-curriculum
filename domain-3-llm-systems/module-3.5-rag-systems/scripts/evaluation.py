@@ -96,12 +96,12 @@ class RAGEvaluator:
     Evaluator for RAG systems using LLM-as-judge.
 
     Example:
-        >>> evaluator = RAGEvaluator(llm_model="llama3.1:8b")
+        >>> evaluator = RAGEvaluator(llm_model="qwen3:8b")
         >>> result = evaluator.evaluate(sample)
         >>> print(f"Faithfulness: {result.faithfulness}")
     """
 
-    def __init__(self, llm_model: str = "llama3.1:8b"):
+    def __init__(self, llm_model: str = "qwen3:8b"):
         """
         Initialize evaluator.
 

@@ -101,8 +101,8 @@ if "model" not in st.session_state:
 
 model = st.selectbox(
     "LLM Model",
-    options=["llama3.2:1b", "llama3.2:3b", "llama3.1:8b", "mistral:7b"],
-    index=["llama3.2:1b", "llama3.2:3b", "llama3.1:8b", "mistral:7b"].index(st.session_state.model)
+    options=["llama3.2:1b", "llama3.2:3b", "qwen3:8b", "mistral:7b"],
+    index=["llama3.2:1b", "llama3.2:3b", "qwen3:8b", "mistral:7b"].index(st.session_state.model)
 )
 st.session_state.model = model
 
