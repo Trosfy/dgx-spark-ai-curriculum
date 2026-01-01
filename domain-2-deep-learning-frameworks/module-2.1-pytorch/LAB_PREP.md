@@ -76,7 +76,7 @@ print(f"Memory: {torch.cuda.get_device_properties(0).total_memory/1e9:.1f} GB")
 ```
 PyTorch version: 2.x.x
 CUDA available: True
-Device: NVIDIA GH200 480GB  # or similar Blackwell
+Device: NVIDIA Graphics Device  # DGX Spark: Blackwell GB10 Superchip
 Memory: 128.0 GB
 ```
 
