@@ -544,4 +544,4 @@ with mlflow.start_run(run_name="capstone-v1"):
 - [Project Templates](./templates/)
 - [Example Implementations](./examples/)
 - [STUDY_GUIDE.md](./STUDY_GUIDE.md)
-- [FAQ.md](./FAQ.md)
+- [TROUBLESHOOTING.md](./TROUBLESHOOTING.md)

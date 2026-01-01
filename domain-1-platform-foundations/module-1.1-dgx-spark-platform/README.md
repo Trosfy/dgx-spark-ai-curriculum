@@ -270,8 +270,7 @@ Use this checklist to track your progress:
 | [STUDY_GUIDE.md](./STUDY_GUIDE.md) | Learning roadmap and core concepts |
 | [QUICK_REFERENCE.md](./QUICK_REFERENCE.md) | Commands, specs, and patterns cheatsheet |
 | [LAB_PREP.md](./LAB_PREP.md) | Environment setup and pre-lab checklists |
-| [TROUBLESHOOTING.md](./TROUBLESHOOTING.md) | Common errors and detailed fixes |
-| [FAQ.md](./FAQ.md) | Frequently asked questions |
+| [TROUBLESHOOTING.md](./TROUBLESHOOTING.md) | Troubleshooting guide and FAQs |
 
 ---
 

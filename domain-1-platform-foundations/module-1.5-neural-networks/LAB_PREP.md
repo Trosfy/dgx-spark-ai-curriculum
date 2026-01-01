@@ -104,7 +104,6 @@ module-1.5-neural-networks/
 ├── PREREQUISITES.md
 ├── LAB_PREP.md          ← You are here
 ├── TROUBLESHOOTING.md
-├── FAQ.md
 ├── labs/
 │   ├── lab-1.5.1-numpy-neural-network.ipynb
 │   ├── lab-1.5.2-activation-function-study.ipynb

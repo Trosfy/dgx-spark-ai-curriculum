@@ -257,8 +257,7 @@ Each module includes:
 Selected modules also include:
 - **ELI5.md** — Jargon-free explanations for complex concepts
 - **LAB_PREP.md** — Environment setup checklist
-- **TROUBLESHOOTING.md** — Common issues and solutions
-- **FAQ.md** — Frequently asked questions
+- **TROUBLESHOOTING.md** — Common issues, solutions, and FAQs
 
 ---
 

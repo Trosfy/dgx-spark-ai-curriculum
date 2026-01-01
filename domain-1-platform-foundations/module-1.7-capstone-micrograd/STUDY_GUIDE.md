@@ -167,7 +167,7 @@ docs/
 | Document | Purpose |
 |----------|---------|
 | [TROUBLESHOOTING.md](./TROUBLESHOOTING.md) | Solutions for common issues |
-| [FAQ.md](./FAQ.md) | Frequently asked questions |
+| [TROUBLESHOOTING.md#-frequently-asked-questions](./TROUBLESHOOTING.md#-frequently-asked-questions) | Frequently asked questions |
 | [docs/API.md](./docs/API.md) | Complete API reference |
 | [docs/TUTORIAL.md](./docs/TUTORIAL.md) | Step-by-step getting started guide |
 | [QUICK_REFERENCE.md](./QUICK_REFERENCE.md) | Commands and code patterns |

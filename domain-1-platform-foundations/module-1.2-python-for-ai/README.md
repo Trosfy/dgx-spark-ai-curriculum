@@ -288,8 +288,7 @@ On DGX Spark with ARM64/aarch64 architecture:
 | [ELI5.md](./ELI5.md) | Simple explanations of complex concepts |
 | [QUICK_REFERENCE.md](./QUICK_REFERENCE.md) | NumPy, Pandas, einsum, profiling cheatsheet |
 | [LAB_PREP.md](./LAB_PREP.md) | Environment setup and lab checklists |
-| [TROUBLESHOOTING.md](./TROUBLESHOOTING.md) | Common errors and fixes |
-| [FAQ.md](./FAQ.md) | Frequently asked questions |
+| [TROUBLESHOOTING.md](./TROUBLESHOOTING.md) | Troubleshooting guide and FAQs |
 
 ---
 

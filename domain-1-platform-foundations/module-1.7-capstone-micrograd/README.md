@@ -365,7 +365,7 @@ print(f"Ratio: {your_time/pytorch_time:.1f}x slower")
 | [ELI5.md](./ELI5.md) | Simple explanations of autograd concepts |
 | [LAB_PREP.md](./LAB_PREP.md) | Environment setup for the labs |
 | [TROUBLESHOOTING.md](./TROUBLESHOOTING.md) | Common issues and solutions |
-| [FAQ.md](./FAQ.md) | Frequently asked questions |
+| [TROUBLESHOOTING.md#-frequently-asked-questions](./TROUBLESHOOTING.md#-frequently-asked-questions) | Frequently asked questions |
 | [docs/API.md](./docs/API.md) | Complete API reference |
 | [docs/TUTORIAL.md](./docs/TUTORIAL.md) | Step-by-step getting started guide |
 

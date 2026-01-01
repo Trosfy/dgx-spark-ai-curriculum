@@ -589,8 +589,7 @@ After completing this module:
 | [QUICK_REFERENCE.md](./QUICK_REFERENCE.md) | Gradio and Streamlit code patterns |
 | [LAB_PREP.md](./LAB_PREP.md) | Environment setup and model downloads |
 | [WORKFLOWS.md](./WORKFLOWS.md) | Step-by-step demo building workflows |
-| [TROUBLESHOOTING.md](./TROUBLESHOOTING.md) | Gradio, Streamlit, and Ollama error solutions |
-| [FAQ.md](./FAQ.md) | Common questions about demos and deployment |
+| [TROUBLESHOOTING.md](./TROUBLESHOOTING.md) | Gradio, Streamlit, Ollama error solutions, and FAQs |
 
 ---
 

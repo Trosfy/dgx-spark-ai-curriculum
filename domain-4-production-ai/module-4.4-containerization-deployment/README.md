@@ -617,8 +617,7 @@ After completing this module:
 | [LAB_PREP.md](./LAB_PREP.md) | Environment setup for all 7 labs |
 | [COMPARISONS.md](./COMPARISONS.md) | AWS vs GCP, Gradio vs Streamlit, orchestration options |
 | [WORKFLOWS.md](./WORKFLOWS.md) | Step-by-step deployment workflows with checklists |
-| [TROUBLESHOOTING.md](./TROUBLESHOOTING.md) | Docker, K8s, and cloud deployment error solutions |
-| [FAQ.md](./FAQ.md) | Common questions about containerization and deployment |
+| [TROUBLESHOOTING.md](./TROUBLESHOOTING.md) | Docker, K8s, cloud deployment error solutions, and FAQs |
 
 ---
 

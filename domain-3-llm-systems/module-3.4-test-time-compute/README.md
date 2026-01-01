@@ -431,8 +431,7 @@ After completing this module:
 | [STUDY_GUIDE.md](./STUDY_GUIDE.md) | Learning objectives and lab roadmap |
 | [QUICK_REFERENCE.md](./QUICK_REFERENCE.md) | Prompting patterns and code snippets |
 | [LAB_PREP.md](./LAB_PREP.md) | Ollama setup and R1 model downloads |
-| [TROUBLESHOOTING.md](./TROUBLESHOOTING.md) | Reasoning model errors and fixes |
-| [FAQ.md](./FAQ.md) | Frequently asked questions |
+| [TROUBLESHOOTING.md](./TROUBLESHOOTING.md) | Reasoning model errors, fixes, and FAQs |
 
 ---
 

@@ -547,6 +547,230 @@ result = executor.invoke({"input": "test"})
 
 ---
 
+## ❓ Frequently Asked Questions
+
+**Q: What's the difference between an agent and a chain?**
+
+**A**:
+
+| Feature | Chain | Agent |
+|---------|-------|-------|
+| **Control flow** | Fixed, predefined | Dynamic, LLM decides |
+| **Tools** | Can use, but sequence is fixed | Selects tools based on task |
+| **Iteration** | Usually single pass | Loops until task complete |
+| **Complexity** | Simpler to debug | More powerful but harder to debug |
+
+**Use chains when**: You know the exact steps needed.
+**Use agents when**: The LLM needs to decide what to do.
+
+---
+
+**Q: When should I use LangGraph vs a simple agent?**
+
+**A**: Use LangGraph when you need:
+
+- **Conditional branching**: Different paths based on outcomes
+- **Human-in-the-loop**: Approval steps before actions
+- **Complex state**: Multiple pieces of information to track
+- **Retry loops**: Automatic retry on failure
+- **Multi-step workflows**: Beyond simple tool selection
+
+Use simple agents when:
+- Task is straightforward (answer question, do calculation)
+- No approval needed
+- Single-session interaction
+
+---
+
+**Q: How do I choose between CrewAI and custom multi-agent?**
+
+**A**:
+
+| Factor | CrewAI | Custom Multi-Agent |
+|--------|--------|-------------------|
+| **Setup time** | Fast | Slower |
+| **Flexibility** | Medium | High |
+| **Role-based tasks** | Excellent | Manual |
+| **Customization** | Limited | Full control |
+| **Learning curve** | Low | Medium |
+
+**Use CrewAI when**: You want quick role-based agent teams.
+**Use custom when**: You need specific agent behaviors or communication patterns.
+
+---
+
+**Q: What model should I use for agents?**
+
+**A**:
+
+| Model | Best For | Trade-off |
+|-------|----------|-----------|
+| llama3.1:8b | Development, testing | Fast but may struggle with complex reasoning |
+| llama3.1:70b | Production, complex tasks | Slow but excellent reasoning |
+| GPT-4 | Best quality (if API OK) | Cost, API dependency |
+
+**Recommendation**: Develop with 8B, deploy with 70B.
+
+---
+
+**Q: How many tools should an agent have?**
+
+**A**: General guidelines:
+
+| Tool Count | Recommendation |
+|------------|----------------|
+| 1-5 | Ideal for most cases |
+| 6-10 | OK if tools are distinct |
+| 10+ | Consider grouping or using sub-agents |
+
+More tools = more confusion. If agent picks wrong tools:
+1. Reduce tool count
+2. Make descriptions more distinct
+3. Group related tools into one
+
+---
+
+**Q: How should I write tool descriptions?**
+
+**A**: Follow this pattern:
+- One-line summary of what this tool does
+- "Use this when you need to:" with specific use cases
+- "Do NOT use this for:" what it can't do
+- Clear argument descriptions
+- Return value description
+- Examples
+
+Good descriptions prevent wrong tool selection.
+
+---
+
+**Q: Should tools have side effects?**
+
+**A**: Best practices:
+
+| Tool Type | Side Effects | Recommendation |
+|-----------|--------------|----------------|
+| Read-only | None | Safe, use freely |
+| Write | Yes | Require confirmation |
+| External API | Depends | Add rate limiting |
+| Irreversible | Yes | Human approval required |
+
+For risky operations, use LangGraph with approval steps.
+
+---
+
+**Q: How do I debug an agent that's not working?**
+
+**A**: Step-by-step debugging:
+
+1. Enable verbose mode
+2. Run and inspect
+3. Check intermediate steps to see which tools were called and what they returned
+
+---
+
+**Q: How do I prevent agents from looping forever?**
+
+**A**: Multiple safeguards:
+
+1. Set max iterations
+2. Set max execution time
+3. Use early stopping
+4. Track tool usage patterns
+
+---
+
+**Q: How do I handle tool failures gracefully?**
+
+**A**: Error handling at multiple levels:
+
+**Level 1**: In the tool - wrap in try/except and return helpful error messages
+
+**Level 2**: In the executor - enable handle_parsing_errors and set max_iterations
+
+---
+
+**Q: How do agents communicate in multi-agent systems?**
+
+**A**: Common patterns:
+
+**1. Sequential (Pipeline)**: Agent A → output → Agent B → output → Agent C
+
+**2. Shared State (Blackboard)**: All agents read/write to shared state
+
+**3. Message Passing**: Agents append to and read from message queue
+
+**4. Direct Invocation (CrewAI)**: CrewAI handles communication automatically via tasks
+
+---
+
+**Q: How do I handle conflicting agent outputs?**
+
+**A**: Resolution strategies:
+
+**1. Voting**: Multiple agents vote, majority wins
+
+**2. Hierarchy**: Senior agent resolves conflicts
+
+**3. Confidence-based**: Highest confidence wins
+
+---
+
+**Q: How do I make agents faster?**
+
+**A**: Optimization strategies:
+
+| Strategy | Impact | Complexity |
+|----------|--------|------------|
+| Use smaller model | High | Low |
+| Cache tool results | Medium | Low |
+| Reduce tool count | Medium | Low |
+| Parallel tool calls | High | Medium |
+| Pre-compute embeddings | Medium | Medium |
+
+---
+
+**Q: How do I monitor agents in production?**
+
+**A**: Key metrics to track:
+- Total runs
+- Successful vs failed runs
+- Average duration
+- Average iterations
+- Tool usage statistics
+
+---
+
+**Q: How do I test agents?**
+
+**A**: Testing strategy:
+
+1. **Unit test individual tools**: Verify each tool works correctly
+2. **Test agent behavior**: Check that correct tools are selected
+3. **Integration tests**: Test with expected outcomes for various queries
+
+---
+
+**Q: Can agents learn from experience?**
+
+**A**: Approaches to agent learning:
+
+**1. Long-term Memory**: Store successful patterns in vector database
+
+**2. Prompt Refinement**: Add successful examples to prompt
+
+**3. Tool Preference Learning**: Track which tools work best for which queries
+
+---
+
+**Q: How do I implement human-in-the-loop?**
+
+**A**: Using LangGraph:
+
+Create nodes that wait for human approval and conditional edges that route to approval nodes for risky operations.
+
+---
+
 ## 🆘 Still Stuck?
 
 1. **Enable verbose mode**: See exactly what's happening

@@ -293,8 +293,7 @@ After completing this module:
 | [STUDY_GUIDE.md](./STUDY_GUIDE.md) | Learning objectives and lab roadmap |
 | [QUICK_REFERENCE.md](./QUICK_REFERENCE.md) | Data types, commands, and code patterns |
 | [LAB_PREP.md](./LAB_PREP.md) | Environment setup and downloads |
-| [TROUBLESHOOTING.md](./TROUBLESHOOTING.md) | NVFP4, GPTQ, AWQ, GGUF errors |
-| [FAQ.md](./FAQ.md) | Frequently asked questions |
+| [TROUBLESHOOTING.md](./TROUBLESHOOTING.md) | NVFP4, GPTQ, AWQ, GGUF errors and FAQ |
 
 ---
 

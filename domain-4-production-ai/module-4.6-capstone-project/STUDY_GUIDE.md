@@ -206,5 +206,5 @@ This capstone synthesizes skills from all domains:
 ## Before You Start
 
 - See [QUICKSTART.md](./QUICKSTART.md) for rapid MVP validation
-- See [FAQ.md](./FAQ.md) for common questions
+- See [TROUBLESHOOTING.md](./TROUBLESHOOTING.md) for common questions and error solutions
 - Review templates in `templates/` folder

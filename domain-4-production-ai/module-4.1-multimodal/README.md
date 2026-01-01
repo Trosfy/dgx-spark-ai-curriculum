@@ -111,8 +111,7 @@ The 128GB unified memory means you can run multiple models simultaneously - for 
 | [STUDY_GUIDE.md](./STUDY_GUIDE.md) | Learning objectives and module roadmap |
 | [QUICK_REFERENCE.md](./QUICK_REFERENCE.md) | Commands and code patterns cheatsheet |
 | [LAB_PREP.md](./LAB_PREP.md) | Environment setup and download checklist |
-| [TROUBLESHOOTING.md](./TROUBLESHOOTING.md) | Common errors and fixes |
-| [FAQ.md](./FAQ.md) | Frequently asked questions |
+| [TROUBLESHOOTING.md](./TROUBLESHOOTING.md) | Common errors, fixes, and FAQs |
 
 ---
 

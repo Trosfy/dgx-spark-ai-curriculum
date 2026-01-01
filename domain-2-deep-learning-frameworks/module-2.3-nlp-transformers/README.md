@@ -149,8 +149,7 @@ mask = cumsum <= p
 | [ELI5.md](./ELI5.md) | Intuitive explanations of attention, Q/K/V, positional encoding |
 | [QUICK_REFERENCE.md](./QUICK_REFERENCE.md) | Commands, patterns, and code snippets |
 | [LAB_PREP.md](./LAB_PREP.md) | Environment setup and lab preparation |
-| [TROUBLESHOOTING.md](./TROUBLESHOOTING.md) | Common errors and solutions |
-| [FAQ.md](./FAQ.md) | Frequently asked questions about transformers and NLP |
+| [TROUBLESHOOTING.md](./TROUBLESHOOTING.md) | Common errors and solutions, including FAQ |
 
 ---
 

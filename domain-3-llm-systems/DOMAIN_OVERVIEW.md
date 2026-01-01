@@ -245,8 +245,7 @@ Each module includes these documentation files:
 | STUDY_GUIDE.md | Learning path and objectives |
 | QUICK_REFERENCE.md | Commands and patterns |
 | LAB_PREP.md | Environment setup |
-| TROUBLESHOOTING.md | Error solutions |
-| FAQ.md | Common questions |
+| TROUBLESHOOTING.md | Error solutions and FAQs |
 
 ---
 

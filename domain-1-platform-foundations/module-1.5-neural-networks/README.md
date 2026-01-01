@@ -271,8 +271,7 @@ See [TROUBLESHOOTING.md](./TROUBLESHOOTING.md) for detailed solutions.
 | [STUDY_GUIDE.md](./STUDY_GUIDE.md) | Learning roadmap and concept overview |
 | [QUICK_REFERENCE.md](./QUICK_REFERENCE.md) | Layer implementations and debugging checklist |
 | [LAB_PREP.md](./LAB_PREP.md) | Environment setup and data preparation |
-| [TROUBLESHOOTING.md](./TROUBLESHOOTING.md) | Solutions to common problems |
-| [FAQ.md](./FAQ.md) | Frequently asked questions |
+| [TROUBLESHOOTING.md](./TROUBLESHOOTING.md) | Troubleshooting guide and FAQs |
 
 ---
 
