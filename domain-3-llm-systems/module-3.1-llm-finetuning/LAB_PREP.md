@@ -82,9 +82,9 @@ print(f"Compute Capability: {torch.cuda.get_device_capability()}")
 **Expected output**:
 ```
 CUDA available: True
-Device: NVIDIA GH200 480GB  # or similar Blackwell
+Device: NVIDIA Blackwell GB10 Superchip  # DGX Spark GPU
 Memory: 128.0 GB
-Compute Capability: (10, 0)  # Blackwell = 10.x
+Compute Capability: (10, 0)  # Blackwell architecture
 ```
 
 ### 3. Clear Memory (Fresh Start)

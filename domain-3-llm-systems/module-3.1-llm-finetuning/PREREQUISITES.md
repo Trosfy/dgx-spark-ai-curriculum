@@ -180,7 +180,7 @@ If model predicts 10% probability for correct token: Loss = -log(0.1) = 2.30 (hi
 **Do you know these terms?**
 | Term | Your Definition |
 |------|-----------------|
-| VRAM / GPU Memory | [Write yours here] |
+| GPU Memory (Unified) | [Write yours here] |
 | Gradient Checkpointing | [Write yours here] |
 | Mixed Precision (FP16/BF16) | [Write yours here] |
 | Memory Fragmentation | [Write yours here] |
@@ -190,7 +190,7 @@ If model predicts 10% probability for correct token: Loss = -log(0.1) = 2.30 (hi
 
 | Term | Definition |
 |------|------------|
-| VRAM / GPU Memory | Memory on the GPU for storing model weights, activations, and gradients. DGX Spark has 128GB unified memory. |
+| GPU Memory (Unified) | Memory for storing model weights, activations, and gradients. DGX Spark has 128GB unified memory shared between CPU and GPU. |
 | Gradient Checkpointing | Trade compute for memory: don't store all activations, recompute during backward pass. Reduces memory ~50% but slows training. |
 | Mixed Precision (FP16/BF16) | Use 16-bit instead of 32-bit floats. Halves memory, often faster. BF16 preferred on Blackwell for better range. |
 | Memory Fragmentation | Memory becomes divided into small unusable chunks. Solution: `torch.cuda.empty_cache()` or restart. |

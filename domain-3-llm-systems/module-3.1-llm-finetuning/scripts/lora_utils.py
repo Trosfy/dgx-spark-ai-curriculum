@@ -5,7 +5,7 @@ LoRA Utilities for LLM Fine-Tuning
 This module provides utilities for working with LoRA (Low-Rank Adaptation) layers.
 
 Author: DGX Spark AI Curriculum
-Module: 10 - Large Language Model Fine-Tuning
+Module: 3.1 - Large Language Model Fine-Tuning
 """
 
 __all__ = [

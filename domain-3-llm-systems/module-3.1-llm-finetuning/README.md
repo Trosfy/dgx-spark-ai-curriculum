@@ -300,10 +300,10 @@ Deploy your fine-tuned model.
 1. Merge LoRA weights with base model
 2. Convert to GGUF format
 3. Import to Ollama
-4. Test in JupyterLab
-5. Benchmark performance
+4. Test in Ollama Web UI (http://localhost:11434)
+5. Benchmark performance (prefill tok/s, decode tok/s)
 
-**Deliverable:** Fine-tuned model running in Ollama
+**Deliverable:** Fine-tuned model running in Ollama Web UI
 
 ---
 

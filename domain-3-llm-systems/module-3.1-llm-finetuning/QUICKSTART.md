@@ -17,7 +17,11 @@ docker run --gpus all -it --rm \
     -v $HOME/workspace:/workspace \
     -v $HOME/.cache/huggingface:/root/.cache/huggingface \
     --ipc=host \
-    nvcr.io/nvidia/pytorch:25.11-py3
+    -p 8888:8888 \
+    nvcr.io/nvidia/pytorch:25.11-py3 \
+    jupyter lab --ip=0.0.0.0 --allow-root --no-browser
+
+# Access at: http://localhost:8888
 ```
 
 ### Step 2: Install Dependencies
