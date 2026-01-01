@@ -157,4 +157,4 @@ Simple explanations of complex concepts covered in this module.
 
 - [QUICK_REFERENCE.md](./QUICK_REFERENCE.md) - Technical patterns and commands
 - [STUDY_GUIDE.md](./STUDY_GUIDE.md) - Learning roadmap
-- [FAQ.md](./FAQ.md) - Common questions answered
+- [TROUBLESHOOTING.md](./TROUBLESHOOTING.md) - Common questions answered

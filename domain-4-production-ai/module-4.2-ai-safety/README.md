@@ -256,8 +256,7 @@ Create comprehensive documentation for a model.
 | [STUDY_GUIDE.md](./STUDY_GUIDE.md) | Learning objectives and module roadmap |
 | [QUICK_REFERENCE.md](./QUICK_REFERENCE.md) | Commands, configs, and code patterns |
 | [LAB_PREP.md](./LAB_PREP.md) | Environment setup and checklist |
-| [TROUBLESHOOTING.md](./TROUBLESHOOTING.md) | Common errors and fixes |
-| [FAQ.md](./FAQ.md) | Frequently asked questions |
+| [TROUBLESHOOTING.md](./TROUBLESHOOTING.md) | Common errors, fixes, and FAQs |
 
 ---
 

@@ -104,4 +104,4 @@ Containerization             Demo Building              Capstone
 
 - See [QUICKSTART.md](./QUICKSTART.md) for 5-minute first success
 - See [QUICK_REFERENCE.md](./QUICK_REFERENCE.md) for Gradio/Streamlit patterns
-- See [FAQ.md](./FAQ.md) for common questions
+- See [TROUBLESHOOTING.md](./TROUBLESHOOTING.md) for common questions and error solutions

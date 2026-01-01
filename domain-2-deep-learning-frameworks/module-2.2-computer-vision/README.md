@@ -210,7 +210,7 @@ optimizer = torch.optim.Adam([
 | [ELI5.md](./ELI5.md) | Intuitive explanations of convolution, skip connections, ViT |
 | [QUICK_REFERENCE.md](./QUICK_REFERENCE.md) | Commands, patterns, and code snippets |
 | [LAB_PREP.md](./LAB_PREP.md) | Environment setup and lab preparation |
-| [TROUBLESHOOTING.md](./TROUBLESHOOTING.md) | Common errors and solutions |
+| [TROUBLESHOOTING.md](./TROUBLESHOOTING.md) | Common errors, solutions, and FAQs |
 
 ---
 
@@ -257,8 +257,7 @@ This module is optimized for DGX Spark's unique capabilities:
 | [STUDY_GUIDE.md](./STUDY_GUIDE.md) | Learning objectives and study plan |
 | [QUICK_REFERENCE.md](./QUICK_REFERENCE.md) | Commands and code patterns cheat sheet |
 | [LAB_PREP.md](./LAB_PREP.md) | Lab environment setup instructions |
-| [TROUBLESHOOTING.md](./TROUBLESHOOTING.md) | Solutions to common errors |
-| [FAQ.md](./FAQ.md) | Frequently asked questions |
+| [TROUBLESHOOTING.md](./TROUBLESHOOTING.md) | Solutions to common errors and FAQs |
 
 ---
 

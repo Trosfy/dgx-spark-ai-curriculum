@@ -314,4 +314,4 @@ You truly understand these concepts when you can explain them without jargon:
 
 ## Want More Detail?
 
-Ready to go deeper? See [FAQ.md](./FAQ.md) for technical answers to common questions about attention, tokenization, fine-tuning, and more.
+Ready to go deeper? See [TROUBLESHOOTING.md](./TROUBLESHOOTING.md) for technical answers to common questions about attention, tokenization, fine-tuning, and more.

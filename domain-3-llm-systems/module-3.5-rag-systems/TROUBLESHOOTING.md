@@ -488,6 +488,237 @@ dataset = Dataset.from_dict(data)
 
 ---
 
+## ❓ Frequently Asked Questions
+
+**Q: When should I use RAG vs fine-tuning?**
+
+**A**: Use this decision framework:
+
+| Scenario | RAG | Fine-tuning |
+|----------|-----|-------------|
+| Frequently changing data | ✅ Best | ❌ Expensive to retrain |
+| Need source citations | ✅ Natural | ❌ Hard to add |
+| Proprietary knowledge | ✅ Easy | ✅ Works too |
+| Style/tone changes | ❌ Limited | ✅ Better |
+| Domain vocabulary | ⚠️ Partial | ✅ Better |
+| Reduce hallucination | ✅ Grounded | ⚠️ Can still hallucinate |
+
+**Default recommendation**: Start with RAG. It's faster to implement, easier to update, and provides citations. Add fine-tuning later if needed for style or specialized vocabulary.
+
+---
+
+**Q: What chunk size should I use?**
+
+**A**: It depends on your content and queries:
+
+| Chunk Size | Best For | Trade-off |
+|------------|----------|-----------|
+| 256 tokens | Precise Q&A, specific facts | May lose context |
+| 512 tokens | General purpose (default) | Good balance |
+| 1024 tokens | Complex topics, narrative | Less precise retrieval |
+
+**Experiment**: Try multiple sizes and measure retrieval quality with RAGAS.
+
+---
+
+**Q: Which embedding model should I choose?**
+
+**A**:
+
+| Model | Dimensions | Speed | Quality | Best For |
+|-------|------------|-------|---------|----------|
+| all-MiniLM-L6-v2 | 384 | Fast | Good | Development, testing |
+| bge-base-en-v1.5 | 768 | Medium | Better | Production (balanced) |
+| bge-large-en-v1.5 | 1024 | Slower | Best | Production (quality) |
+| nomic-embed-text | 768 | Medium | Good | Long documents (8K context) |
+
+**For DGX Spark**: Use `bge-large-en-v1.5` for production—it fits easily in memory and provides excellent quality.
+
+---
+
+**Q: Which vector database should I use?**
+
+**A**:
+
+| Database | Best For | Trade-off |
+|----------|----------|-----------|
+| ChromaDB | Learning, prototyping | Limited scalability |
+| FAISS | GPU acceleration, large scale | No built-in persistence |
+| Qdrant | Production, filtering | More complex setup |
+| Milvus | Enterprise scale | Heavy infrastructure |
+
+**For DGX Spark**: Start with ChromaDB for learning, use FAISS for GPU acceleration, consider Qdrant for production features.
+
+---
+
+**Q: How many documents should I retrieve (k)?**
+
+**A**: The right `k` depends on your pipeline:
+
+**Without reranking**:
+- `k=3-5`: When context window is limited
+- `k=5-10`: General recommendation
+
+**With reranking**:
+- Retrieve `k=50-100`: Cast a wide net
+- Rerank to `k=5-10`: Get the best ones
+
+---
+
+**Q: What is alpha in hybrid search?**
+
+**A**: Alpha controls the balance between dense (embedding) and sparse (keyword) search:
+
+```
+final_score = alpha * dense_score + (1 - alpha) * sparse_score
+```
+
+| Alpha | Emphasis | Best For |
+|-------|----------|----------|
+| 1.0 | Pure dense | Semantic search only |
+| 0.7 | Mostly dense | General use (default) |
+| 0.5 | Balanced | Mixed content |
+| 0.3 | Mostly sparse | Technical docs with specific terms |
+| 0.0 | Pure sparse | Exact keyword matching |
+
+**Tip**: Tune alpha on a validation set of queries with known relevant documents.
+
+---
+
+**Q: When is BM25 better than embeddings?**
+
+**A**: BM25 (sparse search) excels at:
+- **Exact terms**: Product codes, error messages, IDs
+- **Rare words**: Technical jargon not well-represented in embeddings
+- **Short queries**: Single-word or very short queries
+- **Out-of-domain content**: Content the embedding model wasn't trained on
+
+Use hybrid search to get the best of both.
+
+---
+
+**Q: Is reranking worth the latency?**
+
+**A**: Usually yes, but measure it:
+
+| Scenario | Latency Impact | Quality Improvement |
+|----------|----------------|---------------------|
+| Simple queries | +50-100ms | Marginal |
+| Complex queries | +50-100ms | Significant (10-30%) |
+| Noisy retrieval | +50-100ms | Very significant (20-50%) |
+
+**Recommendation**: Add reranking if:
+- Your first-stage retrieval is noisy
+- Precision matters more than latency
+- You're using hybrid search (reranker helps combine)
+
+---
+
+**Q: How does a cross-encoder reranker work?**
+
+**A**: Unlike bi-encoders (which encode query and doc separately), cross-encoders:
+
+1. Take query + document as a **single input**
+2. Process them **together** with full attention
+3. Output a **relevance score**
+
+This is more accurate but slower (can't pre-compute document embeddings).
+
+---
+
+**Q: What RAGAS metrics should I track?**
+
+**A**: Core metrics for RAG evaluation:
+
+| Metric | What It Measures | Target |
+|--------|------------------|--------|
+| **Faithfulness** | Answer based only on context | >0.9 |
+| **Answer Relevancy** | Answer addresses the question | >0.8 |
+| **Context Precision** | Retrieved docs are relevant | >0.7 |
+| **Context Recall** | All relevant docs retrieved | >0.7 |
+
+---
+
+**Q: How do I create a test set for RAG evaluation?**
+
+**A**: Three approaches:
+
+**1. Manual creation** (most accurate): Create questions with ground truth answers and expected documents
+
+**2. LLM-generated** (faster): Have an LLM generate questions from your documents
+
+**3. Synthetic with RAGAS**: Use RAGAS TestsetGenerator to create test sets automatically
+
+---
+
+**Q: How do I handle document updates?**
+
+**A**: Strategies for keeping your index current:
+
+**1. Full rebuild** (simplest): Delete and recreate entire collection
+
+**2. Incremental updates** (more efficient): Delete old versions and add updated documents
+
+**3. Versioned collections**: Create new collection versions and switch when ready
+
+---
+
+**Q: How do I add caching to RAG?**
+
+**A**: Cache at multiple levels:
+1. Cache embeddings for repeated text
+2. Cache retrieval results for identical queries
+3. Cache final answers for frequently asked questions
+
+---
+
+**Q: How do I handle multi-modal content (images, tables)?**
+
+**A**: Options for non-text content:
+
+**1. Extract text descriptions**: Use vision models or convert tables to markdown
+
+**2. Use multi-modal embeddings**: Models like CLIP can embed images and text in same space
+
+**3. Store metadata and retrieve later**: Index descriptions but keep references to original content
+
+---
+
+**Q: My RAG answers are generic, not using the context**
+
+**A**: Common causes and fixes:
+
+1. **Weak prompt template**: Make context more prominent and add explicit instructions to use only the provided context
+2. **Context too far from question**: Put context closer to where the model generates
+3. **Model not following instructions**: Try a more instruction-tuned model
+
+---
+
+**Q: Retrieval is slow, what can I do?**
+
+**A**: Optimization strategies:
+
+| Optimization | Improvement | Complexity |
+|--------------|-------------|------------|
+| Use GPU for FAISS | 10x faster | Low |
+| Use approximate search (IVF, HNSW) | 10-100x faster | Medium |
+| Pre-filter with metadata | Variable | Low |
+| Reduce embedding dimension | 2-3x faster | Medium |
+| Cache frequent queries | Huge for repeats | Low |
+
+---
+
+**Q: How do I debug poor retrieval?**
+
+**A**: Systematic debugging process:
+
+1. Check what's being retrieved and their scores
+2. Check if relevant doc exists in collection
+3. Compare embeddings directly
+4. Test with exact document text
+
+---
+
 ## 🆘 Still Stuck?
 
 1. **Check logs**: Most errors have detailed stack traces

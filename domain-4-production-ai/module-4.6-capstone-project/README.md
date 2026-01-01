@@ -233,8 +233,7 @@ Upon completing the capstone, you will have:
 | [QUICK_REFERENCE.md](./QUICK_REFERENCE.md) | Code patterns for all four project options |
 | [LAB_PREP.md](./LAB_PREP.md) | Environment setup and resource planning |
 | [WORKFLOWS.md](./WORKFLOWS.md) | Step-by-step workflows for planning, development, and documentation |
-| [TROUBLESHOOTING.md](./TROUBLESHOOTING.md) | Common errors and solutions during capstone development |
-| [FAQ.md](./FAQ.md) | Common questions about scope, timeline, and deliverables |
+| [TROUBLESHOOTING.md](./TROUBLESHOOTING.md) | Common errors, solutions, and FAQs for capstone development |
 
 ---
 

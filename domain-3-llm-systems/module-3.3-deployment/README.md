@@ -333,8 +333,7 @@ After completing this module:
 | [STUDY_GUIDE.md](./STUDY_GUIDE.md) | Learning objectives and lab roadmap |
 | [QUICK_REFERENCE.md](./QUICK_REFERENCE.md) | Engine commands and patterns |
 | [LAB_PREP.md](./LAB_PREP.md) | Environment setup and port mapping |
-| [TROUBLESHOOTING.md](./TROUBLESHOOTING.md) | vLLM, SGLang, TensorRT errors |
-| [FAQ.md](./FAQ.md) | Frequently asked questions |
+| [TROUBLESHOOTING.md](./TROUBLESHOOTING.md) | vLLM, SGLang, TensorRT errors and FAQ |
 
 ---
 

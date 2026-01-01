@@ -276,8 +276,7 @@ class SimpleBPE:
 ## Quick Links
 
 **Module Docs:**
-- [FAQ.md](./FAQ.md) - Common questions answered
-- [TROUBLESHOOTING.md](./TROUBLESHOOTING.md) - Error solutions
+- [TROUBLESHOOTING.md](./TROUBLESHOOTING.md) - Common questions answered and error solutions
 
 **External Resources:**
 - [The Illustrated Transformer](http://jalammar.github.io/illustrated-transformer/)
