@@ -219,6 +219,15 @@ KL(P || Q) = sum(P * log(P/Q))
 | Adam t=0 causes division by zero | Start t at 1, not 0 |
 
 ## 🔗 Quick Links
+
+### Module Labs
+- [Lab 1.4.1: Manual Backpropagation](./labs/lab-1.4.1-manual-backpropagation.ipynb) - Chain rule, gradients
+- [Lab 1.4.2: Optimizer Implementation](./labs/lab-1.4.2-optimizer-implementation.ipynb) - SGD, Momentum, Adam
+- [Lab 1.4.3: Loss Landscape Visualization](./labs/lab-1.4.3-loss-landscape-visualization.ipynb) - 2D/3D plots
+- [Lab 1.4.4: SVD for LoRA](./labs/lab-1.4.4-svd-for-lora.ipynb) - Low-rank approximation
+- [Lab 1.4.5: Probability Distributions](./labs/lab-1.4.5-probability-distributions.ipynb) - MLE, cross-entropy
+
+### External Resources
 - [3Blue1Brown: Calculus](https://www.youtube.com/playlist?list=PLZHQObOWTQDMsr9K-rj53DwVRMYO3t5Yr)
 - [3Blue1Brown: Linear Algebra](https://www.youtube.com/playlist?list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab)
 - [Matrix Calculus for DL](https://explained.ai/matrix-calculus/)

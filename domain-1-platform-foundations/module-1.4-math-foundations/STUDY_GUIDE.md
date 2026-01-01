@@ -17,7 +17,7 @@ By the end of this module, you will be able to:
 | 4 | SVD for LoRA | Linear algebra | ~2 hr | Understand low-rank approximation |
 | 5 | Probability Distributions | Statistics | ~2 hr | Derive cross-entropy from MLE |
 
-**Total time**: ~10 hours
+**Total time**: ~8-10 hours
 
 ## 🔑 Core Concepts
 
@@ -96,7 +96,7 @@ For r << d, this is MUCH smaller!
 
 ## 📖 Recommended Approach
 
-**Standard path** (10 hours):
+**Standard path** (8-10 hours):
 1. Lab 1: Essential—backprop is foundational
 2. Lab 2: Implement all three optimizers
 3. Lab 3: Visualize to build intuition
@@ -111,6 +111,8 @@ For r << d, this is MUCH smaller!
 5. Skip Lab 5 if comfortable with MLE
 
 ## 📋 Before You Start
-→ See [QUICKSTART.md](./QUICKSTART.md) for 5-minute gradient verification
-→ See [ELI5.md](./ELI5.md) for intuitive explanations
-→ See [QUICK_REFERENCE.md](./QUICK_REFERENCE.md) for formulas
+- See [QUICKSTART.md](./QUICKSTART.md) for 5-minute gradient verification
+- See [PREREQUISITES.md](./PREREQUISITES.md) for skill self-assessment
+- See [ELI5.md](./ELI5.md) for intuitive explanations
+- See [LAB_PREP.md](./LAB_PREP.md) for environment setup
+- See [QUICK_REFERENCE.md](./QUICK_REFERENCE.md) for formulas
