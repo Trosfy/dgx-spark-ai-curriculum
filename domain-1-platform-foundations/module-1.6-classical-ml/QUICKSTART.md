@@ -89,3 +89,4 @@ In the full module, you'll:
 1. **Understand when to use what**: Read [STUDY_GUIDE.md](./STUDY_GUIDE.md)
 2. **See XGBoost patterns**: Check [QUICK_REFERENCE.md](./QUICK_REFERENCE.md)
 3. **Start Lab 1**: Open `notebooks/lab-1.6.1-tabular-challenge.ipynb`
+4. **Having issues?**: See [TROUBLESHOOTING.md](./TROUBLESHOOTING.md)

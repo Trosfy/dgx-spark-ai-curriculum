@@ -48,6 +48,13 @@ except ImportError:
     XGB_AVAILABLE = False
     warnings.warn("XGBoost not available. Install with: pip install xgboost")
 
+# Detect GPU availability for XGBoost
+try:
+    import torch
+    XGB_DEVICE = 'cuda' if torch.cuda.is_available() else 'cpu'
+except ImportError:
+    XGB_DEVICE = 'cpu'
+
 
 @dataclass
 class ModelResult:
@@ -241,7 +248,7 @@ class BaselineExperiment:
             self (for method chaining)
         """
         if self.task == 'classification':
-            # XGBoost
+            # XGBoost with GPU support on DGX Spark
             if XGB_AVAILABLE:
                 self.add_model(
                     'XGBoost',
@@ -249,6 +256,7 @@ class BaselineExperiment:
                         n_estimators=100,
                         max_depth=6,
                         learning_rate=0.1,
+                        device=XGB_DEVICE,
                         random_state=self.random_state,
                         verbosity=0,
                         n_jobs=-1
@@ -280,7 +288,7 @@ class BaselineExperiment:
             )
 
         else:  # regression
-            # XGBoost
+            # XGBoost with GPU support on DGX Spark
             if XGB_AVAILABLE:
                 self.add_model(
                     'XGBoost',
@@ -288,6 +296,7 @@ class BaselineExperiment:
                         n_estimators=100,
                         max_depth=6,
                         learning_rate=0.1,
+                        device=XGB_DEVICE,
                         random_state=self.random_state,
                         verbosity=0,
                         n_jobs=-1

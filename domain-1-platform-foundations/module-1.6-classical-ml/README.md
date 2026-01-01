@@ -286,8 +286,6 @@ Use this checklist to track your progress:
 
 ---
 
----
-
 ## 📖 Study Materials
 
 | Document | Purpose |
@@ -295,6 +293,8 @@ Use this checklist to track your progress:
 | [QUICKSTART.md](./QUICKSTART.md) | Train XGBoost on GPU in 5 minutes |
 | [STUDY_GUIDE.md](./STUDY_GUIDE.md) | When to use classical ML vs deep learning |
 | [QUICK_REFERENCE.md](./QUICK_REFERENCE.md) | XGBoost, Optuna, and cuML patterns |
+| [TROUBLESHOOTING.md](./TROUBLESHOOTING.md) | Common issues and solutions |
+| [FAQ.md](./FAQ.md) | Frequently asked questions |
 
 ---
 
