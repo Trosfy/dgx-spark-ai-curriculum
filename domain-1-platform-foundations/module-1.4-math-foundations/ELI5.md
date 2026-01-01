@@ -229,14 +229,14 @@ Imagine plotting the loss as a height on a map. Training is trying to find the l
 
 | ELI5 Term | Technical Term | Where to Learn More |
 |-----------|----------------|---------------------|
-| "Which way is downhill" | Gradient | Lab 1.4.1 |
-| "Passing the buck" | Chain Rule / Backprop | Lab 1.4.1 |
-| "Step size" | Learning Rate | Lab 1.4.2 |
-| "Score keeper" | Loss Function | Lab 1.4.5 |
-| "Rolling ball" | Momentum | Lab 1.4.2 |
-| "Smart coach" | Adam Optimizer | Lab 1.4.2 |
-| "MP3 for matrices" | SVD / Low-Rank | Lab 1.4.4 |
-| "Foggy mountains" | Loss Landscape | Lab 1.4.3 |
+| "Which way is downhill" | Gradient | [Lab 1.4.1](./labs/lab-1.4.1-manual-backpropagation.ipynb) |
+| "Passing the buck" | Chain Rule / Backprop | [Lab 1.4.1](./labs/lab-1.4.1-manual-backpropagation.ipynb) |
+| "Step size" | Learning Rate | [Lab 1.4.2](./labs/lab-1.4.2-optimizer-implementation.ipynb) |
+| "Score keeper" | Loss Function | [Lab 1.4.5](./labs/lab-1.4.5-probability-distributions.ipynb) |
+| "Rolling ball" | Momentum | [Lab 1.4.2](./labs/lab-1.4.2-optimizer-implementation.ipynb) |
+| "Smart coach" | Adam Optimizer | [Lab 1.4.2](./labs/lab-1.4.2-optimizer-implementation.ipynb) |
+| "MP3 for matrices" | SVD / Low-Rank | [Lab 1.4.4](./labs/lab-1.4.4-svd-for-lora.ipynb) |
+| "Foggy mountains" | Loss Landscape | [Lab 1.4.3](./labs/lab-1.4.3-loss-landscape-visualization.ipynb) |
 
 ---
 
