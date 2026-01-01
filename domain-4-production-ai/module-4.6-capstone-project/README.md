@@ -223,6 +223,16 @@ Upon completing the capstone, you will have:
 
 ---
 
+## Study Materials
+
+| Document | Purpose |
+|----------|---------|
+| [QUICKSTART.md](./QUICKSTART.md) | Validate your project idea with a quick MVP |
+| [STUDY_GUIDE.md](./STUDY_GUIDE.md) | Week-by-week plan and deliverables checklist |
+| [FAQ.md](./FAQ.md) | Common questions about scope, timeline, and deliverables |
+
+---
+
 ## Resources
 
 - [DGX Spark Playbooks](https://build.nvidia.com/spark)

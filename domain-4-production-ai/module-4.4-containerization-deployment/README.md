@@ -606,6 +606,18 @@ After completing this module:
 
 ---
 
+## Study Materials
+
+| Document | Purpose |
+|----------|---------|
+| [QUICKSTART.md](./QUICKSTART.md) | Containerize an ML inference server in 5 minutes |
+| [STUDY_GUIDE.md](./STUDY_GUIDE.md) | Learning objectives and 7-lab roadmap |
+| [COMPARISONS.md](./COMPARISONS.md) | AWS vs GCP, Gradio vs Streamlit, orchestration options |
+| [WORKFLOWS.md](./WORKFLOWS.md) | Step-by-step deployment workflows with checklists |
+| [FAQ.md](./FAQ.md) | Common questions about containerization and deployment |
+
+---
+
 ## Resources
 
 - [Docker Documentation](https://docs.docker.com/)

@@ -580,6 +580,18 @@ After completing this module:
 
 ---
 
+## Study Materials
+
+| Document | Purpose |
+|----------|---------|
+| [QUICKSTART.md](./QUICKSTART.md) | Build a chat demo in 5 minutes |
+| [STUDY_GUIDE.md](./STUDY_GUIDE.md) | Learning objectives and 3-lab roadmap |
+| [QUICK_REFERENCE.md](./QUICK_REFERENCE.md) | Gradio and Streamlit code patterns |
+| [WORKFLOWS.md](./WORKFLOWS.md) | Step-by-step demo building workflows |
+| [FAQ.md](./FAQ.md) | Common questions about demos and deployment |
+
+---
+
 ## Resources
 
 - [Gradio Documentation](https://gradio.app/docs/)

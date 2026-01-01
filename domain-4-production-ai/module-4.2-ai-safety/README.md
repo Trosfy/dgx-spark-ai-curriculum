@@ -247,6 +247,20 @@ Create comprehensive documentation for a model.
 
 ---
 
+## Study Materials
+
+| Document | Purpose |
+|----------|---------|
+| [QUICKSTART.md](./QUICKSTART.md) | Implement Llama Guard safety filter in 5 minutes |
+| [ELI5.md](./ELI5.md) | Jargon-free explanations of guardrails, injection, red teaming |
+| [STUDY_GUIDE.md](./STUDY_GUIDE.md) | Learning objectives and module roadmap |
+| [QUICK_REFERENCE.md](./QUICK_REFERENCE.md) | Commands, configs, and code patterns |
+| [LAB_PREP.md](./LAB_PREP.md) | Environment setup and checklist |
+| [TROUBLESHOOTING.md](./TROUBLESHOOTING.md) | Common errors and fixes |
+| [FAQ.md](./FAQ.md) | Frequently asked questions |
+
+---
+
 ## Guidance
 
 ### DGX Spark Setup
