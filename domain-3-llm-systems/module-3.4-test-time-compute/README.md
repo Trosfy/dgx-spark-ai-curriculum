@@ -333,12 +333,12 @@ def best_of_n(llm, prompt, n=5, temperature=0.7):
 
 ### DGX Spark Performance
 
-| Model | Quantization | Memory | Thinking Speed |
-|-------|--------------|--------|----------------|
-| R1-distill-7B | FP16 | ~14GB | Fast (~50 tok/s) |
-| R1-distill-32B | Q4 | ~20GB | Moderate (~30 tok/s) |
-| R1-distill-70B | Q4 | ~45GB | Good (~20 tok/s) |
-| Llama 3.1 70B | Q4 | ~45GB | Fast (~25 tok/s) |
+| Model | Quantization | Memory | Decode tok/s |
+|-------|--------------|--------|--------------|
+| R1-distill-7B | FP16 | ~14GB | ~50 |
+| R1-distill-32B | Q4 | ~20GB | ~30 |
+| R1-distill-70B | Q4 | ~45GB | ~20 |
+| Llama 3.1 70B | Q4 | ~45GB | ~25 |
 
 **Note:** R1 models produce more tokens due to thinking, but the quality improvement on reasoning tasks is substantial.
 
@@ -355,7 +355,6 @@ docker run --gpus all -it --rm \
     -v $HOME/.ollama:/root/.ollama \
     --ipc=host \
     --network=host \
-    -p 8888:8888 \
     nvcr.io/nvidia/pytorch:25.11-py3 \
     jupyter lab --ip=0.0.0.0 --allow-root --no-browser
 ```

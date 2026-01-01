@@ -27,8 +27,8 @@ docker run --gpus all -it --rm \
 ## 📊 Key Performance Data
 
 ### DGX Spark Reasoning Model Performance
-| Model | Quantization | Memory | Speed (tok/s) |
-|-------|--------------|--------|---------------|
+| Model | Quantization | Memory | Decode tok/s |
+|-------|--------------|--------|--------------|
 | R1-distill-7B | FP16 | ~14GB | ~50 |
 | R1-distill-32B | Q4 | ~20GB | ~30 |
 | R1-distill-70B | Q4 | ~45GB | ~20 |

@@ -129,7 +129,7 @@ The answer is 391.
 ```
 
 ### Why This Matters on DGX Spark
-DeepSeek-R1-distill-70B runs great on DGX Spark (~45GB with Q4 quantization). You get state-of-the-art reasoning capabilities on your desktop!
+DeepSeek-R1-distill-70B runs great on DGX Spark (~45GB with Q4 quantization). You get state-of-the-art reasoning capabilities on your workstation!
 
 ### When You're Ready for Details
 → See: [Lab 3.4.3](./labs/lab-3.4.3-deepseek-r1.ipynb) for R1 exploration
