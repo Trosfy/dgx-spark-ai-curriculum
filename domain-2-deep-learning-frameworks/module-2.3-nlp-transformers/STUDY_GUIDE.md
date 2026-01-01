@@ -190,6 +190,7 @@ Input Tokens: ["The", "cat", "sat"]
 - See [LAB_PREP.md](./LAB_PREP.md) for environment setup
 - See [QUICKSTART.md](./QUICKSTART.md) for 5-minute attention demo
 - See [ELI5.md](./ELI5.md) for intuitive explanations
+- See [FAQ.md](./FAQ.md) for common questions and answers
 
 ---
 

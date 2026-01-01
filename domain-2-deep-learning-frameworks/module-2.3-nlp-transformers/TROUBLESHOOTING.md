@@ -391,6 +391,7 @@ rm -rf ~/.cache/huggingface/hub/models--bert-base-uncased
 2. **Check solution notebooks** - in `solutions/` folder
 3. **Use smaller examples** - Debug with seq_len=3 before scaling up
 4. **Visualize attention** - Often reveals what's wrong
+5. **Check FAQ** - See [FAQ.md](./FAQ.md) for conceptual questions
 
 **Debug template**:
 ```python

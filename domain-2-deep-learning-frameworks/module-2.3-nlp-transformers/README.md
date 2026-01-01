@@ -150,6 +150,7 @@ mask = cumsum <= p
 | [QUICK_REFERENCE.md](./QUICK_REFERENCE.md) | Commands, patterns, and code snippets |
 | [LAB_PREP.md](./LAB_PREP.md) | Environment setup and lab preparation |
 | [TROUBLESHOOTING.md](./TROUBLESHOOTING.md) | Common errors and solutions |
+| [FAQ.md](./FAQ.md) | Frequently asked questions about transformers and NLP |
 
 ---
 
@@ -237,7 +238,7 @@ For standalone scripts, you can also use direct file imports:
 
 ```python
 from scripts.attention import MultiHeadAttention, scaled_dot_product_attention
-from scripts.transformer import TransformerEncoder, TransformerEncoderBlock
+from scripts.transformer import TransformerEncoder, TransformerEncoderLayer
 from scripts.positional_encoding import SinusoidalPositionalEncoding, RoPE
 from scripts.generation import greedy_decode, top_k_sampling, top_p_sampling
 from scripts.tokenizer_utils import SimpleBPE, estimate_token_cost

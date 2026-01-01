@@ -80,10 +80,10 @@ class MultiHeadAttention(nn.Module):
         return self.W_o(output)
 ```
 
-### Pattern: Transformer Encoder Block
+### Pattern: Transformer Encoder Layer
 
 ```python
-class TransformerEncoderBlock(nn.Module):
+class TransformerEncoderLayer(nn.Module):
     def __init__(self, d_model, num_heads, d_ff, dropout=0.1):
         super().__init__()
         self.attention = MultiHeadAttention(d_model, num_heads)
@@ -275,6 +275,11 @@ class SimpleBPE:
 
 ## Quick Links
 
+**Module Docs:**
+- [FAQ.md](./FAQ.md) - Common questions answered
+- [TROUBLESHOOTING.md](./TROUBLESHOOTING.md) - Error solutions
+
+**External Resources:**
 - [The Illustrated Transformer](http://jalammar.github.io/illustrated-transformer/)
 - [Attention Is All You Need](https://arxiv.org/abs/1706.03762)
 - [RoPE Paper](https://arxiv.org/abs/2104.09864)

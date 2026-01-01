@@ -309,3 +309,9 @@ You truly understand these concepts when you can explain them without jargon:
 2. Why do we need multiple attention heads instead of one big one?
 3. How does the model know that "it" refers to "cat" in "The cat was tired because it..."?
 4. Why is "running" tokenized as ["run", "ning"] instead of one token?
+
+---
+
+## Want More Detail?
+
+Ready to go deeper? See [FAQ.md](./FAQ.md) for technical answers to common questions about attention, tokenization, fine-tuning, and more.
