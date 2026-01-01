@@ -133,9 +133,10 @@ $HOME/workspace/module-1.2/
 # Create workspace
 mkdir -p $HOME/workspace/module-1.2/{data,outputs,scripts,notebooks}
 
-# Start container with Jupyter
+# Start NGC container with Jupyter
 docker run --gpus all -it --rm \
     -v $HOME/workspace:/workspace \
+    -v $HOME/.cache/huggingface:/root/.cache/huggingface \
     --ipc=host \
     -p 8888:8888 \
     nvcr.io/nvidia/pytorch:25.11-py3 \

@@ -6,7 +6,8 @@
 Experience a 100x+ speedup by replacing loops with NumPy vectorization.
 
 ## ✅ Before You Start
-- [ ] NGC PyTorch container running (see Module 1.1)
+- [ ] Verified Python prerequisites (see [PREREQUISITES.md](./PREREQUISITES.md))
+- [ ] NGC PyTorch container running (see [LAB_PREP.md](./LAB_PREP.md))
 - [ ] Python shell or Jupyter ready
 
 ## 🚀 Let's Go!

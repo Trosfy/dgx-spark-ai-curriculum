@@ -215,17 +215,27 @@ Quick reference:
 ## DGX Spark Specific
 
 ### Q: Why does profiling show different results than on my laptop?
-**A**: ARM64 architecture has different performance characteristics:
-- Some operations faster (SIMD)
-- Some operations slower (x86-optimized libraries)
-- Memory bandwidth different
+**A**: DGX Spark uses ARM64/aarch64 architecture, which has different performance characteristics than x86:
+- Some operations are faster (optimized SIMD operations)
+- Some operations are slower (x86-optimized libraries may not be available)
+- Memory bandwidth is different (273 GB/s on DGX Spark)
 
-Always benchmark on target hardware.
+With 128GB unified memory, DGX Spark can handle much larger datasets than typical laptops. Always benchmark on target hardware for accurate performance comparisons.
+
+---
+
+### Q: Why must I use the NGC container instead of pip install?
+**A**: DGX Spark uses ARM64/aarch64 architecture. Many Python packages (especially PyTorch and its dependencies) don't have pre-built ARM64 wheels on PyPI. The NGC containers include:
+- Pre-built ARM64-compatible packages
+- CUDA-optimized libraries for the Blackwell GPU
+- Tested, validated configurations
+
+**Never use `pip install torch` on DGX Spark**—it will fail or install an incompatible version.
 
 ---
 
 ### Q: Can I use Numba on DGX Spark?
-**A**: Yes, but use the version from NGC container:
+**A**: Yes, but use the version from the NGC container:
 
 ```python
 from numba import jit
@@ -235,7 +245,7 @@ def fast_function(x):
     return x ** 2
 ```
 
-Don't pip install numba—use the container version.
+Don't pip install numba—use the version pre-installed in the NGC container, which is compiled for ARM64.
 
 ---
 

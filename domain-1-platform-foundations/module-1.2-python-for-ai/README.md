@@ -233,10 +233,23 @@ results = compare_implementations(
 
 ### DGX Spark Compatibility Notes
 
-On DGX Spark with ARM64 architecture:
+On DGX Spark with ARM64/aarch64 architecture:
 - **cProfile and tracemalloc** work out of the box (stdlib)
 - **line_profiler and memory_profiler** may need conda installation
 - Use NGC containers which have pre-built ARM64 packages
+- DGX Spark has 128GB unified memory, allowing large dataset operations
+
+### Common Issues
+
+| Issue | Solution |
+|-------|----------|
+| `ModuleNotFoundError: No module named 'numpy'` | Use NGC container, not base Python |
+| Broadcasting shape mismatch | Check array shapes, align from right |
+| `SettingWithCopyWarning` in Pandas | Use `.copy()` or `.loc[]` |
+| Plots not showing in Jupyter | Add `%matplotlib inline` |
+| `MemoryError` on large arrays | Use `float32` instead of `float64` |
+
+> See [TROUBLESHOOTING.md](./TROUBLESHOOTING.md) for detailed solutions.
 
 ### Memory Requirements
 
@@ -265,14 +278,14 @@ On DGX Spark with ARM64 architecture:
 
 ---
 
----
-
 ## 📖 Study Materials
 
 | Document | Purpose |
 |----------|---------|
 | [QUICKSTART.md](./QUICKSTART.md) | See 100x+ speedup from vectorization in 5 minutes |
+| [PREREQUISITES.md](./PREREQUISITES.md) | Verify you have required Python skills |
 | [STUDY_GUIDE.md](./STUDY_GUIDE.md) | Learning roadmap and core concepts |
+| [ELI5.md](./ELI5.md) | Simple explanations of complex concepts |
 | [QUICK_REFERENCE.md](./QUICK_REFERENCE.md) | NumPy, Pandas, einsum, profiling cheatsheet |
 | [LAB_PREP.md](./LAB_PREP.md) | Environment setup and lab checklists |
 | [TROUBLESHOOTING.md](./TROUBLESHOOTING.md) | Common errors and fixes |

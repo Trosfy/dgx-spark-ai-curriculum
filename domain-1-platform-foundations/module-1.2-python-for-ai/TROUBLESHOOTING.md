@@ -1,11 +1,42 @@
 # Module 1.2: Python for AI/ML - Troubleshooting Guide
 
+This guide expands on the Common Issues from [README.md](./README.md) with detailed solutions.
+
 ## 🔍 Quick Diagnostic
 
 **Before diving into specific errors:**
-1. Check you're in NGC container: `import torch; print(torch.__version__)`
-2. Verify NumPy/Pandas: `import numpy as np; import pandas as pd`
-3. Check memory: `import psutil; print(f"{psutil.virtual_memory().percent}% used")`
+1. Check you're in NGC container: `python -c "import torch; print(torch.__version__)"`
+2. Verify NumPy/Pandas: `python -c "import numpy as np; import pandas as pd; print('OK')"`
+3. Check memory: `python -c "import psutil; print(f'{psutil.virtual_memory().percent}% used')"`
+
+> **DGX Spark Note:** With 128GB unified memory, memory issues are rare. If you encounter them, ensure you're using `float32` instead of `float64`.
+
+---
+
+## 🚨 Environment Issues
+
+### Error: ModuleNotFoundError: No module named 'numpy'
+
+**Symptoms:**
+```
+ModuleNotFoundError: No module named 'numpy'
+```
+
+**Cause:** Running Python outside the NGC container, or using a bare Python installation.
+
+**Solution:**
+Always use the NGC container which has all required packages pre-installed:
+```bash
+docker run --gpus all -it --rm \
+    -v $HOME/workspace:/workspace \
+    -v $HOME/.cache/huggingface:/root/.cache/huggingface \
+    --ipc=host \
+    -p 8888:8888 \
+    nvcr.io/nvidia/pytorch:25.11-py3 \
+    jupyter lab --ip=0.0.0.0 --allow-root --no-browser
+```
+
+**Never** use `pip install numpy` or `pip install torch` on DGX Spark—the NGC container has ARM64-optimized versions.
 
 ---
 
