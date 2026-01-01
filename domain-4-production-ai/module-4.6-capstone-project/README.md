@@ -228,7 +228,12 @@ Upon completing the capstone, you will have:
 | Document | Purpose |
 |----------|---------|
 | [QUICKSTART.md](./QUICKSTART.md) | Validate your project idea with a quick MVP |
+| [PREREQUISITES.md](./PREREQUISITES.md) | Self-assessment for required skills from all domains |
 | [STUDY_GUIDE.md](./STUDY_GUIDE.md) | Week-by-week plan and deliverables checklist |
+| [QUICK_REFERENCE.md](./QUICK_REFERENCE.md) | Code patterns for all four project options |
+| [LAB_PREP.md](./LAB_PREP.md) | Environment setup and resource planning |
+| [WORKFLOWS.md](./WORKFLOWS.md) | Step-by-step workflows for planning, development, and documentation |
+| [TROUBLESHOOTING.md](./TROUBLESHOOTING.md) | Common errors and solutions during capstone development |
 | [FAQ.md](./FAQ.md) | Common questions about scope, timeline, and deliverables |
 
 ---

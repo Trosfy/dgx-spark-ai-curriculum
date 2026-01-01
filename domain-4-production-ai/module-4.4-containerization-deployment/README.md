@@ -611,9 +611,13 @@ After completing this module:
 | Document | Purpose |
 |----------|---------|
 | [QUICKSTART.md](./QUICKSTART.md) | Containerize an ML inference server in 5 minutes |
+| [ELI5.md](./ELI5.md) | Docker, Kubernetes, and cloud concepts explained simply |
 | [STUDY_GUIDE.md](./STUDY_GUIDE.md) | Learning objectives and 7-lab roadmap |
+| [QUICK_REFERENCE.md](./QUICK_REFERENCE.md) | Docker, K8s, cloud commands and code patterns |
+| [LAB_PREP.md](./LAB_PREP.md) | Environment setup for all 7 labs |
 | [COMPARISONS.md](./COMPARISONS.md) | AWS vs GCP, Gradio vs Streamlit, orchestration options |
 | [WORKFLOWS.md](./WORKFLOWS.md) | Step-by-step deployment workflows with checklists |
+| [TROUBLESHOOTING.md](./TROUBLESHOOTING.md) | Docker, K8s, and cloud deployment error solutions |
 | [FAQ.md](./FAQ.md) | Common questions about containerization and deployment |
 
 ---
