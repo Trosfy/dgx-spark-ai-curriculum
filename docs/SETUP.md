@@ -318,27 +318,80 @@ export OLLAMA_NUM_PARALLEL=4
 export OLLAMA_MAX_LOADED_MODELS=2
 ```
 
-### Pull Recommended Models
+### Pull Recommended Models (2025 Tier 1)
 
 ```bash
-# Small model for testing
-ollama pull llama3.2:3b
+# ═══════════════════════════════════════════════════════════════════
+# GENERAL PURPOSE LLMs
+# ═══════════════════════════════════════════════════════════════════
 
-# Medium model (primary development)
-ollama pull llama3.1:8b
+# Primary general purpose (NVIDIA - optimized for DGX Spark)
+ollama pull nemotron-3-nano       # 3.2B active/31.6B total, 1M context, fastest
 
-# Large model (DGX Spark advantage!)
-ollama pull llama3.1:70b
+# Alternative general purpose (Alibaba)
+ollama pull qwen3:8b              # Fast testing (~5GB, hybrid /think mode)
+ollama pull qwen3:32b             # Best tool calling BFCL 68.2 (~20GB)
 
-# Embedding model
-ollama pull nomic-embed-text
+# ═══════════════════════════════════════════════════════════════════
+# REASONING MODELS
+# ═══════════════════════════════════════════════════════════════════
 
-# Vision model
-ollama pull llava:34b
+# Primary reasoning (Alibaba)
+ollama pull qwq:32b               # 79.5% AIME, Apache 2.0 (~20GB)
+
+# Alternative reasoning with vision (Mistral)
+ollama pull magistral-small       # 86% AIME, vision+tools, Apache 2.0 (~15GB)
+
+# Reasoning comparison (DeepSeek) - NOTE: No tool calling!
+ollama pull deepseek-r1:8b        # 72.6% AIME, reasoning only (~5GB)
+
+# ═══════════════════════════════════════════════════════════════════
+# CODE MODELS
+# ═══════════════════════════════════════════════════════════════════
+
+# Primary code model (Mistral)
+ollama pull devstral-small-2      # 68% SWE-Bench, vision+tools, Apache 2.0 (~15GB)
+
+# ═══════════════════════════════════════════════════════════════════
+# EMBEDDING MODELS
+# ═══════════════════════════════════════════════════════════════════
+
+# Primary embeddings (Alibaba)
+ollama pull qwen3-embedding:8b    # #1 MTEB, 100+ languages, 32K context (~8GB)
+
+# ═══════════════════════════════════════════════════════════════════
+# VISION MODELS
+# ═══════════════════════════════════════════════════════════════════
+
+# General vision-language (Alibaba)
+ollama pull qwen3-vl:8b           # 32-lang OCR, GUI agents, tools (~8GB)
+
+# Document OCR (DeepSeek) - via HuggingFace, not Ollama
+# pip install deepseek-ocr        # 97% precision, 10x token compression
+
+# ═══════════════════════════════════════════════════════════════════
+# IMAGE GENERATION (via diffusers, not Ollama)
+# ═══════════════════════════════════════════════════════════════════
+# FLUX.2 dev - Free for non-commercial use
+# black-forest-labs/FLUX.2-dev    # 32B, inpainting, outpainting
 
 # List installed models
 ollama list
 ```
+
+> **2025 Model Capability Matrix:**
+>
+> | Model | Thinking | Tool Calling | Vision | Best For |
+> |-------|----------|--------------|--------|----------|
+> | nemotron-3-nano | ✅ ON/OFF | ✅ Strong | ❌ | Agents, long context |
+> | qwen3:32b | ✅ /think | ✅ Best (68.2) | ❌ | General + tools |
+> | qwq:32b | ✅ Always | ⚠️ Via Qwen-Agent | ❌ | Pure reasoning |
+> | magistral-small | ✅ Traceable | ✅ Enhanced | ✅ | Reasoning + vision |
+> | devstral-small-2 | ✅ | ✅ Function | ✅ | Agentic coding |
+> | deepseek-r1:8b | ✅ `<think>` | ❌ No | ❌ | Reasoning only |
+> | qwen3-vl:8b | ✅ Thinking | ✅ GUI agents | ✅ | Vision tasks |
+>
+> **⚠️ Critical:** DeepSeek-R1 does NOT support tool calling - do not use for agents!
 
 ### Ollama API Test
 
@@ -351,7 +404,7 @@ def test_ollama():
     response = requests.post(
         'http://localhost:11434/api/generate',
         json={
-            'model': 'llama3.1:8b',
+            'model': 'qwen3:8b',
             'prompt': 'Hello! Respond with just "OK" if you can hear me.',
             'stream': False
         }

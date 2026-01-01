@@ -14,7 +14,7 @@ Implement Chain-of-Thought prompting and see immediate accuracy improvement.
 ### Step 1: Start Ollama (if not running)
 ```bash
 ollama serve &
-ollama pull llama3.1:8b
+ollama pull qwen3:8b
 ```
 
 ### Step 2: Test WITHOUT Chain-of-Thought
@@ -29,7 +29,7 @@ how many oranges did I buy?
 
 # Direct answer (no reasoning)
 response = ollama.chat(
-    model="llama3.1:8b",
+    model="qwen3:8b",
     messages=[{"role": "user", "content": question}]
 )
 print("Direct Answer:", response['message']['content'])
@@ -40,7 +40,7 @@ print("Direct Answer:", response['message']['content'])
 cot_prompt = question + "\n\nLet's think step by step:"
 
 response = ollama.chat(
-    model="llama3.1:8b",
+    model="qwen3:8b",
     messages=[{"role": "user", "content": cot_prompt}]
 )
 print("\nWith Chain-of-Thought:")

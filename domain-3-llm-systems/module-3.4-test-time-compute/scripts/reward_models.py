@@ -330,7 +330,7 @@ def best_of_n(
 
     Example:
         >>> best, score, all_cands = best_of_n(
-        ...     ollama, "llama3.1:8b",
+        ...     ollama, "qwen3:8b",
         ...     reward_model, reward_tokenizer,
         ...     "Explain quantum entanglement simply.",
         ...     n=5

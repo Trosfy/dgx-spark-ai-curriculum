@@ -359,7 +359,7 @@ def chat(message, history):
     messages.append({"role": "user", "content": message})
 
     response = ollama.chat(
-        model="llama3.1:8b",
+        model="qwen3:8b",
         messages=messages,
         stream=True
     )
@@ -442,7 +442,7 @@ if prompt := st.chat_input("Ask something..."):
 
     with st.chat_message("assistant"):
         response = ollama.chat(
-            model="llama3.1:8b",
+            model="qwen3:8b",
             messages=st.session_state.messages
         )
         reply = response["message"]["content"]
@@ -474,7 +474,7 @@ def load_model():
 @st.cache_data(ttl=3600)
 def get_embeddings(text):
     """Cache embeddings for 1 hour."""
-    return client.embeddings(model="nomic-embed-text", prompt=text)
+    return client.embeddings(model="qwen3-embedding:8b", prompt=text)
 ```
 
 ---

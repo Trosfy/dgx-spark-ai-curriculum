@@ -102,7 +102,7 @@ for item in squad:
 |-------|-----------|---------|-------|
 | bge-large-en-v1.5 | 1024 | Best | Medium |
 | bge-base-en-v1.5 | 768 | Great | Fast |
-| nomic-embed-text | 768 | Good | Fast (Ollama) |
+| qwen3-embedding:8b | 768 | Great | Fast (Ollama) |
 | e5-large-v2 | 1024 | Great | Medium |
 
 ## Vector Database Storage

@@ -230,7 +230,7 @@ nslookup registry.ollama.ai
 echo "nameserver 8.8.8.8" | sudo tee /etc/resolv.conf
 
 # Retry pull
-ollama pull llama3.1:8b
+ollama pull qwen3:8b
 ```
 
 ---
@@ -246,10 +246,10 @@ Model fails to load or generates very slowly.
 sudo sh -c 'sync; echo 3 > /proc/sys/vm/drop_caches'
 
 # Unload any currently loaded model
-curl http://localhost:11434/api/generate -d '{"model": "llama3.1:8b", "keep_alive": 0}'
+curl http://localhost:11434/api/generate -d '{"model": "qwen3:8b", "keep_alive": 0}'
 
 # Use quantized model variant
-ollama pull llama3.1:8b-q4_0  # Smaller quantization
+ollama pull qwen3:8b-q4_0  # Smaller quantization
 ```
 
 ---
@@ -540,7 +540,7 @@ The Web UI adds rendering overhead that skews timing measurements. Direct API ca
 Send a generate request with `keep_alive: 0`:
 
 ```bash
-curl http://localhost:11434/api/generate -d '{"model": "llama3.1:8b", "keep_alive": 0}'
+curl http://localhost:11434/api/generate -d '{"model": "qwen3:8b", "keep_alive": 0}'
 ```
 
 Or wait for the default timeout (5 minutes).
@@ -553,9 +553,9 @@ For this module, download at minimum:
 
 | Model | Size | Required? |
 |-------|------|-----------|
-| `llama3.2:3b` | ~2 GB | Yes - quick tests |
-| `llama3.1:8b` | ~5 GB | Yes - main benchmark |
-| `llama3.1:70b` | ~45 GB | Recommended - shows unified memory advantage |
+| `qwen3:1.7b` | ~1 GB | Yes - quick tests |
+| `qwen3:8b` | ~5 GB | Yes - main benchmark |
+| `qwen3:32b` | ~20 GB | Recommended - shows unified memory advantage |
 
 ---
 

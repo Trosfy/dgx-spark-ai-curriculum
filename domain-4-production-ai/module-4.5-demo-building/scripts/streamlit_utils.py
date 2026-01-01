@@ -6,7 +6,7 @@ Production-quality utilities for building polished Streamlit demos.
 Example usage:
     >>> from streamlit_utils import init_session_state, cached_model_loader
     >>> init_session_state({"messages": [], "user": None})
-    >>> model = cached_model_loader("llama3.2:3b")
+    >>> model = cached_model_loader("qwen3:4b")
 """
 
 import streamlit as st

@@ -164,7 +164,7 @@ docker run --gpus all -p 8000:8000 \
     --ipc=host \
     nvcr.io/nvidia/pytorch:25.11-py3 \
     bash -c "pip install vllm && python -m vllm.entrypoints.openai.api_server \
-        --model meta-llama/Llama-3.1-8B-Instruct \
+        --model Qwen/Qwen3-8B-Instruct \
         --enforce-eager \
         --max-model-len 4096 \
         --dtype bfloat16"
@@ -174,7 +174,7 @@ docker run --gpus all -p 8000:8000 \
 #     -v ~/.cache/huggingface:/root/.cache/huggingface \
 #     --ipc=host \
 #     vllm/vllm-openai:latest \
-#     --model meta-llama/Llama-3.1-8B-Instruct \
+#     --model Qwen/Qwen3-8B-Instruct \
 #     --enforce-eager
 ```
 
@@ -215,7 +215,7 @@ async def chat(request: ChatRequest):
 ```python
 # Start SGLang server with RadixAttention
 # python -m sglang.launch_server \
-#     --model-path meta-llama/Llama-3.1-8B-Instruct \
+#     --model-path Qwen/Qwen3-8B-Instruct \
 #     --port 30000 \
 #     --dtype bfloat16
 
@@ -247,7 +247,7 @@ import torch
 
 # Standard model loading pattern for DGX Spark
 model = AutoModelForCausalLM.from_pretrained(
-    "meta-llama/Llama-3.1-8B-Instruct",
+    "Qwen/Qwen3-8B-Instruct",
     torch_dtype=torch.bfloat16,  # Native Blackwell support
     device_map="auto"
 )

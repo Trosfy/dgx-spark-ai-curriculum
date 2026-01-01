@@ -22,7 +22,7 @@ import ollama
 
 def chat(message, history):
     messages = [{"role": "user", "content": message}]
-    response = ollama.chat(model="llama3.2:3b", messages=messages, stream=True)
+    response = ollama.chat(model="qwen3:4b", messages=messages, stream=True)
 
     partial = ""
     for chunk in response:
@@ -165,7 +165,7 @@ def load_model():
 @st.cache_data(ttl=3600)  # Cache data for 1 hour
 def get_embeddings(text):
     client = load_model()
-    return client.embeddings(model="nomic-embed-text", prompt=text)
+    return client.embeddings(model="qwen3-embedding:8b", prompt=text)
 ```
 
 ### Columns and Metrics

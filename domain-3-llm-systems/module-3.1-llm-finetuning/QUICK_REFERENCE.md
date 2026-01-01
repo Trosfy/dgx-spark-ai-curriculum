@@ -88,7 +88,7 @@ bnb_config = BitsAndBytesConfig(
 )
 
 model = AutoModelForCausalLM.from_pretrained(
-    "meta-llama/Llama-3.1-70B-Instruct",
+    "Qwen/Qwen3-32B-Instruct",
     quantization_config=bnb_config,
     device_map="auto"
 )
@@ -156,7 +156,7 @@ trainer.train()
 from unsloth import FastLanguageModel
 
 model, tokenizer = FastLanguageModel.from_pretrained(
-    model_name="meta-llama/Llama-3.1-8B-Instruct",
+    model_name="Qwen/Qwen3-8B-Instruct",
     max_seq_length=2048,
     load_in_4bit=True,
 )

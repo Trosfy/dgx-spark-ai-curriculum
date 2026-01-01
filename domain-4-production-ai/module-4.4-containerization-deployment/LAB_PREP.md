@@ -391,14 +391,18 @@ echo "Setup complete!"
 For inference labs, you'll need a model ready:
 
 ```bash
-# Option 1: Use Ollama (simplest)
-ollama pull llama3.1:8b
+# Option 1: Use Ollama (simplest - 2025 Tier 1)
+ollama pull qwen3:8b              # Fast development
+ollama pull qwen3:32b             # Production quality
 
 # Option 2: Download HuggingFace model
-huggingface-cli download meta-llama/Llama-3.1-8B-Instruct
+huggingface-cli download Qwen/Qwen3-8B-Instruct
 
 # Option 3: Use your fine-tuned model from Module 3.1
 # Copy from /workspace/finetuned_model/
+
+# Legacy model (for comparison)
+ollama pull qwen3:8b
 ```
 
 ---

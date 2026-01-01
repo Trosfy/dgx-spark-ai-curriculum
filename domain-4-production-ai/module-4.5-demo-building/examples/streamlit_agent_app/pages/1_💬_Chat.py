@@ -127,7 +127,7 @@ After getting results, provide your answer."""
 
 # Get settings
 enabled_tools = st.session_state.get("enabled_tools", list(TOOLS.keys()))
-model = st.session_state.get("model", "llama3.2:3b")
+model = st.session_state.get("model", "qwen3:4b")
 
 # Layout
 chat_col, tool_col = st.columns([2, 1])

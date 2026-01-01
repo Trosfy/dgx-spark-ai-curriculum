@@ -63,18 +63,18 @@ print(f"Allocated: {torch.cuda.memory_allocated() / 1e9:.2f} GB")
 print(f"Cached: {torch.cuda.memory_reserved() / 1e9:.2f} GB")
 ```
 
-### Ollama Commands
+### Ollama Commands (2025 Tier 1)
 ```bash
 # List available models
 ollama list
 
-# Pull a model
-ollama pull llama3.2:3b
-ollama pull llama3.1:8b
-ollama pull llama3.1:70b
+# Pull 2025 recommended models
+ollama pull qwen3:8b              # Fast, hybrid thinking (~5GB)
+ollama pull qwen3:32b             # Best quality (~20GB)
+ollama pull qwq:32b               # SOTA reasoning (~20GB)
 
 # Run model interactively
-ollama run llama3.1:8b
+ollama run qwen3:8b
 
 # Check API availability
 curl http://localhost:11434/api/tags
@@ -140,7 +140,7 @@ import time
 
 response = requests.post(
     "http://localhost:11434/api/generate",
-    json={"model": "llama3.1:8b", "prompt": "Hello", "stream": False}
+    json={"model": "qwen3:8b", "prompt": "Hello", "stream": False}
 )
 data = response.json()
 

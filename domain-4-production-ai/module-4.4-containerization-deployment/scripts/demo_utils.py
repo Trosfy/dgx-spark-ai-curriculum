@@ -10,7 +10,7 @@ Example usage:
     from demo_utils import create_gradio_chat_interface, StreamingLLMClient
 
     # Create a streaming LLM client
-    client = StreamingLLMClient(model="llama3.1:8b")
+    client = StreamingLLMClient(model="qwen3:8b")
 
     # Create Gradio chat interface
     demo = create_gradio_chat_interface(client)
@@ -73,14 +73,14 @@ class StreamingLLMClient(LLMClient):
     - OpenAI-compatible APIs (vLLM, SGLang, etc.)
 
     Example:
-        >>> client = StreamingLLMClient(model="llama3.1:8b", backend="ollama")
+        >>> client = StreamingLLMClient(model="qwen3:8b", backend="ollama")
         >>> for chunk in client.stream_chat([Message("user", "Hello!")]):
         ...     print(chunk, end="", flush=True)
     """
 
     def __init__(
         self,
-        model: str = "llama3.1:8b",
+        model: str = "qwen3:8b",
         backend: str = "ollama",  # "ollama", "openai", "openai-compatible"
         base_url: Optional[str] = None,
         api_key: Optional[str] = None,
@@ -592,7 +592,7 @@ def get_response(messages: List[Dict], stream: bool = True):
         response = requests.post(
             "http://localhost:11434/api/chat",
             json={{
-                "model": "llama3.1:8b",
+                "model": "qwen3:8b",
                 "messages": messages,
                 "stream": stream,
             }},
@@ -710,7 +710,7 @@ def page_settings():
 
     model = st.selectbox(
         "Model",
-        ["llama3.1:8b", "llama3.1:70b", "codellama:7b", "mistral:7b"],
+        ["qwen3:8b", "qwen3:32b", "codellama:7b", "mistral:7b"],
     )
 
     temperature = st.slider(

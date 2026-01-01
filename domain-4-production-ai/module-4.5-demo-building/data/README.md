@@ -150,7 +150,7 @@ app_file: app.py
 pinned: true
 license: mit
 models:
-  - meta-llama/Llama-3.1-8B-Instruct
+  - Qwen/Qwen3-8B-Instruct
 tags:
   - rag
   - llm

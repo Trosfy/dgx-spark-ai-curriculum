@@ -64,7 +64,7 @@ bnb_config = BitsAndBytesConfig(
 )
 
 model = AutoModelForCausalLM.from_pretrained(
-    "meta-llama/Llama-3.1-70B-Instruct",
+    "Qwen/Qwen3-32B-Instruct",
     quantization_config=bnb_config,
     device_map="auto",
 )
@@ -88,7 +88,7 @@ import chromadb
 from langchain_community.vectorstores import Chroma
 from langchain_community.embeddings import OllamaEmbeddings
 
-embeddings = OllamaEmbeddings(model="nomic-embed-text")
+embeddings = OllamaEmbeddings(model="qwen3-embedding:8b")
 vectordb = Chroma(
     collection_name="domain_docs",
     embedding_function=embeddings,
@@ -175,7 +175,7 @@ Document:
 
 Return as JSON:"""
 
-    response = ollama.generate(model="llama3.1:8b", prompt=prompt)
+    response = ollama.generate(model="qwen3:8b", prompt=prompt)
     return json.loads(response["response"])
 ```
 

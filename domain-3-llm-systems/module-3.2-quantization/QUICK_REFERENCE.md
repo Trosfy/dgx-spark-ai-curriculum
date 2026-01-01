@@ -79,7 +79,7 @@ bnb_config = BitsAndBytesConfig(
 )
 
 model = AutoModelForCausalLM.from_pretrained(
-    "meta-llama/Llama-3.1-70B-Instruct",
+    "Qwen/Qwen3-32B-Instruct",
     quantization_config=bnb_config,
     device_map="auto"
 )
@@ -127,7 +127,7 @@ gptq_config = GPTQConfig(
 )
 
 model = AutoModelForCausalLM.from_pretrained(
-    "meta-llama/Llama-3.1-8B-Instruct",
+    "Qwen/Qwen3-8B-Instruct",
     quantization_config=gptq_config,
     device_map="auto"
 )
@@ -138,7 +138,7 @@ model = AutoModelForCausalLM.from_pretrained(
 from awq import AutoAWQForCausalLM
 
 model = AutoAWQForCausalLM.from_pretrained(
-    "meta-llama/Llama-3.1-8B-Instruct"
+    "Qwen/Qwen3-8B-Instruct"
 )
 
 # Quantize

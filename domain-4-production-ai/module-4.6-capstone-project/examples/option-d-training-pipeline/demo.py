@@ -71,7 +71,7 @@ def demo_training(train_data):
     print("\n2.1 Training Configuration")
     print("-" * 40)
     config = TrainingConfig(
-        model_name="meta-llama/Llama-3.3-8B-Instruct",
+        model_name="Qwen/Qwen3-8B-Instruct",
         lora_r=16,
         lora_alpha=32,
         num_epochs=2,

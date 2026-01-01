@@ -6,7 +6,7 @@ including attack prompt libraries and vulnerability detection.
 
 Example usage:
     >>> from red_team_utils import RedTeamRunner, AttackPromptLibrary
-    >>> runner = RedTeamRunner(model="llama3.1:8b")
+    >>> runner = RedTeamRunner(model="qwen3:8b")
     >>> runner.load_attack_library(AttackPromptLibrary.STANDARD)
     >>> results = runner.run_all_tests()
     >>> print(runner.generate_report())
@@ -147,7 +147,7 @@ class RedTeamRunner:
 
     Example:
         >>> runner = RedTeamRunner(
-        ...     model="llama3.1:8b",
+        ...     model="qwen3:8b",
         ...     system_prompt="You are a helpful assistant."
         ... )
         >>> runner.load_attack_library(AttackPromptLibrary.STANDARD)
@@ -158,7 +158,7 @@ class RedTeamRunner:
 
     def __init__(
         self,
-        model: str = "llama3.1:8b",
+        model: str = "qwen3:8b",
         system_prompt: Optional[str] = None,
         custom_analyzer: Optional[Callable] = None
     ):
@@ -415,7 +415,7 @@ class RedTeamRunner:
 
 
 def quick_red_team(
-    model: str = "llama3.1:8b",
+    model: str = "qwen3:8b",
     system_prompt: Optional[str] = None
 ) -> Dict:
     """

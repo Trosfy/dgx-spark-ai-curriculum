@@ -86,7 +86,7 @@ User: {text}
 models:
   - type: main
     engine: ollama
-    model: llama3.1:8b
+    model: qwen3:8b  # or qwen3:32b for better quality
 
 rails:
   input:
@@ -161,7 +161,7 @@ print(response["content"])
 
 ```yaml
 providers:
-  - id: ollama:llama3.1:8b
+  - id: ollama:qwen3:8b
     config:
       temperature: 0.7
 
@@ -208,7 +208,7 @@ promptfoo view  # View results in browser
 
 ```bash
 lm_eval --model hf \
-    --model_args pretrained=meta-llama/Llama-3.1-8B-Instruct,dtype=bfloat16 \
+    --model_args pretrained=Qwen/Qwen3-8B-Instruct,dtype=bfloat16 \
     --tasks truthfulqa_mc2 \
     --batch_size 8 \
     --output_path ./safety_results
@@ -218,7 +218,7 @@ lm_eval --model hf \
 
 ```bash
 lm_eval --model hf \
-    --model_args pretrained=meta-llama/Llama-3.1-8B-Instruct,dtype=bfloat16 \
+    --model_args pretrained=Qwen/Qwen3-8B-Instruct,dtype=bfloat16 \
     --tasks bbq \
     --batch_size 8 \
     --output_path ./bias_results
@@ -291,7 +291,7 @@ tags:
 # Model Card: [Your Model Name]
 
 ## Model Description
-- **Base model:** meta-llama/Llama-3.1-8B-Instruct
+- **Base model:** Qwen/Qwen3-8B-Instruct
 - **Fine-tuning:** QLoRA on [dataset]
 - **Training hardware:** DGX Spark (128GB unified memory)
 

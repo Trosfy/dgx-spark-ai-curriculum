@@ -121,7 +121,7 @@ The benchmark covers 38 categories including:
 models:
   - type: main
     engine: ollama
-    model: llama3.1:8b
+    model: qwen3:8b
 
 sample_conversation: |
   user "Hello"
@@ -172,7 +172,7 @@ prompts:
   - "{{prompt}}"
 
 providers:
-  - id: ollama:llama3.1:8b
+  - id: ollama:qwen3:8b
 
 tests:
   - vars:
@@ -253,7 +253,7 @@ with open("attack_prompts.json", "w") as f:
 #!/bin/bash
 # run_safety_suite.sh
 
-MODEL="meta-llama/Llama-3.1-8B-Instruct"
+MODEL="Qwen/Qwen3-8B-Instruct"
 OUTPUT="./safety_results"
 
 echo "Running TruthfulQA..."

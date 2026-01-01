@@ -12,18 +12,21 @@
 
 ## 📦 Required Downloads
 
-### Ollama Models
+### Ollama Models (2025)
 ```bash
 # Start Ollama
 ollama serve &
 
-# DeepSeek-R1 models
-ollama pull deepseek-r1:7b    # Fast testing (~14GB)
-ollama pull deepseek-r1:70b   # Best quality (~45GB with Q4)
+# Primary reasoning model (Tier 1)
+ollama pull qwq:32b           # SOTA reasoning (~20GB, 79.5% AIME)
 
-# Comparison models
-ollama pull llama3.1:8b
-ollama pull llama3.1:70b
+# DeepSeek-R1 distillations
+ollama pull deepseek-r1:8b    # SOTA 8B (~5GB, matches Qwen3-235B!)
+ollama pull deepseek-r1:70b   # Frontier reasoning (~45GB with Q4)
+
+# Comparison/baseline models
+ollama pull qwen3:8b          # Fast with hybrid /think mode (~5GB)
+ollama pull qwen3:32b         # Primary teaching model (~20GB)
 ```
 
 ### Reward Model (Lab 3.4.5)
@@ -62,8 +65,15 @@ print("Available models:", [m['name'] for m in models['models']])
 
 # Test reasoning model
 response = ollama.chat(
-    model="deepseek-r1:7b",
-    messages=[{"role": "user", "content": "What is 2+2?"}]
+    model="qwq:32b",  # or deepseek-r1:8b for faster testing
+    messages=[{"role": "user", "content": "What is 2+2? Think through it."}]
+)
+print(response['message']['content'])
+
+# Test Qwen3 hybrid thinking mode
+response = ollama.chat(
+    model="qwen3:8b",
+    messages=[{"role": "user", "content": "/think What is 2+2?"}]
 )
 print(response['message']['content'])
 ```
@@ -75,9 +85,9 @@ print(response['message']['content'])
 - [ ] Any 8B model available
 - [ ] Test prompts ready (in `data/`)
 
-### Lab 3.4.3-3.4.4: DeepSeek-R1
-- [ ] DeepSeek-R1 model pulled
-- [ ] At least 15GB GPU memory free (7B) or 50GB (70B)
+### Lab 3.4.3-3.4.4: Reasoning Models (QwQ/R1)
+- [ ] QwQ-32B or DeepSeek-R1 model pulled
+- [ ] At least 20GB GPU memory free (32B) or 50GB (70B)
 - [ ] GSM8K sample data available
 
 ### Lab 3.4.5: Best-of-N
@@ -108,6 +118,7 @@ print(response['message']['content'])
 ```bash
 cd /workspace
 pip install ollama openai
-ollama pull deepseek-r1:7b
+ollama pull qwq:32b          # Primary reasoning model
+ollama pull deepseek-r1:8b   # Efficient reasoning alternative
 python -c "import ollama; print('✅ Ready!')"
 ```

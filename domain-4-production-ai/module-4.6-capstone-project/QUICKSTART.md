@@ -80,7 +80,7 @@ Question: {question}
 Answer:"""
 
     response = ollama.chat(
-        model="llama3.2:3b",
+        model="qwen3:4b",
         messages=[{"role": "user", "content": prompt}]
     )
     return response["message"]["content"]

@@ -16,14 +16,15 @@
 
 ## Required Downloads
 
-### Models via Ollama
+### Models via Ollama (2025)
 
 ```bash
-# Llama Guard 3 8B (~8GB) - Required for Labs 4.2.1, 4.2.2
+# Llama Guard 3 8B (~8GB) - Safety classifier for Labs 4.2.1, 4.2.2
 ollama pull llama-guard3:8b
 
-# Base LLM for testing (~8GB) - Required for all labs
-ollama pull llama3.1:8b
+# Base LLM for testing (~5-20GB) - Required for all labs
+ollama pull qwen3:8b              # Fast development (~5GB)
+ollama pull qwen3:32b             # Better quality (~20GB)
 ```
 
 ### Models via HuggingFace (for benchmarking)
@@ -31,7 +32,7 @@ ollama pull llama3.1:8b
 ```bash
 # For lm-eval benchmarks - downloads automatically
 # But you can pre-download:
-huggingface-cli download meta-llama/Llama-3.1-8B-Instruct
+huggingface-cli download Qwen/Qwen3-8B-Instruct
 ```
 
 **Total download size**: ~16GB for Ollama models
@@ -96,7 +97,7 @@ except Exception as e:
 **Expected output**:
 ```
 Ollama connected!
-Available models: ['llama-guard3:8b', 'llama3.1:8b']
+Available models: ['llama-guard3:8b', 'qwen3:8b']
 ```
 
 ---
@@ -106,12 +107,12 @@ Available models: ['llama-guard3:8b', 'llama3.1:8b']
 ### Lab 4.2.0: AI Safety Overview
 
 - [ ] Ollama running
-- [ ] llama3.1:8b pulled
+- [ ] qwen3:8b pulled (or qwen3:32b for better quality)
 - [ ] Basic understanding of LLM concepts
 
 **Quick Test**:
 ```python
-response = ollama.chat(model="llama3.1:8b", messages=[{"role": "user", "content": "Hello!"}])
+response = ollama.chat(model="qwen3:8b", messages=[{"role": "user", "content": "Hello!"}])
 print("LLM ready!" if response else "Check Ollama")
 ```
 
@@ -292,9 +293,10 @@ mkdir -p guardrails_config redteam/attacks safety_results bias_analysis model_ca
 ollama serve &
 sleep 5
 
-# Pull required models
-ollama pull llama-guard3:8b
-ollama pull llama3.1:8b
+# Pull required models (2025 Tier 1)
+ollama pull llama-guard3:8b       # Safety classifier
+ollama pull qwen3:8b              # Fast testing
+ollama pull qwen3:32b             # Better quality
 
 # Install dependencies
 pip install nemoguardrails>=0.8.0 promptfoo deepeval fairlearn lm-eval>=0.4.0 pandas matplotlib seaborn

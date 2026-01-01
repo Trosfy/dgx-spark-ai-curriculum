@@ -104,12 +104,12 @@ docker run --gpus all -it --rm \
 ### Performance Benchmarks (Ollama Web UI Reference)
 | Model | Precision | Prefill (tok/s) | Decode (tok/s) |
 |-------|-----------|-----------------|----------------|
-| Llama 3.1 8B | NVFP4 | ~10,000 | ~38 |
-| GPT-OSS 20B | MXFP4 | ~4,500 | ~59 |
-| Llama 3.1 70B | Q4 | ~800 | ~25 |
+| Qwen3 8B | NVFP4 | ~10,000 | ~38 |
+| Qwen3 32B | Q4 | ~2,000 | ~30 |
+| DeepSeek-R1 70B | Q4 | ~800 | ~25 |
 | 3B Q4 (general) | Q4 | ~5,000 | ~80 |
 | 8B Q4 (general) | Q4 | ~3,000 | ~45 |
-| 70B Q4 (general) | Q4 | ~500 | ~15 |
+| 32B Q4 (general) | Q4 | ~1,500 | ~25 |
 
 ### Memory Estimates (Source of Truth)
 | Model Size | FP16 | INT8 | INT4 |
@@ -154,7 +154,7 @@ sudo sh -c 'sync; echo 3 > /proc/sys/vm/drop_caches'
 ollama list
 
 # Run model
-ollama run llama3.1:70b
+ollama run qwen3:32b
 
 # API endpoint
 curl http://localhost:11434/api/generate
@@ -310,10 +310,10 @@ docker run --gpus all -it nvcr.io/nvidia/pytorch:25.11-py3 bash
 #### 1.3 Variable Name Consistency
 ```python
 # Cell 3
-model_name = "llama3.1:8b"
+model_name = "qwen3:8b"
 
 # Cell 7
-model = "llama3.1:8b"  # ❌ Different variable name for same concept
+model = "qwen3:8b"  # ❌ Different variable name for same concept
 ```
 
 #### 1.4 Output ↔ Code Match
@@ -1051,7 +1051,7 @@ For comprehensive review, include files from MULTIPLE modules to check cross-mod
 - [ ] Testing platform called "Ollama Web UI" (not just "Ollama")?
 - [ ] API URL consistent (http://localhost:11434)?
 - [ ] Benchmark instructions reference Ollama Web UI?
-- [ ] Model names consistent format (llama3.1:8b not llama3.1-8b)?
+- [ ] Model names consistent format (qwen3:8b not qwen3-8b)?
 
 ### Memory Management - Check consistency:
 - [ ] Buffer cache command identical everywhere?
@@ -1253,7 +1253,7 @@ Look for variations of:
 - Testing platform (should be: "Ollama Web UI")
 - FP4 quantization (should be: "NVFP4")
 - State space models (should be: "Mamba" or "State Space Models")
-- Model names (should be: llama3.1:8b format)
+- Model names (should be: qwen3:8b format)
 - Fine-tuning methods (should be: LoRA, QLoRA, DoRA, NEFTune, SimPO, ORPO)
 
 Files:

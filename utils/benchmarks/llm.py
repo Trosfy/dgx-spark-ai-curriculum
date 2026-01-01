@@ -52,7 +52,7 @@ class OllamaBenchmark(BaseBenchmark):
 
     Example:
         >>> bench = OllamaBenchmark()
-        >>> result = bench.benchmark("llama3.1:8b", prompt, runs=5)
+        >>> result = bench.benchmark("qwen3:8b", prompt, runs=5)
         >>> print(f"Decode speed: {result.avg_decode_tps:.1f} tokens/sec")
     """
 
@@ -267,15 +267,15 @@ class BenchmarkSuite:
 
     Example:
         >>> suite = BenchmarkSuite()
-        >>> results = suite.run_ollama_suite(["llama3.1:8b", "llama3.2:3b"])
+        >>> results = suite.run_ollama_suite(["qwen3:8b", "qwen3:4b"])
         >>> suite.print_results()
         >>> suite.save_results("benchmark_results.json")
     """
 
     # NVIDIA published baselines for DGX Spark
     NVIDIA_BASELINES = {
-        "llama3.1:8b": {"prefill": 3000, "decode": 45},
-        "llama3.1:70b": {"prefill": 500, "decode": 15},
+        "qwen3:8b": {"prefill": 3000, "decode": 45},
+        "qwen3:32b": {"prefill": 500, "decode": 15},
         "gpt-oss-20b": {"prefill": 4500, "decode": 59},
     }
 
@@ -349,7 +349,7 @@ class BenchmarkSuite:
 
 
 def quick_benchmark(
-    model: str = "llama3.1:8b", runs: int = 3
+    model: str = "qwen3:8b", runs: int = 3
 ) -> Optional[BenchmarkSummary]:
     """
     Quick benchmark for a single Ollama model.

@@ -197,7 +197,7 @@ gc.collect()
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
 model = AutoModelForCausalLM.from_pretrained(
-    "meta-llama/Llama-3.1-8B-Instruct",
+    "Qwen/Qwen3-8B-Instruct",
     torch_dtype=torch.bfloat16,
     device_map="auto"
 )
@@ -207,7 +207,7 @@ model = AutoModelForCausalLM.from_pretrained(
 ```python
 from transformers import AutoModelForCausalLM
 
-model = AutoModelForCausalLM.from_pretrained("meta-llama/Llama-3.1-8B-Instruct")
+model = AutoModelForCausalLM.from_pretrained("Qwen/Qwen3-8B-Instruct")
 ```
 Missing: `torch_dtype` and `device_map` parameters.
 
@@ -216,7 +216,7 @@ Missing: `torch_dtype` and `device_map` parameters.
 **Recommendation:** Add a comment noting that production code should include dtype and device_map:
 ```python
 model = AutoModelForCausalLM.from_pretrained(
-    "meta-llama/Llama-3.1-8B-Instruct"
+    "Qwen/Qwen3-8B-Instruct"
     # Note: Add torch_dtype=torch.bfloat16, device_map="auto" for production
 )
 ```
@@ -309,19 +309,19 @@ model = AutoModelForCausalLM.from_pretrained(
 
 ### Issue EM1: Model Naming Format
 
-**HuggingFace Format:** `meta-llama/Llama-3.1-8B-Instruct`
-**Ollama Format:** `llama3.1:8b` or `llama3.1:70b`
+**HuggingFace Format:** `Qwen/Qwen3-8B-Instruct`
+**Ollama Format:** `qwen3:8b` or `qwen3:32b`
 
 **Usage Analysis:**
 
 | Module | Context | Format | Correct? |
 |--------|---------|--------|----------|
-| 2.5 | HF loading | `meta-llama/Llama-3.1-8B-Instruct` | ✅ |
-| 3.1 | HF loading | `meta-llama/Llama-3.1-8B-Instruct` | ✅ |
-| 3.3 | HF loading | `meta-llama/Llama-3.1-8B-Instruct` | ✅ |
+| 2.5 | HF loading | `Qwen/Qwen3-8B-Instruct` | ✅ |
+| 3.1 | HF loading | `Qwen/Qwen3-8B-Instruct` | ✅ |
+| 3.3 | HF loading | `Qwen/Qwen3-8B-Instruct` | ✅ |
 | 3.4 | Ollama | `deepseek-r1:70b` | ✅ |
-| 3.5 | Ollama | `llama3.1:70b` | ✅ |
-| 4.2 | Ollama | `llama3.1:8b` | ✅ |
+| 3.5 | Ollama | `qwen3:32b` | ✅ |
+| 4.2 | Ollama | `qwen3:8b` | ✅ |
 
 **Status:** ✅ Correct format used for each context (HuggingFace vs Ollama).
 

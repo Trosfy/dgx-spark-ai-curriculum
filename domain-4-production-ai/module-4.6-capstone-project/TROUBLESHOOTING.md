@@ -192,7 +192,7 @@ collection = client.create_collection("my_collection")
 
 # Solution 2: Ensure consistent embedding model
 # Always use the SAME model for embeddings
-EMBEDDING_MODEL = "nomic-embed-text"
+EMBEDDING_MODEL = "qwen3-embedding:8b"
 
 def get_embedding(text):
     response = ollama.embeddings(model=EMBEDDING_MODEL, prompt=text)

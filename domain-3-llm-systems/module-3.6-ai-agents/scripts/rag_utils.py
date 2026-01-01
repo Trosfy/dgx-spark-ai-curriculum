@@ -479,8 +479,8 @@ class RAGPipeline:
         >>> from langchain_community.embeddings import OllamaEmbeddings
         >>> from langchain_community.llms import Ollama
         >>>
-        >>> embeddings = OllamaEmbeddings(model="nomic-embed-text")
-        >>> llm = Ollama(model="llama3.1:70b")
+        >>> embeddings = OllamaEmbeddings(model="qwen3-embedding:8b")
+        >>> llm = Ollama(model="qwen3:32b")
         >>>
         >>> pipeline = RAGPipeline(embeddings, llm)
         >>> pipeline.load_documents("./data/sample_documents")

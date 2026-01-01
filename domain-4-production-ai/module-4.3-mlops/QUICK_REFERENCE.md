@@ -167,7 +167,7 @@ wandb.agent(sweep_id, function=train, count=10)
 
 ```bash
 lm_eval --model hf \
-    --model_args pretrained=meta-llama/Llama-3.1-8B-Instruct,dtype=bfloat16 \
+    --model_args pretrained=Qwen/Qwen3-8B-Instruct,dtype=bfloat16 \
     --tasks mmlu,hellaswag \
     --batch_size 8 \
     --output_path ./results
@@ -189,7 +189,7 @@ lm_eval --model hf \
 
 ```bash
 lm_eval --model hf \
-    --model_args pretrained=meta-llama/Llama-3.1-8B-Instruct,load_in_4bit=True \
+    --model_args pretrained=Qwen/Qwen3-8B-Instruct,load_in_4bit=True \
     --tasks mmlu \
     --batch_size 4
 ```
@@ -306,7 +306,7 @@ mlflow.log_artifact("requirements.txt")
 
 ```python
 # Benchmark base model
-base_results = run_benchmark("meta-llama/Llama-3.1-8B")
+base_results = run_benchmark("Qwen/Qwen3-8B")
 
 # Benchmark fine-tuned model
 ft_results = run_benchmark("./my-finetuned-model")

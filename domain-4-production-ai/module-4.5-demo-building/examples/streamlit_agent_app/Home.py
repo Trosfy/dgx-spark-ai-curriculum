@@ -26,7 +26,7 @@ if "tool_calls" not in st.session_state:
 if "enabled_tools" not in st.session_state:
     st.session_state.enabled_tools = ["calculator", "datetime", "weather", "web_search"]
 if "model" not in st.session_state:
-    st.session_state.model = "llama3.2:3b"
+    st.session_state.model = "qwen3:4b"
 
 # Main page content
 st.title("🤖 Agent Playground")

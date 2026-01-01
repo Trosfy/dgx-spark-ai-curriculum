@@ -69,7 +69,7 @@ def chain_of_thought(
     Example:
         >>> import ollama
         >>> response = chain_of_thought(
-        ...     ollama, "llama3.1:8b",
+        ...     ollama, "qwen3:8b",
         ...     "A store sells apples for $2 each. If I buy 5 apples, how much do I spend?"
         ... )
         >>> print(response)

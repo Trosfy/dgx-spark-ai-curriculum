@@ -15,7 +15,7 @@
 - [ ] Python 3.10+
 - [ ] CUDA 12.0+
 - [ ] NGC PyTorch container or local PyTorch with CUDA
-- [ ] Ollama installed with llama3.1:8b or 70b
+- [ ] Ollama installed with qwen3:8b or 70b
 
 ### Python Package Dependencies
 ```bash
@@ -67,7 +67,7 @@ result = greet("Alice")  # Prints "Calling greet", returns "Hello, Alice!"
 import ollama
 
 response = ollama.chat(
-    model="llama3.1:8b",
+    model="qwen3:8b",
     messages=[{"role": "user", "content": "Hello!"}]
 )
 print(response['message']['content'])
@@ -84,7 +84,7 @@ print(response['message']['content'])
 from langchain.prompts import PromptTemplate
 from langchain_community.llms import Ollama
 
-llm = Ollama(model="llama3.1:8b")
+llm = Ollama(model="qwen3:8b")
 prompt = PromptTemplate.from_template("Tell me about {topic}")
 chain = prompt | llm
 result = chain.invoke({"topic": "AI agents"})
@@ -200,7 +200,7 @@ try:
     print(f"✅ Ollama available with models: {model_names[:3]}")
 except Exception as e:
     print(f"⚠️ Ollama not running: {e}")
-    print("   Run: ollama serve & ollama pull llama3.1:8b")
+    print("   Run: ollama serve & ollama pull qwen3:8b")
 
 # 3. Check LangChain
 try:

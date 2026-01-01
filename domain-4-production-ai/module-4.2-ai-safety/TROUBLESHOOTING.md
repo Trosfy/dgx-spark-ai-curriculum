@@ -60,7 +60,7 @@ CUDA out of memory when loading model
 **Solutions**:
 ```python
 # Solution 1: Unload other models first
-ollama stop llama3.1:8b
+ollama stop qwen3:8b
 
 # Solution 2: Clear GPU memory
 import torch, gc
@@ -99,7 +99,7 @@ pydantic.error_wrappers.ValidationError: 1 validation error for RailsConfig
 models:
   - type: main
     engine: ollama
-    model: llama3.1:8b
+    model: qwen3:8b
 
 # NOT:
 models:
@@ -150,7 +150,7 @@ config = RailsConfig.from_content("""
 models:
   - type: main
     engine: ollama
-    model: llama3.1:8b  # Not 70b
+    model: qwen3:8b  # Not 70b
 """)
 
 # Solution 2: Increase timeout
@@ -182,14 +182,14 @@ npm install -g promptfoo
 ```yaml
 # Verify provider config
 providers:
-  - id: ollama:llama3.1:8b
+  - id: ollama:qwen3:8b
     config:
       apiHost: http://localhost:11434  # Add if needed
       temperature: 0.7
 
 # Test manually first
 curl http://localhost:11434/api/generate -d '{
-  "model": "llama3.1:8b",
+  "model": "qwen3:8b",
   "prompt": "Hello"
 }'
 ```
@@ -257,13 +257,13 @@ CUDA out of memory during evaluation
 ```bash
 # Solution 1: Reduce batch size
 lm_eval --model hf \
-    --model_args pretrained=meta-llama/Llama-3.1-8B-Instruct,dtype=bfloat16 \
+    --model_args pretrained=Qwen/Qwen3-8B-Instruct,dtype=bfloat16 \
     --tasks truthfulqa_mc2 \
     --batch_size 1  # Reduce from 8
 
 # Solution 2: Use 4-bit quantization
 lm_eval --model hf \
-    --model_args pretrained=meta-llama/Llama-3.1-8B-Instruct,load_in_4bit=True \
+    --model_args pretrained=Qwen/Qwen3-8B-Instruct,load_in_4bit=True \
     --tasks truthfulqa_mc2
 ```
 
@@ -385,7 +385,7 @@ cat > /workspace/guardrails_config/config.yaml << 'EOF'
 models:
   - type: main
     engine: ollama
-    model: llama3.1:8b
+    model: qwen3:8b
 EOF
 ```
 

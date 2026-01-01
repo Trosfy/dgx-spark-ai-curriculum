@@ -99,7 +99,7 @@ Create multiple granularities:
 |-------|------------|---------|-------|
 | BGE-large-en-v1.5 | 1024 | Excellent | Medium |
 | E5-large-v2 | 1024 | Excellent | Medium |
-| nomic-embed-text | 768 | Good | Fast |
+| qwen3-embedding:8b | 1024 | Excellent | Fast |
 | OpenAI ada-002 | 1536 | Good | API latency |
 
 ### Embedding Best Practices

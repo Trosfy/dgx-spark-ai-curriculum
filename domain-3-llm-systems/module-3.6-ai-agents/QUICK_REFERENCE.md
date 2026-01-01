@@ -34,13 +34,18 @@ docker run --gpus all -it --rm \
 | CrewAI Agent | Role-based teams | CrewAI |
 | AutoGen Agent | Conversations | AutoGen |
 
-### DGX Spark Agent Performance
-| Component | Memory | Speed |
-|-----------|--------|-------|
-| Llama 3.1 8B (agent) | ~8GB | ~50 tok/s |
-| Llama 3.1 70B (agent) | ~45GB | ~20 tok/s |
-| Tool execution | Varies | ~100ms/call |
-| LangGraph state | ~100MB | ~10ms/step |
+### DGX Spark Agent Performance (2025)
+| Component | Memory | Speed | Tool Calling | Notes |
+|-----------|--------|-------|--------------|-------|
+| Nemotron-3-Nano | ~3GB | ~55 tok/s | ✅ Strong | 1M context, NVIDIA optimized |
+| Qwen3-8B (agent) | ~5GB | ~45 tok/s | ✅ Strong | 0.971 F1 BFCL |
+| Qwen3-32B (agent) | ~20GB | ~35 tok/s | ✅ Best | BFCL 68.2, primary teaching |
+| QwQ-32B (reasoning) | ~20GB | ~28 tok/s | ⚠️ Via Qwen-Agent | 79.5% AIME |
+| DeepSeek-R1-8B | ~5GB | ~45 tok/s | ❌ None | **NOT for agents!** |
+| Tool execution | Varies | ~100ms/call | - | |
+| LangGraph state | ~100MB | ~10ms/step | - | |
+
+> **⚠️ CRITICAL**: DeepSeek-R1 does NOT support tool calling. Use Qwen3, Nemotron, or Magistral for agents!
 
 ## 🔧 Common Patterns
 
@@ -86,8 +91,10 @@ from langchain_community.llms import Ollama
 from langchain.agents import AgentExecutor, create_react_agent
 from langchain.prompts import PromptTemplate
 
-# LLM
-llm = Ollama(model="llama3.1:70b")
+# LLM (2025 Tier 1 - best function calling)
+# Options: nemotron-3-nano (fastest), qwen3:8b (fast), qwen3:32b (best quality)
+# WARNING: Do NOT use deepseek-r1 for agents - it has no tool calling support!
+llm = Ollama(model="qwen3:32b")  # or nemotron-3-nano for fastest
 
 # Tools
 tools = [calculate, search_documents, ...]
@@ -173,7 +180,7 @@ result = app.invoke({"messages": [], "current_step": "start", "approved": False}
 from crewai import Agent, Task, Crew
 from langchain_community.llms import Ollama
 
-llm = Ollama(model="llama3.1:70b")
+llm = Ollama(model="qwen3:32b")  # Best for multi-agent teams
 
 # Define agents
 researcher = Agent(

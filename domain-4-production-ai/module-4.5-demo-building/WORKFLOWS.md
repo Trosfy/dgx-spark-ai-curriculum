@@ -22,7 +22,7 @@ Quick ML chat demo with streaming, deployed publicly.
 │ def chat(message, history):                                 │
 │     messages = [{"role": "user", "content": message}]       │
 │     response = ollama.chat(                                 │
-│         model="llama3.2:3b",                                │
+│         model="qwen3:4b",                                │
 │         messages=messages,                                  │
 │         stream=True                                         │
 │     )                                                       │
@@ -186,7 +186,7 @@ Complex demo with document upload, chat, and settings tabs.
 │ Code:                                                       │
 │ ```python                                                   │
 │ with gr.TabItem("Settings"):                                │
-│     model = gr.Dropdown(["llama3.1:8b", "llama3.1:70b"])    │
+│     model = gr.Dropdown(["qwen3:8b", "qwen3:32b"])    │
 │     temp = gr.Slider(0, 1, 0.7, label="Temperature")        │
 │     chunks = gr.Slider(1, 10, 3, label="Chunks")            │
 │ ```                                                         │

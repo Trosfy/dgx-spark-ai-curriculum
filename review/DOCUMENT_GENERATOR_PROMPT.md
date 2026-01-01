@@ -1939,13 +1939,13 @@ Exclude: [Anything to skip]
 ### Ollama (Fastest Start)
 ```bash
 # Pull quantized model
-ollama pull llama3.1:8b-q4_K_M
+ollama pull qwen3:8b-q4_K_M
 
 # Check model info
-ollama show llama3.1:8b-q4_K_M
+ollama show qwen3:8b-q4_K_M
 
 # Run inference
-ollama run llama3.1:8b-q4_K_M "Hello"
+ollama run qwen3:8b-q4_K_M "Hello"
 ```
 
 ### bitsandbytes (Python)
@@ -1961,7 +1961,7 @@ bnb_config = BitsAndBytesConfig(
 )
 
 model = AutoModelForCausalLM.from_pretrained(
-    "meta-llama/Llama-3.1-8B",
+    "Qwen/Qwen3-8B",
     quantization_config=bnb_config,
     device_map="auto"
 )
@@ -2001,7 +2001,7 @@ ValueError: Tokenizer class LlamaTokenizer does not exist or is not currently im
 # Use Auto class instead
 # ✅ 
 from transformers import AutoTokenizer
-tokenizer = AutoTokenizer.from_pretrained("meta-llama/Llama-3.1-8B")
+tokenizer = AutoTokenizer.from_pretrained("Qwen/Qwen3-8B")
 ```
 
 **If still failing**, update transformers:

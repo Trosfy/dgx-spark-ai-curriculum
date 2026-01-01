@@ -14,18 +14,21 @@
 
 ## Required Downloads
 
-### Models (Download Before Labs)
+### Models (Download Before Labs - 2025)
 
 ```bash
 # Lab 4.1.1: Vision-Language Models
-# LLaVA-7B (~14GB) - Required
+# Qwen3-VL-8B (~8GB) - Primary VLM (Tier 1), design-to-code, 32-lang OCR
+ollama pull qwen3-vl:8b
+
+# Via HuggingFace (for advanced usage)
+huggingface-cli download Qwen/Qwen3-VL-8B-Instruct
+
+# MiniCPM-V 4.5 (~8GB) - #1 OCRBench, document specialist
+huggingface-cli download openbmb/MiniCPM-V-4.5
+
+# Legacy/comparison (optional)
 huggingface-cli download llava-hf/llava-1.5-7b-hf
-
-# LLaVA-13B (~26GB) - Optional, better quality
-huggingface-cli download llava-hf/llava-1.5-13b-hf
-
-# Qwen2-VL-7B (~18GB) - Alternative VLM
-huggingface-cli download Qwen/Qwen2-VL-7B-Instruct
 ```
 
 ```bash
@@ -114,21 +117,38 @@ print(f"Free memory: {(torch.cuda.get_device_properties(0).total_memory - torch.
 
 ### Lab 4.1.1: Vision-Language Demo
 
-- [ ] LLaVA-7B model downloaded
+- [ ] Qwen3-VL-8B model pulled via Ollama (`ollama pull qwen3-vl:8b`)
 - [ ] At least 20GB GPU memory free
 - [ ] Sample images prepared (or will download)
 - [ ] Reviewed concepts: Transformers, attention mechanism
 
-**Quick Test**:
+**Quick Test (Ollama - Recommended)**:
 ```python
-from transformers import LlavaForConditionalGeneration
-model = LlavaForConditionalGeneration.from_pretrained(
-    "llava-hf/llava-1.5-7b-hf",
+import ollama
+import base64
+
+# Test Qwen3-VL (2025 Tier 1 VLM)
+with open("test_image.jpg", "rb") as f:
+    image_data = base64.b64encode(f.read()).decode()
+
+response = ollama.chat(
+    model="qwen3-vl:8b",
+    messages=[{"role": "user", "content": "Describe this image.", "images": [image_data]}]
+)
+print("Qwen3-VL loaded successfully!")
+print(response['message']['content'])
+```
+
+**Alternative Test (HuggingFace)**:
+```python
+from transformers import Qwen2VLForConditionalGeneration
+model = Qwen2VLForConditionalGeneration.from_pretrained(
+    "Qwen/Qwen3-VL-8B-Instruct",
     torch_dtype=torch.bfloat16,
     device_map="auto",
     low_cpu_mem_usage=True
 )
-print("LLaVA loaded successfully!")
+print("Qwen3-VL loaded successfully!")
 del model; torch.cuda.empty_cache()
 ```
 

@@ -14,7 +14,7 @@ Example usage:
     # Deploy to AWS SageMaker
     sagemaker = SageMakerDeployer(region="us-west-2")
     endpoint = sagemaker.deploy_huggingface_model(
-        model_id="meta-llama/Llama-2-7b-chat-hf",
+        model_id="Qwen/Qwen3-8B-Instruct",
         instance_type="ml.g5.xlarge"
     )
 
@@ -124,7 +124,7 @@ class SageMakerDeployer(CloudDeployer):
     Example:
         >>> deployer = SageMakerDeployer(region="us-west-2")
         >>> endpoint = deployer.deploy_huggingface_model(
-        ...     model_id="meta-llama/Llama-2-7b-chat-hf",
+        ...     model_id="Qwen/Qwen3-8B-Instruct",
         ...     instance_type="ml.g5.xlarge"
         ... )
         >>> response = deployer.invoke_endpoint(
@@ -213,7 +213,7 @@ class SageMakerDeployer(CloudDeployer):
         Deploy a HuggingFace model to SageMaker.
 
         Args:
-            model_id: HuggingFace model ID (e.g., "meta-llama/Llama-2-7b-chat-hf")
+            model_id: HuggingFace model ID (e.g., "Qwen/Qwen3-8B-Instruct")
             instance_type: SageMaker instance type
             instance_count: Number of instances
             endpoint_name: Custom endpoint name
@@ -1023,7 +1023,7 @@ if __name__ == "__main__":
         print(est)
 
     print("\n=== Platform Comparison ===")
-    comparison = compare_platforms("meta-llama/Llama-2-7b-chat-hf")
+    comparison = compare_platforms("Qwen/Qwen3-8B-Instruct")
     print(json.dumps(comparison, indent=2, default=str))
 
     print("\n=== Deployment Checklist ===")

@@ -91,21 +91,26 @@ pip install gradio streamlit mlflow wandb
 pip install pypdf python-docx pillow
 ```
 
-### 3. Download Base Models
+### 3. Download Base Models (2025 Tier 1)
 
 ```bash
 # For all options - chat model
-ollama pull llama3.1:8b
-ollama pull nomic-embed-text
+ollama pull qwen3:8b               # Fast development
+ollama pull qwen3:32b              # Production quality
+ollama pull qwen3-embedding:8b     # RAG embeddings
 
-# Option A: Large fine-tuning base (choose one)
-huggingface-cli download meta-llama/Llama-3.1-70B-Instruct
+# Option A: Large fine-tuning base
+huggingface-cli download Qwen/Qwen3-32B-Instruct
 
 # Option B: Vision-language model
-huggingface-cli download Qwen/Qwen2-VL-7B-Instruct
+huggingface-cli download Qwen/Qwen3-VL-8B-Instruct
+
+# Option C: Agents (with tool calling support)
+ollama pull nemotron-3-nano        # Fast agent model
+# WARNING: Do NOT use deepseek-r1 for agents - no tool calling!
 
 # Option D: Training-specific
-huggingface-cli download meta-llama/Llama-3.1-8B-Instruct
+huggingface-cli download Qwen/Qwen3-8B-Instruct
 ```
 
 ### 4. Verify Setup
@@ -136,7 +141,7 @@ Transformers 4.4x.x
 CUDA available: True
 GPU: NVIDIA GH200 480GB
 Memory: 128 GB
-Ollama models: ['llama3.1:8b', 'nomic-embed-text']
+Ollama models: ['qwen3:8b', 'qwen3-embedding:8b']
 ```
 
 ---
@@ -192,7 +197,7 @@ from transformers import AutoModelForCausalLM, BitsAndBytesConfig
 
 bnb_config = BitsAndBytesConfig(load_in_4bit=True)
 model = AutoModelForCausalLM.from_pretrained(
-    "meta-llama/Llama-3.1-8B-Instruct",  # Test with 8B first
+    "Qwen/Qwen3-8B-Instruct",  # Test with 8B first
     quantization_config=bnb_config,
     device_map="auto"
 )
@@ -231,7 +236,7 @@ print("VLM loaded!")
 from langchain_community.llms import Ollama
 from langgraph.graph import StateGraph
 
-llm = Ollama(model="llama3.1:8b")
+llm = Ollama(model="qwen3:8b")  # or nemotron-3-nano for agents
 print(llm.invoke("Hello, I'm an agent!"))
 ```
 
@@ -389,10 +394,10 @@ EOF
 # Install dependencies
 pip install -r requirements.txt
 
-# Start Ollama
+# Start Ollama (2025 Tier 1)
 ollama serve &
 sleep 5
-ollama pull llama3.1:8b
+ollama pull qwen3:8b
 
 # Create initial notebook
 touch notebooks/01-exploration.ipynb

@@ -313,7 +313,7 @@ Deploy your fine-tuned model.
 
 **Important:** Llama 3.1 models require approval from Meta before download.
 
-1. **Request Access:** Visit https://huggingface.co/meta-llama/Llama-3.1-8B-Instruct and request access
+1. **Request Access:** Visit https://huggingface.co/Qwen/Qwen3-8B-Instruct and request access
 2. **Login to HuggingFace:**
    ```bash
    huggingface-cli login
@@ -365,7 +365,7 @@ bnb_config = BitsAndBytesConfig(
 )
 
 model = AutoModelForCausalLM.from_pretrained(
-    "meta-llama/Llama-3.1-70B-Instruct",
+    "Qwen/Qwen3-32B-Instruct",
     quantization_config=bnb_config,
     device_map="auto"
 )
@@ -444,7 +444,7 @@ gc.collect()
 from unsloth import FastLanguageModel
 
 model, tokenizer = FastLanguageModel.from_pretrained(
-    model_name="meta-llama/Llama-3.1-8B-Instruct",
+    model_name="Qwen/Qwen3-8B-Instruct",
     max_seq_length=2048,
     load_in_4bit=True,
 )

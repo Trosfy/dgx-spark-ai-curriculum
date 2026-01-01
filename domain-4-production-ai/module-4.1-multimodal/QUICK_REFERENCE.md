@@ -36,43 +36,43 @@ pip install openai-whisper soundfile librosa scipy
 
 ---
 
-## Vision-Language Models
+## Vision-Language Models (2025)
 
-### LLaVA (7B/13B)
+### Qwen3-VL-8B (Primary - Tier 1)
 
 ```python
-from transformers import AutoProcessor, LlavaForConditionalGeneration
-import torch
+import ollama
 from PIL import Image
+import base64
+import io
 
-# Load model
-model = LlavaForConditionalGeneration.from_pretrained(
-    "llava-hf/llava-1.5-13b-hf",  # or llava-1.5-7b-hf
-    torch_dtype=torch.bfloat16,
-    device_map="auto"
-)
-processor = AutoProcessor.from_pretrained("llava-hf/llava-1.5-13b-hf")
+# Using Ollama (recommended)
+def describe_image(image_path: str) -> str:
+    """Describe an image using Qwen3-VL via Ollama."""
+    with open(image_path, "rb") as f:
+        image_data = base64.b64encode(f.read()).decode()
 
-# Inference
-image = Image.open("image.jpg")
-prompt = "USER: <image>\nDescribe this image.\nASSISTANT:"
-inputs = processor(text=prompt, images=image, return_tensors="pt").to(model.device)
-output = model.generate(**inputs, max_new_tokens=200)
-print(processor.decode(output[0], skip_special_tokens=True))
-```
+    response = ollama.chat(
+        model="qwen3-vl:8b",
+        messages=[{
+            "role": "user",
+            "content": "What's in this image? Describe it in detail.",
+            "images": [image_data]
+        }]
+    )
+    return response['message']['content']
 
-### Qwen2-VL (7B)
-
-```python
+# Using HuggingFace (for advanced usage)
 from transformers import Qwen2VLForConditionalGeneration, AutoProcessor
 from qwen_vl_utils import process_vision_info
+import torch
 
 model = Qwen2VLForConditionalGeneration.from_pretrained(
-    "Qwen/Qwen2-VL-7B-Instruct",
+    "Qwen/Qwen3-VL-8B-Instruct",  # 2025 version: 256K context, design-to-code
     torch_dtype=torch.bfloat16,
     device_map="auto"
 )
-processor = AutoProcessor.from_pretrained("Qwen/Qwen2-VL-7B-Instruct")
+processor = AutoProcessor.from_pretrained("Qwen/Qwen3-VL-8B-Instruct")
 
 messages = [{
     "role": "user",
@@ -86,6 +86,31 @@ image_inputs, _ = process_vision_info(messages)
 inputs = processor(text=[text], images=image_inputs, return_tensors="pt").to(model.device)
 output = model.generate(**inputs, max_new_tokens=200)
 print(processor.batch_decode(output, skip_special_tokens=True)[0])
+```
+
+### MiniCPM-V 4.5 (OCR Specialist)
+
+```python
+from transformers import AutoModel, AutoTokenizer
+import torch
+
+# Best-in-class for document OCR
+model = AutoModel.from_pretrained(
+    "openbmb/MiniCPM-V-4.5",
+    torch_dtype=torch.bfloat16,
+    device_map="auto",
+    trust_remote_code=True
+)
+tokenizer = AutoTokenizer.from_pretrained("openbmb/MiniCPM-V-4.5", trust_remote_code=True)
+
+# OCR-focused inference
+image = Image.open("document.jpg")
+response = model.chat(
+    image=image,
+    msgs=[{"role": "user", "content": "Extract all text from this document."}],
+    tokenizer=tokenizer
+)
+print(response)
 ```
 
 ---
@@ -114,14 +139,15 @@ image = pipe(
 image.save("output.png")
 ```
 
-### Flux (Higher Quality)
+### FLUX.2 dev (Higher Quality - 2025)
 
 ```python
 from diffusers import FluxPipeline
 import torch
 
+# FLUX.2 dev - free for non-commercial use, inpaint + outpaint support
 pipe = FluxPipeline.from_pretrained(
-    "black-forest-labs/FLUX.1-dev",
+    "black-forest-labs/FLUX.2-dev",
     torch_dtype=torch.bfloat16
 ).to("cuda")
 
@@ -288,11 +314,11 @@ for segment in result["segments"]:
 
 | Model | VRAM | Generation Time |
 |-------|------|-----------------|
-| LLaVA-7B | ~16GB | ~2-3s/response |
-| LLaVA-13B | ~28GB | ~4-5s/response |
-| Qwen2-VL-7B | ~18GB | ~3-4s/response |
+| Qwen3-VL-8B | ~18GB | ~3-4s/response |
+| MiniCPM-V-4.5 | ~18GB | ~3-4s/response |
+| LLaVA-7B (legacy) | ~16GB | ~2-3s/response |
 | SDXL (1024x1024) | ~8GB | ~5-8s |
-| Flux (1024x1024) | ~24GB | ~15-20s |
+| FLUX.2 dev (1024x1024) | ~24GB | ~15-20s |
 | Whisper-large-v3 | ~4GB | ~0.5x real-time |
 | CLIP-ViT-L/14 | ~2GB | ~50ms/image |
 

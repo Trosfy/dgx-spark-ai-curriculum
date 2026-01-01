@@ -6,7 +6,7 @@ and BBQ on language models.
 
 Example usage:
     >>> from benchmark_utils import BenchmarkRunner
-    >>> runner = BenchmarkRunner(model="llama3.1:8b")
+    >>> runner = BenchmarkRunner(model="qwen3:8b")
     >>> truthfulqa_results = runner.run_truthfulqa()
     >>> bbq_results = runner.run_bbq()
 """
@@ -112,7 +112,7 @@ class BenchmarkRunner:
 
     def __init__(
         self,
-        model: str = "llama3.1:8b",
+        model: str = "qwen3:8b",
         temperature: float = 0.0
     ):
         """
@@ -332,7 +332,7 @@ Answer with just the number (1, 2, or 3):"""
             json.dump(serializable, f, indent=2)
 
 
-def quick_benchmark(model: str = "llama3.1:8b") -> Dict:
+def quick_benchmark(model: str = "qwen3:8b") -> Dict:
     """
     Run a quick benchmark test.
 

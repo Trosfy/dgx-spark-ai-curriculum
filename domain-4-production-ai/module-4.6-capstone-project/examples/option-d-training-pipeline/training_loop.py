@@ -17,7 +17,7 @@ import time
 class TrainingConfig:
     """Training configuration."""
     # Model
-    model_name: str = "meta-llama/Llama-3.3-8B-Instruct"
+    model_name: str = "Qwen/Qwen3-8B-Instruct"
     use_4bit: bool = True
 
     # LoRA
@@ -283,7 +283,7 @@ if __name__ == "__main__":
 
     # Create config
     config = TrainingConfig(
-        model_name="meta-llama/Llama-3.3-8B-Instruct",
+        model_name="Qwen/Qwen3-8B-Instruct",
         num_epochs=2,
         batch_size=4,
         learning_rate=2e-4,

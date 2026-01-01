@@ -483,7 +483,7 @@ def chat(message, history):
     messages.append({"role": "user", "content": message})
 
     response = ollama.chat(
-        model="llama3.1:8b",
+        model="qwen3:8b",
         messages=messages,
         stream=True
     )
@@ -531,7 +531,7 @@ if page == "Chat":
 
         with st.chat_message("assistant"):
             response = ollama.chat(
-                model="llama3.1:8b",
+                model="qwen3:8b",
                 messages=st.session_state.messages
             )
             reply = response["message"]["content"]

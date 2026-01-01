@@ -150,7 +150,7 @@ Benchmark Ollama models using direct API calls for accurate metrics. Results can
 **Instructions:**
 1. Open `lab-1.1.5-ollama-benchmarking.ipynb`
 2. Verify Ollama service: `curl http://localhost:11434/api/tags`
-3. Pull models: `ollama pull llama3.2:3b llama3.1:8b llama3.1:70b`
+3. Pull models: `ollama pull qwen3:8b qwen3:32b` (or legacy: `qwen3:8b`)
 4. Use the benchmark utility from `utils/benchmarks/`
 5. Measure prefill tok/s and decode tok/s via API
 6. Record memory usage per model
@@ -165,7 +165,7 @@ import time
 
 response = requests.post(
     "http://localhost:11434/api/generate",
-    json={"model": "llama3.1:8b", "prompt": "Hello", "stream": False}
+    json={"model": "qwen3:8b", "prompt": "Hello", "stream": False}
 )
 data = response.json()
 
@@ -180,8 +180,8 @@ decode_tps = data["eval_count"] / (data["eval_duration"] / 1e9)
 | Model | Prefill (tok/s) | Decode (tok/s) | Memory (GB) |
 |-------|-----------------|----------------|-------------|
 | 3B Q4 | ~5,000 | ~80 | ~3 |
-| 8B Q4 | ~3,000 | ~45 | ~6 |
-| 70B Q4 | ~500 | ~15 | ~45 |
+| 8B Q4 | ~3,000 | ~45 | ~8 |
+| 32B Q4 | ~1,000 | ~25 | ~20 |
 
 ---
 

@@ -9,7 +9,7 @@ Example:
     >>> from inference_client import UnifiedInferenceClient
     >>>
     >>> # Connect to Ollama
-    >>> client = UnifiedInferenceClient.from_ollama("llama3.1:8b")
+    >>> client = UnifiedInferenceClient.from_ollama("qwen3:8b")
     >>>
     >>> # Simple completion
     >>> response = client.complete("Tell me a joke")
@@ -428,7 +428,7 @@ class UnifiedInferenceClient:
 
     Example:
         >>> # Create client for Ollama
-        >>> client = UnifiedInferenceClient.from_ollama("llama3.1:8b")
+        >>> client = UnifiedInferenceClient.from_ollama("qwen3:8b")
         >>>
         >>> # Simple completion
         >>> response = client.complete("What is Python?")
@@ -463,14 +463,14 @@ class UnifiedInferenceClient:
     @classmethod
     def from_ollama(
         cls,
-        model: str = "llama3.1:8b",
+        model: str = "qwen3:8b",
         base_url: str = "http://localhost:11434"
     ) -> "UnifiedInferenceClient":
         """
         Create a client connected to Ollama.
 
         Args:
-            model: Model name (e.g., "llama3.1:8b", "mistral", "qwen2.5:32b")
+            model: Model name (e.g., "qwen3:8b", "mistral", "qwen3:32b")
             base_url: Ollama server URL
 
         Returns:
@@ -482,7 +482,7 @@ class UnifiedInferenceClient:
     @classmethod
     def from_vllm(
         cls,
-        model: str = "meta-llama/Llama-3.1-8B-Instruct",
+        model: str = "Qwen/Qwen3-8B-Instruct",
         base_url: str = "http://localhost:8000",
         api_key: str = ""
     ) -> "UnifiedInferenceClient":
@@ -503,7 +503,7 @@ class UnifiedInferenceClient:
     @classmethod
     def from_sglang(
         cls,
-        model: str = "meta-llama/Llama-3.1-8B-Instruct",
+        model: str = "Qwen/Qwen3-8B-Instruct",
         base_url: str = "http://localhost:30000",
         api_key: str = ""
     ) -> "UnifiedInferenceClient":
@@ -524,7 +524,7 @@ class UnifiedInferenceClient:
     @classmethod
     def from_tensorrt_llm(
         cls,
-        model: str = "meta-llama/Llama-3.1-8B-Instruct",
+        model: str = "Qwen/Qwen3-8B-Instruct",
         base_url: str = "http://localhost:8000",
         api_key: str = ""
     ) -> "UnifiedInferenceClient":
@@ -695,7 +695,7 @@ class ConversationManager:
     Manages multi-turn conversations with automatic history tracking.
 
     Example:
-        >>> client = UnifiedInferenceClient.from_ollama("llama3.1:8b")
+        >>> client = UnifiedInferenceClient.from_ollama("qwen3:8b")
         >>> conversation = ConversationManager(client, system_prompt="You are a helpful assistant.")
         >>>
         >>> # First turn
@@ -802,7 +802,7 @@ if __name__ == "__main__":
     print("=" * 50)
 
     # Try to connect to Ollama
-    client = UnifiedInferenceClient.from_ollama("llama3.1:8b")
+    client = UnifiedInferenceClient.from_ollama("qwen3:8b")
 
     if client.is_healthy():
         print("Connected to Ollama!")

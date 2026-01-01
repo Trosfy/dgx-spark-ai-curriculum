@@ -166,13 +166,13 @@ class BiasEvaluator:
     indicator and measures differences in model responses.
 
     Example:
-        >>> evaluator = BiasEvaluator(model="llama3.1:8b")
+        >>> evaluator = BiasEvaluator(model="qwen3:8b")
         >>> results = evaluator.evaluate_dimension("gender")
         >>> analysis = evaluator.analyze_disparities()
         >>> print(analysis["gender"]["disparities"])
     """
 
-    def __init__(self, model: str = "llama3.1:8b"):
+    def __init__(self, model: str = "qwen3:8b"):
         """
         Initialize the bias evaluator.
 

@@ -12,17 +12,17 @@
 
 ## Required Downloads
 
-### Models for Demos
+### Models for Demos (2025 Tier 1)
 
 ```bash
-# Chat model for all labs (~4-8 GB)
-ollama pull llama3.1:8b
+# Chat model for all labs (~5GB, hybrid thinking)
+ollama pull qwen3:8b
 
-# Embedding model for RAG (~500 MB)
-ollama pull nomic-embed-text
+# Embedding model for RAG (~8GB, #1 MTEB)
+ollama pull qwen3-embedding:8b
 
-# (Optional) Larger model for better quality (~40 GB)
-ollama pull llama3.1:70b-instruct-q4_K_M
+# (Optional) Larger model for better quality (~20GB)
+ollama pull qwen3:32b
 ```
 
 **Total download size**: ~5-10 GB (basic) or ~50 GB (with large model)
@@ -70,9 +70,9 @@ ollama serve &
 # Wait for startup
 sleep 5
 
-# Pull required model
-ollama pull llama3.1:8b
-ollama pull nomic-embed-text
+# Pull required models (2025 Tier 1)
+ollama pull qwen3:8b
+ollama pull qwen3-embedding:8b
 ```
 
 ### 4. Verify Setup
@@ -87,7 +87,7 @@ print(f"Gradio {gr.__version__} ready!")
 
 # Check Ollama
 response = ollama.chat(
-    model="llama3.1:8b",
+    model="qwen3:8b",
     messages=[{"role": "user", "content": "Hello!"}]
 )
 print(f"Ollama ready! Response: {response['message']['content'][:50]}...")
@@ -108,8 +108,8 @@ All systems go!
 
 ### Lab 4.5.1: Complete RAG Demo
 
-- [ ] Ollama running with llama3.1:8b
-- [ ] Ollama running with nomic-embed-text
+- [ ] Ollama running with qwen3:8b
+- [ ] Ollama running with qwen3-embedding:8b
 - [ ] Gradio installed
 - [ ] chromadb installed
 - [ ] pypdf installed (for PDF upload)
@@ -142,7 +142,7 @@ echo "DGX Spark features 128GB unified memory..." > /workspace/module-4.5/sample
 
 ### Lab 4.5.2: Agent Playground
 
-- [ ] Ollama running with llama3.1:8b
+- [ ] Ollama running with qwen3:8b
 - [ ] Streamlit installed
 - [ ] Completed basic Streamlit example
 - [ ] Port 8501 available
@@ -209,8 +209,8 @@ For deploying Streamlit apps publicly:
 |---------|-------------|------------|
 | Ollama not running | Chat/embeddings fail | Start with `ollama serve &` |
 | Wrong port mapped | Can't access demo | Use `-p 7860:7860 -p 8501:8501` |
-| No model pulled | Model not found errors | Run `ollama pull llama3.1:8b` |
-| Missing nomic-embed-text | RAG embedding fails | Run `ollama pull nomic-embed-text` |
+| No model pulled | Model not found errors | Run `ollama pull qwen3:8b` |
+| Missing embedding model | RAG embedding fails | Run `ollama pull qwen3-embedding:8b` |
 | ChromaDB not installed | Vector store errors | Run `pip install chromadb` |
 | Port already in use | Demo won't start | Kill existing process or use different port |
 
@@ -252,11 +252,11 @@ mkdir -p module-4.5/{lab-4.5.1-rag-demo,lab-4.5.2-agent-playground/pages,lab-4.5
 # Install dependencies
 pip install gradio>=4.0.0 streamlit>=1.30.0 ollama chromadb pypdf python-docx plotly altair
 
-# Start Ollama and pull models
+# Start Ollama and pull models (2025 Tier 1)
 ollama serve &
 sleep 5
-ollama pull llama3.1:8b
-ollama pull nomic-embed-text
+ollama pull qwen3:8b
+ollama pull qwen3-embedding:8b
 
 # Verify installation
 python -c "import gradio as gr; print(f'Gradio {gr.__version__} ready!')"

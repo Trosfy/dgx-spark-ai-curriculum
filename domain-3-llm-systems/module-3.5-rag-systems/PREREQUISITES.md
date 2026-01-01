@@ -61,7 +61,7 @@ class DocumentProcessor:
 import ollama
 
 response = ollama.chat(
-    model="llama3.1:8b",
+    model="qwen3:8b",
     messages=[{"role": "user", "content": "Hello!"}]
 )
 print(response['message']['content'])
@@ -168,7 +168,7 @@ print(f"✅ Similarity between texts: {similarity:.3f}")
 # 4. Test Ollama
 import ollama
 response = ollama.chat(
-    model="llama3.1:8b",
+    model="qwen3:8b",
     messages=[{"role": "user", "content": "Say 'ready' if you can hear me."}]
 )
 print(f"✅ Ollama response: {response['message']['content'][:50]}")

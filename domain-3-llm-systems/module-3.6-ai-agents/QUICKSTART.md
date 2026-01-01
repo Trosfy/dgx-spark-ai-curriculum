@@ -7,7 +7,7 @@ Create a ReAct agent that can use tools to answer questions—thinking, acting, 
 
 ## ✅ Before You Start
 - [ ] DGX Spark NGC container running
-- [ ] Ollama running with llama3.1:8b or 70b (verify via Ollama Web UI at http://localhost:11434)
+- [ ] Ollama running with qwen3:8b or 70b (verify via Ollama Web UI at http://localhost:11434)
 
 ## 🚀 Let's Go!
 
@@ -61,7 +61,7 @@ from langchain.agents import AgentExecutor, create_react_agent
 from langchain.prompts import PromptTemplate
 
 # Initialize LLM
-llm = Ollama(model="llama3.1:8b")
+llm = Ollama(model="qwen3:8b")
 
 # ReAct prompt template
 react_prompt = PromptTemplate.from_template("""Answer the following questions as best you can. You have access to the following tools:

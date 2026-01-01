@@ -25,13 +25,13 @@ huggingface-cli download TinyLlama/TinyLlama-1.1B-Chat-v1.0
 
 # For 8B training (Lab 3.1.4)
 # Llama 3.1 8B - ~16GB (requires approval)
-# First: Request access at https://huggingface.co/meta-llama/Llama-3.1-8B-Instruct
+# First: Request access at https://huggingface.co/Qwen/Qwen3-8B-Instruct
 huggingface-cli login
-huggingface-cli download meta-llama/Llama-3.1-8B-Instruct
+huggingface-cli download Qwen/Qwen3-8B-Instruct
 
 # For 70B training (Lab 3.1.5) ⭐
 # Llama 3.1 70B - ~140GB (will be quantized to ~35GB)
-huggingface-cli download meta-llama/Llama-3.1-70B-Instruct
+huggingface-cli download Qwen/Qwen3-32B-Instruct
 
 # Alternative (no approval required):
 huggingface-cli download mistralai/Mistral-7B-Instruct-v0.2
