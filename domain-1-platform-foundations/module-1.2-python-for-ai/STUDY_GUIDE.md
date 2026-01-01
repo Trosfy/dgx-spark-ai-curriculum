@@ -1,11 +1,14 @@
 # Module 1.2: Python for AI/ML - Study Guide
 
 ## 🎯 Learning Objectives
+
+These objectives match the Learning Outcomes in [README.md](./README.md).
+
 By the end of this module, you will be able to:
-1. **Implement** vectorized operations using NumPy broadcasting
-2. **Transform** and clean datasets using Pandas operations
-3. **Create** multi-panel visualizations for model analysis
-4. **Profile** Python code and identify performance bottlenecks
+1. ✅ **Write** efficient NumPy code for tensor operations (vectorization, broadcasting)
+2. ✅ **Manipulate** datasets using Pandas for ML preprocessing
+3. ✅ **Create** publication-quality visualizations with Matplotlib/Seaborn
+4. ✅ **Profile** and optimize Python code for performance
 
 ## 🗺️ Module Roadmap
 
@@ -113,6 +116,8 @@ np.einsum('bhsd,bhtd->bhst', Q, K)  # (batch, heads, seq, dim)
 | CuPy (GPU) | 500-1000x |
 
 ## 📋 Before You Start
-→ See [QUICKSTART.md](./QUICKSTART.md) for 5-minute vectorization demo
-→ See [QUICK_REFERENCE.md](./QUICK_REFERENCE.md) for einsum patterns
-→ Ensure NGC container is running (Module 1.1)
+
+1. **Verify Prerequisites**: Complete the self-check in [PREREQUISITES.md](./PREREQUISITES.md)
+2. **Try the Quickstart**: See [QUICKSTART.md](./QUICKSTART.md) for a 5-minute vectorization demo
+3. **Have Reference Handy**: Keep [QUICK_REFERENCE.md](./QUICK_REFERENCE.md) open for einsum patterns
+4. **Start NGC Container**: Ensure the container is running (see [LAB_PREP.md](./LAB_PREP.md))
