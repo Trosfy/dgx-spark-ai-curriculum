@@ -46,9 +46,9 @@ cc = torch.cuda.get_device_capability()
 print(f"Compute Capability: {cc[0]}.{cc[1]}")
 
 if cc[0] >= 10:
-    print("✅ Blackwell detected! FP4 tensor cores available.")
+    print("✅ Blackwell detected! NVFP4 tensor cores available.")
 else:
-    print("⚠️  Non-Blackwell GPU. FP4 will run in emulation mode.")
+    print("⚠️  Non-Blackwell GPU. NVFP4 will run in emulation mode.")
 ```
 
 ### Pre-clearing Memory for Large Models
@@ -186,6 +186,8 @@ model = quantize(
 ```
 
 ### Performance Expectations on DGX Spark
+
+Verify these benchmarks in your Ollama Web UI for consistent test conditions:
 
 | Model | Precision | Prefill (tok/s) | Decode (tok/s) |
 |-------|-----------|-----------------|----------------|

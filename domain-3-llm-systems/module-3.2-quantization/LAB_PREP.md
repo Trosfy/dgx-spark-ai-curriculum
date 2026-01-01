@@ -149,7 +149,7 @@ make -j$(nproc) GGML_CUDA=1  # With CUDA support
 - [ ] Model to convert ready (fine-tuned or base)
 - [ ] llama.cpp built with CUDA
 - [ ] gguf Python package installed
-- [ ] Ollama installed on host (for testing)
+- [ ] Ollama Web UI accessible (for testing converted models)
 
 ### Lab 3.2.7: Quality Benchmark Suite
 - [ ] Multiple quantized models ready

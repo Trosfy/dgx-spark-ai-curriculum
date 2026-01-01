@@ -20,12 +20,12 @@ Neural network weights are like millions of numbers between -1 and 1. Originally
 - **FP16**: 16 decimal places (half the file size)
 - **INT8**: 8 bits, like rounding to 1 decimal place
 - **INT4**: 4 bits, like rounding to integers only
-- **FP4**: 4 bits, but smarter about which values matter
+- **NVFP4**: 4 bits, but smarter about which values matter (Blackwell exclusive!)
 
 The model is smaller and faster, but the "pictures" (outputs) look almost the same.
 
 ### Why This Matters on DGX Spark
-With 128GB memory and Blackwell's native FP4 support, you can run models that would never fit otherwise. A 200B parameter model? NVFP4 makes it possible.
+With 128GB unified memory and Blackwell's native NVFP4 support, you can run models that would never fit otherwise. A 200B parameter model? NVFP4 makes it possible.
 
 ### When You're Ready for Details
 → See: [Lab 3.2.1](./labs/lab-3.2.1-data-type-exploration.ipynb) for hands-on exploration

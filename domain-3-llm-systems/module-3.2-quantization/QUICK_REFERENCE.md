@@ -19,7 +19,7 @@ import torch
 cc = torch.cuda.get_device_capability()
 print(f"Compute Capability: {cc[0]}.{cc[1]}")
 if cc[0] >= 10:
-    print("✅ Blackwell detected! NVFP4 available.")
+    print("✅ Blackwell detected! NVFP4 tensor cores available.")
 else:
     print("⚠️ Pre-Blackwell GPU. NVFP4 will run in emulation.")
 ```
@@ -54,6 +54,9 @@ sudo sh -c 'sync; echo 3 > /proc/sys/vm/drop_caches'
 | bitsandbytes | PTQ | Any GPU | Quick 4/8-bit | ✅ Works |
 
 ### DGX Spark Performance
+
+Verify these benchmarks in your Ollama Web UI for consistent test conditions:
+
 | Model | Precision | Memory | Prefill (tok/s) | Decode (tok/s) |
 |-------|-----------|--------|-----------------|----------------|
 | Llama 3.1 8B | NVFP4 | ~4 GB | ~10,000 | ~39 |
