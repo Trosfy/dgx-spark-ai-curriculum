@@ -161,7 +161,7 @@ print(response["content"])
 
 ```yaml
 providers:
-  - id: ollama:llama3.1:8b
+  - id: ollama:qwen3:8b
     config:
       temperature: 0.7
 

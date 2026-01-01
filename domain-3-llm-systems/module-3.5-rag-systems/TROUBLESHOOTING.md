@@ -294,7 +294,7 @@ Answer:"""
 ```python
 # 1. Lower temperature for more deterministic output
 response = ollama.chat(
-    model="llama3.1:8b",
+    model="qwen3:8b",
     messages=[{"role": "user", "content": prompt}],
     options={"temperature": 0.1}  # Lower = more focused
 )
@@ -461,7 +461,7 @@ AuthenticationError: No API key provided
 from ragas.llms import LangchainLLMWrapper
 from langchain_community.llms import Ollama
 
-llm = LangchainLLMWrapper(Ollama(model="llama3.1:8b"))
+llm = LangchainLLMWrapper(Ollama(model="qwen3:8b"))
 result = evaluate(dataset, metrics=metrics, llm=llm)
 ```
 
@@ -530,7 +530,7 @@ dataset = Dataset.from_dict(data)
 | all-MiniLM-L6-v2 | 384 | Fast | Good | Development, testing |
 | bge-base-en-v1.5 | 768 | Medium | Better | Production (balanced) |
 | bge-large-en-v1.5 | 1024 | Slower | Best | Production (quality) |
-| nomic-embed-text | 768 | Medium | Good | Long documents (8K context) |
+| qwen3-embedding:8b | 768 | Medium | Good | Long documents (8K context) |
 
 **For DGX Spark**: Use `bge-large-en-v1.5` for production—it fits easily in memory and provides excellent quality.
 

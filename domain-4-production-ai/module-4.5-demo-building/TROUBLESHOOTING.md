@@ -27,7 +27,7 @@ Response cuts off mid-generation.
 def chat(message, history):
     try:
         response = ollama.chat(
-            model="llama3.1:8b",
+            model="qwen3:8b",
             messages=[{"role": "user", "content": message}]
         )
         return response["message"]["content"]
@@ -38,7 +38,7 @@ def chat(message, history):
 def stream_chat(message, history):
     try:
         partial = ""
-        for chunk in ollama.chat(model="llama3.1:8b", messages=messages, stream=True):
+        for chunk in ollama.chat(model="qwen3:8b", messages=messages, stream=True):
             partial += chunk["message"]["content"]
             yield partial
     except GeneratorExit:
@@ -79,7 +79,7 @@ import ollama
 print("Loading model...")
 client = ollama.Client()
 # Warm up with a small request
-client.generate(model="llama3.1:8b", prompt="Hello", options={"num_predict": 1})
+client.generate(model="qwen3:8b", prompt="Hello", options={"num_predict": 1})
 print("Model ready!")
 
 def chat(message, history):
@@ -202,7 +202,7 @@ if "messages" not in st.session_state:
 # Solution 3: Cache expensive computations
 @st.cache_data(ttl=3600)  # Cache for 1 hour
 def get_embeddings(text):
-    return ollama.embeddings(model="nomic-embed-text", prompt=text)
+    return ollama.embeddings(model="qwen3-embedding:8b", prompt=text)
 ```
 
 ---
@@ -335,13 +335,13 @@ client = ollama.Client(host="http://localhost:11434")
 
 **Symptoms**:
 ```
-ollama._types.ResponseError: model 'llama3.1:8b' not found
+ollama._types.ResponseError: model 'qwen3:8b' not found
 ```
 
 **Solutions**:
 ```bash
 # Solution 1: Pull the model
-ollama pull llama3.1:8b
+ollama pull qwen3:8b
 
 # Solution 2: Check available models
 ollama list
@@ -365,18 +365,18 @@ ollama list
 # Run in terminal: nvidia-smi
 
 # Solution 2: Clear model memory
-ollama stop llama3.1:8b  # If supported
+ollama stop qwen3:8b  # If supported
 
 # Solution 3: Reduce context length
 response = ollama.chat(
-    model="llama3.1:8b",
+    model="qwen3:8b",
     messages=messages,
     options={"num_ctx": 2048}  # Reduce from default 4096
 )
 
 # Solution 4: Limit response length
 response = ollama.generate(
-    model="llama3.1:8b",
+    model="qwen3:8b",
     prompt=prompt,
     options={"num_predict": 256}  # Limit tokens
 )
@@ -425,7 +425,7 @@ collection = client.create_collection("my_docs")
 # Solution 2: Use consistent embedding model
 # Always use same model for embeddings:
 def get_embedding(text):
-    response = ollama.embeddings(model="nomic-embed-text", prompt=text)
+    response = ollama.embeddings(model="qwen3-embedding:8b", prompt=text)
     return response["embedding"]
 ```
 
@@ -691,7 +691,7 @@ if prompt := st.chat_input():
 
 ```python
 # Page 1: Set value
-st.session_state.user_model = "llama3.1:8b"
+st.session_state.user_model = "qwen3:8b"
 
 # Page 2: Read value
 model = st.session_state.get("user_model", "default")

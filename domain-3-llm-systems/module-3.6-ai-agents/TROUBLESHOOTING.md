@@ -34,7 +34,7 @@ executor = AgentExecutor(
 )
 
 # 2. Use a more capable model
-llm = Ollama(model="llama3.1:70b")  # Better at following formats
+llm = Ollama(model="qwen3:32b")  # Better at following formats
 
 # 3. Simplify the prompt
 # Reduce number of tools or make tool descriptions clearer
@@ -117,7 +117,7 @@ def calculate(expression: str) -> str:
 # Don't have multiple tools that could handle similar tasks
 
 # 3. Use a better model
-llm = Ollama(model="llama3.1:70b")  # Much better reasoning
+llm = Ollama(model="qwen3:32b")  # Much better reasoning
 ```
 
 ---
@@ -417,8 +417,8 @@ task = Task(
 **Solutions**:
 ```python
 # 1. Use faster model for simpler agents
-fast_llm = Ollama(model="llama3.1:8b")
-quality_llm = Ollama(model="llama3.1:70b")
+fast_llm = Ollama(model="qwen3:8b")
+quality_llm = Ollama(model="qwen3:32b")
 
 # Use fast model for routine work
 researcher = Agent(role="Researcher", llm=fast_llm, ...)
@@ -442,7 +442,7 @@ agent = Agent(..., max_iter=3)
 **Solutions**:
 ```python
 # 1. Use smaller model
-llm = Ollama(model="llama3.1:8b")  # vs 70b
+llm = Ollama(model="qwen3:8b")  # vs 70b
 
 # 2. Reduce tool count
 # Only include tools actually needed
@@ -468,7 +468,7 @@ def search(query: str) -> str:
 **Solutions**:
 ```python
 # 1. Use smaller model
-llm = Ollama(model="llama3.1:8b")
+llm = Ollama(model="qwen3:8b")
 
 # 2. Clear cache between runs
 import torch
@@ -607,8 +607,8 @@ Use simple agents when:
 
 | Model | Best For | Trade-off |
 |-------|----------|-----------|
-| llama3.1:8b | Development, testing | Fast but may struggle with complex reasoning |
-| llama3.1:70b | Production, complex tasks | Slow but excellent reasoning |
+| qwen3:8b | Development, testing | Fast but may struggle with complex reasoning |
+| qwen3:32b | Production, complex tasks | Slow but excellent reasoning |
 | GPT-4 | Best quality (if API OK) | Cost, API dependency |
 
 **Recommendation**: Develop with 8B, deploy with 70B.

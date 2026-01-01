@@ -165,7 +165,7 @@ def load_model():
 @st.cache_data(ttl=3600)  # Cache data for 1 hour
 def get_embeddings(text):
     client = load_model()
-    return client.embeddings(model="nomic-embed-text", prompt=text)
+    return client.embeddings(model="qwen3-embedding:8b", prompt=text)
 ```
 
 ### Columns and Metrics

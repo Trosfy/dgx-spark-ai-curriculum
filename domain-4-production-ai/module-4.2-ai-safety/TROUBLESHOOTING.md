@@ -60,7 +60,7 @@ CUDA out of memory when loading model
 **Solutions**:
 ```python
 # Solution 1: Unload other models first
-ollama stop llama3.1:8b
+ollama stop qwen3:8b
 
 # Solution 2: Clear GPU memory
 import torch, gc
@@ -99,7 +99,7 @@ pydantic.error_wrappers.ValidationError: 1 validation error for RailsConfig
 models:
   - type: main
     engine: ollama
-    model: llama3.1:8b
+    model: qwen3:8b
 
 # NOT:
 models:
@@ -150,7 +150,7 @@ config = RailsConfig.from_content("""
 models:
   - type: main
     engine: ollama
-    model: llama3.1:8b  # Not 70b
+    model: qwen3:8b  # Not 70b
 """)
 
 # Solution 2: Increase timeout
@@ -182,14 +182,14 @@ npm install -g promptfoo
 ```yaml
 # Verify provider config
 providers:
-  - id: ollama:llama3.1:8b
+  - id: ollama:qwen3:8b
     config:
       apiHost: http://localhost:11434  # Add if needed
       temperature: 0.7
 
 # Test manually first
 curl http://localhost:11434/api/generate -d '{
-  "model": "llama3.1:8b",
+  "model": "qwen3:8b",
   "prompt": "Hello"
 }'
 ```
@@ -385,7 +385,7 @@ cat > /workspace/guardrails_config/config.yaml << 'EOF'
 models:
   - type: main
     engine: ollama
-    model: llama3.1:8b
+    model: qwen3:8b
 EOF
 ```
 
