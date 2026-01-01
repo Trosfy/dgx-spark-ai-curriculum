@@ -20,7 +20,7 @@
 
 ```bash
 # Primary model for benchmarking (~16GB)
-huggingface-cli download meta-llama/Llama-3.1-8B-Instruct
+huggingface-cli download Qwen/Qwen3-8B-Instruct
 
 # Smaller model for quick tests (~4GB)
 huggingface-cli download microsoft/phi-2

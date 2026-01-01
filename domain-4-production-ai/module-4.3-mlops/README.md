@@ -155,7 +155,7 @@ pip install lm-eval
 
 # Run benchmarks
 lm_eval --model hf \
-    --model_args pretrained=meta-llama/Llama-3.1-8B,dtype=bfloat16 \
+    --model_args pretrained=Qwen/Qwen3-8B,dtype=bfloat16 \
     --tasks mmlu,hellaswag,arc_easy \
     --batch_size 8 \
     --output_path ./results

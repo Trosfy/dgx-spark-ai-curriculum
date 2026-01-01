@@ -44,7 +44,7 @@ sudo sh -c 'sync; echo 3 > /proc/sys/vm/drop_caches'
 ### Pattern: vLLM Server (DGX Spark)
 ```bash
 python -m vllm.entrypoints.openai.api_server \
-    --model meta-llama/Llama-3.1-8B-Instruct \
+    --model Qwen/Qwen3-8B-Instruct \
     --enforce-eager \
     --dtype bfloat16 \
     --max-model-len 4096 \
@@ -61,7 +61,7 @@ client = OpenAI(
 )
 
 response = client.chat.completions.create(
-    model="meta-llama/Llama-3.1-8B-Instruct",
+    model="Qwen/Qwen3-8B-Instruct",
     messages=[{"role": "user", "content": "Hello!"}],
     max_tokens=100,
     stream=True
@@ -75,7 +75,7 @@ for chunk in response:
 ### Pattern: SGLang Server
 ```bash
 python -m sglang.launch_server \
-    --model-path meta-llama/Llama-3.1-8B-Instruct \
+    --model-path Qwen/Qwen3-8B-Instruct \
     --port 30000 \
     --dtype bfloat16
 ```
@@ -105,7 +105,7 @@ import torch
 
 # Load model
 model = AutoModelForCausalLM.from_pretrained(
-    "meta-llama/Llama-3.1-8B-Instruct",
+    "Qwen/Qwen3-8B-Instruct",
     torch_dtype=torch.bfloat16,
     device_map="auto"
 )

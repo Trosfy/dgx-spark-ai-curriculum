@@ -337,7 +337,7 @@ class AgentConfig:
     tools: List[str] = field(default_factory=list)
     max_iterations: int = 10
     temperature: float = 0.7
-    model: str = "llama3.1:70b"
+    model: str = "qwen3:32b"
 
 
 class BaseAgent(ABC):

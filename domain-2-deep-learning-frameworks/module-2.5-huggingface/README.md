@@ -109,7 +109,7 @@ import torch
 # DGX Spark's 128GB unified memory enables loading large models!
 # BF16 inference supports up to 50-55B parameters
 model = AutoModelForCausalLM.from_pretrained(
-    "meta-llama/Llama-3.1-8B-Instruct",  # Fits easily in BF16
+    "Qwen/Qwen3-8B-Instruct",  # Fits easily in BF16
     torch_dtype=torch.bfloat16,  # Native Blackwell GB10 support
     device_map="auto"  # Automatic device placement
 )

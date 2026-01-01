@@ -388,14 +388,14 @@ promptfoo eval --config promptfoo.yaml
 ```bash
 # Run TruthfulQA
 lm_eval --model hf \
-    --model_args pretrained=meta-llama/Llama-3.1-8B-Instruct,dtype=bfloat16 \
+    --model_args pretrained=Qwen/Qwen3-8B-Instruct,dtype=bfloat16 \
     --tasks truthfulqa_mc2 \
     --batch_size 8 \
     --output_path ./safety_results
 
 # Run BBQ for bias
 lm_eval --model hf \
-    --model_args pretrained=meta-llama/Llama-3.1-8B-Instruct,dtype=bfloat16 \
+    --model_args pretrained=Qwen/Qwen3-8B-Instruct,dtype=bfloat16 \
     --tasks bbq \
     --batch_size 8 \
     --output_path ./bias_results
@@ -416,7 +416,7 @@ tags:
 # Model Card: [Your Model Name]
 
 ## Model Description
-- **Base model:** meta-llama/Llama-3.1-8B-Instruct
+- **Base model:** Qwen/Qwen3-8B-Instruct
 - **Fine-tuning:** QLoRA on [dataset]
 - **Training hardware:** DGX Spark (128GB unified memory)
 

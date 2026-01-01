@@ -22,7 +22,7 @@ import ollama
 
 def chat(message, history):
     messages = [{"role": "user", "content": message}]
-    response = ollama.chat(model="llama3.2:3b", messages=messages, stream=True)
+    response = ollama.chat(model="qwen3:4b", messages=messages, stream=True)
 
     partial = ""
     for chunk in response:

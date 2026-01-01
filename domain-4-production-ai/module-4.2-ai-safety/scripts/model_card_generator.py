@@ -64,7 +64,7 @@ class ModelCardGenerator:
         ...     name="tech-assistant-llama3-8b",
         ...     version="1.0.0",
         ...     model_type="Text Generation",
-        ...     base_model="meta-llama/Llama-3.1-8B-Instruct"
+        ...     base_model="Qwen/Qwen3-8B-Instruct"
         ... )
         >>> gen.set_description(
         ...     summary="A helpful technical assistant",
@@ -696,7 +696,7 @@ def create_example_model_card() -> ModelCardGenerator:
         name="tech-assistant-llama3-8b-lora",
         version="1.0.0",
         model_type="Text Generation (Conversational)",
-        base_model="meta-llama/Llama-3.1-8B-Instruct",
+        base_model="Qwen/Qwen3-8B-Instruct",
         license="llama3.1"
     )
 

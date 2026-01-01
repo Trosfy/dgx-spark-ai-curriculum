@@ -64,7 +64,7 @@ bnb_config = BitsAndBytesConfig(
 )
 
 model = AutoModelForCausalLM.from_pretrained(
-    "meta-llama/Llama-3.1-70B-Instruct",
+    "Qwen/Qwen3-32B-Instruct",
     quantization_config=bnb_config,
     device_map="auto",
 )

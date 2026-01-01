@@ -226,7 +226,7 @@ services:
       - "8001:8000"
     ipc: host
     command: >
-      --model meta-llama/Llama-3.1-8B-Instruct
+      --model Qwen/Qwen3-8B-Instruct
       --enforce-eager
       --max-model-len 4096
     profiles:
@@ -397,14 +397,14 @@ docker run --gpus all -it --rm \
     -p 8000:8000 \
     -v $HOME/.cache/huggingface:/root/.cache/huggingface \
     nvcr.io/nvidia/vllm:spark \
-    --model meta-llama/Llama-3.1-8B-Instruct \
+    --model Qwen/Qwen3-8B-Instruct \
     --enforce-eager \
     --max-model-len 4096
 
 # Test API
 curl http://localhost:8000/v1/completions \
     -H "Content-Type: application/json" \
-    -d '{"model": "meta-llama/Llama-3.1-8B-Instruct", "prompt": "Hello", "max_tokens": 50}'
+    -d '{"model": "Qwen/Qwen3-8B-Instruct", "prompt": "Hello", "max_tokens": 50}'
 ```
 
 ### TensorRT-LLM Container
@@ -473,7 +473,7 @@ docker run --gpus all --net=host ...
 
 ```bash
 # Pre-download models on host
-huggingface-cli download meta-llama/Llama-3.1-8B-Instruct
+huggingface-cli download Qwen/Qwen3-8B-Instruct
 
 # Mount cache in container
 docker run -v $HOME/.cache/huggingface:/root/.cache/huggingface ...

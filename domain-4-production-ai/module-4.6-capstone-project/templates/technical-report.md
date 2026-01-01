@@ -192,7 +192,7 @@ class YourMainClass:
 ```python
 # Example: Loading large model without OOM
 model = AutoModelForCausalLM.from_pretrained(
-    "meta-llama/Llama-3.3-70B-Instruct",
+    "Qwen/Qwen3-32B-Instruct",
     torch_dtype=torch.bfloat16,
     device_map="cuda",
     # Memory optimization flags

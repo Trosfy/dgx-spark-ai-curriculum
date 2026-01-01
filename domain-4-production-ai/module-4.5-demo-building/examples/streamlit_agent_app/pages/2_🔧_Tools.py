@@ -97,12 +97,12 @@ st.markdown("---")
 st.markdown("### Model Settings")
 
 if "model" not in st.session_state:
-    st.session_state.model = "llama3.2:3b"
+    st.session_state.model = "qwen3:4b"
 
 model = st.selectbox(
     "LLM Model",
-    options=["llama3.2:1b", "llama3.2:3b", "qwen3:8b", "mistral:7b"],
-    index=["llama3.2:1b", "llama3.2:3b", "qwen3:8b", "mistral:7b"].index(st.session_state.model)
+    options=["qwen3:1.7b", "qwen3:4b", "qwen3:8b", "mistral:7b"],
+    index=["qwen3:1.7b", "qwen3:4b", "qwen3:8b", "mistral:7b"].index(st.session_state.model)
 )
 st.session_state.model = model
 

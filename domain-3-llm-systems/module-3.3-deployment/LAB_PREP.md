@@ -25,8 +25,8 @@ huggingface-cli download Qwen/Qwen3-8B-Instruct
 huggingface-cli download Qwen/Qwen3-32B-Instruct
 
 # Legacy models for comparison (optional)
-ollama pull llama3.1:8b           # ~5GB
-huggingface-cli download meta-llama/Llama-3.1-8B-Instruct
+ollama pull qwen3:8b           # ~5GB
+huggingface-cli download Qwen/Qwen3-8B-Instruct
 
 # For Medusa (if using pre-trained heads)
 # Check Medusa repo for compatible heads

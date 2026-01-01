@@ -150,7 +150,7 @@ Benchmark Ollama models using direct API calls for accurate metrics. Results can
 **Instructions:**
 1. Open `lab-1.1.5-ollama-benchmarking.ipynb`
 2. Verify Ollama service: `curl http://localhost:11434/api/tags`
-3. Pull models: `ollama pull qwen3:8b qwen3:32b` (or legacy: `llama3.1:8b`)
+3. Pull models: `ollama pull qwen3:8b qwen3:32b` (or legacy: `qwen3:8b`)
 4. Use the benchmark utility from `utils/benchmarks/`
 5. Measure prefill tok/s and decode tok/s via API
 6. Record memory usage per model

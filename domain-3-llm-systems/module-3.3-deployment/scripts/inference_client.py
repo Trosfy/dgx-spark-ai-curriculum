@@ -482,7 +482,7 @@ class UnifiedInferenceClient:
     @classmethod
     def from_vllm(
         cls,
-        model: str = "meta-llama/Llama-3.1-8B-Instruct",
+        model: str = "Qwen/Qwen3-8B-Instruct",
         base_url: str = "http://localhost:8000",
         api_key: str = ""
     ) -> "UnifiedInferenceClient":
@@ -503,7 +503,7 @@ class UnifiedInferenceClient:
     @classmethod
     def from_sglang(
         cls,
-        model: str = "meta-llama/Llama-3.1-8B-Instruct",
+        model: str = "Qwen/Qwen3-8B-Instruct",
         base_url: str = "http://localhost:30000",
         api_key: str = ""
     ) -> "UnifiedInferenceClient":
@@ -524,7 +524,7 @@ class UnifiedInferenceClient:
     @classmethod
     def from_tensorrt_llm(
         cls,
-        model: str = "meta-llama/Llama-3.1-8B-Instruct",
+        model: str = "Qwen/Qwen3-8B-Instruct",
         base_url: str = "http://localhost:8000",
         api_key: str = ""
     ) -> "UnifiedInferenceClient":

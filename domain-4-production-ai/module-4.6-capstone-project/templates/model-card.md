@@ -18,7 +18,7 @@ Fill in each section thoroughly. This is a required deliverable for the capstone
 | Property | Value |
 |----------|-------|
 | **Model Name** | [Your model name] |
-| **Base Model** | [e.g., meta-llama/Llama-3.3-70B-Instruct] |
+| **Base Model** | [e.g., Qwen/Qwen3-32B-Instruct] |
 | **Model Type** | [e.g., Causal Language Model] |
 | **Version** | [e.g., v1.0.0] |
 | **Release Date** | [YYYY-MM-DD] |

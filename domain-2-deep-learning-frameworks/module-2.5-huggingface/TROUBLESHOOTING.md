@@ -23,7 +23,7 @@
 # Common mistakes:
 # "bert-base" → "bert-base-uncased"
 # "gpt2-large" → "gpt2" (then check for "-large" variant)
-# "llama-7b" → "meta-llama/Llama-2-7b-hf" (check organization)
+# "llama-7b" → "Qwen/Qwen3-8B" (check organization)
 ```
 
 ---
@@ -41,7 +41,7 @@ login()
 
 # Or pass token directly
 model = AutoModel.from_pretrained(
-    "meta-llama/Llama-2-7b-hf",
+    "Qwen/Qwen3-8B",
     token="your_token_here"  # Or use_auth_token=True after login
 )
 ```

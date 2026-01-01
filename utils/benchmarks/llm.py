@@ -267,7 +267,7 @@ class BenchmarkSuite:
 
     Example:
         >>> suite = BenchmarkSuite()
-        >>> results = suite.run_ollama_suite(["qwen3:8b", "llama3.2:3b"])
+        >>> results = suite.run_ollama_suite(["qwen3:8b", "qwen3:4b"])
         >>> suite.print_results()
         >>> suite.save_results("benchmark_results.json")
     """

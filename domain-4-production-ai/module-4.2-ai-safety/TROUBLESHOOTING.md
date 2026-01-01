@@ -257,13 +257,13 @@ CUDA out of memory during evaluation
 ```bash
 # Solution 1: Reduce batch size
 lm_eval --model hf \
-    --model_args pretrained=meta-llama/Llama-3.1-8B-Instruct,dtype=bfloat16 \
+    --model_args pretrained=Qwen/Qwen3-8B-Instruct,dtype=bfloat16 \
     --tasks truthfulqa_mc2 \
     --batch_size 1  # Reduce from 8
 
 # Solution 2: Use 4-bit quantization
 lm_eval --model hf \
-    --model_args pretrained=meta-llama/Llama-3.1-8B-Instruct,load_in_4bit=True \
+    --model_args pretrained=Qwen/Qwen3-8B-Instruct,load_in_4bit=True \
     --tasks truthfulqa_mc2
 ```
 

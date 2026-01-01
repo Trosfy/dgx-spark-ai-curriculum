@@ -388,7 +388,7 @@ class OpenAICompatibleClient(BaseInferenceClient):
     def __init__(
         self,
         base_url: str = "http://localhost:8000",
-        model: str = "meta-llama/Llama-3.1-8B-Instruct",
+        model: str = "Qwen/Qwen3-8B-Instruct",
         engine_name: str = "vllm"
     ):
         super().__init__(base_url, model)
@@ -780,7 +780,7 @@ def compare_engines(
     Example:
         >>> engines = [
         ...     {"engine": "ollama", "model": "qwen3:8b"},
-        ...     {"engine": "vllm", "model": "meta-llama/Llama-3.1-8B-Instruct"},
+        ...     {"engine": "vllm", "model": "Qwen/Qwen3-8B-Instruct"},
         ... ]
         >>> prompts = ["Hello!", "What is Python?"]
         >>> results = compare_engines(engines, prompts)

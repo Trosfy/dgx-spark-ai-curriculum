@@ -32,7 +32,7 @@ ollama pull qwen3:32b             # Better quality (~20GB)
 ```bash
 # For lm-eval benchmarks - downloads automatically
 # But you can pre-download:
-huggingface-cli download meta-llama/Llama-3.1-8B-Instruct
+huggingface-cli download Qwen/Qwen3-8B-Instruct
 ```
 
 **Total download size**: ~16GB for Ollama models

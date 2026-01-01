@@ -22,10 +22,10 @@
 huggingface-cli download TinyLlama/TinyLlama-1.1B-Chat-v1.0
 
 # For 8B quantization (most labs)
-huggingface-cli download meta-llama/Llama-3.1-8B-Instruct
+huggingface-cli download Qwen/Qwen3-8B-Instruct
 
 # For 70B NVFP4 showcase (Lab 3.2.2) ⭐
-huggingface-cli download meta-llama/Llama-3.1-70B-Instruct
+huggingface-cli download Qwen/Qwen3-32B-Instruct
 ```
 
 **Total download size**: ~160GB

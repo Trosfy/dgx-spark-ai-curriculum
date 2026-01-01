@@ -253,7 +253,7 @@ with open("attack_prompts.json", "w") as f:
 #!/bin/bash
 # run_safety_suite.sh
 
-MODEL="meta-llama/Llama-3.1-8B-Instruct"
+MODEL="Qwen/Qwen3-8B-Instruct"
 OUTPUT="./safety_results"
 
 echo "Running TruthfulQA..."

@@ -133,7 +133,7 @@ ollama pull qwen3:32b             # Best quality (~20GB, primary teaching)
 ollama pull qwen3-embedding:8b    # #1 MTEB multilingual (~8GB, 32K context)
 
 # Legacy/comparison (optional)
-ollama pull llama3.1:8b           # For comparison
+ollama pull qwen3:8b           # For comparison
 ```
 
 ---

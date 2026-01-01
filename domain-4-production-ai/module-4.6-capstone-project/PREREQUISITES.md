@@ -106,12 +106,12 @@ bnb_config = BitsAndBytesConfig(
 )
 
 model = AutoModelForCausalLM.from_pretrained(
-    "meta-llama/Llama-3.1-8B-Instruct",
+    "Qwen/Qwen3-8B-Instruct",
     quantization_config=bnb_config,
     device_map="auto",
 )
 
-tokenizer = AutoTokenizer.from_pretrained("meta-llama/Llama-3.1-8B-Instruct")
+tokenizer = AutoTokenizer.from_pretrained("Qwen/Qwen3-8B-Instruct")
 ```
 
 **Key points:**

@@ -27,7 +27,7 @@ RuntimeError: CUDA error: an illegal instruction was encountered
 ```bash
 # Always use --enforce-eager on DGX Spark
 python -m vllm.entrypoints.openai.api_server \
-    --model meta-llama/Llama-3.1-8B-Instruct \
+    --model Qwen/Qwen3-8B-Instruct \
     --enforce-eager \  # Required for ARM64!
     --dtype bfloat16
 ```
@@ -99,7 +99,7 @@ curl http://localhost:30000/health
 
 # If not running, start it
 python -m sglang.launch_server \
-    --model-path meta-llama/Llama-3.1-8B-Instruct \
+    --model-path Qwen/Qwen3-8B-Instruct \
     --port 30000 \
     --dtype bfloat16
 
@@ -523,11 +523,11 @@ Speculative decoding works best on:
 # vLLM multi-model (load on demand)
 from vllm import LLM
 
-llm_small = LLM(model="meta-llama/Llama-3.1-8B-Instruct")
+llm_small = LLM(model="Qwen/Qwen3-8B-Instruct")
 # When needed, unload small and load large
 del llm_small
 torch.cuda.empty_cache()
-llm_large = LLM(model="meta-llama/Llama-3.1-70B-Instruct")
+llm_large = LLM(model="Qwen/Qwen3-32B-Instruct")
 ```
 
 ---

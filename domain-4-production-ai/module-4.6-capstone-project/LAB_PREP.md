@@ -197,7 +197,7 @@ from transformers import AutoModelForCausalLM, BitsAndBytesConfig
 
 bnb_config = BitsAndBytesConfig(load_in_4bit=True)
 model = AutoModelForCausalLM.from_pretrained(
-    "meta-llama/Llama-3.1-8B-Instruct",  # Test with 8B first
+    "Qwen/Qwen3-8B-Instruct",  # Test with 8B first
     quantization_config=bnb_config,
     device_map="auto"
 )

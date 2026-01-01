@@ -35,7 +35,7 @@ def chat(message, history):
     messages.append({"role": "user", "content": message})
 
     response = ollama.chat(
-        model="llama3.2:3b",
+        model="qwen3:4b",
         messages=messages,
         stream=True
     )

@@ -107,7 +107,7 @@ from transformers import AutoTokenizer, DataCollatorForLanguageModeling
 dataset = load_dataset("tatsu-lab/alpaca", split="train[:1000]")
 
 # Load tokenizer
-tokenizer = AutoTokenizer.from_pretrained("meta-llama/Llama-3.1-8B")
+tokenizer = AutoTokenizer.from_pretrained("Qwen/Qwen3-8B")
 tokenizer.pad_token = tokenizer.eos_token
 
 # Tokenize function

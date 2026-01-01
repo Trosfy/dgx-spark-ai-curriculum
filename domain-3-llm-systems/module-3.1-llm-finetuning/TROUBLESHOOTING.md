@@ -89,7 +89,7 @@ sudo sh -c 'sync; echo 3 > /proc/sys/vm/drop_caches'
 
 # Then in Python:
 model = AutoModelForCausalLM.from_pretrained(
-    "meta-llama/Llama-3.1-70B-Instruct",
+    "Qwen/Qwen3-32B-Instruct",
     quantization_config=bnb_config,
     device_map="auto",
     max_memory={0: "120GiB"}  # Leave headroom
@@ -141,11 +141,11 @@ pip install bitsandbytes --no-cache-dir
 
 ### Model Loading Errors
 
-#### Error: `OSError: meta-llama/Llama-3.1-8B-Instruct is not a local folder`
+#### Error: `OSError: Qwen/Qwen3-8B-Instruct is not a local folder`
 **Cause**: Need to accept license on HuggingFace.
 
 **Solution**:
-1. Go to https://huggingface.co/meta-llama/Llama-3.1-8B-Instruct
+1. Go to https://huggingface.co/Qwen/Qwen3-8B-Instruct
 2. Click "Agree and access repository"
 3. Login: `huggingface-cli login`
 4. Retry the download
@@ -163,7 +163,7 @@ pip install bitsandbytes --no-cache-dir
 
 # Correct:
 from transformers import AutoTokenizer
-tokenizer = AutoTokenizer.from_pretrained("meta-llama/Llama-3.1-8B-Instruct")
+tokenizer = AutoTokenizer.from_pretrained("Qwen/Qwen3-8B-Instruct")
 ```
 
 ---
@@ -177,7 +177,7 @@ from peft import PeftModel, PeftConfig
 
 # First load base model
 base_model = AutoModelForCausalLM.from_pretrained(
-    "meta-llama/Llama-3.1-8B-Instruct",
+    "Qwen/Qwen3-8B-Instruct",
     torch_dtype=torch.bfloat16,
     device_map="auto"
 )
@@ -382,7 +382,7 @@ In Jupyter:
 
 **A**:
 1. Create a HuggingFace account
-2. Go to https://huggingface.co/meta-llama/Llama-3.1-8B-Instruct
+2. Go to https://huggingface.co/Qwen/Qwen3-8B-Instruct
 3. Click "Agree and access repository"
 4. Run `huggingface-cli login` and paste your token
 5. Wait ~15 minutes for access to propagate

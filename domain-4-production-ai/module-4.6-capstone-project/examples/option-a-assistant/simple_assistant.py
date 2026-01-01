@@ -89,7 +89,7 @@ class SimpleAssistant:
     def __init__(
         self,
         domain: str = "AWS",
-        model_name: str = "meta-llama/Llama-3.3-8B-Instruct",
+        model_name: str = "Qwen/Qwen3-8B-Instruct",
         load_model: bool = True,
     ):
         self.domain = domain
