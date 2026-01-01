@@ -296,7 +296,7 @@ Latency Distribution:
   - Min/Max: {self.min_latency_ms:.1f}ms / {self.max_latency_ms:.1f}ms
 
 Token Throughput:
-  - Avg Speed: {self.avg_tokens_per_second:.1f} tokens/s
+  - Avg Speed: {self.avg_tokens_per_second:.1f} tok/s
   - Total Generated: {self.total_tokens_generated:,}
 """
 
