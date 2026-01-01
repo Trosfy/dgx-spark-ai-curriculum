@@ -29,8 +29,11 @@ ollama pull qwen3:32b             # ~20 GB - Best quality, primary teaching
 # Reasoning model
 ollama pull qwq:32b               # ~20 GB - SOTA reasoning (79.5% AIME)
 
+# Reasoning model with vision + tools (Tier 1 alternative)
+ollama pull magistral-small       # ~15 GB - 86% AIME, multimodal reasoning
+
 # Legacy/comparison (optional)
-ollama pull llama3.1:8b           # ~5 GB - For comparison
+ollama pull llama3.1:8b           # ~5 GB - For performance comparison
 ```
 
 **Total download size**: ~70 GB
@@ -103,7 +106,7 @@ mkdir -p $HOME/.cache/huggingface
 
 ### Lab 1.1.5: Ollama Benchmarking
 - [ ] Ollama service running
-- [ ] At least llama3.2:3b and llama3.1:8b downloaded
+- [ ] At least qwen3:8b downloaded (or llama3.1:8b for comparison)
 - [ ] Optional: llama3.1:70b for full benchmarks
 - [ ] Python environment with `requests` library
 
@@ -144,9 +147,9 @@ docker pull nvcr.io/nvidia/pytorch:25.11-py3
 # Verify Ollama
 systemctl status ollama || sudo systemctl start ollama
 
-# Pull minimum required models
-ollama pull llama3.2:3b
-ollama pull llama3.1:8b
+# Pull minimum required models (2025 Tier 1)
+ollama pull qwen3:8b              # Primary fast model
+ollama pull qwen3:32b             # Primary teaching model
 
 # Clear buffer cache for clean start
 sudo sh -c 'sync; echo 3 > /proc/sys/vm/drop_caches'

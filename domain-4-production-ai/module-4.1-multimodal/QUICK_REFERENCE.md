@@ -139,14 +139,15 @@ image = pipe(
 image.save("output.png")
 ```
 
-### Flux (Higher Quality)
+### FLUX.2 dev (Higher Quality - 2025)
 
 ```python
 from diffusers import FluxPipeline
 import torch
 
+# FLUX.2 dev - free for non-commercial use, inpaint + outpaint support
 pipe = FluxPipeline.from_pretrained(
-    "black-forest-labs/FLUX.1-dev",
+    "black-forest-labs/FLUX.2-dev",
     torch_dtype=torch.bfloat16
 ).to("cuda")
 
@@ -313,11 +314,11 @@ for segment in result["segments"]:
 
 | Model | VRAM | Generation Time |
 |-------|------|-----------------|
-| LLaVA-7B | ~16GB | ~2-3s/response |
-| LLaVA-13B | ~28GB | ~4-5s/response |
-| Qwen2-VL-7B | ~18GB | ~3-4s/response |
+| Qwen3-VL-8B | ~18GB | ~3-4s/response |
+| MiniCPM-V-4.5 | ~18GB | ~3-4s/response |
+| LLaVA-7B (legacy) | ~16GB | ~2-3s/response |
 | SDXL (1024x1024) | ~8GB | ~5-8s |
-| Flux (1024x1024) | ~24GB | ~15-20s |
+| FLUX.2 dev (1024x1024) | ~24GB | ~15-20s |
 | Whisper-large-v3 | ~4GB | ~0.5x real-time |
 | CLIP-ViT-L/14 | ~2GB | ~50ms/image |
 

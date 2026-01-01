@@ -79,16 +79,27 @@ ollama serve &
 
 ### Pull Required Models (2025)
 ```bash
-# For development (faster with function calling)
+# ═══════════════════════════════════════════════════════════════════
+# AGENT MODELS (with tool calling support)
+# ═══════════════════════════════════════════════════════════════════
+
+# For fast development (strong tool calling)
+ollama pull nemotron-3-nano       # Fastest, 1M context, NVIDIA-optimized
 ollama pull qwen3:8b              # Hybrid thinking, 0.971 F1 BFCL
 
 # For production quality agents
-ollama pull qwen3:32b             # Best quality (~20GB)
-ollama pull qwq:32b               # Extended reasoning for complex tasks
+ollama pull qwen3:32b             # Best quality (~20GB), BFCL 68.2
+
+# For reasoning-heavy agent tasks
+ollama pull qwq:32b               # 79.5% AIME (use via Qwen-Agent for tools)
 
 # For embeddings (if using RAG tools)
 ollama pull qwen3-embedding:8b    # #1 MTEB multilingual
 ```
+
+> **⚠️ CRITICAL WARNING**: DeepSeek-R1 does NOT support tool calling!
+> Do not use `deepseek-r1:8b` or `deepseek-r1:70b` for agents.
+> Use Nemotron 3 Nano, Qwen3, or Magistral Small for agentic tasks.
 
 ### Verify Ollama via Ollama Web UI
 ```bash

@@ -1052,8 +1052,8 @@ By the end of this module, you will be able to:
    - Image-to-image generation
 
 4. **Modern Architectures**
-   - SDXL improvements
-   - Flux architecture
+   - SDXL improvements (legacy)
+   - FLUX.2 architecture (32B, current SOTA)
    - DiT (Diffusion Transformers)
 
 5. **Fine-tuning Diffusion Models**
@@ -1068,13 +1068,13 @@ By the end of this module, you will be able to:
 | 2.6.1 | **Diffusion Theory Notebook** | Implement simple DDPM on MNIST. Visualize forward/reverse process step by step. | 2 hours |
 | 2.6.2 | **Stable Diffusion Generation** | Run SDXL on DGX Spark. Experiment with prompts, negative prompts, guidance scale. Document quality vs speed. | 2 hours |
 | 2.6.3 | **ControlNet Workshop** | Use ControlNet with pose, canny, and depth. Create consistent character generations. | 2 hours |
-| 2.6.4 | **Flux Exploration** | Run Flux on DGX Spark. Compare quality with SDXL. | 2 hours |
+| 2.6.4 | **FLUX.2 Exploration** | Run FLUX.2 dev on DGX Spark. Compare quality with SDXL. Use inpainting/outpainting. | 2 hours |
 | 2.6.5 | **LoRA Style Training** | Train a LoRA on ~20 style images. Generate images in your custom style. | 2 hours |
 | 2.6.6 | **Image Generation Pipeline** | Build end-to-end pipeline: text prompt → image → upscaling → variations. | 2 hours |
 
 ### Guidance
 
-> **DGX Spark Performance:** SDXL generates 1024x1024 images in ~5-8 seconds. Flux is slower (~15-20s) but higher quality.
+> **DGX Spark Performance:** SDXL generates 1024x1024 images in ~5-8 seconds. FLUX.2 dev is slower (~15-20s) but significantly higher quality with better text rendering and multi-reference consistency.
 
 > **Memory for Diffusion:** SDXL requires ~7GB VRAM minimum. With 128GB unified memory, you can run the largest models and multiple LoRAs simultaneously.
 
@@ -1083,7 +1083,7 @@ By the end of this module, you will be able to:
 - [ ] Simple DDPM implementation complete
 - [ ] SDXL generation with various techniques
 - [ ] ControlNet demos working
-- [ ] Flux comparison documented
+- [ ] FLUX.2 comparison documented
 - [ ] Custom LoRA style trained
 - [ ] End-to-end generation pipeline created
 
@@ -1407,7 +1407,7 @@ By the end of this module, you will be able to:
 By the end of this module, you will be able to:
 - Explain test-time compute scaling and inference-time reasoning
 - Implement Chain-of-Thought and reasoning strategies
-- Use reasoning models (DeepSeek-R1) effectively
+- Use reasoning models (QwQ, Magistral, DeepSeek-R1) effectively
 - Apply basic reward model concepts for output selection
 
 ### Learning Objectives
@@ -2205,13 +2205,18 @@ These modules can be completed independently based on interest and time availabi
 | Power | 140W TDP |
 
 ### Performance Benchmarks (2025 Models)
-| Model | Precision | Prefill (tok/s) | Decode (tok/s) | Notes |
-|-------|-----------|-----------------|----------------|-------|
-| Qwen3-8B | NVFP4 | 12,000 | 42 | Hybrid thinking, 131K ctx |
-| Qwen3-32B | Q4_K_M | 3,800 | 35 | Primary teaching model |
-| QwQ-32B | Q4_K_M | 3,200 | 28 | Extended reasoning |
-| Qwen3-Coder-30B (MoE) | Q4_K_M | 4,200 | 38 | 3.3B active params |
-| DeepSeek-R1-70B | Q4 | 800 | 22 | Frontier reasoning |
+| Model | Precision | Prefill (tok/s) | Decode (tok/s) | Capabilities | Notes |
+|-------|-----------|-----------------|----------------|--------------|-------|
+| Nemotron-3-Nano | Q4_K_M | 15,000 | 55 | Think ✅ Tools ✅ | 1M context, 3.2B active |
+| Qwen3-8B | NVFP4 | 12,000 | 42 | Think ✅ Tools ✅ | Hybrid /think mode |
+| Qwen3-32B | Q4_K_M | 3,800 | 35 | Think ✅ Tools ✅ | Best BFCL (68.2) |
+| QwQ-32B | Q4_K_M | 3,200 | 28 | Think ✅ Tools ⚠️ | 79.5% AIME |
+| Magistral-Small | Q4_K_M | 3,500 | 32 | Think ✅ Tools ✅ Vision ✅ | 86% AIME, multimodal |
+| Devstral-Small-2 | Q4_K_M | 3,800 | 34 | Think ✅ Tools ✅ Vision ✅ | 68% SWE-Bench, code |
+| DeepSeek-R1-8B | Q4_K_M | 8,000 | 45 | Think ✅ Tools ❌ | Reasoning only |
+| Qwen3-VL-8B | Q4_K_M | 4,500 | 38 | Think ✅ Tools ✅ Vision ✅ | 32-lang OCR |
+
+> **⚠️ Tool Calling Warning:** DeepSeek-R1 does NOT support tool calling - use QwQ or Magistral for agents!
 
 ### Common Commands
 ```bash
@@ -2229,9 +2234,12 @@ docker run --gpus all --ipc=host -v $HOME:/workspace -it nvcr.io/nvidia/pytorch:
 
 # Ollama (2025 Tier 1 Models)
 ollama list
-ollama run qwen3:32b           # General purpose
-ollama run qwq:32b             # Extended reasoning
-ollama run qwen3-coder:30b     # Coding tasks
+ollama run nemotron-3-nano     # General purpose (1M ctx, fastest)
+ollama run qwen3:32b           # General purpose (best tools)
+ollama run qwq:32b             # Reasoning (79.5% AIME)
+ollama run magistral-small     # Reasoning + vision + tools
+ollama run devstral-small-2    # Agentic coding (68% SWE-Bench)
+ollama run qwen3-vl:8b         # Vision-language (GUI agents)
 ```
 
 ## Appendix B: NVIDIA Tools Compatibility

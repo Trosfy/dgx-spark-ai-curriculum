@@ -13,23 +13,23 @@
 
 ## 📦 Required Downloads
 
-### Models (Download Before Labs)
+### Models (Download Before Labs - 2025)
 
 ```bash
-# Primary test model (all labs)
-huggingface-cli download meta-llama/Llama-3.1-8B-Instruct
+# Primary test models via Ollama (recommended)
+ollama pull qwen3:8b              # Fast testing (~5GB)
+ollama pull qwen3:32b             # Production quality (~20GB)
 
-# For 70B benchmarks (optional, Labs 3.3.1, 3.3.6)
-huggingface-cli download meta-llama/Llama-3.1-70B-Instruct
+# For HuggingFace/vLLM/TensorRT-LLM benchmarks
+huggingface-cli download Qwen/Qwen3-8B-Instruct
+huggingface-cli download Qwen/Qwen3-32B-Instruct
+
+# Legacy models for comparison (optional)
+ollama pull llama3.1:8b           # ~5GB
+huggingface-cli download meta-llama/Llama-3.1-8B-Instruct
 
 # For Medusa (if using pre-trained heads)
 # Check Medusa repo for compatible heads
-```
-
-### Ollama Models (for comparison)
-```bash
-ollama pull llama3.1:8b
-ollama pull llama3.1:70b  # Optional
 ```
 
 ### Additional Packages
@@ -205,8 +205,10 @@ cd /workspace
 # Install all inference libraries
 pip install vllm sglang fastapi uvicorn httpx locust
 
-# Download model
-huggingface-cli download meta-llama/Llama-3.1-8B-Instruct
+# Download models (2025 Tier 1)
+ollama pull qwen3:8b
+# or for vLLM/TensorRT:
+huggingface-cli download Qwen/Qwen3-8B-Instruct
 
 # Test vLLM quickly
 python -c "

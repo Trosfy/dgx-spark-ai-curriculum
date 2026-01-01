@@ -32,7 +32,9 @@ docker run --gpus all -it --rm \
 |-------|------------|-------|---------|
 | all-MiniLM-L6-v2 | 384 | ⭐⭐⭐⭐⭐ | ⭐⭐⭐ |
 | bge-large-en-v1.5 | 1024 | ⭐⭐⭐ | ⭐⭐⭐⭐⭐ |
-| nomic-embed-text | 768 | ⭐⭐⭐⭐ | ⭐⭐⭐⭐ |
+| qwen3-embedding:8b | 4096 | ⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ |
+
+> **2025 Tier 1**: Use `qwen3-embedding:8b` for production (#1 MTEB multilingual, 100+ langs)
 
 ### Chunk Size Guidelines
 | Size | Use Case |
@@ -79,7 +81,7 @@ def rag_query(question):
     context = "\n".join(results['documents'][0])
 
     prompt = f"Context:\n{context}\n\nQuestion: {question}\nAnswer:"
-    response = ollama.chat(model="llama3.1:70b", messages=[{"role": "user", "content": prompt}])
+    response = ollama.chat(model="qwen3:32b", messages=[{"role": "user", "content": prompt}])
     return response['message']['content']
 ```
 
