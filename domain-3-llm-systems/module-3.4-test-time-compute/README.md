@@ -338,7 +338,7 @@ def best_of_n(llm, prompt, n=5, temperature=0.7):
 | R1-distill-7B | FP16 | ~14GB | ~50 |
 | R1-distill-32B | Q4 | ~20GB | ~30 |
 | R1-distill-70B | Q4 | ~45GB | ~20 |
-| Llama 3.1 70B | Q4 | ~45GB | ~25 |
+| Qwen3 32B | Q4 | ~20GB | ~30 |
 
 **Note:** R1 models produce more tokens due to thinking, but the quality improvement on reasoning tasks is substantial.
 
@@ -375,7 +375,7 @@ ollama serve
 # Pull reasoning models
 ollama pull deepseek-r1:7b           # Fast testing
 ollama pull deepseek-r1:70b          # Best quality
-ollama pull llama3.1:70b             # For comparison
+ollama pull qwen3:32b                # For comparison
 ```
 
 ---

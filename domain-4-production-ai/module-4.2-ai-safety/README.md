@@ -293,7 +293,7 @@ ollama pull llama-guard3:8b
 models:
   - type: main
     engine: ollama
-    model: llama3.1:8b
+    model: qwen3:8b
 
 rails:
   input:
@@ -353,7 +353,7 @@ print(f"Safe: {result['is_safe']}")  # Safe: False
 ```yaml
 # promptfoo.yaml
 providers:
-  - id: ollama:llama3.1:8b
+  - id: ollama:qwen3:8b
     config:
       temperature: 0.7
 

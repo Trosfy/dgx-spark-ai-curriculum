@@ -36,9 +36,9 @@ No external data files are required for Module 1.1. All exercises use:
 ```
 | Model         | Prefill (tok/s) | Decode (tok/s) | Memory (GB) |
 |---------------|-----------------|----------------|-------------|
-| llama3.2:3b   | ~5,000         | ~80            | ~3          |
-| llama3.1:8b   | ~3,000         | ~45            | ~6          |
-| llama3.1:70b  | ~500           | ~15            | ~45         |
+| qwen3:3b      | ~5,000         | ~80            | ~3          |
+| qwen3:8b      | ~3,000         | ~45            | ~8          |
+| qwen3:32b     | ~1,000         | ~25            | ~20         |
 ```
 
 ### System Specification (Example)

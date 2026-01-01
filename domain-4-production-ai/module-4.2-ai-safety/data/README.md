@@ -121,7 +121,7 @@ The benchmark covers 38 categories including:
 models:
   - type: main
     engine: ollama
-    model: llama3.1:8b
+    model: qwen3:8b
 
 sample_conversation: |
   user "Hello"
@@ -172,7 +172,7 @@ prompts:
   - "{{prompt}}"
 
 providers:
-  - id: ollama:llama3.1:8b
+  - id: ollama:qwen3:8b
 
 tests:
   - vars:

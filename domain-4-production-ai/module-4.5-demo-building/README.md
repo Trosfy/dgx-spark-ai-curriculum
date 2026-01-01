@@ -317,7 +317,7 @@ Use the sidebar to navigate between pages.
 col1, col2, col3 = st.columns(3)
 col1.metric("Documents", len(st.session_state.documents))
 col2.metric("Conversations", len(st.session_state.messages))
-col3.metric("Model", "Llama 3.1 8B")
+col3.metric("Model", "Qwen3 8B")
 ```
 
 ### Chat Page with Agent Visualization
@@ -395,7 +395,7 @@ def get_embeddings(text: str):
     """Cache embeddings to avoid recomputation."""
     client = load_model()
     response = client.embeddings(
-        model="nomic-embed-text",
+        model="qwen3-embedding:8b",
         prompt=text
     )
     return response["embedding"]

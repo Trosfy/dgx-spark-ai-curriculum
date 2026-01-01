@@ -51,10 +51,8 @@ By the end of this module, you will be able to:
 
 | Model | VRAM Required | Fits on DGX Spark? |
 |-------|---------------|-------------------|
-| LLaVA-1.5-7B | ~16GB | Easily |
-| LLaVA-1.5-13B | ~28GB | Yes |
-| Qwen2-VL-7B | ~18GB | Easily |
-| Qwen2-VL-72B (4-bit) | ~45GB | Yes |
+| Qwen3-VL-8B | ~18GB | Easily |
+| Qwen3-VL-8B (4-bit) | ~8GB | Easily |
 | SDXL | ~8GB | Easily |
 | Flux.1-dev | ~24GB | Yes |
 | Whisper-large-v3 | ~4GB | Easily |

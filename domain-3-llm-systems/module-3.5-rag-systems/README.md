@@ -295,9 +295,9 @@ import chromadb
 client = chromadb.PersistentClient(path="./chroma_db")
 collection = client.get_or_create_collection("documents")
 
-# LLM: 70B via Ollama for best quality
+# LLM: 32B via Ollama for best quality
 import ollama
-response = ollama.chat(model="llama3.1:70b", messages=[...])
+response = ollama.chat(model="qwen3:32b", messages=[...])
 
 # Reranker: BGE-reranker for quality boost
 from sentence_transformers import CrossEncoder
@@ -355,7 +355,7 @@ Question: {question}
 Answer:"""
 
     response = ollama.chat(
-        model="llama3.1:70b",
+        model="qwen3:32b",
         messages=[{"role": "user", "content": prompt}]
     )
     return response["message"]["content"]
@@ -430,7 +430,7 @@ class RerankingRetriever:
 | BGE-reranker-large | FP16 | ~2GB | ~100 pairs/sec |
 | ChromaDB | Default | ~1GB + index | ~1ms/query |
 | FAISS (GPU) | IVF-Flat | ~1GB + index | ~0.1ms/query |
-| Llama 3.1 70B | Q4 | ~45GB | ~20 decode tok/s |
+| Qwen3 32B | Q4 | ~20GB | ~25 decode tok/s |
 
 **Total for full RAG stack:** ~50GB, leaving plenty of headroom on 128GB system.
 
@@ -476,8 +476,8 @@ python -c "import nltk; nltk.download('punkt'); nltk.download('stopwords'); nltk
 ollama serve
 
 # Pull models for RAG
-ollama pull llama3.1:70b         # LLM for generation
-ollama pull nomic-embed-text     # Alternative local embeddings
+ollama pull qwen3:32b            # LLM for generation
+ollama pull qwen3-embedding:8b   # Alternative local embeddings
 ```
 
 ---

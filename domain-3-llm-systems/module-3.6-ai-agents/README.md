@@ -123,13 +123,16 @@ By the end of this module, you will be able to:
 ### Local Agent Stack on DGX Spark
 
 ```python
-# LLM: 70B model for best agent performance
+# LLM: 32B model for best agent performance
 from langchain_community.llms import Ollama
-llm = Ollama(model="llama3.1:70b")
+llm = Ollama(model="qwen3:32b")
 
 # For tool calling, use the chat model
 from langchain_community.chat_models import ChatOllama
-chat = ChatOllama(model="llama3.1:70b")
+chat = ChatOllama(model="qwen3:32b")
+
+# ⚠️ WARNING: deepseek-r1 does NOT support tool calling/function calling
+# Do not use deepseek-r1 models for agents that require tool use
 ```
 
 ### Custom Tool
@@ -315,9 +318,9 @@ pip install langchain langchain-community chromadb llama-index \
 ollama serve
 
 # Pull required models
-ollama pull llama3.1:8b          # Fast responses for development
-ollama pull llama3.1:70b         # Best quality for production
-ollama pull nomic-embed-text     # Local embeddings
+ollama pull qwen3:8b             # Fast responses for development
+ollama pull qwen3:32b            # Best quality for production
+ollama pull qwen3-embedding:8b   # Local embeddings
 ```
 
 ### Verify Setup
