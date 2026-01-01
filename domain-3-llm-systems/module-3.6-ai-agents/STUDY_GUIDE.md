@@ -13,10 +13,10 @@ By the end of this module, you will be able to:
 |---|-----|-------|------|-------------|
 | 1 | lab-3.6.1-custom-tools.ipynb | Building tools | ~2 hr | 5 custom tools |
 | 2 | lab-3.6.2-react-agent.ipynb | ReAct pattern | ~2 hr | Working agent with tool selection |
-| 3 | lab-3.6.3-langgraph.ipynb | Workflow graphs | ~2 hr | Multi-step with human approval |
-| 4 | lab-3.6.4-multi-agent.ipynb | Agent collaboration | ~2 hr | 3-agent content team |
-| 5 | lab-3.6.5-crewai.ipynb | CrewAI framework | ~2 hr | Role-based agent team |
-| 6 | lab-3.6.6-evaluation.ipynb | Agent benchmarking | ~2 hr | Evaluation framework |
+| 3 | lab-3.6.3-langgraph-workflow.ipynb | Workflow graphs | ~2 hr | Multi-step with human approval |
+| 4 | lab-3.6.4-multi-agent-system.ipynb | Agent collaboration | ~2 hr | 3-agent content team |
+| 5 | lab-3.6.5-crewai-project.ipynb | CrewAI framework | ~2 hr | Role-based agent team |
+| 6 | lab-3.6.6-agent-benchmark.ipynb | Agent benchmarking | ~2 hr | Evaluation framework |
 
 **Total time**: ~12 hours
 

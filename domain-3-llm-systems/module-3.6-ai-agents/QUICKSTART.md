@@ -7,7 +7,7 @@ Create a ReAct agent that can use tools to answer questions—thinking, acting, 
 
 ## ✅ Before You Start
 - [ ] DGX Spark NGC container running
-- [ ] Ollama running with llama3.1:8b or 70b
+- [ ] Ollama running with llama3.1:8b or 70b (verify via Ollama Web UI at http://localhost:11434)
 
 ## 🚀 Let's Go!
 
@@ -143,5 +143,5 @@ This same pattern scales to:
 
 ## ▶️ Next Steps
 1. **Add more tools**: See [Lab 3.6.1](./labs/lab-3.6.1-custom-tools.ipynb)
-2. **Build workflows**: See [Lab 3.6.3](./labs/lab-3.6.3-langgraph.ipynb)
+2. **Build workflows**: See [Lab 3.6.3](./labs/lab-3.6.3-langgraph-workflow.ipynb)
 3. **Full setup**: Start with [LAB_PREP.md](./LAB_PREP.md)

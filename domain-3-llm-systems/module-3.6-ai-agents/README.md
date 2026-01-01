@@ -286,15 +286,18 @@ result = crew.kickoff(inputs={"topic": "AI in 2025"})
 
 ```bash
 # Start NGC container with all required flags
+# Using --network=host for seamless Ollama Web UI access (http://localhost:11434)
 docker run --gpus all -it --rm \
     -v $HOME/workspace:/workspace \
     -v $HOME/.cache/huggingface:/root/.cache/huggingface \
     -v $HOME/.ollama:/root/.ollama \
     --ipc=host \
-    -p 8888:8888 \
+    --network=host \
     nvcr.io/nvidia/pytorch:25.11-py3 \
     jupyter lab --ip=0.0.0.0 --allow-root --no-browser
 ```
+
+**Note:** Using `--network=host` instead of `-p 8888:8888` provides seamless access to both Jupyter (port 8888) and Ollama Web UI (port 11434) without explicit port mapping.
 
 ### Install Agent Dependencies
 

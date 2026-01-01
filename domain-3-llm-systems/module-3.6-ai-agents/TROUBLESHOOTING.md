@@ -81,8 +81,10 @@ ollama serve
 # In background
 nohup ollama serve &
 
-# Verify it's running
+# Verify via Ollama Web UI API
 curl http://localhost:11434/api/tags
+
+# Ollama Web UI endpoint: http://localhost:11434
 ```
 
 ---

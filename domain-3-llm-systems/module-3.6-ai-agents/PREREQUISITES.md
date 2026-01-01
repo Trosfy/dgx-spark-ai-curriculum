@@ -2,12 +2,14 @@
 
 ## 📋 Required Before Starting
 
-### Hardware Requirements
-| Component | Minimum | Recommended |
-|-----------|---------|-------------|
-| GPU Memory | 8GB | 16GB+ (for 70B model) |
-| System RAM | 16GB | 32GB |
-| Storage | 10GB free | 20GB |
+### Hardware Requirements (DGX Spark)
+| Component | DGX Spark Spec | Notes |
+|-----------|----------------|-------|
+| GPU | NVIDIA Blackwell GB10 Superchip | 6,144 CUDA cores, 192 Tensor Cores |
+| Memory | 128GB unified LPDDR5X | Sufficient for 70B+ models |
+| Storage | 10GB free | For models and dependencies |
+
+**Note:** DGX Spark's 128GB unified memory enables running large models (70B+) that require significant memory for agent workloads.
 
 ### Software Requirements
 - [ ] Python 3.10+
