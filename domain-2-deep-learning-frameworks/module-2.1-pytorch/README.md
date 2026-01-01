@@ -260,6 +260,19 @@ prof.export_chrome_trace("trace.json")
 
 ---
 
+## Study Materials
+
+| Document | Purpose |
+|----------|---------|
+| [QUICKSTART.md](./QUICKSTART.md) | Train your first model with BF16 in 5 minutes |
+| [PREREQUISITES.md](./PREREQUISITES.md) | Self-check before starting (Domain 1 skills) |
+| [STUDY_GUIDE.md](./STUDY_GUIDE.md) | Learning objectives and module roadmap |
+| [QUICK_REFERENCE.md](./QUICK_REFERENCE.md) | Commands, patterns, and code snippets |
+| [LAB_PREP.md](./LAB_PREP.md) | Environment setup checklist |
+| [TROUBLESHOOTING.md](./TROUBLESHOOTING.md) | Common errors and fixes |
+
+---
+
 ## Milestone Checklist
 
 - [ ] ResNet-18 implemented with custom blocks

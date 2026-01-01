@@ -139,6 +139,20 @@ mask = cumsum <= p
 
 ---
 
+## Study Materials
+
+| Document | Purpose |
+|----------|---------|
+| [QUICKSTART.md](./QUICKSTART.md) | Run your first attention mechanism in 5 minutes |
+| [PREREQUISITES.md](./PREREQUISITES.md) | Skills self-check before starting |
+| [STUDY_GUIDE.md](./STUDY_GUIDE.md) | Learning objectives and module roadmap |
+| [ELI5.md](./ELI5.md) | Intuitive explanations of attention, Q/K/V, positional encoding |
+| [QUICK_REFERENCE.md](./QUICK_REFERENCE.md) | Commands, patterns, and code snippets |
+| [LAB_PREP.md](./LAB_PREP.md) | Environment setup and lab preparation |
+| [TROUBLESHOOTING.md](./TROUBLESHOOTING.md) | Common errors and solutions |
+
+---
+
 ## Milestone Checklist
 
 - [ ] Multi-head attention implementation complete
