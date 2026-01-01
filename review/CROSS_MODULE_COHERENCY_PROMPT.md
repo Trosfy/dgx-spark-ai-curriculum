@@ -145,7 +145,7 @@ Types of cross-module issues you catch:
 ### Domain 4: Production AI (Weeks 27-40)
 | Module | Key Concepts Introduced | Dependencies |
 |--------|------------------------|--------------|
-| 4.1 Multimodal AI | LLaVA, Qwen2-VL, Whisper, multimodal RAG | 2.6, 3.5 |
+| 4.1 Multimodal AI | Qwen3-VL, Magistral-Small, Whisper, multimodal RAG | 2.6, 3.5 |
 | 4.2 AI Safety [P0] | NeMo Guardrails, Llama Guard, red teaming | 3.6, 3.1 |
 | 4.3 MLOps [P0/P1] | MLflow, W&B, lm-eval-harness, Evidently | 3.1, 2.1 |
 | 4.4 Containerization [P0/P1] | Docker, Kubernetes, SageMaker, Vertex AI | 1.1, 3.2 |
@@ -302,7 +302,7 @@ Check that common operations use the same patterns:
 ```python
 # Module 2.5 pattern:
 from transformers import AutoModelForCausalLM
-model = AutoModelForCausalLM.from_pretrained("meta-llama/Llama-3.1-8B")
+model = AutoModelForCausalLM.from_pretrained("Qwen/Qwen3-8B")
 
 # Module 3.1 should use SAME pattern, not:
 model = LlamaForCausalLM.from_pretrained(...)  # ❌ Different class
@@ -381,8 +381,8 @@ Check that example models are used consistently:
 
 | Task | Module 2.5 | Module 3.1 | Module 3.3 | Consistent? |
 |------|------------|------------|------------|-------------|
-| 8B example | Llama-3.1-8B | Llama-3.1-8B | llama3.1:8b | Check format |
-| 70B example | Llama-3.1-70B | Llama-2-70B | llama3.1:70b | ❌ Version! |
+| 8B example | Qwen3-8B | Qwen3-8B | qwen3:8b | Check format |
+| 32B example | Qwen3-32B | Qwen3-32B | qwen3:32b | ✅ Consistent |
 
 </task>
 
@@ -516,7 +516,7 @@ Update in files:
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
 model = AutoModelForCausalLM.from_pretrained(
-    "meta-llama/Llama-3.1-8B",
+    "Qwen/Qwen3-8B",
     torch_dtype=torch.bfloat16,
     device_map="auto"
 )
@@ -526,8 +526,8 @@ model = AutoModelForCausalLM.from_pretrained(
 ```python
 from transformers import LlamaForCausalLM
 
-model = LlamaForCausalLM.from_pretrained(
-    "meta-llama/Llama-3.1-8B",
+model = AutoModelForCausalLM.from_pretrained(
+    "Qwen/Qwen3-8B",
     load_in_4bit=True  # Different parameters!
 )
 ```
@@ -639,11 +639,11 @@ larger effective batches while fitting in memory."
 
 | Model Reference | 2.5 | 3.1 | 3.2 | 3.3 | 4.1 | Consistent? |
 |-----------------|-----|-----|-----|-----|-----|-------------|
-| 8B example | Llama-3.1-8B | Llama-3.1-8B | Llama-3.1-8B | llama3.1:8b | Llama-3.1-8B | ⚠️ Format |
-| 70B example | Llama-3.1-70B | Llama-3.1-70B | Llama-3.1-70B | llama3.1:70b | Llama-3.1-70B | ✅ |
-| Vision model | - | - | - | - | LLaVA-1.6 | N/A |
+| 8B example | Qwen3-8B | Qwen3-8B | Qwen3-8B | qwen3:8b | Qwen3-8B | ✅ |
+| 32B example | Qwen3-32B | Qwen3-32B | Qwen3-32B | qwen3:32b | Qwen3-32B | ✅ |
+| Vision model | - | - | - | - | Qwen3-VL-8B | N/A |
 
-**Note:** HuggingFace format (Llama-3.1-8B) vs Ollama format (llama3.1:8b) is expected.
+**Note:** HuggingFace format (Qwen3-8B) vs Ollama format (qwen3:8b) is expected.
 
 ---
 

@@ -379,7 +379,7 @@ OSError: You are trying to access a gated repo.
 huggingface-cli login
 
 # 2. Accept model license on HF website
-# Visit: https://huggingface.co/meta-llama/Llama-3.1-8B-Instruct
+# Visit: https://huggingface.co/Qwen/Qwen3-8B-Instruct
 # Click "Agree and access repository"
 
 # 3. Set token in code
@@ -392,14 +392,14 @@ login(token="hf_xxxxx")
 **Solutions:**
 ```bash
 # 1. Clear specific model cache
-rm -rf ~/.cache/huggingface/hub/models--meta-llama--Llama-3.1-8B-Instruct
+rm -rf ~/.cache/huggingface/hub/models--Qwen--Qwen3-8B-Instruct
 
 # 2. Force re-download
 from transformers import AutoModel
 model = AutoModel.from_pretrained("model-name", force_download=True)
 
 # 3. Use CLI for reliable download
-huggingface-cli download meta-llama/Llama-3.1-8B-Instruct --resume-download
+huggingface-cli download Qwen/Qwen3-8B-Instruct --resume-download
 ```
 
 ### Tokenizer warnings / errors
@@ -516,7 +516,7 @@ docker pull nvcr.io/nvidia/vllm:spark
 
 # 2. Use --enforce-eager flag
 python -m vllm.entrypoints.openai.api_server \
-    --model meta-llama/Llama-3.1-8B-Instruct \
+    --model Qwen/Qwen3-8B-Instruct \
     --enforce-eager
 
 # 3. Reduce max model length
