@@ -207,6 +207,8 @@ class BaselineFramework:
 | cuML dtype errors | Ensure float32: `X.astype(np.float32)` |
 | Optuna slow | Use `n_jobs=-1` for parallel trials |
 
+→ For detailed solutions, see [TROUBLESHOOTING.md](./TROUBLESHOOTING.md)
+
 ## 📊 Quick Comparisons
 
 ### XGBoost vs LightGBM vs CatBoost

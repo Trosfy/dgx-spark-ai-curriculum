@@ -126,7 +126,7 @@ gdf = cudf.DataFrame(X)
 
 ## Memory Considerations on DGX Spark
 
-With the DGX Spark's 128GB unified memory (shared between CPU and GPU):
+With the DGX Spark's 128GB unified memory:
 
 | Dataset Size | Estimated Memory | Fits in GPU? |
 |--------------|------------------|--------------|
@@ -137,7 +137,7 @@ With the DGX Spark's 128GB unified memory (shared between CPU and GPU):
 
 Tips:
 - Always use `float32` instead of `float64` to halve memory usage
-- The unified memory means CPU and GPU share the same memory pool
+- DGX Spark's 128GB unified memory eliminates CPU↔GPU transfer overhead
 - No explicit data transfers needed on DGX Spark
 
 ## Data Preprocessing Pipeline

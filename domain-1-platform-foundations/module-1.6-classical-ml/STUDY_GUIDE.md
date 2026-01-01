@@ -104,4 +104,6 @@ By the end of this module, you will be able to:
 ## 📋 Before You Start
 → See [QUICKSTART.md](./QUICKSTART.md) for 5-minute XGBoost demo
 → See [QUICK_REFERENCE.md](./QUICK_REFERENCE.md) for XGBoost and cuML patterns
+→ See [FAQ.md](./FAQ.md) for common questions
+→ See [TROUBLESHOOTING.md](./TROUBLESHOOTING.md) if you encounter issues
 → Ensure NGC container has XGBoost installed
