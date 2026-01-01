@@ -70,9 +70,9 @@ By the end of this module, you will be able to:
 
 | Status | Tools |
 |--------|-------|
-| ✅ Full Support | Ollama, llama.cpp, NeMo |
-| ⚠️ NGC Required | PyTorch, JAX, Hugging Face |
-| ⚠️ Partial | vLLM, TensorRT-LLM, DeepSpeed |
+| ✅ Full Support | Ollama, llama.cpp, NeMo, SGLang |
+| ⚠️ NGC Required | PyTorch, JAX, Hugging Face, TensorRT-LLM |
+| ⚠️ Partial | vLLM (use `--enforce-eager`), DeepSpeed |
 | ❌ Not Compatible | Standard pip PyTorch |
 
 ---

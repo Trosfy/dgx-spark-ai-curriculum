@@ -86,7 +86,7 @@ curl http://localhost:11434/api/tags
 | Component | Specification |
 |-----------|---------------|
 | GPU | NVIDIA Blackwell GB10 Superchip |
-| Memory | 128 GB LPDDR5X unified |
+| Memory | 128GB LPDDR5X unified |
 | Bandwidth | 273 GB/s |
 | CUDA Cores | 6,144 |
 | Tensor Cores | 192 (5th gen) |
@@ -113,9 +113,9 @@ curl http://localhost:11434/api/tags
 ### Ecosystem Compatibility
 | Status | Tools |
 |--------|-------|
-| ✅ Full Support | Ollama, llama.cpp, NeMo |
-| ⚠️ NGC Required | PyTorch, JAX, Hugging Face |
-| ⚠️ Partial | vLLM, TensorRT-LLM, DeepSpeed |
+| ✅ Full Support | Ollama, llama.cpp, NeMo, SGLang |
+| ⚠️ NGC Required | PyTorch, JAX, Hugging Face, TensorRT-LLM |
+| ⚠️ Partial | vLLM (use `--enforce-eager`), DeepSpeed |
 | ❌ Not Compatible | Standard pip PyTorch |
 
 ## 🔧 Common Patterns
