@@ -21,14 +21,15 @@ docker run --gpus all -it --rm \
     nvcr.io/nvidia/pytorch:25.11-py3
 ```
 
-### Option B: Local Environment
-```bash
-# Create virtual environment
-python -m venv rag-env
-source rag-env/bin/activate
+### Option B: Local Environment (Not Recommended for DGX Spark)
+> ⚠️ **WARNING:** DGX Spark uses ARM64/aarch64 architecture. **Never use `pip install torch`** on DGX Spark as PyPI wheels are x86-only. Always use NGC containers for PyTorch on ARM64.
 
-# Install PyTorch with CUDA
-pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
+```bash
+# ❌ DO NOT USE on DGX Spark (ARM64 incompatible):
+# pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
+
+# ✅ CORRECT: Use NGC container (Option A above)
+# The NGC container includes pre-built PyTorch optimized for ARM64 + Blackwell GPU
 ```
 
 ---

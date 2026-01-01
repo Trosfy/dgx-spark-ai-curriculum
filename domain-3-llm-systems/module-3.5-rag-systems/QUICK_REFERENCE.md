@@ -21,7 +21,8 @@ docker run --gpus all -it --rm \
     -v $HOME/.ollama:/root/.ollama \
     --ipc=host \
     --network=host \
-    nvcr.io/nvidia/pytorch:25.11-py3
+    nvcr.io/nvidia/pytorch:25.11-py3 \
+    jupyter lab --ip=0.0.0.0 --allow-root --no-browser
 ```
 
 ## 📊 Key Values
