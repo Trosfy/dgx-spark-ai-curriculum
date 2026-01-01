@@ -219,7 +219,7 @@ Tensor Cores are special hardware that multiplies ENTIRE matrices at once, not j
 | FP32 on CUDA cores | ~31 TFLOPS |
 | BF16 on Tensor Cores | ~100 TFLOPS |
 | FP8 on Tensor Cores | ~209 TFLOPS |
-| FP4 on Tensor Cores | ~1000 TFLOPS (1 PFLOP!) |
+| NVFP4 on Tensor Cores | ~1000 TFLOPS (1 PFLOP!) |
 
 ### When They're Used
 PyTorch automatically uses Tensor Cores when:

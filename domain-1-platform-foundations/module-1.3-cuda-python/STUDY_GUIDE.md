@@ -69,7 +69,7 @@ By the end of this module, you will be able to:
 |-----------|---------------|
 | CUDA Cores | 6,144 |
 | Tensor Cores | 192 (5th gen) |
-| Memory | 128 GB unified |
+| Memory | 128GB unified memory |
 | Bandwidth | 273 GB/s |
 | Warp Size | 32 threads |
 | Max Threads/Block | 1024 |
@@ -80,7 +80,7 @@ By the end of this module, you will be able to:
 | Registers | 1 cycle | ~256 KB total |
 | Shared Memory | ~5 cycles | 64-228 KB/SM |
 | L2 Cache | ~100 cycles | 24 MB |
-| Global Memory | ~500 cycles | 128 GB |
+| Global Memory | ~500 cycles | 128GB |
 
 ### Precision Performance
 | Format | TFLOPS | Best For |

@@ -312,7 +312,7 @@ blocks = (
 | Missing bounds check | Add `if idx < arr.size` |
 | Missing `cuda.syncthreads()` | Add after shared memory writes |
 | Forgot `cuda.synchronize()` | Add before timing measurement |
-| Using pip numba | Use NGC container |
+| Using pip numba on ARM64 | Use NGC container (pre-configured for DGX Spark) |
 | Not using float32 | Specify `dtype=np.float32` |
 | Strided memory access | Rearrange for coalesced access |
 
