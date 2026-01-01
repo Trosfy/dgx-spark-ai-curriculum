@@ -84,7 +84,7 @@ By the end of this module, you will be able to:
 
 | Specification | Value | Notes |
 |---------------|-------|-------|
-| Total Memory | 128 GB | LPDDR5X unified |
+| Total Memory | 128GB | LPDDR5X unified |
 | Memory Bandwidth | 273 GB/s | CPU and GPU share |
 | CUDA Cores | 6,144 | Blackwell architecture |
 | Tensor Cores | 192 | 5th generation |

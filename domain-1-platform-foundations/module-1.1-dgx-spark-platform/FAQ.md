@@ -24,13 +24,17 @@
 echo "transformers>=4.40.0" > $HOME/workspace/requirements.txt
 docker run --gpus all -it --rm \
     -v $HOME/workspace:/workspace \
+    -v $HOME/.cache/huggingface:/root/.cache/huggingface \
+    --ipc=host \
     nvcr.io/nvidia/pytorch:25.11-py3 \
     bash -c "pip install -r /workspace/requirements.txt && bash"
 
 # Option 2: Persistent pip cache
 docker run --gpus all -it --rm \
     -v $HOME/workspace:/workspace \
+    -v $HOME/.cache/huggingface:/root/.cache/huggingface \
     -v $HOME/.cache/pip:/root/.cache/pip \
+    --ipc=host \
     nvcr.io/nvidia/pytorch:25.11-py3
 ```
 
@@ -83,7 +87,7 @@ Use BF16 for training, FP8/NVFP4 for inference when accuracy permits.
 |------|-----------|-----------------|
 | Inference | FP16 | 50-55B parameters |
 | Inference | FP8 | 90-100B parameters |
-| Inference | FP4 | ~200B parameters |
+| Inference | NVFP4 | ~200B parameters |
 | Fine-tuning (full) | FP16 | 12-16B parameters |
 | Fine-tuning (QLoRA) | 4-bit | 100-120B parameters |
 
@@ -168,10 +172,11 @@ If still stuck, also clear buffer cache from terminal.
 ## Compatibility
 
 ### Q: Can I use vLLM on DGX Spark?
-**A**: Partial support. vLLM requires custom builds for ARM64. Current status:
-- Basic inference: Works with manual build
+**A**: Partial support. vLLM has ARM64 support but requires the `--enforce-eager` flag. Current status:
+- Basic inference: Works with `--enforce-eager` flag
 - Full features: Some may not work
-- Recommendation: Use Ollama or TensorRT-LLM for production
+- Workaround: `vllm serve model --enforce-eager`
+- Recommendation: Use Ollama, SGLang, or TensorRT-LLM for production (SGLang is 29-45% faster)
 
 ---
 
@@ -200,7 +205,7 @@ Check if there's:
 
 | Aspect | DGX Spark | Cloud (A100 80GB) |
 |--------|-----------|-------------------|
-| Memory | 128 GB unified | 80 GB GPU + separate RAM |
+| Memory | 128GB unified | 80GB GPU + separate RAM |
 | Cost | One-time purchase | Hourly (~$2-4/hr) |
 | Max model (inference) | ~100B FP8 | ~40B FP16 |
 | Best for | Local development, privacy | Burst capacity, training |

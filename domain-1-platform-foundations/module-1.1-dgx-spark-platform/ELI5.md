@@ -23,7 +23,7 @@ Imagine two chefs (CPU and GPU) who need to prepare a meal together.
 - This carrying back and forth is slow!
 
 **DGX Spark (Unified Memory):**
-- Both chefs share one HUGE counter in the kitchen (128 GB)
+- Both chefs share one HUGE counter in the kitchen (128GB)
 - Chef 1 chops vegetables on one end
 - Chef 2 cooks on the other end
 - No carrying needed—they just reach across the counter
@@ -191,7 +191,7 @@ Quantization is like rounding numbers. Instead of storing 3.14159265359, you sto
 | FP32 (full) | Every blade of grass | Huge |
 | FP16/BF16 | Individual trees | Medium |
 | FP8 | Buildings | Small |
-| FP4 | Cities only | Tiny |
+| NVFP4 | Cities only | Tiny |
 
 Each zoom out:
 - Loses some detail
@@ -199,10 +199,10 @@ Each zoom out:
 - Still useful for most purposes
 
 ### The DGX Spark Advantage
-With 128GB memory, you can run:
+With 128GB unified memory, you can run:
 - FP16: ~55 billion parameter models
 - FP8: ~100 billion parameter models
-- FP4: ~200 billion parameter models
+- NVFP4: ~200 billion parameter models
 
 Same hardware, different "zoom levels" = different model sizes!
 
@@ -220,7 +220,7 @@ Same hardware, different "zoom levels" = different model sizes!
 | "Army of calculators" | CUDA Cores | Module 1.3 |
 | "Multiply all button" | Tensor Cores | Lab 1.1.5 |
 | "Recipe language" | ISA (ARM64 vs x86) | Lab 1.1.4 |
-| "Map zoom level" | Quantization (FP32/FP16/FP8/FP4) | Module 3.2 |
+| "Map zoom level" | Quantization (FP32/FP16/FP8/NVFP4) | Module 3.2 |
 
 ---
 
