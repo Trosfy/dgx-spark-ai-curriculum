@@ -130,7 +130,7 @@ print(f"Generated: {image.size}")
 | Flux-dev | ~12 GB | High-quality 50-step |
 | LoRA Training | ~16 GB | With gradient checkpointing |
 
-All models fit comfortably in DGX Spark's 128GB.
+All models fit comfortably in DGX Spark's 128GB unified memory.
 
 ---
 
@@ -205,7 +205,7 @@ login()  # Enter your token
 
 | Feature | Benefit |
 |---------|---------|
-| 128GB Memory | SDXL + Refiner simultaneously |
-| 128GB Memory | Multiple ControlNets loaded |
-| BF16 Native | Faster generation, native precision |
+| 128GB unified memory | SDXL + Refiner simultaneously |
+| 128GB unified memory | Multiple ControlNets loaded |
+| bfloat16 Native | Faster generation, native precision |
 | Fast Memory | Train LoRAs at full precision |

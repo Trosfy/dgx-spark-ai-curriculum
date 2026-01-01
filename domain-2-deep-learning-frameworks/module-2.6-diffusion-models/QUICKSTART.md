@@ -69,7 +69,7 @@ for i, p in enumerate(prompts):
 ## You Did It!
 
 You just:
-- Loaded SDXL on DGX Spark's 128GB memory
+- Loaded SDXL on DGX Spark's 128GB unified memory
 - Generated images from text prompts
 - Used negative prompts to improve quality
 - Created multiple images with different styles
