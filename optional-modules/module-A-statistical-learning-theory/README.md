@@ -294,6 +294,17 @@ for vc in [10, 100, 1000]:
 
 ---
 
+## 📖 Study Materials
+
+| Document | Purpose |
+|----------|---------|
+| [QUICKSTART.md](./QUICKSTART.md) | Prove VC dimension = 3 in 5 minutes |
+| [QUICK_REFERENCE.md](./QUICK_REFERENCE.md) | Key formulas and bounds at a glance |
+| [TROUBLESHOOTING.md](./TROUBLESHOOTING.md) | Common issues and debugging help |
+| [ELI5.md](./ELI5.md) | Intuitive explanations with everyday analogies |
+
+---
+
 ## Milestone Checklist
 
 - [ ] Can explain VC dimension in your own words
