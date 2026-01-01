@@ -86,7 +86,7 @@ User: {text}
 models:
   - type: main
     engine: ollama
-    model: llama3.1:8b
+    model: qwen3:8b  # or qwen3:32b for better quality
 
 rails:
   input:

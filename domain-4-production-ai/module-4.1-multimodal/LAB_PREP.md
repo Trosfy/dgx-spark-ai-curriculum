@@ -14,18 +14,21 @@
 
 ## Required Downloads
 
-### Models (Download Before Labs)
+### Models (Download Before Labs - 2025)
 
 ```bash
 # Lab 4.1.1: Vision-Language Models
-# LLaVA-7B (~14GB) - Required
+# Qwen3-VL-8B (~8GB) - Primary VLM (Tier 1), design-to-code, 32-lang OCR
+ollama pull qwen3-vl:8b
+
+# Via HuggingFace (for advanced usage)
+huggingface-cli download Qwen/Qwen3-VL-8B-Instruct
+
+# MiniCPM-V 4.5 (~8GB) - #1 OCRBench, document specialist
+huggingface-cli download openbmb/MiniCPM-V-4.5
+
+# Legacy/comparison (optional)
 huggingface-cli download llava-hf/llava-1.5-7b-hf
-
-# LLaVA-13B (~26GB) - Optional, better quality
-huggingface-cli download llava-hf/llava-1.5-13b-hf
-
-# Qwen2-VL-7B (~18GB) - Alternative VLM
-huggingface-cli download Qwen/Qwen2-VL-7B-Instruct
 ```
 
 ```bash

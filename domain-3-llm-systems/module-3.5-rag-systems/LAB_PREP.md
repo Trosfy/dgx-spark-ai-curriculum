@@ -120,14 +120,20 @@ reranker = CrossEncoder("BAAI/bge-reranker-large")
 print("✅ Reranker model downloaded")
 ```
 
-### LLM Models (via Ollama)
+### LLM Models (via Ollama - 2025)
 ```bash
 # Ensure Ollama is running
 ollama serve &
 
 # Pull required models
-ollama pull llama3.1:8b    # Primary model for generation
-ollama pull llama3.1:70b   # Optional: larger model for better quality
+ollama pull qwen3:8b              # Fast generation (~5GB, 131K context)
+ollama pull qwen3:32b             # Best quality (~20GB, primary teaching)
+
+# Embedding model (Tier 1)
+ollama pull qwen3-embedding:8b    # #1 MTEB multilingual (~8GB, 32K context)
+
+# Legacy/comparison (optional)
+ollama pull llama3.1:8b           # For comparison
 ```
 
 ---
@@ -237,7 +243,7 @@ def main():
             print("⚠️ Ollama running but no models pulled")
     except Exception as e:
         print(f"❌ Ollama: {e}")
-        print("   Run: ollama serve & ollama pull llama3.1:8b")
+        print("   Run: ollama serve & ollama pull qwen3:8b")
 
     # Final status
     print("\n" + "=" * 50)
@@ -360,7 +366,7 @@ Before starting each lab, verify:
 - [ ] NGC container or virtual environment activated
 - [ ] All dependencies installed
 - [ ] Embedding models downloaded
-- [ ] Ollama running with llama3.1:8b
+- [ ] Ollama running with qwen3:8b or qwen3:32b
 - [ ] GPU memory available (check with `nvidia-smi`)
 - [ ] Working directory has write permissions
 

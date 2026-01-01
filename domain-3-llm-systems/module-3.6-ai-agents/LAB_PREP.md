@@ -77,16 +77,17 @@ pip install \
 ollama serve &
 ```
 
-### Pull Required Models
+### Pull Required Models (2025)
 ```bash
-# For development (faster)
-ollama pull llama3.1:8b
+# For development (faster with function calling)
+ollama pull qwen3:8b              # Hybrid thinking, 0.971 F1 BFCL
 
-# For production quality (recommended for agents)
-ollama pull llama3.1:70b
+# For production quality agents
+ollama pull qwen3:32b             # Best quality (~20GB)
+ollama pull qwq:32b               # Extended reasoning for complex tasks
 
 # For embeddings (if using RAG tools)
-ollama pull nomic-embed-text
+ollama pull qwen3-embedding:8b    # #1 MTEB multilingual
 ```
 
 ### Verify Ollama via Ollama Web UI
@@ -96,7 +97,7 @@ curl http://localhost:11434/api/tags
 
 # Test generation via Ollama Web UI API
 curl http://localhost:11434/api/generate -d '{
-  "model": "llama3.1:8b",
+  "model": "qwen3:8b",
   "prompt": "Hello!",
   "stream": false
 }'
@@ -169,16 +170,16 @@ def main():
         model_names = [m['name'] for m in models.get('models', [])]
         if model_names:
             print(f"✅ Ollama running with models: {model_names[:3]}")
-            if any('70b' in m for m in model_names):
-                print("   ✅ 70B model available (recommended for agents)")
+            if any('32b' in m for m in model_names):
+                print("   ✅ 32B model available (recommended for agents)")
             else:
-                print("   ⚠️ Consider: ollama pull llama3.1:70b")
+                print("   ⚠️ Consider: ollama pull qwen3:32b")
         else:
             print("⚠️ Ollama running but no models pulled")
-            print("   Run: ollama pull llama3.1:8b")
+            print("   Run: ollama pull qwen3:8b")
     except Exception as e:
         print(f"❌ Ollama: {e}")
-        print("   Run: ollama serve & ollama pull llama3.1:8b")
+        print("   Run: ollama serve & ollama pull qwen3:8b")
 
     # LangChain agent test
     print("\n🔗 LangChain Agent Test:")
@@ -378,7 +379,7 @@ Before starting each lab, verify:
 
 - [ ] NGC container or virtual environment activated
 - [ ] All dependencies installed
-- [ ] Ollama running with llama3.1:8b or 70b (verify via Ollama Web UI at http://localhost:11434)
+- [ ] Ollama running with qwen3:8b or qwen3:32b (verify via Ollama Web UI at http://localhost:11434)
 - [ ] GPU memory available (check with `nvidia-smi`)
 - [ ] Working directory has write permissions
 
@@ -393,7 +394,7 @@ Before starting each lab, verify:
 | LangGraph not found | `pip install langgraph` |
 | CrewAI errors | Check Python version (3.10+) |
 | Agent loops forever | Add `max_iterations` to AgentExecutor |
-| Out of GPU memory | Use 8B model instead of 70B |
+| Out of GPU memory | Use 8B model instead of 32B |
 
 ---
 

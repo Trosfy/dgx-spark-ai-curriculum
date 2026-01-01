@@ -16,14 +16,15 @@
 
 ## Required Downloads
 
-### Models via Ollama
+### Models via Ollama (2025)
 
 ```bash
-# Llama Guard 3 8B (~8GB) - Required for Labs 4.2.1, 4.2.2
+# Llama Guard 3 8B (~8GB) - Safety classifier for Labs 4.2.1, 4.2.2
 ollama pull llama-guard3:8b
 
-# Base LLM for testing (~8GB) - Required for all labs
-ollama pull llama3.1:8b
+# Base LLM for testing (~5-20GB) - Required for all labs
+ollama pull qwen3:8b              # Fast development (~5GB)
+ollama pull qwen3:32b             # Better quality (~20GB)
 ```
 
 ### Models via HuggingFace (for benchmarking)
@@ -96,7 +97,7 @@ except Exception as e:
 **Expected output**:
 ```
 Ollama connected!
-Available models: ['llama-guard3:8b', 'llama3.1:8b']
+Available models: ['llama-guard3:8b', 'qwen3:8b']
 ```
 
 ---

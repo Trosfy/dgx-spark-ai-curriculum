@@ -20,12 +20,17 @@
 docker pull nvcr.io/nvidia/pytorch:25.11-py3
 ```
 
-### Ollama Models (Download Before Lab 5)
+### Ollama Models - 2025 Tier 1 (Download Before Lab 5)
 ```bash
-# Model sizes shown - total ~55 GB
-ollama pull llama3.2:3b    # ~2 GB
-ollama pull llama3.1:8b    # ~5 GB
-ollama pull llama3.1:70b   # ~45 GB (optional but recommended)
+# Primary teaching models
+ollama pull qwen3:8b              # ~5 GB - Fast, hybrid thinking
+ollama pull qwen3:32b             # ~20 GB - Best quality, primary teaching
+
+# Reasoning model
+ollama pull qwq:32b               # ~20 GB - SOTA reasoning (79.5% AIME)
+
+# Legacy/comparison (optional)
+ollama pull llama3.1:8b           # ~5 GB - For comparison
 ```
 
 **Total download size**: ~70 GB

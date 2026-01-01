@@ -2204,12 +2204,14 @@ These modules can be completed independently based on interest and time availabi
 | Networking | 10GbE + 200Gbps ConnectX-7 |
 | Power | 140W TDP |
 
-### Performance Benchmarks
-| Model | Precision | Prefill (tok/s) | Decode (tok/s) |
-|-------|-----------|-----------------|----------------|
-| Llama 3.1 8B | NVFP4 | 10,257 | 38.7 |
-| GPT-OSS 20B | MXFP4 | 4,500 | 59.0 |
-| Llama 3.1 70B | Q4 | 800 | 25+ |
+### Performance Benchmarks (2025 Models)
+| Model | Precision | Prefill (tok/s) | Decode (tok/s) | Notes |
+|-------|-----------|-----------------|----------------|-------|
+| Qwen3-8B | NVFP4 | 12,000 | 42 | Hybrid thinking, 131K ctx |
+| Qwen3-32B | Q4_K_M | 3,800 | 35 | Primary teaching model |
+| QwQ-32B | Q4_K_M | 3,200 | 28 | Extended reasoning |
+| Qwen3-Coder-30B (MoE) | Q4_K_M | 4,200 | 38 | 3.3B active params |
+| DeepSeek-R1-70B | Q4 | 800 | 22 | Frontier reasoning |
 
 ### Common Commands
 ```bash
@@ -2225,9 +2227,11 @@ sudo sh -c 'sync; echo 3 > /proc/sys/vm/drop_caches'
 docker pull nvcr.io/nvidia/pytorch:25.11-py3
 docker run --gpus all --ipc=host -v $HOME:/workspace -it nvcr.io/nvidia/pytorch:25.11-py3
 
-# Ollama
+# Ollama (2025 Tier 1 Models)
 ollama list
-ollama run llama3.1:70b
+ollama run qwen3:32b           # General purpose
+ollama run qwq:32b             # Extended reasoning
+ollama run qwen3-coder:30b     # Coding tasks
 ```
 
 ## Appendix B: NVIDIA Tools Compatibility

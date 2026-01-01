@@ -2,15 +2,18 @@
 
 ## 🚀 Essential Commands
 
-### Ollama Setup for Reasoning Models
+### Ollama Setup for Reasoning Models (2025)
 ```bash
-# Pull DeepSeek-R1 models
-ollama pull deepseek-r1:7b    # Fast testing
-ollama pull deepseek-r1:70b   # Best quality
+# Primary reasoning model (Tier 1)
+ollama pull qwq:32b           # SOTA reasoning (~20GB, 79.5% AIME)
 
-# Pull comparison models
-ollama pull llama3.1:8b
-ollama pull llama3.1:70b
+# DeepSeek-R1 distillations
+ollama pull deepseek-r1:8b    # SOTA 8B reasoning (matches Qwen3-235B!)
+ollama pull deepseek-r1:70b   # Frontier reasoning (~45GB)
+
+# Comparison/baseline models
+ollama pull qwen3:8b          # Fast general purpose with /think mode
+ollama pull qwen3:32b         # Best general purpose
 ```
 
 ### NGC Container
@@ -26,13 +29,14 @@ docker run --gpus all -it --rm \
 
 ## 📊 Key Performance Data
 
-### DGX Spark Reasoning Model Performance
-| Model | Quantization | Memory | Decode tok/s |
-|-------|--------------|--------|--------------|
-| R1-distill-7B | FP16 | ~14GB | ~50 |
-| R1-distill-32B | Q4 | ~20GB | ~30 |
-| R1-distill-70B | Q4 | ~45GB | ~20 |
-| Llama 3.1 70B | Q4 | ~45GB | ~25 |
+### DGX Spark Reasoning Model Performance (2025)
+| Model | Quantization | Memory | Decode tok/s | AIME Score |
+|-------|--------------|--------|--------------|------------|
+| QwQ-32B | Q4_K_M | ~20GB | ~28 | 79.5% |
+| DeepSeek-R1-8B | Q4_K_M | ~5GB | ~45 | 72.6% |
+| DeepSeek-R1-32B | Q4 | ~20GB | ~30 | 76.8% |
+| DeepSeek-R1-70B | Q4 | ~45GB | ~20 | 79.8% |
+| Qwen3-32B (/think) | Q4_K_M | ~20GB | ~35 | N/A |
 
 ### CoT Accuracy Improvements
 | Dataset | Without CoT | With CoT | Improvement |
@@ -45,15 +49,19 @@ docker run --gpus all -it --rm \
 
 ### Pattern: Zero-Shot Chain-of-Thought
 ```python
-# Just add this magic phrase!
+# Option 1: Traditional CoT prompt
 prompt = f"""
 {question}
 
 Let's think step by step:
 """
 
+# Option 2: Qwen3 hybrid thinking mode (recommended)
+# Just add /think to enable extended reasoning
+prompt = f"/think {question}"
+
 response = ollama.chat(
-    model="llama3.1:8b",
+    model="qwen3:8b",  # or qwen3:32b for better quality
     messages=[{"role": "user", "content": prompt}]
 )
 ```
@@ -104,23 +112,30 @@ def self_consistency(model, prompt, n_samples=5, temperature=0.7):
     return best_answer, confidence
 ```
 
-### Pattern: DeepSeek-R1 Usage
+### Pattern: QwQ/DeepSeek-R1 Reasoning
 ```python
 import ollama
+import re
 
+# QwQ-32B - primary reasoning model (always reasons)
 response = ollama.chat(
-    model="deepseek-r1:70b",
+    model="qwq:32b",
     messages=[{
         "role": "user",
         "content": "What is the derivative of x³ + 2x² - 5x + 3?"
     }]
 )
 
-# Response includes <think>...</think> blocks
-print(response['message']['content'])
+# DeepSeek-R1 includes <think>...</think> blocks
+response = ollama.chat(
+    model="deepseek-r1:8b",  # SOTA 8B, matches larger models!
+    messages=[{
+        "role": "user",
+        "content": "Solve: If 3x + 7 = 22, what is x?"
+    }]
+)
 
-# Extract just the answer
-import re
+# Extract just the answer (remove thinking)
 answer = re.sub(r'<think>.*?</think>', '', response['message']['content'], flags=re.DOTALL)
 print("Clean answer:", answer.strip())
 ```
@@ -130,19 +145,19 @@ print("Clean answer:", answer.strip())
 from transformers import AutoModelForSequenceClassification, AutoTokenizer
 import torch
 
-# Load reward model
+# Load reward model (Skywork is current SOTA)
 reward_model = AutoModelForSequenceClassification.from_pretrained(
-    "RLHFlow/ArmoRM-Llama3-8B-v0.1",
+    "Skywork/Skywork-Reward-Gemma-2-27B-v0.2",  # or RLHFlow/ArmoRM-Llama3-8B-v0.1
     torch_dtype=torch.bfloat16,
     device_map="auto"
 )
-reward_tokenizer = AutoTokenizer.from_pretrained("RLHFlow/ArmoRM-Llama3-8B-v0.1")
+reward_tokenizer = AutoTokenizer.from_pretrained("Skywork/Skywork-Reward-Gemma-2-27B-v0.2")
 
 def best_of_n(prompt, n=5, temperature=0.7):
     candidates = []
     for _ in range(n):
         response = ollama.chat(
-            model="llama3.1:8b",
+            model="qwen3:8b",  # Fast generation
             messages=[{"role": "user", "content": prompt}],
             options={"temperature": temperature}
         )
@@ -182,15 +197,15 @@ def adaptive_answer(question):
     complexity = classify_complexity(question)
 
     if complexity == "simple":
-        # Fast model, direct answer
+        # Fast model, direct answer (no thinking)
         return ollama.chat(
-            model="llama3.1:8b",
-            messages=[{"role": "user", "content": question}]
+            model="qwen3:8b",
+            messages=[{"role": "user", "content": f"/no_think {question}"}]
         )
     else:
-        # Reasoning model, more compute
+        # Reasoning model, extended compute
         return ollama.chat(
-            model="deepseek-r1:70b",
+            model="qwq:32b",  # or deepseek-r1:8b for efficiency
             messages=[{"role": "user", "content": question}]
         )
 ```

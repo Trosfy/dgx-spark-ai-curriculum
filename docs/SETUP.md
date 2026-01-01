@@ -318,27 +318,37 @@ export OLLAMA_NUM_PARALLEL=4
 export OLLAMA_MAX_LOADED_MODELS=2
 ```
 
-### Pull Recommended Models
+### Pull Recommended Models (2025 Tier 1)
 
 ```bash
-# Small model for testing
-ollama pull llama3.2:3b
+# General purpose (primary development)
+ollama pull qwen3:8b              # Fast testing (~5GB, hybrid thinking)
+ollama pull qwen3:32b             # Best quality (~20GB, 131K context)
 
-# Medium model (primary development)
-ollama pull llama3.1:8b
+# Reasoning model (extended CoT)
+ollama pull qwq:32b               # SOTA reasoning (~20GB, matches R1 on math)
 
-# Large model (DGX Spark advantage!)
-ollama pull llama3.1:70b
+# Coding model
+ollama pull qwen3-coder:30b       # 69.6% SWE-Bench (~19GB, 256K context)
 
 # Embedding model
-ollama pull nomic-embed-text
+ollama pull qwen3-embedding:8b    # #1 MTEB multilingual (~8GB, 32K context)
 
 # Vision model
-ollama pull llava:34b
+ollama pull qwen3-vl:8b           # Design-to-code, 32-lang OCR (~8GB)
+
+# Legacy comparison models (optional)
+ollama pull llama3.1:8b           # For comparison with newer models
+ollama pull deepseek-r1:8b        # SOTA 8B reasoning distillation
 
 # List installed models
 ollama list
 ```
+
+> **2025 Model Notes:**
+> - Qwen3 models support hybrid thinking mode (toggle with /think or /no_think)
+> - QwQ-32B provides extended chain-of-thought reasoning by default
+> - All Tier 1 models have Apache 2.0 licensing (except Llama)
 
 ### Ollama API Test
 
@@ -351,7 +361,7 @@ def test_ollama():
     response = requests.post(
         'http://localhost:11434/api/generate',
         json={
-            'model': 'llama3.1:8b',
+            'model': 'qwen3:8b',
             'prompt': 'Hello! Respond with just "OK" if you can hear me.',
             'stream': False
         }
