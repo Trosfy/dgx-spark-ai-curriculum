@@ -159,7 +159,7 @@ jobs:
             'utils',
             'templates',
             'assets',
-            'review',
+            'prompts',
             'optional-modules',
             '.github',
             'domain-1-platform-foundations',
