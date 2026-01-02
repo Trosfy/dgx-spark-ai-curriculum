@@ -1,0 +1,356 @@
+{
+  "generated": "2026-01-02T15:09:04.812220",
+  "platform": "NVIDIA DGX Spark",
+  "tools": [
+    {
+      "name": "PyTorch",
+      "category": "Deep Learning Framework",
+      "status": "NGC",
+      "status_display": "\ud83d\udc33 NGC Required",
+      "notes": "Must use NGC container. pip install does NOT work on ARM64+CUDA.",
+      "workaround": "docker pull nvcr.io/nvidia/pytorch:25.11-py3",
+      "tested_version": "2.5+",
+      "url": "https://catalog.ngc.nvidia.com/orgs/nvidia/containers/pytorch"
+    },
+    {
+      "name": "TensorFlow",
+      "category": "Deep Learning Framework",
+      "status": "NGC",
+      "status_display": "\ud83d\udc33 NGC Required",
+      "notes": "Use NGC container for GPU support.",
+      "workaround": "docker pull nvcr.io/nvidia/tensorflow:25.11-tf2-py3",
+      "tested_version": "2.16+",
+      "url": null
+    },
+    {
+      "name": "JAX",
+      "category": "Deep Learning Framework",
+      "status": "NGC",
+      "status_display": "\ud83d\udc33 NGC Required",
+      "notes": "NGC container available with CUDA support.",
+      "workaround": "docker pull nvcr.io/nvidia/jax:25.11-py3",
+      "tested_version": null,
+      "url": null
+    },
+    {
+      "name": "Ollama",
+      "category": "LLM Inference",
+      "status": "FULL",
+      "status_display": "\u2705 Full Support",
+      "notes": "Native ARM64 support. Pre-installed on DGX OS. Excellent performance.",
+      "workaround": null,
+      "tested_version": "0.3+",
+      "url": "https://ollama.ai"
+    },
+    {
+      "name": "llama.cpp",
+      "category": "LLM Inference",
+      "status": "FULL",
+      "status_display": "\u2705 Full Support",
+      "notes": "Native ARM64+CUDA support. Compile with CUDA flags.",
+      "workaround": "cmake -B build -DGGML_CUDA=ON && cmake --build build",
+      "tested_version": null,
+      "url": "https://github.com/ggerganov/llama.cpp"
+    },
+    {
+      "name": "SGLang",
+      "category": "LLM Inference",
+      "status": "FULL",
+      "status_display": "\u2705 Full Support",
+      "notes": "Full Blackwell/Jetson support. 29-45% faster than vLLM on supported models.",
+      "workaround": null,
+      "tested_version": "0.2+",
+      "url": "https://github.com/sgl-project/sglang"
+    },
+    {
+      "name": "vLLM",
+      "category": "LLM Inference",
+      "status": "PARTIAL",
+      "status_display": "\u26a0\ufe0f Partial",
+      "notes": "ARM64 support available. Requires --enforce-eager flag for DGX Spark.",
+      "workaround": "pip install vllm && vllm serve model --enforce-eager",
+      "tested_version": null,
+      "url": "https://github.com/vllm-project/vllm"
+    },
+    {
+      "name": "TensorRT-LLM",
+      "category": "LLM Inference",
+      "status": "NGC",
+      "status_display": "\ud83d\udc33 NGC Required",
+      "notes": "Requires NGC container or source build. Blackwell support available.",
+      "workaround": "docker pull nvcr.io/nvidia/tritonserver:25.11-trtllm-python-py3",
+      "tested_version": null,
+      "url": null
+    },
+    {
+      "name": "Text Generation Inference (TGI)",
+      "category": "LLM Inference",
+      "status": "PARTIAL",
+      "status_display": "\u26a0\ufe0f Partial",
+      "notes": "HuggingFace server. ARM64 Docker image available.",
+      "workaround": "Use ARM64 Docker image",
+      "tested_version": null,
+      "url": null
+    },
+    {
+      "name": "Hugging Face Transformers",
+      "category": "Model Library",
+      "status": "NGC",
+      "status_display": "\ud83d\udc33 NGC Required",
+      "notes": "Works inside NGC PyTorch container.",
+      "workaround": "pip install transformers inside NGC container",
+      "tested_version": "4.40+",
+      "url": null
+    },
+    {
+      "name": "Hugging Face Diffusers",
+      "category": "Model Library",
+      "status": "NGC",
+      "status_display": "\ud83d\udc33 NGC Required",
+      "notes": "Works inside NGC PyTorch container.",
+      "workaround": "pip install diffusers inside NGC container",
+      "tested_version": null,
+      "url": null
+    },
+    {
+      "name": "NVIDIA NeMo",
+      "category": "Model Library",
+      "status": "NGC",
+      "status_display": "\ud83d\udc33 NGC Required",
+      "notes": "Full support via NGC container.",
+      "workaround": "docker pull nvcr.io/nvidia/nemo:25.11",
+      "tested_version": null,
+      "url": "https://catalog.ngc.nvidia.com/orgs/nvidia/containers/nemo"
+    },
+    {
+      "name": "OpenAI API (client)",
+      "category": "Model Library",
+      "status": "FULL",
+      "status_display": "\u2705 Full Support",
+      "notes": "Pure Python - works everywhere.",
+      "workaround": null,
+      "tested_version": "1.0+",
+      "url": null
+    },
+    {
+      "name": "LangChain",
+      "category": "Model Library",
+      "status": "FULL",
+      "status_display": "\u2705 Full Support",
+      "notes": "Pure Python - works everywhere. Use with Ollama.",
+      "workaround": null,
+      "tested_version": "0.2+",
+      "url": null
+    },
+    {
+      "name": "LlamaIndex",
+      "category": "Model Library",
+      "status": "FULL",
+      "status_display": "\u2705 Full Support",
+      "notes": "Pure Python - works everywhere.",
+      "workaround": null,
+      "tested_version": "0.10+",
+      "url": null
+    },
+    {
+      "name": "DeepSpeed",
+      "category": "Training",
+      "status": "PARTIAL",
+      "status_display": "\u26a0\ufe0f Partial",
+      "notes": "Some features may not work. Use NGC container.",
+      "workaround": "Use within NGC PyTorch container",
+      "tested_version": null,
+      "url": null
+    },
+    {
+      "name": "PEFT (LoRA)",
+      "category": "Training",
+      "status": "NGC",
+      "status_display": "\ud83d\udc33 NGC Required",
+      "notes": "Works inside NGC container.",
+      "workaround": "pip install peft inside NGC container",
+      "tested_version": null,
+      "url": null
+    },
+    {
+      "name": "bitsandbytes",
+      "category": "Training",
+      "status": "PARTIAL",
+      "status_display": "\u26a0\ufe0f Partial",
+      "notes": "4-bit/8-bit quantization. ARM64 support improving.",
+      "workaround": "May need to build from source",
+      "tested_version": null,
+      "url": null
+    },
+    {
+      "name": "Unsloth",
+      "category": "Training",
+      "status": "UNTESTED",
+      "status_display": "\u2753 Untested",
+      "notes": "Fast fine-tuning. Needs testing on ARM64.",
+      "workaround": null,
+      "tested_version": null,
+      "url": null
+    },
+    {
+      "name": "Axolotl",
+      "category": "Training",
+      "status": "NGC",
+      "status_display": "\ud83d\udc33 NGC Required",
+      "notes": "Fine-tuning framework. Use with NGC container.",
+      "workaround": null,
+      "tested_version": null,
+      "url": null
+    },
+    {
+      "name": "RAPIDS (cuDF, cuML)",
+      "category": "Data Science",
+      "status": "NGC",
+      "status_display": "\ud83d\udc33 NGC Required",
+      "notes": "GPU-accelerated data science. Full NGC support.",
+      "workaround": "docker pull nvcr.io/nvidia/rapidsai/base:25.11-cuda13.0-py3.11",
+      "tested_version": null,
+      "url": null
+    },
+    {
+      "name": "Pandas",
+      "category": "Data Science",
+      "status": "FULL",
+      "status_display": "\u2705 Full Support",
+      "notes": "Pure Python - works everywhere.",
+      "workaround": null,
+      "tested_version": null,
+      "url": null
+    },
+    {
+      "name": "NumPy",
+      "category": "Data Science",
+      "status": "FULL",
+      "status_display": "\u2705 Full Support",
+      "notes": "ARM64 wheels available.",
+      "workaround": null,
+      "tested_version": null,
+      "url": null
+    },
+    {
+      "name": "Scikit-learn",
+      "category": "Data Science",
+      "status": "FULL",
+      "status_display": "\u2705 Full Support",
+      "notes": "ARM64 wheels available.",
+      "workaround": null,
+      "tested_version": null,
+      "url": null
+    },
+    {
+      "name": "ChromaDB",
+      "category": "Vector Database",
+      "status": "FULL",
+      "status_display": "\u2705 Full Support",
+      "notes": "Pure Python with SQLite. Works everywhere.",
+      "workaround": null,
+      "tested_version": null,
+      "url": null
+    },
+    {
+      "name": "FAISS",
+      "category": "Vector Database",
+      "status": "NGC",
+      "status_display": "\ud83d\udc33 NGC Required",
+      "notes": "GPU version needs NGC container.",
+      "workaround": "Use faiss-gpu inside NGC container",
+      "tested_version": null,
+      "url": null
+    },
+    {
+      "name": "Milvus",
+      "category": "Vector Database",
+      "status": "PARTIAL",
+      "status_display": "\u26a0\ufe0f Partial",
+      "notes": "ARM64 Docker images available.",
+      "workaround": null,
+      "tested_version": null,
+      "url": null
+    },
+    {
+      "name": "Qdrant",
+      "category": "Vector Database",
+      "status": "FULL",
+      "status_display": "\u2705 Full Support",
+      "notes": "ARM64 Docker images available.",
+      "workaround": null,
+      "tested_version": null,
+      "url": null
+    },
+    {
+      "name": "JupyterLab",
+      "category": "Development",
+      "status": "FULL",
+      "status_display": "\u2705 Full Support",
+      "notes": "Pre-installed on DGX OS.",
+      "workaround": null,
+      "tested_version": null,
+      "url": null
+    },
+    {
+      "name": "VS Code",
+      "category": "Development",
+      "status": "FULL",
+      "status_display": "\u2705 Full Support",
+      "notes": "ARM64 version available.",
+      "workaround": null,
+      "tested_version": null,
+      "url": null
+    },
+    {
+      "name": "Docker",
+      "category": "Development",
+      "status": "FULL",
+      "status_display": "\u2705 Full Support",
+      "notes": "Pre-installed with NVIDIA runtime.",
+      "workaround": null,
+      "tested_version": null,
+      "url": null
+    },
+    {
+      "name": "Git",
+      "category": "Development",
+      "status": "FULL",
+      "status_display": "\u2705 Full Support",
+      "notes": "Pre-installed.",
+      "workaround": null,
+      "tested_version": null,
+      "url": null
+    },
+    {
+      "name": "MLflow",
+      "category": "MLOps",
+      "status": "FULL",
+      "status_display": "\u2705 Full Support",
+      "notes": "Pure Python - works everywhere.",
+      "workaround": null,
+      "tested_version": null,
+      "url": null
+    },
+    {
+      "name": "Weights & Biases",
+      "category": "MLOps",
+      "status": "FULL",
+      "status_display": "\u2705 Full Support",
+      "notes": "Pure Python - works everywhere.",
+      "workaround": null,
+      "tested_version": null,
+      "url": null
+    },
+    {
+      "name": "Triton Inference Server",
+      "category": "MLOps",
+      "status": "NGC",
+      "status_display": "\ud83d\udc33 NGC Required",
+      "notes": "Full NGC support.",
+      "workaround": "docker pull nvcr.io/nvidia/tritonserver:25.11-py3",
+      "tested_version": null,
+      "url": null
+    }
+  ]
+}

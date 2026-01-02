@@ -1,0 +1,141 @@
+{
+  "timestamp": "2026-01-02T16:10:56.858195",
+  "platform": "NVIDIA DGX Spark",
+  "results": [
+    {
+      "model": "qwen3:32b",
+      "prompt_tokens": 21,
+      "generated_tokens": 100,
+      "prefill_tokens_per_sec": 182.65514276806425,
+      "decode_tokens_per_sec": 9.884320659908683,
+      "total_time_seconds": 10.353726414999999,
+      "memory_gb": 0.0
+    },
+    {
+      "model": "qwen3:8b",
+      "prompt_tokens": 21,
+      "generated_tokens": 100,
+      "prefill_tokens_per_sec": 572.1396211093097,
+      "decode_tokens_per_sec": 41.891784233703675,
+      "total_time_seconds": 3.2570436755,
+      "memory_gb": 0.0
+    },
+    {
+      "model": "qwen3:4b",
+      "prompt_tokens": 21,
+      "generated_tokens": 100,
+      "prefill_tokens_per_sec": 1171.6730805650325,
+      "decode_tokens_per_sec": 76.34753885282556,
+      "total_time_seconds": 1.428453446,
+      "memory_gb": 0.0
+    },
+    {
+      "model": "magistral:24b",
+      "prompt_tokens": 183,
+      "generated_tokens": 100,
+      "prefill_tokens_per_sec": 2173.2211092606376,
+      "decode_tokens_per_sec": 13.933630399809392,
+      "total_time_seconds": 7.397638932333334,
+      "memory_gb": 0.0
+    },
+    {
+      "model": "qwen3-vl:8b",
+      "prompt_tokens": 21,
+      "generated_tokens": 100,
+      "prefill_tokens_per_sec": 710.8789617883958,
+      "decode_tokens_per_sec": 42.66629371357687,
+      "total_time_seconds": 2.4859085353333334,
+      "memory_gb": 0.0
+    },
+    {
+      "model": "rnj-1:8b",
+      "prompt_tokens": 41,
+      "generated_tokens": 55,
+      "prefill_tokens_per_sec": 1238.42229563294,
+      "decode_tokens_per_sec": 37.019569426335416,
+      "total_time_seconds": 1.638661426,
+      "memory_gb": 0.0
+    },
+    {
+      "model": "qwen3-embedding:4b",
+      "prompt_tokens": 0,
+      "generated_tokens": 0,
+      "prefill_tokens_per_sec": 0,
+      "decode_tokens_per_sec": 0,
+      "total_time_seconds": 0,
+      "memory_gb": 0.0
+    },
+    {
+      "model": "ministral-3:14b",
+      "prompt_tokens": 565,
+      "generated_tokens": 100,
+      "prefill_tokens_per_sec": 11926.715000087335,
+      "decode_tokens_per_sec": 25.376844437727875,
+      "total_time_seconds": 4.106222074,
+      "memory_gb": 0.0
+    },
+    {
+      "model": "gpt-oss:20b",
+      "prompt_tokens": 77,
+      "generated_tokens": 100,
+      "prefill_tokens_per_sec": 3130.379499066901,
+      "decode_tokens_per_sec": 59.12309052794545,
+      "total_time_seconds": 1.9111407156666667,
+      "memory_gb": 0.0
+    },
+    {
+      "model": "devstral-small-2:24b",
+      "prompt_tokens": 566,
+      "generated_tokens": 100,
+      "prefill_tokens_per_sec": 6317.4876259935345,
+      "decode_tokens_per_sec": 13.735130222681383,
+      "total_time_seconds": 7.501875411,
+      "memory_gb": 0.0
+    },
+    {
+      "model": "devstral-2:123b",
+      "prompt_tokens": 518,
+      "generated_tokens": 100,
+      "prefill_tokens_per_sec": 1262.580783730389,
+      "decode_tokens_per_sec": 2.6139350738007647,
+      "total_time_seconds": 39.06095218033333,
+      "memory_gb": 0.0
+    },
+    {
+      "model": "deepseek-r1:70b",
+      "prompt_tokens": 14,
+      "generated_tokens": 100,
+      "prefill_tokens_per_sec": 57.04390226597293,
+      "decode_tokens_per_sec": 4.547637342523967,
+      "total_time_seconds": 22.397950594,
+      "memory_gb": 0.0
+    },
+    {
+      "model": "nemotron-3-nano:30b",
+      "prompt_tokens": 27,
+      "generated_tokens": 100,
+      "prefill_tokens_per_sec": 338.14541665365937,
+      "decode_tokens_per_sec": 62.77662990638946,
+      "total_time_seconds": 1.805150016,
+      "memory_gb": 0.0
+    },
+    {
+      "model": "deepseek-ocr:3b",
+      "prompt_tokens": 11,
+      "generated_tokens": 100,
+      "prefill_tokens_per_sec": 1235.8973603420786,
+      "decode_tokens_per_sec": 175.90641680864232,
+      "total_time_seconds": 0.6742526213333333,
+      "memory_gb": 0.0
+    },
+    {
+      "model": "gpt-oss:120b",
+      "prompt_tokens": 77,
+      "generated_tokens": 100,
+      "prefill_tokens_per_sec": 2212.64190458144,
+      "decode_tokens_per_sec": 42.5034042630085,
+      "total_time_seconds": 2.564398743,
+      "memory_gb": 0.0
+    }
+  ]
+}
