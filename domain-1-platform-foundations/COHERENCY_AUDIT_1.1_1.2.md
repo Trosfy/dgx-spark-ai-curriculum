@@ -2,7 +2,7 @@
 
 **Modules Reviewed:** 1.1 (DGX Spark Platform Mastery), 1.2 (Python for AI/ML)
 **Files Analyzed:** 15+ notebooks, READMEs, and support scripts
-**Inconsistencies Found:** 11
+**Inconsistencies Found:** 21
 **Curriculum Version:** v2.0
 **Audit Date:** 2026-01-02
 
@@ -20,7 +20,8 @@
 | Values | 2 |
 | Testing Platform | 0 |
 | Documentation | 2 |
-| **TOTAL** | **11** |
+| **Exercise Coherency (NEW)** | **10** |
+| **TOTAL** | **21** |
 
 ---
 
@@ -267,6 +268,257 @@ def train_test_split_simple(df, test_size=0.2, random_state=42):
 
 ---
 
+### Issue 4: `np.linalg.norm()` Used in Exercise Without Prior Teaching
+
+**Type:** Exercise Coherency / Untaught Function in Solution
+
+**Location:**
+- File: `module-1.2-python-for-ai/labs/lab-1.2.1-numpy-broadcasting-lab.ipynb`
+- Section: Exercise 2 (Cells 23-24) - Cosine Similarity
+
+**The Inconsistency:**
+
+What's ASKED in Exercise 2:
+```markdown
+**Task:** Implement cosine similarity between all pairs of vectors using broadcasting.
+
+Cosine similarity formula:
+$$\text{cosine\_sim}(a, b) = \frac{a \cdot b}{\|a\| \cdot \|b\|}$$
+```
+
+What's in the HINT:
+```python
+# 1. First normalize each embedding to unit length
+# 2. Then cosine similarity is just the dot product!
+# 3. Use `embeddings @ embeddings.T` after normalization
+```
+
+What's MISSING:
+- **How to compute the norm** `||a||` is never taught
+- Students need `np.linalg.norm()` or `np.sqrt(np.sum(x**2, axis=1))`
+- Neither approach is shown before this exercise
+
+**Why It's Confusing:**
+- The formula shows `||a||` (norm) but doesn't explain how to compute it
+- Hint says "normalize" but normalization isn't taught
+- Students must discover `np.linalg.norm()` on their own
+
+**Fix:**
+
+Add a teaching cell BEFORE Exercise 2:
+
+```python
+# Vector Norms and Normalization
+# ==============================
+# The L2 norm (Euclidean length) of a vector is computed with np.linalg.norm()
+
+v = np.array([3, 4])
+print(f"Vector: {v}")
+print(f"L2 Norm: {np.linalg.norm(v)}")  # sqrt(3² + 4²) = 5
+
+# Normalizing = dividing by norm to get unit length
+v_normalized = v / np.linalg.norm(v)
+print(f"Normalized: {v_normalized}")
+print(f"Length after normalizing: {np.linalg.norm(v_normalized)}")  # 1.0
+
+# For a matrix of vectors (normalize each row):
+vectors = np.random.randn(5, 3)
+norms = np.linalg.norm(vectors, axis=1, keepdims=True)  # keepdims for broadcasting!
+normalized_vectors = vectors / norms
+```
+
+---
+
+### Issue 5: ReLU Activation Used in Challenge Without Definition
+
+**Type:** Exercise Coherency / Undefined Function in Challenge
+
+**Location:**
+- File: `module-1.2-python-for-ai/labs/lab-1.2.1-numpy-broadcasting-lab.ipynb`
+- Section: Challenge (Cells 39-40) - Mini Neural Network
+
+**The Inconsistency:**
+
+What's ASKED in Challenge:
+```markdown
+**Implement a mini neural network forward pass using only NumPy broadcasting!**
+
+Create a 2-layer network:
+1. Input: (batch_size, 784) - flattened MNIST images
+2. Hidden: (784, 256) weights + (256,) bias with ReLU activation
+3. Output: (256, 10) weights + (10,) bias with softmax
+```
+
+What's in the TEMPLATE:
+```python
+def forward(x, w1, b1, w2, b2):
+    # TODO: Implement using broadcasting
+    # hidden = relu(x @ w1 + b1)  # <-- What is relu()?
+    # output = softmax(hidden @ w2 + b2)
+    pass
+```
+
+What's MISSING:
+- `relu()` function is never defined anywhere
+- Students see `relu()` but don't know if it's a NumPy function or custom
+- No explanation of what ReLU even is
+
+**Why It's Confusing:**
+- Challenge casually uses `relu()` as if students know it
+- ReLU is covered in Module 1.5 (Neural Networks) - future module!
+- Students may search for `np.relu` which doesn't exist
+
+**Fix:**
+
+Add activation functions cell BEFORE the Challenge:
+
+```python
+# Activation Functions for Neural Networks
+# ========================================
+# Activation functions introduce non-linearity. Here are the most common:
+
+def relu(x):
+    """Rectified Linear Unit: max(0, x)"""
+    return np.maximum(0, x)
+
+def sigmoid(x):
+    """Sigmoid: 1 / (1 + exp(-x)), outputs 0-1"""
+    return 1 / (1 + np.exp(-x))
+
+def softmax(x, axis=-1):
+    """Softmax: converts logits to probabilities"""
+    exp_x = np.exp(x - x.max(axis=axis, keepdims=True))
+    return exp_x / exp_x.sum(axis=axis, keepdims=True)
+
+# Example:
+x = np.array([-2, -1, 0, 1, 2])
+print(f"Input:   {x}")
+print(f"ReLU:    {relu(x)}")      # [-2,-1,0,1,2] → [0,0,0,1,2]
+print(f"Sigmoid: {sigmoid(x).round(3)}")
+```
+
+---
+
+### Issue 6: `df.groupby()` and `transform()` Used in Exercise Without Teaching
+
+**Type:** Exercise Coherency / Untaught Pandas Functions
+
+**Location:**
+- File: `module-1.2-python-for-ai/labs/lab-1.2.2-dataset-preprocessing-pipeline.ipynb`
+- Section: Exercise 1 (Cells 15-16) - Group-Based Imputation
+
+**The Inconsistency:**
+
+What's ASKED:
+```markdown
+**Task:** Implement group-based imputation.
+Instead of using the global median for `income`, impute using the median income
+*for each education level*.
+```
+
+What's in the HINT:
+```python
+df['income'] = df.groupby('education')['income'].transform(
+    lambda x: x.fillna(x.median())
+)
+```
+
+What's MISSING:
+- `groupby()` is never taught in this lab or prior labs
+- `transform()` is never taught
+- Lambda functions with transform pattern is advanced Pandas
+
+**Why It's Confusing:**
+- Students are expected to use functions they've never seen
+- The hint IS the solution - but students can't understand it
+- Copy-pasting without understanding defeats the learning objective
+
+**Fix:**
+
+Add a teaching cell BEFORE Exercise 1:
+
+```python
+# Pandas GroupBy Operations
+# =========================
+# groupby() lets you split data by categories and apply operations per group
+
+# Basic groupby - aggregate statistics per group
+print(df.groupby('education')['income'].median())
+
+# transform() - returns values aligned with original DataFrame
+# Unlike agg(), transform returns same-length output
+df['income_group_median'] = df.groupby('education')['income'].transform('median')
+
+# Powerful pattern: Fill missing with group median
+df['income'] = df.groupby('education')['income'].transform(
+    lambda x: x.fillna(x.median())  # For each education group, fill NaN with that group's median
+)
+```
+
+---
+
+### Issue 7: `np.argpartition()` and `np.take_along_axis()` in Exercise Solution
+
+**Type:** Exercise Coherency / Advanced Functions in Solution
+
+**Location:**
+- File: `module-1.2-python-for-ai/labs/lab-1.2.5-profiling-exercise.ipynb`
+- Section: Exercise Solution (Cell 23) - KNN Optimization
+
+**The Inconsistency:**
+
+What's in the SOLUTION HINT:
+```python
+# Use argpartition for efficiency (doesn't fully sort)
+# This is O(n) instead of O(n log n) for full sort
+indices = np.argpartition(sq_distances, k, axis=1)[:, :k]
+
+# Get the actual distances for these indices
+row_indices = np.arange(len(query_points))[:, np.newaxis]
+top_k_sq_distances = sq_distances[row_indices, indices]
+
+# Sort within the k (argpartition doesn't sort)
+sorted_within_k = np.argsort(top_k_sq_distances, axis=1)
+final_indices = np.take_along_axis(indices, sorted_within_k, axis=1)
+```
+
+What's MISSING:
+- `np.argpartition()` - never taught
+- `np.take_along_axis()` - never taught
+- Advanced NumPy indexing patterns - not covered
+
+**Why It's Confusing:**
+- Solution uses functions students have never seen
+- These are advanced NumPy functions most users don't know
+- Students can't implement the optimization without discovering these
+
+**Fix:**
+
+Add a teaching cell BEFORE the exercise:
+
+```python
+# Advanced NumPy: Efficient Top-K Selection
+# =========================================
+
+# argpartition() - partial sort, O(n) instead of O(n log n)
+# Returns indices that would partition the array
+arr = np.array([5, 2, 8, 1, 9, 3])
+k = 3
+# Get indices of k smallest elements (not sorted!)
+top_k_idx = np.argpartition(arr, k)[:k]
+print(f"Top {k} indices: {top_k_idx}")
+print(f"Top {k} values: {arr[top_k_idx]}")
+
+# take_along_axis() - advanced indexing along an axis
+# Useful when you have indices from argpartition/argsort
+arr_2d = np.array([[5, 2, 8], [1, 9, 3]])
+sorted_idx = np.argsort(arr_2d, axis=1)
+sorted_arr = np.take_along_axis(arr_2d, sorted_idx, axis=1)
+print(f"Sorted: {sorted_arr}")
+```
+
+---
+
 ## 🟡 MEDIUM IMPACT (Inconsistent but Not Blocking)
 
 ### Issue M1: Docker Command Port Mapping Inconsistency
@@ -366,6 +618,90 @@ You'll learn these in depth in Module 1.6. For now, here's how to create them:
 > **Note:** Attention is a key mechanism in Transformer models (covered in Module 2.3).
 > Here we use it as an example of complex tensor operations - focus on the einsum
 > patterns, not the ML theory.
+```
+
+---
+
+### Issue M5: `keepdims=True` Parameter Not Explained
+
+**Location:** `lab-1.2.1-numpy-broadcasting-lab.ipynb` Exercise 1 Hint
+
+**Inconsistency:**
+- Hint uses: `np.mean(data, axis=1, keepdims=True)`
+- `keepdims` parameter behavior is never explained
+
+**Fix:** Expand the hint:
+```markdown
+<details>
+<summary>💡 Hint</summary>
+
+Use `np.mean(data, axis=1, keepdims=True)` to get a shape of `(5, 1)` which broadcasts correctly!
+
+**Why `keepdims=True`?**
+- Without it: `np.mean(data, axis=1)` returns shape `(5,)` - a 1D array
+- With it: returns shape `(5, 1)` - a 2D column vector
+- Shape `(5, 1)` broadcasts against `(5, 4)` correctly!
+</details>
+```
+
+---
+
+### Issue M6: `pd.get_dummies()` Used Without Formal Introduction
+
+**Location:** `lab-1.2.2-dataset-preprocessing-pipeline.ipynb` Cell 20
+
+**Inconsistency:**
+- Cell 20 suddenly uses: `pd.get_dummies(df_encoded['employment_type'], prefix='emp', dtype=int)`
+- No introduction or explanation of this function
+
+**Fix:** Add introduction in Cell 19:
+```python
+# Method 2: One-Hot Encoding (for nominal data)
+# Employment type has no natural order, so we use one-hot encoding
+#
+# pd.get_dummies() creates binary columns for each category:
+# - prefix: adds a prefix to new column names
+# - dtype: sets the data type (int for 0/1 instead of True/False)
+
+employment_dummies = pd.get_dummies(
+    df_encoded['employment_type'],
+    prefix='emp',      # Columns will be: emp_Full-time, emp_Part-time, etc.
+    dtype=int          # Use 0/1 instead of False/True
+)
+```
+
+---
+
+### Issue M7: `GridSpec` Used Without Prior Teaching
+
+**Location:** `lab-1.2.3-visualization-dashboard.ipynb` Cell 19
+
+**Inconsistency:**
+- Dashboard creation uses: `gs = GridSpec(2, 2, figure=fig, hspace=0.3, wspace=0.3)`
+- GridSpec is not introduced before this point
+- Students trying to modify the layout won't understand how
+
+**Fix:** Add teaching cell before Cell 19:
+```python
+# Advanced Subplot Layout: GridSpec
+# ==================================
+# For complex layouts, GridSpec gives you more control than plt.subplots()
+
+from matplotlib.gridspec import GridSpec
+
+fig = plt.figure(figsize=(10, 8))
+gs = GridSpec(2, 2, figure=fig, hspace=0.3, wspace=0.3)
+#             ↑  ↑              ↑             ↑
+#           rows cols     height space   width space
+
+# Access individual cells:
+ax1 = fig.add_subplot(gs[0, 0])  # Top-left
+ax2 = fig.add_subplot(gs[0, 1])  # Top-right
+ax3 = fig.add_subplot(gs[1, 0])  # Bottom-left
+ax4 = fig.add_subplot(gs[1, 1])  # Bottom-right
+
+# GridSpec also supports spanning:
+# ax_wide = fig.add_subplot(gs[0, :])  # Spans full top row
 ```
 
 ---
@@ -495,16 +831,44 @@ Update expected results to account for model architecture:
 
 ## ✅ SIGN-OFF CHECKLIST
 
-- [ ] HIGH: GPU memory monitoring issue documented and alternatives provided
-- [ ] HIGH: Benchmark expectations updated for MoE/sparse models
-- [ ] HIGH: sklearn usage explained or alternatives provided
-- [ ] MEDIUM: Docker port mapping clarified across all notebooks
-- [ ] MEDIUM: Preprocessor class exercise vs import clarified
-- [ ] MEDIUM: ROC curve exercise context added
-- [ ] LOW: Memory column removed or fixed in benchmark output
-- [ ] LOW: System info script updated for unified memory
+### HIGH IMPACT (7 issues - blocks student learning)
+- [ ] Issue 1: GPU memory monitoring - add unified memory explanation and alternatives
+- [ ] Issue 2: Benchmark expectations - add MoE/sparse/reasoning model baselines
+- [ ] Issue 3: sklearn - add train_test_split explanation or NumPy alternative
+- [ ] Issue 4: `np.linalg.norm()` - add vector normalization teaching cell in 1.2.1
+- [ ] Issue 5: ReLU activation - add activation functions cell before Challenge in 1.2.1
+- [ ] Issue 6: `groupby()/transform()` - add Pandas groupby teaching cell in 1.2.2
+- [ ] Issue 7: `argpartition()/take_along_axis()` - add advanced NumPy cell in 1.2.5
 
-**Coherency Status:** NEEDS FIXES (3 HIGH, 4 MEDIUM, 2 LOW)
+### MEDIUM IMPACT (7 issues - confuses but doesn't block)
+- [ ] Issue M1: Docker port mapping clarification
+- [ ] Issue M2: Preprocessor class - change objective or add building exercise
+- [ ] Issue M3: ROC curve - add explanation or move to Module 1.6
+- [ ] Issue M4: Einsum attention - add transformer context note
+- [ ] Issue M5: `keepdims` - expand hint with explanation
+- [ ] Issue M6: `pd.get_dummies()` - add formal introduction
+- [ ] Issue M7: `GridSpec` - add teaching cell before dashboard
+
+### LOW IMPACT (2 issues - polish)
+- [ ] Issue L1: Memory column shows 0.0 GB - fix or remove
+- [ ] Issue L2: System info shows [N/A] - update messaging
+
+**Coherency Status:** NEEDS FIXES (7 HIGH, 7 MEDIUM, 2 LOW)
+
+---
+
+## 📊 Exercise Coherency Quick Reference
+
+| Lab | Exercise | Untaught Function | Priority |
+|-----|----------|-------------------|----------|
+| 1.2.1 | Exercise 2 | `np.linalg.norm()` | HIGH |
+| 1.2.1 | Challenge | `relu()` | HIGH |
+| 1.2.2 | Exercise 1 | `groupby()`, `transform()` | HIGH |
+| 1.2.5 | Exercise | `argpartition()`, `take_along_axis()` | HIGH |
+| 1.2.1 | Exercise 1 | `keepdims=True` explained | MEDIUM |
+| 1.2.2 | Part 3 | `pd.get_dummies()` | MEDIUM |
+| 1.2.3 | Part 5 | `GridSpec` | MEDIUM |
+| 1.2.3 | Exercise | `roc_curve`, `auc` | MEDIUM |
 
 ---
 
