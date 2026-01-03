@@ -8,6 +8,7 @@
 | B | Document Intelligence | VLM, OCR, Extraction | Document pipeline |
 | C | Agent Swarm | Multi-agent, Safety | Agent system |
 | D | Training Pipeline | Data, SFT, DPO | MLOps pipeline |
+| E | Browser-Deployed LLM | QLoRA, ONNX, Transformers.js | Static web app |
 
 ---
 
@@ -315,6 +316,276 @@ trainer = DPOTrainer(
 
 trainer.train()
 ```
+
+---
+
+## Option E: Browser-Deployed Fine-Tuned LLM
+
+### Pipeline Overview
+
+```
+Dataset → QLoRA Training → Merge Adapters → ONNX Export → INT4 Quantization → Browser
+  (150+)    (DGX Spark)      (BF16)         (FP32)         (~500MB)        (WebGPU)
+```
+
+### Dependencies
+
+```bash
+# Training (DGX Spark)
+pip install -U transformers>=4.50.0 datasets accelerate peft trl bitsandbytes
+pip install unsloth mlflow optimum onnx onnxruntime
+
+# Browser (npm)
+npm install @huggingface/transformers
+```
+
+### Dataset Format (Messages)
+
+```python
+# Training data format for chat models
+training_example = {
+    "messages": [
+        {"role": "system", "content": "You are a matcha tea expert."},
+        {"role": "user", "content": "What is ceremonial grade matcha?"},
+        {"role": "assistant", "content": "Ceremonial grade matcha is..."}
+    ]
+}
+
+# Save with datasets library
+from datasets import Dataset
+dataset = Dataset.from_list(training_data)
+dataset.push_to_hub("your-username/matcha-dataset")
+```
+
+### QLoRA Training with Unsloth
+
+```python
+from unsloth import FastLanguageModel
+import torch
+
+# Load model with 4-bit quantization
+model, tokenizer = FastLanguageModel.from_pretrained(
+    model_name="unsloth/gemma-3-1b-it",
+    max_seq_length=2048,
+    load_in_4bit=True,
+    dtype=torch.bfloat16,
+)
+
+# Add LoRA adapters
+model = FastLanguageModel.get_peft_model(
+    model,
+    r=16,
+    lora_alpha=16,
+    lora_dropout=0,
+    target_modules=["q_proj", "k_proj", "v_proj", "o_proj",
+                    "gate_proj", "up_proj", "down_proj"],
+)
+
+# Train with SFTTrainer
+from trl import SFTTrainer, SFTConfig
+
+trainer = SFTTrainer(
+    model=model,
+    tokenizer=tokenizer,
+    train_dataset=dataset,
+    args=SFTConfig(
+        output_dir="./matcha-lora",
+        per_device_train_batch_size=2,
+        gradient_accumulation_steps=4,
+        num_train_epochs=3,
+        learning_rate=2e-4,
+        bf16=True,
+        logging_steps=10,
+        save_steps=100,
+    ),
+)
+trainer.train()
+model.save_pretrained("./matcha-lora")
+```
+
+### Merge LoRA Adapters (BF16)
+
+```python
+from transformers import AutoModelForCausalLM, AutoTokenizer
+from peft import PeftModel
+import torch
+
+# Load base model in BF16 (CRITICAL: full precision for quality!)
+base_model = AutoModelForCausalLM.from_pretrained(
+    "google/gemma-3-1b-it",
+    torch_dtype=torch.bfloat16,
+    device_map="auto",
+)
+
+# Load and merge LoRA
+model = PeftModel.from_pretrained(base_model, "./matcha-lora")
+merged_model = model.merge_and_unload()
+
+# Save merged model
+merged_model.save_pretrained("./matcha-merged")
+tokenizer.save_pretrained("./matcha-merged")
+```
+
+### ONNX Export + INT4 Quantization
+
+```python
+from optimum.onnxruntime import ORTModelForCausalLM
+from optimum.exporters.onnx import main_export
+
+# Export to ONNX
+main_export(
+    model_name_or_path="./matcha-merged",
+    output="./matcha-onnx",
+    task="text-generation-with-past",
+)
+
+# INT4 Quantization (browser-compatible!)
+from onnxruntime.quantization import quantize_dynamic, QuantType
+
+quantize_dynamic(
+    model_input="./matcha-onnx/model.onnx",
+    model_output="./matcha-onnx-int4/model_quantized.onnx",
+    weight_type=QuantType.QInt4,
+)
+```
+
+### Transformers.js Browser Integration
+
+```javascript
+import { pipeline, env } from '@huggingface/transformers';
+
+// Configure model location
+env.localModelPath = 'https://your-bucket.s3.amazonaws.com/models/';
+env.allowRemoteModels = true;
+
+// Load model with WebGPU + INT4
+const generator = await pipeline(
+  'text-generation',
+  'matcha-chatbot-int4',
+  {
+    device: 'webgpu',
+    dtype: 'q4',
+    progress_callback: (progress) => {
+      console.log(`Loading: ${(progress.progress * 100).toFixed(1)}%`);
+    },
+  }
+);
+
+// Generate response
+const messages = [
+  { role: 'system', content: 'You are a matcha tea expert.' },
+  { role: 'user', content: 'What makes matcha green?' }
+];
+
+const output = await generator(messages, {
+  max_new_tokens: 256,
+  temperature: 0.7,
+  do_sample: true,
+});
+
+console.log(output[0].generated_text);
+```
+
+### React Component Pattern
+
+```jsx
+import { useState, useCallback } from 'react';
+import { pipeline } from '@huggingface/transformers';
+
+function MatchaChatbot() {
+  const [messages, setMessages] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [generator, setGenerator] = useState(null);
+
+  // Load model on first use
+  const loadModel = useCallback(async () => {
+    if (generator) return generator;
+
+    setLoading(true);
+    const pipe = await pipeline('text-generation', 'matcha-chatbot', {
+      device: 'webgpu',
+      dtype: 'q4',
+    });
+    setGenerator(pipe);
+    setLoading(false);
+    return pipe;
+  }, [generator]);
+
+  const sendMessage = async (userMessage) => {
+    const pipe = await loadModel();
+
+    const newMessages = [...messages, { role: 'user', content: userMessage }];
+    setMessages(newMessages);
+
+    const response = await pipe(newMessages, { max_new_tokens: 256 });
+    const assistantMessage = response[0].generated_text.at(-1);
+
+    setMessages([...newMessages, assistantMessage]);
+  };
+
+  return (
+    <div className="chatbot">
+      {loading && <div>Loading model (~500MB, cached after first load)...</div>}
+      {/* Chat UI here */}
+    </div>
+  );
+}
+```
+
+### S3 CORS Configuration
+
+```json
+[
+    {
+        "AllowedHeaders": ["*"],
+        "AllowedMethods": ["GET", "HEAD"],
+        "AllowedOrigins": [
+            "https://yourdomain.com",
+            "http://localhost:5173",
+            "http://localhost:3000"
+        ],
+        "ExposeHeaders": ["Content-Length", "Content-Type", "ETag"],
+        "MaxAgeSeconds": 3600
+    }
+]
+```
+
+### Deployment Headers (Required for SharedArrayBuffer)
+
+```javascript
+// vercel.json
+{
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "Cross-Origin-Opener-Policy", "value": "same-origin" },
+        { "key": "Cross-Origin-Embedder-Policy", "value": "require-corp" }
+      ]
+    }
+  ]
+}
+```
+
+### File Size Reference
+
+| Stage | Model Size | File Size |
+|-------|-----------|-----------|
+| Base (BF16) | 1B params | ~2GB |
+| LoRA Adapters | - | ~10-50MB |
+| Merged (BF16) | 1B params | ~2GB |
+| ONNX (FP32) | 1B params | ~4GB |
+| ONNX INT4 | 1B params | ~500-600MB |
+
+### Performance Expectations
+
+| Device | Tokens/Second |
+|--------|---------------|
+| RTX 4090 (WebGPU) | 40-60 |
+| RTX 3080 (WebGPU) | 25-40 |
+| M1/M2 Mac (WebGPU) | 15-30 |
+| Integrated GPU | 5-15 |
+| CPU (WASM fallback) | 1-5 |
 
 ---
 

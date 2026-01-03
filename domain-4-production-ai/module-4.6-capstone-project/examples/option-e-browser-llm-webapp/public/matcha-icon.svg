@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+  <!-- Matcha Tea Cup Icon -->
+  <defs>
+    <!-- Matcha green gradient -->
+    <linearGradient id="matchaGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#6b9b7a;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#4a7c59;stop-opacity:1" />
+    </linearGradient>
+    <!-- Cup gradient -->
+    <linearGradient id="cupGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#f5f5f0;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#e8e8e0;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Tea bowl (chawan) -->
+  <ellipse cx="50" cy="75" rx="35" ry="10" fill="#d4c4a8"/>
+  <path d="M15 45 Q15 75 50 80 Q85 75 85 45 L85 40 Q85 35 50 35 Q15 35 15 40 Z" fill="url(#cupGradient)" stroke="#c4b498" stroke-width="2"/>
+
+  <!-- Matcha tea surface -->
+  <ellipse cx="50" cy="40" rx="32" ry="8" fill="url(#matchaGradient)"/>
+
+  <!-- Steam wisps -->
+  <path d="M35 25 Q33 15 38 10" fill="none" stroke="#a8d4b8" stroke-width="2" stroke-linecap="round" opacity="0.6">
+    <animate attributeName="d" values="M35 25 Q33 15 38 10;M35 25 Q30 15 35 8;M35 25 Q33 15 38 10" dur="3s" repeatCount="indefinite"/>
+  </path>
+  <path d="M50 23 Q50 13 55 8" fill="none" stroke="#a8d4b8" stroke-width="2" stroke-linecap="round" opacity="0.6">
+    <animate attributeName="d" values="M50 23 Q50 13 55 8;M50 23 Q52 13 48 6;M50 23 Q50 13 55 8" dur="2.5s" repeatCount="indefinite"/>
+  </path>
+  <path d="M65 25 Q67 15 62 10" fill="none" stroke="#a8d4b8" stroke-width="2" stroke-linecap="round" opacity="0.6">
+    <animate attributeName="d" values="M65 25 Q67 15 62 10;M65 25 Q70 15 65 8;M65 25 Q67 15 62 10" dur="3.5s" repeatCount="indefinite"/>
+  </path>
+
+  <!-- Foam bubbles on surface -->
+  <circle cx="40" cy="38" r="2" fill="#a8d4b8" opacity="0.5"/>
+  <circle cx="55" cy="40" r="1.5" fill="#a8d4b8" opacity="0.4"/>
+  <circle cx="62" cy="38" r="1" fill="#a8d4b8" opacity="0.5"/>
+  <circle cx="45" cy="42" r="1" fill="#a8d4b8" opacity="0.3"/>
+</svg>
