@@ -65,9 +65,9 @@
 ## 3. Model Architecture
 
 ### 3.1 Base Model Selection
-- **Model:** [e.g., Gemma 3 1B Instruct]
+- **Model:** [e.g., Gemma 3 270M Instruct]
 - **Why this model:** [Reasoning for selection]
-- **Parameters:** [X] billion
+- **Parameters:** 270 million
 - **Context length:** [X] tokens
 
 ### 3.2 Fine-Tuning Approach

@@ -4,7 +4,7 @@
 
 | Property | Value |
 |----------|-------|
-| Base Model | [e.g., Gemma 3 1B Instruct] |
+| Base Model | [e.g., Gemma 3 270M Instruct] |
 | Fine-tuned Model | [Your model name] |
 | Domain | [e.g., Matcha Tea Expert] |
 | Training Examples | [X] |
@@ -40,10 +40,10 @@
 
 | Format | Size | Reduction |
 |--------|------|-----------|
-| Base Model (BF16) | ~2 GB | - |
-| Merged Model (BF16) | ~2 GB | 0% |
-| ONNX (FP32) | ~4 GB | +100% |
-| ONNX (INT4) | ~500 MB | -75% |
+| Base Model (BF16) | ~540 MB | - |
+| Merged Model (BF16) | ~540 MB | 0% |
+| ONNX (FP32) | ~1 GB | +85% |
+| ONNX (INT4) | ~150-200 MB | -70% |
 
 ---
 

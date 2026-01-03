@@ -107,7 +107,7 @@ Build a complete pipeline that fine-tunes a small language model for a specific 
   - Messages format with system/user/assistant roles
   - Domain-focused (Matcha expertise for this project)
 - **QLoRA Fine-Tuning on DGX Spark**
-  - Base model: Gemma 3 1B or similar (~2.5GB)
+  - Base model: Gemma 3 270M (~540MB)
   - Training with Unsloth for 2x speed
   - MLflow experiment tracking
 - **Model Optimization Pipeline**

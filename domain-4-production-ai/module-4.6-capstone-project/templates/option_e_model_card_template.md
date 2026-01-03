@@ -4,7 +4,7 @@
 
 - **Model Name**: [Name]
 - **Model Type**: Causal Language Model (Chat)
-- **Base Model**: [e.g., Gemma 3 1B Instruct]
+- **Base Model**: [e.g., Gemma 3 270M Instruct]
 - **Fine-tuning Method**: QLoRA (r=16, alpha=16)
 - **Training Framework**: Unsloth + HuggingFace Transformers
 - **Quantization**: INT4 (ONNX Runtime)

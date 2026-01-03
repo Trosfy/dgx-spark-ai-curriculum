@@ -79,8 +79,8 @@ Dataset Creation → Fine-Tuning → Optimization → Browser Deployment
 
 ## Slide 6: Training Architecture
 
-**Base Model:** [e.g., Gemma 3 1B Instruct]
-- 1 billion parameters
+**Base Model:** [e.g., Gemma 3 270M Instruct]
+- 270 million parameters
 - Instruction-tuned
 - Chat-optimized
 
