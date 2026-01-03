@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Matcha Expert - A browser-based AI chatbot specialized in matcha tea knowledge" />
+    <meta name="theme-color" content="#4a7c59" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/matcha-icon.svg" />
+
+    <!-- Open Graph / Social Media -->
+    <meta property="og:title" content="Matcha Expert - Browser AI Chatbot" />
+    <meta property="og:description" content="Ask questions about matcha tea - runs entirely in your browser!" />
+    <meta property="og:type" content="website" />
+
+    <title>Matcha Expert - Browser AI Chatbot</title>
+
+    <!-- Preload critical resources -->
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+
+    <style>
+      /* Critical CSS for initial loading state */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+        background: linear-gradient(135deg, #f5f7f5 0%, #e8f0e8 100%);
+        min-height: 100vh;
+        color: #333;
+      }
+
+      #root {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+
+      /* Loading state before React mounts */
+      .initial-loading {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        padding: 2rem;
+        text-align: center;
+      }
+
+      .initial-loading h1 {
+        color: #4a7c59;
+        margin-bottom: 1rem;
+        font-size: 2rem;
+      }
+
+      .initial-loading p {
+        color: #666;
+        font-size: 1.1rem;
+      }
+
+      .loading-spinner {
+        width: 40px;
+        height: 40px;
+        border: 3px solid #e8f0e8;
+        border-top-color: #4a7c59;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+        margin-bottom: 1rem;
+      }
+
+      @keyframes spin {
+        to { transform: rotate(360deg); }
+      }
+
+      /* No-JS fallback */
+      noscript {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        padding: 2rem;
+        text-align: center;
+        background: #f5f7f5;
+      }
+
+      noscript h1 {
+        color: #4a7c59;
+        margin-bottom: 1rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root">
+      <div class="initial-loading">
+        <div class="loading-spinner"></div>
+        <h1>Matcha Expert</h1>
+        <p>Loading application...</p>
+      </div>
+    </div>
+
+    <noscript>
+      <h1>JavaScript Required</h1>
+      <p>This AI chatbot requires JavaScript to run. Please enable JavaScript in your browser settings.</p>
+    </noscript>
+
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

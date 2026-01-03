@@ -91,6 +91,48 @@ Build infrastructure for continuous model improvement.
 
 ---
 
+### Option E: Browser-Deployed Fine-Tuned LLM (NEW)
+
+Build a complete pipeline that fine-tunes a small language model for a specific domain, optimizes it for browser deployment, and creates a zero-cost static web application.
+
+**Why This Capstone Is Unique:**
+- Demonstrates the FULL ML lifecycle: data → training → optimization → deployment
+- Zero ongoing costs (no GPU servers, no API fees)
+- Privacy-preserving (all inference on user's device)
+- Showcases DGX Spark for training + edge deployment
+- Applies skills from Modules 3.1 (Fine-tuning), 3.2 (Quantization), 4.4 (Deployment)
+
+**Requirements:**
+- **Dataset Creation** (50-200 high-quality examples)
+  - Messages format with system/user/assistant roles
+  - Domain-focused (Matcha expertise for this project)
+- **QLoRA Fine-Tuning on DGX Spark**
+  - Base model: Gemma 3 270M (~540MB)
+  - Training with Unsloth for 2x speed
+  - MLflow experiment tracking
+- **Model Optimization Pipeline**
+  - Merge LoRA adapters in BF16 precision
+  - Export to ONNX format
+  - INT4 block quantization (browser-compatible)
+- **Browser Integration**
+  - Transformers.js for inference
+  - WebGPU acceleration with WASM fallback
+  - React component with streaming
+- **Static Deployment**
+  - S3/CDN hosting for model files
+  - Vercel/Netlify/GitHub Pages for app
+  - Complete model card and documentation
+
+**Deliverables:**
+1. Fine-tuned model files (GGUF + ONNX INT4)
+2. Training code with MLflow logs
+3. React web application
+4. Technical report
+5. Model card with safety evaluation
+6. Video demo
+
+---
+
 ## Project Phases
 
 | Phase | Duration | Activities |
