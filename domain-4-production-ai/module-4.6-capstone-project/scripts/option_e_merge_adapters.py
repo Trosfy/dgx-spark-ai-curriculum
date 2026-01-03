@@ -7,7 +7,7 @@ CRITICAL: Must merge in full precision for quality preservation!
 
 Usage:
     python option_e_merge_adapters.py \
-        --base-model google/gemma-3-1b-it \
+        --base-model google/gemma-3-270m-it \
         --adapter-path ./models/matcha-lora \
         --output-path ./models/matcha-merged
 """
@@ -145,7 +145,7 @@ def verify_merge(merged_path: Path, tokenizer_path: Path = None) -> None:
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Merge LoRA adapters")
-    parser.add_argument("--base-model", default="google/gemma-3-1b-it")
+    parser.add_argument("--base-model", default="google/gemma-3-270m-it")
     parser.add_argument("--adapter-path", type=Path, required=True)
     parser.add_argument("--output-path", type=Path, required=True)
     parser.add_argument("--verify", action="store_true", help="Verify after merging")

@@ -365,7 +365,7 @@ import torch
 
 # Load model with 4-bit quantization
 model, tokenizer = FastLanguageModel.from_pretrained(
-    model_name="unsloth/gemma-3-1b-it",
+    model_name="unsloth/gemma-3-270m-it",
     max_seq_length=2048,
     load_in_4bit=True,
     dtype=torch.bfloat16,
@@ -412,7 +412,7 @@ import torch
 
 # Load base model in BF16 (CRITICAL: full precision for quality!)
 base_model = AutoModelForCausalLM.from_pretrained(
-    "google/gemma-3-1b-it",
+    "google/gemma-3-270m-it",
     torch_dtype=torch.bfloat16,
     device_map="auto",
 )
@@ -571,11 +571,11 @@ function MatchaChatbot() {
 
 | Stage | Model Size | File Size |
 |-------|-----------|-----------|
-| Base (BF16) | 1B params | ~2GB |
-| LoRA Adapters | - | ~10-50MB |
-| Merged (BF16) | 1B params | ~2GB |
-| ONNX (FP32) | 1B params | ~4GB |
-| ONNX INT4 | 1B params | ~500-600MB |
+| Base (BF16) | 270M params | ~540MB |
+| LoRA Adapters | - | ~10-30MB |
+| Merged (BF16) | 270M params | ~540MB |
+| ONNX (FP32) | 270M params | ~1GB |
+| ONNX INT4 | 270M params | ~150-200MB |
 
 ### Performance Expectations
 

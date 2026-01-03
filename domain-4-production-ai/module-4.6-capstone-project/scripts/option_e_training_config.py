@@ -13,7 +13,7 @@ from pathlib import Path
 @dataclass
 class ModelConfig:
     """Base model configuration."""
-    name: str = "unsloth/gemma-3-1b-it"
+    name: str = "unsloth/gemma-3-270m-it"
     max_seq_length: int = 2048
     load_in_4bit: bool = True
     dtype: str = "bfloat16"
