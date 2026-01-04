@@ -26,10 +26,8 @@ A browser-deployed AI chatbot specialized in Troscha's premium matcha products. 
 2. **Configure your model URL:**
    Edit `src/hooks/useModelLoader.js` and update `MODEL_URL`:
    ```javascript
-   // Recommended: CloudFront distribution URL
-   const MODEL_URL = 'https://d1234567890abc.cloudfront.net/';
-   // Alternative: Hugging Face Hub
-   // const MODEL_URL = 'your-username/troscha-matcha-onnx';
+   const MODEL_URL = 'https://your-bucket.s3.amazonaws.com/model/';
+   // Or: 'your-username/troscha-matcha-onnx' for Hugging Face Hub
    ```
 
 3. **Start development server:**
