@@ -184,8 +184,8 @@
 
 ```
 ┌─────────────────┐    ┌─────────────────┐
-│   User Browser  │    │   Static Host   │
-│                 │    │   (Vercel/S3)   │
+│   User Browser  │    │   Web App Host  │
+│                 │    │ (Vercel/Netlify)│
 │ ┌─────────────┐ │    │                 │
 │ │ React App   │◄├────┤ index.html      │
 │ └─────────────┘ │    │ bundle.js       │
@@ -193,8 +193,8 @@
 │        ▼        │    └─────────────────┘
 │ ┌─────────────┐ │
 │ │Transformers │ │    ┌─────────────────┐
-│ │    .js      │◄├────┤  Model Host     │
-│ └─────────────┘ │    │   (S3/HF)       │
+│ │    .js      │◄├────┤  Model CDN      │
+│ └─────────────┘ │    │(S3 + CloudFront)│
 │        │        │    │                 │
 │        ▼        │    │ model.onnx      │
 │ ┌─────────────┐ │    │ tokenizer.json  │
@@ -205,12 +205,13 @@
 
 ### 7.2 Hosting Configuration
 
-**Static Files:** [e.g., Vercel]
+**Web App:** [e.g., Vercel]
 - Deployment URL: [URL]
 - Headers configured for SharedArrayBuffer
 
-**Model Files:** [e.g., AWS S3]
-- Bucket URL: [URL]
+**Model Files:** AWS S3 + CloudFront
+- S3 Bucket: [bucket-name]
+- CloudFront URL: [distribution-url]
 - CORS configured for browser access
 
 ### 7.3 Security Headers

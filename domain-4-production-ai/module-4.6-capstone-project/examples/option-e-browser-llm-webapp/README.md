@@ -26,8 +26,10 @@ A browser-deployed AI chatbot specialized in Troscha's premium matcha products. 
 2. **Configure your model URL:**
    Edit `src/hooks/useModelLoader.js` and update `MODEL_URL`:
    ```javascript
-   const MODEL_URL = 'https://your-bucket.s3.amazonaws.com/model/';
-   // Or: 'your-username/troscha-matcha-onnx' for Hugging Face Hub
+   // Recommended: CloudFront distribution URL
+   const MODEL_URL = 'https://d1234567890abc.cloudfront.net/';
+   // Alternative: Hugging Face Hub
+   // const MODEL_URL = 'your-username/troscha-matcha-onnx';
    ```
 
 3. **Start development server:**
@@ -60,13 +62,45 @@ A browser-deployed AI chatbot specialized in Troscha's premium matcha products. 
 
 ## Deployment
 
-### Vercel (Recommended)
+### Model Hosting: AWS S3 + CloudFront (Recommended)
+
+Host your ONNX model files on S3 with CloudFront CDN for optimal performance:
+
+1. **Upload to S3:**
+   ```bash
+   python scripts/option_e_upload_to_s3.py \
+       --model-path ./models/matcha-onnx-int4 \
+       --bucket troscha-matcha-model \
+       --region us-east-1
+   ```
+
+2. **Create CloudFront Distribution:**
+   - Go to AWS CloudFront Console → Create Distribution
+   - Origin domain: `your-bucket.s3.us-east-1.amazonaws.com`
+   - Cache policy: CachingOptimized
+   - Response headers policy: CORS-with-preflight-and-SecurityHeadersPolicy
+   - Wait for deployment (~5-10 minutes)
+
+3. **Update MODEL_URL:**
+   ```javascript
+   const MODEL_URL = 'https://d1234567890abc.cloudfront.net/';
+   ```
+
+**Benefits:**
+- Global edge caching for faster model downloads
+- Reduced S3 egress costs
+- Free SSL certificate
+- DDoS protection included
+
+### Web App Hosting
+
+#### Vercel
 
 1. Push to GitHub
 2. Connect to Vercel
 3. Deploy - headers are auto-configured via `vercel.json`
 
-### Netlify
+#### Netlify
 
 Create `netlify.toml`:
 ```toml
@@ -93,7 +127,7 @@ Add to your deploy script:
 Your model must be:
 - **Format**: ONNX with INT4 quantization
 - **Size**: <500 MB recommended for reasonable load times
-- **Hosted**: At a CORS-enabled URL (S3, Hugging Face Hub, etc.)
+- **Hosted**: AWS S3 + CloudFront (recommended) or Hugging Face Hub
 
 Required files:
 - `model.onnx` or `model_quantized.onnx`

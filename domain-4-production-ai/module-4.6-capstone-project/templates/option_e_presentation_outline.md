@@ -215,14 +215,14 @@ const generator = await pipeline(
 
 ## Slide 15: Deployment Architecture
 
-**Static Hosting (Zero Cost):**
-- Vercel / Netlify / GitHub Pages
-- Just HTML, CSS, JS files
-
-**Model Hosting:**
-- AWS S3 with CORS
+**Model Hosting (CDN):**
+- AWS S3 + CloudFront (recommended)
 - Or Hugging Face Hub
 - ~500MB download (cached)
+
+**Web App Hosting (Zero Cost):**
+- Vercel / Netlify / GitHub Pages
+- Just HTML, CSS, JS files
 
 **Required Headers:**
 - COOP: same-origin

@@ -1,13 +1,23 @@
 #!/usr/bin/env python3
 """
-Option E: S3 Upload with CORS Configuration
+Option E: S3 + CloudFront Deployment
 
-Uploads model files to S3 with proper CORS for browser access.
+Uploads model files to S3 and provides CloudFront CDN configuration
+for optimal browser-based model delivery.
+
+Architecture:
+    Browser → CloudFront (CDN) → S3 (Origin)
+
+Benefits of S3 + CloudFront:
+    - Global edge caching for faster model downloads
+    - Reduced S3 egress costs
+    - Automatic HTTPS with free SSL certificates
+    - Better CORS handling at edge locations
 
 Usage:
     python option_e_upload_to_s3.py \
         --model-path ./models/matcha-onnx-int4 \
-        --bucket matcha-expert-model \
+        --bucket troscha-matcha-model \
         --region us-east-1
 """
 
@@ -42,7 +52,7 @@ def upload_to_s3(
     from botocore.exceptions import ClientError
 
     print("=" * 70)
-    print("S3 UPLOAD WITH CORS")
+    print("S3 + CLOUDFRONT DEPLOYMENT")
     print("=" * 70)
 
     s3 = boto3.client("s3", region_name=region)
@@ -122,14 +132,45 @@ def upload_to_s3(
             )
             uploaded += 1
 
-    # Get URL
-    base_url = f"https://{bucket_name}.s3.{region}.amazonaws.com/"
+    # Get URLs
+    s3_url = f"https://{bucket_name}.s3.{region}.amazonaws.com/"
 
     print(f"\nUpload complete!")
     print(f"  Files uploaded: {uploaded}")
-    print(f"  Base URL: {base_url}")
+    print(f"  S3 URL: {s3_url}")
+    print()
+    print("=" * 70)
+    print("NEXT STEP: Create CloudFront Distribution")
+    print("=" * 70)
+    print("""
+To serve your model via CloudFront CDN:
 
-    return base_url
+1. Go to AWS CloudFront Console
+2. Create Distribution:
+   - Origin domain: {bucket}.s3.{region}.amazonaws.com
+   - Origin path: (leave empty)
+   - Viewer protocol policy: Redirect HTTP to HTTPS
+   - Cache policy: CachingOptimized
+   - Response headers policy: CORS-with-preflight-and-SecurityHeadersPolicy
+
+3. Configure CORS Response Headers:
+   - Access-Control-Allow-Origin: * (or your domain)
+   - Access-Control-Allow-Methods: GET, HEAD
+   - Access-Control-Allow-Headers: *
+
+4. Wait for deployment (~5-10 minutes)
+
+5. Update your app's MODEL_URL:
+   https://d1234567890abc.cloudfront.net/
+
+CloudFront Benefits:
+- Global edge caching (faster downloads worldwide)
+- Reduced S3 costs (cache hits don't hit S3)
+- Free SSL certificate
+- DDoS protection included
+""".format(bucket=bucket_name, region=region))
+
+    return s3_url
 
 
 def generate_cors_json(output_path: Path, allowed_origins: list = None) -> None:
@@ -160,13 +201,17 @@ def generate_cors_json(output_path: Path, allowed_origins: list = None) -> None:
 
 
 def print_cli_commands(bucket_name: str, model_path: Path, region: str) -> None:
-    """Print AWS CLI commands for manual upload."""
+    """Print AWS CLI commands for S3 + CloudFront setup."""
 
     print("\n" + "=" * 70)
-    print("MANUAL UPLOAD COMMANDS")
+    print("S3 + CLOUDFRONT SETUP COMMANDS")
     print("=" * 70)
 
     commands = f"""
+# ============================================
+# STEP 1: S3 Bucket Setup
+# ============================================
+
 # Create bucket
 aws s3 mb s3://{bucket_name} --region {region}
 
@@ -176,11 +221,31 @@ aws s3api put-bucket-cors --bucket {bucket_name} --cors-configuration file://cor
 # Upload model files
 aws s3 sync {model_path} s3://{bucket_name}/ --acl public-read
 
-# Verify
+# Verify upload
 aws s3 ls s3://{bucket_name}/
 
-# Your model URL
+# ============================================
+# STEP 2: CloudFront Distribution (via Console)
+# ============================================
+
+# CloudFront setup is easiest via AWS Console:
+# 1. Go to CloudFront → Create Distribution
+# 2. Origin domain: {bucket_name}.s3.{region}.amazonaws.com
+# 3. Enable CORS headers in Response Headers Policy
+# 4. Wait for deployment (~5-10 min)
+
+# Or use AWS CLI (requires distribution config JSON):
+# aws cloudfront create-distribution --distribution-config file://cloudfront-config.json
+
+# ============================================
+# URLs
+# ============================================
+
+# S3 Direct (for testing):
 # https://{bucket_name}.s3.{region}.amazonaws.com/
+
+# CloudFront (for production):
+# https://YOUR_DISTRIBUTION_ID.cloudfront.net/
 """
     print(commands)
 
