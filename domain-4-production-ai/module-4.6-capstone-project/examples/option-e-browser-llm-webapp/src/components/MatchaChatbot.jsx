@@ -2,27 +2,53 @@ import React, { useState, useRef, useEffect } from 'react';
 import useModelLoader from '../hooks/useModelLoader';
 
 /**
- * System prompt for the Matcha Expert chatbot
+ * System prompt for the Troscha Matcha Guide chatbot
+ * This should match the prompt used during fine-tuning
  */
-const SYSTEM_PROMPT = `You are a matcha tea expert with deep knowledge of Japanese tea culture, preparation methods, health benefits, and culinary applications. You provide accurate, helpful information about:
-- Matcha grades (ceremonial, premium, culinary) and quality indicators
-- Traditional preparation with chasen (bamboo whisk) and chawan (tea bowl)
-- Health benefits including L-theanine, EGCG, and antioxidants
-- Japanese tea ceremony (chado/sado) traditions
-- Matcha-based recipes and culinary techniques
-- Sourcing and storage recommendations
+const SYSTEM_PROMPT = `You are Troscha's matcha guide.
 
-Be concise, accurate, and helpful. If you're not certain about something, say so.`;
+MENU:
+- Yura: Latte Rp 27k
+- Taku: Straight Rp 25k | Latte Rp 32k | Strawberry Rp 40k
+- Firu: Straight Rp 34k | Latte Rp 44k | Miruku Rp 49k | Strawberry Rp 52k
+- Giru: Straight Rp 39k | Latte Rp 49k | Miruku Rp 54k | Strawberry Rp 57k
+- Zeno: Straight Rp 44k | Latte Rp 54k | Miruku Rp 59k | Strawberry Rp 62k
+- Moku: Hojicha Latte Rp 35k
+- Hiku: Straight Rp 79k | Latte Rp 89k
+- Kiyo: Straight Rp 94k | Latte Rp 104k
+
+ADDON: Oat Milk +Rp 5k
+
+End responses with <preferences> JSON.`;
 
 /**
  * Sample questions to help users get started
+ * These match the Troscha product catalog
  */
 const SAMPLE_QUESTIONS = [
-  "What's the difference between ceremonial and culinary grade matcha?",
-  "How do I make traditional matcha with a bamboo whisk?",
-  "What are the health benefits of matcha compared to regular green tea?",
-  "How should I store matcha to keep it fresh?",
+  "What's the difference between Firu and Zeno?",
+  "I'm new to matcha, what should I try first?",
+  "Which matcha is best for lattes?",
+  "What's your most premium matcha?",
 ];
+
+/**
+ * Parse preferences JSON from model response
+ * Model outputs <preferences>...</preferences> block at end of response
+ */
+function parsePreferences(responseText) {
+  const match = responseText.match(/<preferences>\s*([\s\S]*?)\s*<\/preferences>/);
+  if (!match) return { displayText: responseText, preferences: null };
+
+  try {
+    const preferences = JSON.parse(match[1]);
+    const displayText = responseText.replace(/<preferences>[\s\S]*<\/preferences>/, '').trim();
+    return { displayText, preferences };
+  } catch (e) {
+    console.warn('Failed to parse preferences JSON:', e);
+    return { displayText: responseText, preferences: null };
+  }
+}
 
 /**
  * MatchaChatbot Component
@@ -94,13 +120,17 @@ function MatchaChatbot() {
       // Extract the generated text
       const generatedText = result[0]?.generated_text || 'Sorry, I could not generate a response.';
 
-      // Add assistant message
+      // Parse preferences JSON from model output
+      const { displayText, preferences } = parsePreferences(generatedText.trim());
+
+      // Add assistant message (display text only, preferences stored separately)
       setMessages((prev) => [
         ...prev,
         {
           id: Date.now(),
           role: 'assistant',
-          content: generatedText.trim(),
+          content: displayText,
+          preferences, // Store for potential product card rendering
           timestamp: new Date(),
         },
       ]);

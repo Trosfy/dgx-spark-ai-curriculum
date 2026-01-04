@@ -57,7 +57,7 @@ class TrainingConfig:
 @dataclass
 class PathConfig:
     """Project paths."""
-    project_dir: Path = Path("./matcha-expert")
+    project_dir: Path = Path("./troscha-matcha")
     data_dir: Path = field(default=None)
     model_dir: Path = field(default=None)
     output_dir: Path = field(default=None)
@@ -65,7 +65,7 @@ class PathConfig:
     def __post_init__(self):
         self.data_dir = self.project_dir / "data"
         self.model_dir = self.project_dir / "models"
-        self.output_dir = self.model_dir / "matcha-lora"
+        self.output_dir = self.model_dir / "troscha-lora"
 
         # Create directories
         for path in [self.data_dir, self.model_dir, self.output_dir]:

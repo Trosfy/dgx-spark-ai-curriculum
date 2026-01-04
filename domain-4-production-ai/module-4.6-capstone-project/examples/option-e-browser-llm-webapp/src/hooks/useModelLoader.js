@@ -4,13 +4,23 @@ import { pipeline, env } from '@huggingface/transformers';
 /**
  * Model Configuration
  *
- * UPDATE THIS URL to point to your deployed model.
+ * Configure via environment variable or update the fallback URL.
  * Options:
- * 1. Hugging Face Hub: "your-username/matcha-expert-onnx"
- * 2. S3 bucket: "https://your-bucket.s3.amazonaws.com/model/"
+ * 1. Hugging Face Hub: "your-username/troscha-matcha-onnx"
+ * 2. S3 bucket: "https://your-bucket.s3.region.amazonaws.com/"
  * 3. Any CORS-enabled URL serving the ONNX files
+ *
+ * For local development, set VITE_MODEL_URL in .env:
+ *   VITE_MODEL_URL=https://your-bucket.s3.us-east-1.amazonaws.com/
  */
-const MODEL_URL = 'YOUR_MODEL_URL_HERE'; // <-- Update this!
+const MODEL_URL = import.meta.env.VITE_MODEL_URL || 'YOUR_MODEL_URL_HERE';
+
+// Validate MODEL_URL is configured
+if (MODEL_URL === 'YOUR_MODEL_URL_HERE') {
+  console.warn(
+    '[useModelLoader] MODEL_URL not configured! Set VITE_MODEL_URL in .env or update useModelLoader.js'
+  );
+}
 
 /**
  * Configure Transformers.js environment
