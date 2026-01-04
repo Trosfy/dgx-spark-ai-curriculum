@@ -4,7 +4,7 @@ This directory contains training data for the Troscha Matcha Browser-Deployed Fi
 
 ## Overview
 
-- **Model**: Gemma 3 270M (google/gemma-3-270m-it)
+- **Model**: Gemma 3 270M (unsloth/gemma-3-270m-it for training, google/gemma-3-270m-it for merging)
 - **Total Examples**: 300 conversations
 - **Format**: Messages format with `<preferences>` JSON output
 - **Language**: English

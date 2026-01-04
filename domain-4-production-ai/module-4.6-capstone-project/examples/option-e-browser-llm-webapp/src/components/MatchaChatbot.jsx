@@ -26,7 +26,7 @@ End responses with <preferences> JSON.`;
  * These match the Troscha product catalog
  */
 const SAMPLE_QUESTIONS = [
-  "What's the difference between Firu and Zeno?",
+  "What's the difference between Firu and Giru?",
   "I'm new to matcha, what should I try first?",
   "Which matcha is best for lattes?",
   "What's your most premium matcha?",
@@ -53,7 +53,7 @@ function parsePreferences(responseText) {
 /**
  * MatchaChatbot Component
  *
- * A complete chat interface for the browser-deployed matcha expert LLM.
+ * A complete chat interface for the browser-deployed Troscha Matcha Guide LLM.
  * Handles model loading, message generation, and conversation display.
  */
 function MatchaChatbot() {
@@ -199,7 +199,7 @@ function MatchaChatbot() {
       <div className="chatbot-container">
         <div className="loading-panel">
           <div className="loading-icon">🍵</div>
-          <h2>Loading Matcha Expert</h2>
+          <h2>Loading Troscha Matcha Guide</h2>
 
           {error ? (
             <div className="error-message">
@@ -256,8 +256,8 @@ function MatchaChatbot() {
       <div className="messages-container">
         {messages.length === 0 ? (
           <div className="welcome-panel">
-            <h2>Welcome to Matcha Expert!</h2>
-            <p>Ask me anything about matcha tea, Japanese tea culture, preparation methods, or recipes.</p>
+            <h2>Welcome to Troscha Matcha Guide!</h2>
+            <p>Ask me anything about Troscha's premium matcha products, taste profiles, and which matcha is right for you.</p>
 
             <div className="sample-questions">
               <p className="sample-label">Try asking:</p>

@@ -280,7 +280,7 @@ training_args = SFTConfig(
     num_train_epochs=3,
     logging_steps=10,
     save_steps=100,
-    fp16=True,
+    bf16=True,  # Use bfloat16 (native Blackwell support)
 )
 
 trainer = SFTTrainer(
