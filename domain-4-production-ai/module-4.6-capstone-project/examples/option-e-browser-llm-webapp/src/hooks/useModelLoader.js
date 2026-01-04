@@ -5,13 +5,18 @@ import { pipeline, env } from '@huggingface/transformers';
  * Model Configuration
  *
  * Configure via environment variable or update the fallback URL.
- * Options:
- * 1. Hugging Face Hub: "your-username/troscha-matcha-onnx"
- * 2. S3 bucket: "https://your-bucket.s3.region.amazonaws.com/"
- * 3. Any CORS-enabled URL serving the ONNX files
+ *
+ * Recommended: AWS S3 + CloudFront
+ *   - Upload model to S3 bucket
+ *   - Create CloudFront distribution with CORS headers
+ *   - Use CloudFront URL: "https://d1234567890abc.cloudfront.net/"
+ *
+ * Alternative options:
+ *   - Hugging Face Hub: "your-username/troscha-matcha-onnx"
+ *   - Direct S3 (testing only): "https://your-bucket.s3.region.amazonaws.com/"
  *
  * For local development, set VITE_MODEL_URL in .env:
- *   VITE_MODEL_URL=https://your-bucket.s3.us-east-1.amazonaws.com/
+ *   VITE_MODEL_URL=https://d1234567890abc.cloudfront.net/
  */
 const MODEL_URL = import.meta.env.VITE_MODEL_URL || 'YOUR_MODEL_URL_HERE';
 

@@ -183,35 +183,35 @@
 ### 7.1 Architecture
 
 ```
-┌─────────────────┐    ┌─────────────────┐
-│   User Browser  │    │   Static Host   │
-│                 │    │   (Vercel/S3)   │
-│ ┌─────────────┐ │    │                 │
-│ │ React App   │◄├────┤ index.html      │
-│ └─────────────┘ │    │ bundle.js       │
-│        │        │    │                 │
-│        ▼        │    └─────────────────┘
-│ ┌─────────────┐ │
-│ │Transformers │ │    ┌─────────────────┐
-│ │    .js      │◄├────┤  Model Host     │
-│ └─────────────┘ │    │   (S3/HF)       │
-│        │        │    │                 │
-│        ▼        │    │ model.onnx      │
-│ ┌─────────────┐ │    │ tokenizer.json  │
-│ │ WebGPU/WASM │ │    │                 │
-│ └─────────────┘ │    └─────────────────┘
-└─────────────────┘
+┌──────────────────────────────────────────────────────────┐
+│                  AWS S3 + CloudFront                      │
+│                  (Single Static Site)                     │
+│                                                          │
+│   ┌─────────────────┐    ┌─────────────────────────┐    │
+│   │ React App       │    │ ONNX Model (~500MB)     │    │
+│   │ index.html      │    │ /model/model.onnx       │    │
+│   │ bundle.js       │    │ /model/tokenizer.json   │    │
+│   └─────────────────┘    └─────────────────────────┘    │
+│                                                          │
+└──────────────────────────────────────────────────────────┘
+                           │
+                           ▼
+┌──────────────────────────────────────────────────────────┐
+│                    User's Browser                         │
+│                                                          │
+│   1. Downloads React app (~200KB)                        │
+│   2. Downloads ONNX model (~500MB, cached)               │
+│   3. Runs inference locally via WebGPU/WASM              │
+│   4. All data stays on device                            │
+└──────────────────────────────────────────────────────────┘
 ```
 
 ### 7.2 Hosting Configuration
 
-**Static Files:** [e.g., Vercel]
-- Deployment URL: [URL]
-- Headers configured for SharedArrayBuffer
-
-**Model Files:** [e.g., AWS S3]
-- Bucket URL: [URL]
-- CORS configured for browser access
+**AWS S3 + CloudFront:**
+- S3 Bucket: [bucket-name]
+- CloudFront Distribution: [distribution-url]
+- Response Headers Policy: COOP/COEP for SharedArrayBuffer
 
 ### 7.3 Security Headers
 ```

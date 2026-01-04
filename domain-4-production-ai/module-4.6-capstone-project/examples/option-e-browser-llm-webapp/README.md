@@ -58,42 +58,62 @@ A browser-deployed AI chatbot specialized in Troscha's premium matcha products. 
 └── vercel.json                # Deployment config
 ```
 
-## Deployment
+## Deployment (AWS S3 + CloudFront)
 
-### Vercel (Recommended)
+Deploy the entire app (React + model) as a single static site:
 
-1. Push to GitHub
-2. Connect to Vercel
-3. Deploy - headers are auto-configured via `vercel.json`
-
-### Netlify
-
-Create `netlify.toml`:
-```toml
-[[headers]]
-  for = "/*"
-  [headers.values]
-    Cross-Origin-Opener-Policy = "same-origin"
-    Cross-Origin-Embedder-Policy = "require-corp"
+### Step 1: Build the App
+```bash
+npm run build
+# Output: dist/ folder
 ```
 
-### GitHub Pages
-
-Add to your deploy script:
-```yaml
-- name: Add Security Headers
-  run: |
-    echo '/*
-      Cross-Origin-Opener-Policy: same-origin
-      Cross-Origin-Embedder-Policy: require-corp' > dist/_headers
+### Step 2: Create S3 Bucket
+```bash
+aws s3 mb s3://troscha-matcha-demo --region us-east-1
+aws s3 website s3://troscha-matcha-demo --index-document index.html
 ```
+
+### Step 3: Upload Everything
+```bash
+# Upload React app
+aws s3 sync ./dist s3://troscha-matcha-demo/ --acl public-read
+
+# Upload model files to /model/ subfolder
+aws s3 sync ./models/troscha-browser s3://troscha-matcha-demo/model/ --acl public-read
+```
+
+### Step 4: Create CloudFront Distribution
+1. Go to AWS CloudFront Console → Create Distribution
+2. Origin domain: `troscha-matcha-demo.s3.us-east-1.amazonaws.com`
+3. Default root object: `index.html`
+4. Create Response Headers Policy with:
+   - `Cross-Origin-Opener-Policy: same-origin`
+   - `Cross-Origin-Embedder-Policy: require-corp`
+5. Wait for deployment (~5-10 minutes)
+
+### Step 5: Update MODEL_URL
+```javascript
+// Use relative path (same bucket)
+const MODEL_URL = '/model/';
+// Or full CloudFront URL
+const MODEL_URL = 'https://d1234567890abc.cloudfront.net/model/';
+```
+
+**Your site:** `https://d1234567890abc.cloudfront.net/`
+
+### Benefits
+- Single deployment for app + model
+- Global edge caching (~500MB model cached at edge)
+- Free SSL certificate
+- User downloads model once, runs locally forever
 
 ## Model Requirements
 
 Your model must be:
 - **Format**: ONNX with INT4 quantization
 - **Size**: <500 MB recommended for reasonable load times
-- **Hosted**: At a CORS-enabled URL (S3, Hugging Face Hub, etc.)
+- **Hosted**: AWS S3 + CloudFront (recommended) or Hugging Face Hub
 
 Required files:
 - `model.onnx` or `model_quantized.onnx`
