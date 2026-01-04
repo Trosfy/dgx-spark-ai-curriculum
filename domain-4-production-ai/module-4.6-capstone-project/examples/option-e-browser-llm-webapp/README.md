@@ -60,67 +60,55 @@ A browser-deployed AI chatbot specialized in Troscha's premium matcha products. 
 └── vercel.json                # Deployment config
 ```
 
-## Deployment
+## Deployment (AWS S3 + CloudFront)
 
-### Model Hosting: AWS S3 + CloudFront (Recommended)
+Deploy the entire app (React + model) as a single static site:
 
-Host your ONNX model files on S3 with CloudFront CDN for optimal performance:
+### Step 1: Build the App
+```bash
+npm run build
+# Output: dist/ folder
+```
 
-1. **Upload to S3:**
-   ```bash
-   python scripts/option_e_upload_to_s3.py \
-       --model-path ./models/matcha-onnx-int4 \
-       --bucket troscha-matcha-model \
-       --region us-east-1
-   ```
+### Step 2: Create S3 Bucket
+```bash
+aws s3 mb s3://troscha-matcha-demo --region us-east-1
+aws s3 website s3://troscha-matcha-demo --index-document index.html
+```
 
-2. **Create CloudFront Distribution:**
-   - Go to AWS CloudFront Console → Create Distribution
-   - Origin domain: `your-bucket.s3.us-east-1.amazonaws.com`
-   - Cache policy: CachingOptimized
-   - Response headers policy: CORS-with-preflight-and-SecurityHeadersPolicy
-   - Wait for deployment (~5-10 minutes)
+### Step 3: Upload Everything
+```bash
+# Upload React app
+aws s3 sync ./dist s3://troscha-matcha-demo/ --acl public-read
 
-3. **Update MODEL_URL:**
-   ```javascript
-   const MODEL_URL = 'https://d1234567890abc.cloudfront.net/';
-   ```
+# Upload model files to /model/ subfolder
+aws s3 sync ./models/troscha-browser s3://troscha-matcha-demo/model/ --acl public-read
+```
 
-**Benefits:**
-- Global edge caching for faster model downloads
-- Reduced S3 egress costs
+### Step 4: Create CloudFront Distribution
+1. Go to AWS CloudFront Console → Create Distribution
+2. Origin domain: `troscha-matcha-demo.s3.us-east-1.amazonaws.com`
+3. Default root object: `index.html`
+4. Create Response Headers Policy with:
+   - `Cross-Origin-Opener-Policy: same-origin`
+   - `Cross-Origin-Embedder-Policy: require-corp`
+5. Wait for deployment (~5-10 minutes)
+
+### Step 5: Update MODEL_URL
+```javascript
+// Use relative path (same bucket)
+const MODEL_URL = '/model/';
+// Or full CloudFront URL
+const MODEL_URL = 'https://d1234567890abc.cloudfront.net/model/';
+```
+
+**Your site:** `https://d1234567890abc.cloudfront.net/`
+
+### Benefits
+- Single deployment for app + model
+- Global edge caching (~500MB model cached at edge)
 - Free SSL certificate
-- DDoS protection included
-
-### Web App Hosting
-
-#### Vercel
-
-1. Push to GitHub
-2. Connect to Vercel
-3. Deploy - headers are auto-configured via `vercel.json`
-
-#### Netlify
-
-Create `netlify.toml`:
-```toml
-[[headers]]
-  for = "/*"
-  [headers.values]
-    Cross-Origin-Opener-Policy = "same-origin"
-    Cross-Origin-Embedder-Policy = "require-corp"
-```
-
-### GitHub Pages
-
-Add to your deploy script:
-```yaml
-- name: Add Security Headers
-  run: |
-    echo '/*
-      Cross-Origin-Opener-Policy: same-origin
-      Cross-Origin-Embedder-Policy: require-corp' > dist/_headers
-```
+- User downloads model once, runs locally forever
 
 ## Model Requirements
 

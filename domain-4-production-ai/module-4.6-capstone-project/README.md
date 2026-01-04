@@ -119,8 +119,8 @@ Build a complete pipeline that fine-tunes a small language model for a specific 
   - WebGPU acceleration with WASM fallback
   - React component with streaming
 - **Static Deployment**
-  - AWS S3 + CloudFront for model files (CDN)
-  - Any static host for web app (Vercel/Netlify/etc)
+  - AWS S3 + CloudFront (single site for app + model)
+  - User downloads model to browser, runs locally
   - Complete model card and documentation
 
 **Deliverables:**

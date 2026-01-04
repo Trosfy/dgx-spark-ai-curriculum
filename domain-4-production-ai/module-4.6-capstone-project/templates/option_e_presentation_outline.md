@@ -215,18 +215,17 @@ const generator = await pipeline(
 
 ## Slide 15: Deployment Architecture
 
-**Model Hosting (CDN):**
-- AWS S3 + CloudFront (recommended)
-- Or Hugging Face Hub
-- ~500MB download (cached)
+**Single Static Site (AWS S3 + CloudFront):**
+- React app + ONNX model in one S3 bucket
+- CloudFront CDN for global edge caching
+- ~500MB model downloaded once, cached in browser
+- User runs inference locally - no server needed
 
-**Web App Hosting (Zero Cost):**
-- Vercel / Netlify / GitHub Pages
-- Just HTML, CSS, JS files
-
-**Required Headers:**
+**CloudFront Headers (Required):**
 - COOP: same-origin
 - COEP: require-corp
+
+**Cost:** ~$0/month (within free tier)
 
 ---
 
