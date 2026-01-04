@@ -9,7 +9,7 @@ Quickly validate your project idea and create a minimal working prototype.
 ## Before You Start
 
 - [ ] Completed Domains 1-4 modules
-- [ ] Chosen a project option (A, B, C, or D)
+- [ ] Chosen a project option (A, B, C, D, or E)
 - [ ] DGX Spark access
 
 ## Let's Go!
@@ -37,6 +37,11 @@ Pick the simplest possible version that demonstrates your concept:
 - One fine-tuning run
 - Single evaluation metric
 - Manual tracking
+
+**Option E (Browser-Deployed LLM)**:
+- Fine-tune small model (270M params)
+- Export to ONNX + INT4
+- Test in browser locally
 
 ### Step 2: Create Project Structure
 

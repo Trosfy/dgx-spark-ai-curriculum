@@ -1,6 +1,6 @@
-# Matcha Expert - Browser LLM Chatbot
+# Troscha Matcha Guide - Browser LLM Chatbot
 
-A browser-deployed AI chatbot specialized in matcha tea knowledge. Runs entirely in the browser using WebGPU/WASM - no server required!
+A browser-deployed AI chatbot specialized in Troscha's premium matcha products. Runs entirely in the browser using WebGPU/WASM - no server required!
 
 ## Features
 
@@ -27,7 +27,7 @@ A browser-deployed AI chatbot specialized in matcha tea knowledge. Runs entirely
    Edit `src/hooks/useModelLoader.js` and update `MODEL_URL`:
    ```javascript
    const MODEL_URL = 'https://your-bucket.s3.amazonaws.com/model/';
-   // Or: 'your-username/matcha-expert-onnx' for Hugging Face Hub
+   // Or: 'your-username/troscha-matcha-onnx' for Hugging Face Hub
    ```
 
 3. **Start development server:**

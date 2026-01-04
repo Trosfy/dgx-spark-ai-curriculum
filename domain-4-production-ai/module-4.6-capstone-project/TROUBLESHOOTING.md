@@ -574,6 +574,7 @@ print(f"Memory: {torch.cuda.memory_allocated()/1e9:.2f} GB")
 | Work with documents/images | Option B: Multimodal |
 | Build complex systems | Option C: Agent Swarm |
 | Focus on ML infrastructure | Option D: Training Pipeline |
+| Deploy AI to browsers (zero server cost) | Option E: Browser-Deployed LLM |
 
 **Recommendation**: Pick what excites you - you'll spend 40+ hours on it.
 
@@ -588,6 +589,7 @@ print(f"Memory: {torch.cuda.memory_allocated()/1e9:.2f} GB")
 | A + B | Yes | Document RAG with fine-tuning |
 | A + C | Yes | Agents with domain expertise |
 | C + Safety | Yes | Required for Option C |
+| E + A | Yes | Browser chatbot with domain expertise |
 | All options | No | Too broad, won't finish |
 
 Keep core focus on one option with elements from others.
@@ -679,6 +681,7 @@ Document your memory usage in the technical report.
 | Option B | Extraction F1, comprehension scores |
 | Option C | Task success rate, safety violations, latency |
 | Option D | Model improvement, pipeline throughput |
+| Option E | Browser load time, tokens/sec, model size, domain accuracy |
 
 Always include:
 - Performance metrics (accuracy, F1, etc.)
@@ -698,6 +701,7 @@ Always include:
 | Option B | Input validation + output filtering |
 | Option C | Agent action limits + human-in-loop + red teaming |
 | Option D | Data quality checks + model validation |
+| Option E | Model card + out-of-scope handling + brand safety |
 
 Safety is 15% of the grade - don't skip it.
 
